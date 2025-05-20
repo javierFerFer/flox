@@ -26,7 +26,9 @@ export const appConfig: ApplicationConfig = {
                   darkModeSelector: '.my-app-dark',
                 }
             }
-      }), provideHttpClient(), provideTransloco({
+      }),
+      provideHttpClient(),
+      provideTransloco({
         config: { 
           availableLangs: ['en', 'es'],
           defaultLang: 'en',

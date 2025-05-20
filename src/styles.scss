@@ -2,7 +2,17 @@
 @import "primeicons/primeicons.css";
 @plugin "tailwindcss-primeui";
 
+// font of the app
+@font-face {
+    font-family: 'Poppins';
+    src: url('assets/fonts/Poppins-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 * {
    padding: 0;
-   margin: 0; 
+   margin: 0;
+   font-family:'Poppins', Courier, monospace
 }
