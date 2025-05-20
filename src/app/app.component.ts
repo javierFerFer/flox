@@ -1,9 +1,10 @@
 import { ToolbarModule } from 'primeng/toolbar';
 import { TranslocoModule } from '@jsverse/transloco';
 import { ButtonModule } from 'primeng/button';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
+import { PROJECT_VERSION } from './version.config';
 
 @Component({
   selector: 'app-root',
@@ -18,4 +19,9 @@ import { AvatarModule } from 'primeng/avatar';
 })
 export class AppComponent {
   title = 'flox';
+  version: string = '';
+  constructor() {
+    const { version } = inject(PROJECT_VERSION);
+    this.version = version;
+  }
 }
