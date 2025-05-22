@@ -42,7 +42,7 @@ export const appConfig: ApplicationConfig = {
       }),
       {
         provide: PROJECT_VERSION,
-        useValue: { version: '0.0.1' }
+        useValue: { version: '0.1.0' }
       }
   ]
 };
