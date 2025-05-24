@@ -1,16 +1,15 @@
-import { ApplicationConfig, provideZoneChangeDetection, isDevMode } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { ApplicationConfig, isDevMode, provideZoneChangeDetection } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 
 import { providePrimeNG } from 'primeng/config';
 
-import { MyPreset }  from '../../app.theme';
 import { provideHttpClient } from '@angular/common/http';
+import { provideTransloco } from '@jsverse/transloco';
+import { MyPreset } from '../../app.theme';
 import { TranslocoHttpLoader } from './transloco-loader';
-import { provideTransloco } from '@jsverse/transloco'
-import { VERSION } from '@angular/common';
 import { PROJECT_VERSION } from './version.config';
 
 
@@ -42,7 +41,7 @@ export const appConfig: ApplicationConfig = {
       }),
       {
         provide: PROJECT_VERSION,
-        useValue: { version: '0.1.0' }
+        useValue: { version: '0.2.0' }
       }
   ]
 };
