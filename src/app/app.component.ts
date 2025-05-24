@@ -1,9 +1,9 @@
-import { ToolbarModule } from 'primeng/toolbar';
-import { TranslocoModule } from '@jsverse/transloco';
-import { ButtonModule } from 'primeng/button';
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { TranslocoModule } from '@jsverse/transloco';
 import { AvatarModule } from 'primeng/avatar';
+import { ButtonModule } from 'primeng/button';
+import { ToolbarModule } from 'primeng/toolbar';
 import { PROJECT_VERSION } from './version.config';
 
 @Component({
@@ -12,7 +12,8 @@ import { PROJECT_VERSION } from './version.config';
     ButtonModule,
     TranslocoModule,
     ToolbarModule,
-    AvatarModule
+    AvatarModule,
+    RouterModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
