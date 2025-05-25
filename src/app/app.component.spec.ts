@@ -1,12 +1,12 @@
-import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
-import { PROJECT_VERSION } from './version.config';
-import { provideTransloco } from '@jsverse/transloco';
-import { isDevMode } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
+import { isDevMode } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import { provideTransloco, TranslocoService } from '@jsverse/transloco';
+import { AppComponent } from './app.component';
 import { TranslocoHttpLoader } from './transloco-loader';
+import { PROJECT_VERSION } from './version.config';
 
-describe('AppComponent', () => {
+describe('[AppComponent]', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
@@ -36,16 +36,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'flox' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('flox');
+  it('it should have version', () => {
+    const { version } = TestBed.inject(PROJECT_VERSION);
+    expect(version).toBeDefined();
+    expect(version).toEqual('0.0.1');
   });
 
-  // it('should render title', () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   fixture.detectChanges();
-  //   const compiled = fixture.nativeElement as HTMLElement;
-  //   expect(compiled.querySelector('h1')?.textContent).toContain('Hello, flox');
-  // });
+  it('it should have default language to "EN"', () => {
+    const inject = TestBed.inject(TranslocoService);
+    const defaultLanguage = inject.getDefaultLang();
+    expect(defaultLanguage).toBeDefined();
+    expect(defaultLanguage).toEqual('en');
+  });
 });

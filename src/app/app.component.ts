@@ -1,28 +1,40 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { RouterModule } from '@angular/router';
-import { TranslocoModule } from '@jsverse/transloco';
-import { AvatarModule } from 'primeng/avatar';
-import { ButtonModule } from 'primeng/button';
-import { ToolbarModule } from 'primeng/toolbar';
-import { PROJECT_VERSION } from './version.config';
+import { tap } from 'rxjs';
+import { UserStore } from './stores/user/user.store';
 
 @Component({
   selector: 'app-root',
   imports: [
-    ButtonModule,
-    TranslocoModule,
-    ToolbarModule,
-    AvatarModule,
     RouterModule
   ],
+  providers: [UserStore],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'flox';
-  version: string = '';
+export class AppComponent implements OnInit {
+
+  private userStore;
+  private theme$;
   constructor() {
-    const { version } = inject(PROJECT_VERSION);
-    this.version = version;
+    this.userStore = inject(UserStore);
+    this.theme$ = toObservable(this.userStore.themeAsBoolean)
+    .pipe(
+      tap((isLightTheme: boolean) => {
+        const element = document.querySelector('html');
+        if (isLightTheme) {
+          element!.classList.remove('dark-mode');
+        } else {
+          element!.classList.add('dark-mode');
+        }
+      }
+    )
+  )
   }
+
+  ngOnInit(): void {
+    this.theme$.subscribe();
+  }
+
 }
