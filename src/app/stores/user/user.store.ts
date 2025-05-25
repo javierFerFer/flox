@@ -1,7 +1,8 @@
-import { inject } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import {
   patchState,
   signalStore,
+  withComputed,
   withHooks,
   withMethods,
   withState
@@ -25,17 +26,22 @@ const initialState: UserState = {
 export const UserStore = signalStore(
   {providedIn: 'root'},
   withState(initialState),
-  // withComputed(({ user, theme }) => ({
-  //   theme: computed(() => theme),
-  //   user: computed(() => user), 
-  // })),
-  withMethods((store) => ({
+  withComputed(({ theme }) => ({
+     themeAsBoolean: computed(() => (theme() === 'light') ? true : false),
+  })),
+  withMethods((store, localStorageService = inject(LocalStorageService)) => ({
     updateTheme(theme: UserTheme): void {
-      patchState(store, (state) => ({ ...state, theme }));
+      patchState(store, (state) => {
+        this._updateThemeIntoLocalStorage(theme);
+        return { ...state, theme };
+      });
     },
     updateUser(user: UserModel): void {
       patchState(store, (state) => ({ ...state, user }));
     },
+    _updateThemeIntoLocalStorage(theme: UserTheme): void {
+      localStorageService.setItem<UserTheme>('theme', theme);
+    }
   })),
   withHooks({
     onInit: (store) => {

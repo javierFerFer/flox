@@ -1,1 +1,10 @@
-<p>login works!</p>
+<p-card header="Login" class="flex justify-center items-center w-full h-full">
+  <p-toggleswitch
+    [ngModel]="userStore.themeAsBoolean()"
+    (onChange)="changeTheme($event)"
+  >
+    <ng-template #handle let-checked="checked">
+      <i [ngClass]="['!text-xs', 'pi', checked ? 'pi-sun' : 'pi-moon']"></i>
+    </ng-template>
+  </p-toggleswitch>
+</p-card>

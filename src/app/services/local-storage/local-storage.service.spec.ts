@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { LocalStorageService } from './local-storage.service';
 
 
-describe('[LocalStorageService] - set value', () => {
+describe('[LocalStorageService]', () => {
   it('should verify that put value into localStorage', () => {
     const service = TestBed.inject(LocalStorageService);
     const key = 'testKey';
@@ -13,9 +13,7 @@ describe('[LocalStorageService] - set value', () => {
     expect(storedValue).toBeTruthy();
     expect(JSON.parse(storedValue!)).toEqual(value);
   });
-});
 
-  describe('[LocalStorageService] - get value', () => {
   it('should verify that get value into localStorage', () => {
     const service = TestBed.inject(LocalStorageService);
     const key = 'testKey';
