@@ -1,0 +1,8 @@
+<p-toggleswitch
+  [ngModel]="userStore.themeAsBoolean()"
+  (onChange)="changeTheme($event)"
+>
+  <ng-template #handle let-checked="checked">
+    <i [ngClass]="['!text-xs', 'pi', checked ? 'pi-sun' : 'pi-moon']"></i>
+  </ng-template>
+</p-toggleswitch>

@@ -1,4 +1,4 @@
-import { computed, inject } from '@angular/core';
+import { computed, effect, inject } from '@angular/core';
 import {
   patchState,
   signalStore,
@@ -32,7 +32,6 @@ export const UserStore = signalStore(
   withMethods((store, localStorageService = inject(LocalStorageService)) => ({
     updateTheme(theme: UserTheme): void {
       patchState(store, (state) => {
-        this._updateThemeIntoLocalStorage(theme);
         return { ...state, theme };
       });
     },
@@ -54,6 +53,11 @@ export const UserStore = signalStore(
             theme: storedTheme,
             user: storedUser
         }));
+
+        effect(() => {
+          const theme = store.theme();
+          store._updateThemeIntoLocalStorage(theme);
+        })
     }
   })
 );

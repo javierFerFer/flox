@@ -1,27 +1,28 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslocoModule } from '@jsverse/transloco';
+import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { ToggleSwitchModule } from 'primeng/toggleswitch';
-import { UserStore } from '../../stores/user/user.store';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { InputTextModule } from 'primeng/inputtext';
+import { ToggleThemeComponent } from '../../components/toggle-theme/toggle-theme.component';
 
 @Component({
   selector: 'app-login',
   imports: [
-    ToggleSwitchModule,
     CommonModule,
     CardModule,
-    FormsModule
+    FormsModule,
+    TranslocoModule,
+    ToggleThemeComponent,
+    FloatLabelModule,
+    ButtonModule,
+    InputTextModule,
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  readonly userStore = inject(UserStore);
-
-
-  changeTheme(e: any) {
-    const theme = e.checked ? 'light' : 'dark';
-    this.userStore.updateTheme(theme);
-  }
+  value: string = '';
 }
