@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  angular-app:
+  flox-app:
     build: .
     ports:
       - "8081:80"
