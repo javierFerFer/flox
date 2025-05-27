@@ -12,4 +12,4 @@ FROM nginx:alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Cambia 'my-app' por el nombre real del proyecto si es diferente
-COPY --from=build /usr/src/app/dist/flox/ /usr/share/nginx/html/apps/flox/
+COPY --from=build /usr/src/app/dist/flox/browser/ /usr/share/nginx/html/apps/flox/
