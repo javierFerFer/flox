@@ -17,10 +17,9 @@ describe('[LoginComponent]', () => {
         ToggleSwitchModule,
         CommonModule,
         CardModule,
-        FormsModule
-      ]
-    })
-    .compileComponents();
+        FormsModule,
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
@@ -41,7 +40,7 @@ describe('[LoginComponent]', () => {
     const userStore = component.userStore;
     const theme = userStore.theme();
     expect(theme).toBeDefined();
-    expect(['light', 'dark']).toContain(theme);
+    expect(['light', 'dark']).toContain('');
   });
 
   it('it should toggle theme', () => {
