@@ -1,10 +1,25 @@
-<p-card header="Login" class="flex justify-center items-center w-full h-full">
-  <p-toggleswitch
-    [ngModel]="userStore.themeAsBoolean()"
-    (onChange)="changeTheme($event)"
-  >
-    <ng-template #handle let-checked="checked">
-      <i [ngClass]="['!text-xs', 'pi', checked ? 'pi-sun' : 'pi-moon']"></i>
-    </ng-template>
-  </p-toggleswitch>
-</p-card>
+<ng-container *transloco="let t">
+  <p-card class="flex justify-center items-center w-full h-full">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl">{{ t("LOGIN_PAGE.TITLE") }}</h1>
+      <app-toggle-theme class="mt-2"></app-toggle-theme>
+    </div>
+    <h2 class="mb-6">{{ t("LOGIN_PAGE.SUBTITLE") }}</h2>
+    <div [formGroup]="userForm">
+      <div class="flex justify-center items-center gap-8 mb-8">
+        <p-float-label variant="in">
+          <input pInputText id="username" formControlName="username" />
+          <label for="username">{{ t("LOGIN_PAGE.USERNAME") }}</label>
+        </p-float-label>
+      </div>
+      <p-button
+        (onClick)="logIn()"
+        [disabled]="userForm.controls.username.invalid"
+        [label]="t('LOGIN_PAGE.LOGIN_BUTTON')"
+      />
+    </div>
+    @if (isDevMode) {
+    <p class="flex justify-end pt-4">v{{ version }}</p>
+    }
+  </p-card>
+</ng-container>

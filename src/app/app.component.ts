@@ -15,11 +15,8 @@ import { UserStore } from './stores/user/user.store';
 })
 export class AppComponent implements OnInit {
 
-  private userStore;
-  private theme$;
-  constructor() {
-    this.userStore = inject(UserStore);
-    this.theme$ = toObservable(this.userStore.themeAsBoolean)
+  private userStore = inject(UserStore);
+  private theme$ = toObservable(this.userStore.themeAsBoolean)
     .pipe(
       tap((isLightTheme: boolean) => {
         const element = document.querySelector('html');
@@ -30,8 +27,7 @@ export class AppComponent implements OnInit {
         }
       }
     )
-  )
-  }
+  );
 
   ngOnInit(): void {
     this.theme$.subscribe();
