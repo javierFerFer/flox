@@ -1,0 +1,26 @@
+name: Run Angular Tests
+
+on:
+  pull_request:
+    branches:
+      #   - develop # or 'develop' or any branch you want to protect
+      - infra/configure-github-actions-tests # or 'develop' or any branch you want to protect
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.19.1 # or whatever version your Angular project uses
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Angular tests
+        run: npx ng test --watch=false --browsers=ChromeHeadless
