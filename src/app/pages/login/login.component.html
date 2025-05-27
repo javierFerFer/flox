@@ -6,12 +6,21 @@
       <app-toggle-theme class="mt-2"></app-toggle-theme>
     </div>
     <h2 class="mb-6">{{ t("LOGIN_PAGE.SUBTITLE") }}</h2>
-    <div class="flex justify-center items-center gap-8 mb-8">
-      <p-float-label variant="in">
-        <input pInputText id="username" />
-        <label for="username">{{ t("LOGIN_PAGE.USERNAME") }}</label>
-      </p-float-label>
+    <div [formGroup]="userForm">
+      <div class="flex justify-center items-center gap-8 mb-8">
+        <p-float-label variant="in">
+          <input pInputText id="username" formControlName="username" />
+          <label for="username">{{ t("LOGIN_PAGE.USERNAME") }}</label>
+        </p-float-label>
+      </div>
+      <p-button
+        (onClick)="logIn()"
+        [disabled]="userForm.controls.username.invalid"
+        [label]="t('LOGIN_PAGE.LOGIN_BUTTON')"
+      />
     </div>
-    <p-button [label]="t('LOGIN_PAGE.LOGIN_BUTTON')" />
+    @if (isDevMode) {
+    <p class="flex justify-end pt-4">v{{ version }}</p>
+    }
   </p-card>
 </ng-container>

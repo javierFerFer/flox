@@ -5,29 +5,29 @@ import {
   withComputed,
   withHooks,
   withMethods,
-  withState
+  withState,
 } from '@ngrx/signals';
-import { LocalStorageService } from "../../services/local-storage/local-storage.service";
-import { UserModel } from "./user.model";
+import { LocalStorageService } from '../../services/local-storage/local-storage.service';
+import { UserModel } from './user.model';
 export type UserTheme = 'light' | 'dark';
 
 type UserState = {
-    user: UserModel;
-    theme: UserTheme;
-}
+  user: UserModel;
+  theme: UserTheme;
+};
 
 const initialState: UserState = {
-    user: {
-        username: ''
-    },
-    theme: 'light'
-}
+  user: {
+    username: '',
+  },
+  theme: 'light',
+};
 
 export const UserStore = signalStore(
-  {providedIn: 'root'},
+  { providedIn: 'root' },
   withState(initialState),
   withComputed(({ theme }) => ({
-     themeAsBoolean: computed(() => (theme() === 'light') ? true : false),
+    themeAsBoolean: computed(() => (theme() === 'light' ? true : false)),
   })),
   withMethods((store, localStorageService = inject(LocalStorageService)) => ({
     updateTheme(theme: UserTheme): void {
@@ -40,24 +40,35 @@ export const UserStore = signalStore(
     },
     _updateThemeIntoLocalStorage(theme: UserTheme): void {
       localStorageService.setItem<UserTheme>('theme', theme);
-    }
+    },
+    _updateUserIntoLocalStorage(user: UserModel): void {
+      localStorageService.setItem<UserModel>('user', user);
+    },
   })),
   withHooks({
     onInit: (store) => {
-        const localStorageService = inject(LocalStorageService);
-        const storedTheme = localStorageService.getItem<UserTheme>('theme') || 'light';
-        const storedUser = localStorageService.getItem<UserModel>('user') || { username: '' };
-        
-        patchState(store, (state) => ({
-            ...state,
-            theme: storedTheme,
-            user: storedUser
-        }));
+      const localStorageService = inject(LocalStorageService);
+      const storedTheme =
+        localStorageService.getItem<UserTheme>('theme') || 'light';
+      const storedUser = localStorageService.getItem<UserModel>('user') || {
+        username: '',
+      };
 
-        effect(() => {
-          const theme = store.theme();
-          store._updateThemeIntoLocalStorage(theme);
-        })
-    }
+      patchState(store, (state) => ({
+        ...state,
+        theme: storedTheme,
+        user: storedUser,
+      }));
+
+      effect(() => {
+        const theme = store.theme();
+        store._updateThemeIntoLocalStorage(theme);
+      });
+
+      effect(() => {
+        const user = store.user();
+        store._updateUserIntoLocalStorage(user);
+      });
+    },
   })
 );

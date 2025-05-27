@@ -1,12 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject, isDevMode } from '@angular/core';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { TranslocoModule } from '@jsverse/transloco';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToggleThemeComponent } from '../../components/toggle-theme/toggle-theme.component';
+import { UserStore } from '../../stores/user/user.store';
+import { PROJECT_VERSION } from '../../version.config';
 
 @Component({
   selector: 'app-login',
@@ -19,10 +26,28 @@ import { ToggleThemeComponent } from '../../components/toggle-theme/toggle-theme
     FloatLabelModule,
     ButtonModule,
     InputTextModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  value: string = '';
+  private readonly fb = inject(FormBuilder);
+  private readonly userStore = inject(UserStore);
+  public version = inject(PROJECT_VERSION).version;
+  public isDevMode = isDevMode();
+
+  userForm = this.fb.group({
+    username: [this.userStore.user().username, Validators.required],
+  });
+
+  logIn() {
+    if (this.userForm.controls.username.invalid) {
+      return;
+    }
+
+    this.userStore.updateUser({
+      username: this.userForm.controls.username.value || '',
+    });
+  }
 }
