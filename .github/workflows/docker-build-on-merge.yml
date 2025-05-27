@@ -3,7 +3,7 @@ name: Build Docker Image on Merge
 on:
   push:
     branches:
-      - test_branch # or 'develop' or any other branch you want
+      - infra/configure-auto-deploy # or 'develop' or any other branch you want
 
 jobs:
   build:
