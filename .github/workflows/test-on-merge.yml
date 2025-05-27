@@ -4,7 +4,8 @@ on:
   pull_request:
     branches:
       #   - develop # or 'develop' or any branch you want to protect
-      - infra/configure-github-actions-tests # or 'develop' or any branch you want to protect
+      - develop # or 'develop' or any branch you want to protect
+      - main # or 'develop' or any branch you want to protect
 
 jobs:
   test:
