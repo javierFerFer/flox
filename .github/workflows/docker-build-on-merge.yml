@@ -28,3 +28,4 @@ jobs:
           context: .
           push: true
           tags: javidev99/flox:latest
+          platforms: linux/amd64,linux/arm64
