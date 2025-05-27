@@ -8,6 +8,7 @@ import { provideTransloco } from '@jsverse/transloco';
 import { CardModule } from 'primeng/card';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import { TranslocoHttpLoader } from '../../transloco-loader';
+import { PROJECT_VERSION } from '../../version.config';
 import { LoginComponent } from './login.component';
 
 describe('[LoginComponent]', () => {
@@ -35,6 +36,10 @@ describe('[LoginComponent]', () => {
           },
           loader: TranslocoHttpLoader,
         }),
+        {
+          provide: PROJECT_VERSION,
+          useValue: { version: '0.0.1' },
+        },
       ],
     }).compileComponents();
 
