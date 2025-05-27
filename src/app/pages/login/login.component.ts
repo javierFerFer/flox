@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, isDevMode } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormsModule,
@@ -35,7 +35,6 @@ export class LoginComponent {
   private readonly fb = inject(FormBuilder);
   private readonly userStore = inject(UserStore);
   public version = inject(PROJECT_VERSION).version;
-  public isDevMode = isDevMode();
 
   userForm = this.fb.group({
     username: [this.userStore.user().username, Validators.required],
