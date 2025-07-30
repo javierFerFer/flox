@@ -20,6 +20,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideAnimationsAsync(),
     providePrimeNG({
       ripple: true,
       theme: {
@@ -29,7 +30,6 @@ export const appConfig: ApplicationConfig = {
         },
       },
     }),
-    provideAnimationsAsync(),
     provideHttpClient(),
     provideTransloco({
       config: {
@@ -43,7 +43,7 @@ export const appConfig: ApplicationConfig = {
     }),
     {
       provide: PROJECT_VERSION,
-      useValue: { version: '0.4.0' },
+      useValue: { version: '0.5.0' },
     },
   ],
 };

@@ -1,9 +1,10 @@
 {
   "name": "en",
   "LOGIN_PAGE": {
-    "TITLE": "Welcome to Flox!",
-    "SUBTITLE": "Please give me a name as username",
+    "TITLE": "Login",
     "USERNAME": "Username",
-    "LOGIN_BUTTON": "Log In"
+    "PASSWORD": "Password",
+    "LOGIN_BUTTON": "Log In",
+    "SIGN_UP_BUTTON": "Sign Up"
   }
 }

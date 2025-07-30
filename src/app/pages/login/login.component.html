@@ -1,23 +1,45 @@
 <ng-container *transloco="let t">
-  <p-card class="flex justify-center items-center w-full h-full">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-3xl">{{ t("LOGIN_PAGE.TITLE") }}</h1>
-      <app-toggle-theme class="mt-2"></app-toggle-theme>
-    </div>
-    <h2 class="mb-6">{{ t("LOGIN_PAGE.SUBTITLE") }}</h2>
-    <div [formGroup]="userForm">
-      <div class="flex justify-center items-center gap-8 mb-8">
-        <p-float-label variant="in">
-          <input pInputText id="username" formControlName="username" />
-          <label for="username">{{ t("LOGIN_PAGE.USERNAME") }}</label>
-        </p-float-label>
+  <div class="flex h-full items-center justify-center">
+    <p-card>
+      <div class="mb-6 flex items-center justify-between">
+        <h1 class="text-3xl">{{ t("LOGIN_PAGE.TITLE") }}</h1>
+        <app-toggle-theme class="mt-2"></app-toggle-theme>
       </div>
-      <p-button
-        (onClick)="logIn()"
-        [disabled]="userForm.controls.username.invalid"
-        [label]="t('LOGIN_PAGE.LOGIN_BUTTON')"
-      />
-    </div>
-    <p class="flex justify-end pt-4">v{{ version }}</p>
-  </p-card>
+      <div [formGroup]="userForm">
+        <div class="mb-4 flex items-center justify-center">
+          <p-float-label variant="in">
+            <input pInputText id="username" formControlName="username" />
+            <label for="username">{{ t("LOGIN_PAGE.USERNAME") }}</label>
+          </p-float-label>
+        </div>
+        <div class="mb-8 flex items-center justify-center">
+          <p-float-label variant="in">
+            <input
+              pInputText
+              id="password"
+              type="password"
+              formControlName="password"
+            />
+            <label for="password">{{ t("LOGIN_PAGE.PASSWORD") }}</label>
+          </p-float-label>
+        </div>
+        <div class="flex flex-col items-center justify-center space-y-4">
+          <p-button
+            class="w-[100%] lg:w-76"
+            (onClick)="logIn()"
+            [disabled]="userForm.controls.username.invalid"
+            [label]="t('LOGIN_PAGE.LOGIN_BUTTON')"
+          />
+          <p-button
+            class="w-[100%] lg:w-76"
+            severity="secondary"
+            (onClick)="logIn()"
+            [disabled]="userForm.controls.username.invalid"
+            [label]="t('LOGIN_PAGE.SIGN_UP_BUTTON')"
+          />
+        </div>
+      </div>
+      <p class="flex justify-end pt-4">v{{ version }}</p>
+    </p-card>
+  </div>
 </ng-container>
