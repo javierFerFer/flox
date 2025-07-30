@@ -14,6 +14,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ToggleThemeComponent } from '../../components/toggle-theme/toggle-theme.component';
 import { UserStore } from '../../stores/user/user.store';
 import { PROJECT_VERSION } from '../../version.config';
+import { RippleModule } from 'primeng/ripple';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,7 @@ import { PROJECT_VERSION } from '../../version.config';
     ToggleThemeComponent,
     FloatLabelModule,
     ButtonModule,
+    RippleModule,
     InputTextModule,
     ReactiveFormsModule,
   ],
@@ -38,6 +40,7 @@ export class LoginComponent {
 
   userForm = this.fb.group({
     username: [this.userStore.user().username, Validators.required],
+    password: [this.userStore.user().username, Validators.required],
   });
 
   logIn() {
