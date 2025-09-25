@@ -1,4 +1,5 @@
-
 export interface UserModel {
-    username: string;
+  username?: string;
+  email?: string;
+  uid?: string;
 }

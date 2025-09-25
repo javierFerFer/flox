@@ -16,6 +16,8 @@ import { UserStore } from '../../stores/user/user.store';
 import { PROJECT_VERSION } from '../../version.config';
 import { RippleModule } from 'primeng/ripple';
 import { AuthService } from '../../services/auth/auth.service';
+import { from, map, switchMap, take } from 'rxjs';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +32,7 @@ import { AuthService } from '../../services/auth/auth.service';
     RippleModule,
     InputTextModule,
     ReactiveFormsModule,
+    RouterModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -38,6 +41,7 @@ export class LoginComponent {
   private readonly fb = inject(FormBuilder);
   private readonly userStore = inject(UserStore);
   private readonly authService = inject(AuthService);
+
   public version = inject(PROJECT_VERSION).version;
 
   userForm = this.fb.group({
@@ -45,16 +49,37 @@ export class LoginComponent {
     password: [this.userStore.user().username, Validators.required],
   });
 
+  constructor(private router: Router) {}
+
   logIn() {
     if (this.userForm.controls.username.invalid) {
       return;
     }
+
     const { username, password } = this.userForm.getRawValue();
+
     this.authService
       .login(username || '', password || '')
-      .subscribe(console.log);
-    // this.userStore.updateUser({
-    //   username: this.userForm.controls.username.value || '',
-    // });
+      .pipe(
+        switchMap(({ user }) => {
+          return from(user.getIdToken()).pipe(
+            take(1),
+            map((token) => {
+              return {
+                user,
+                token,
+              };
+            }),
+          );
+        }),
+      )
+      .subscribe(({ user, token }) => {
+        this.userStore.updateUser({
+          username: this.userForm.controls.username.value || '',
+          email: user.email || undefined,
+          uid: user.uid,
+        });
+        this.router.navigate(['dashboard']);
+      });
   }
 }

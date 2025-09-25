@@ -20,13 +20,13 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyANoCB_sbEnr0GKe48iCqtiaXJCB4V6L2A',
-  authDomain: 'flox-password-management.firebaseapp.com',
-  projectId: 'flox-password-management',
-  storageBucket: 'flox-password-management.firebasestorage.app',
-  messagingSenderId: '551551751719',
-  appId: '1:551551751719:web:817bda29db6430c99a6002',
-  measurementId: 'G-GX41LK1LPJ',
+  apiKey: 'AIzaSyA53tCg81VnygQLo6exgQsldVO_SfIe4b4',
+  authDomain: 'flox-8290b.firebaseapp.com',
+  projectId: 'flox-8290b',
+  storageBucket: 'flox-8290b.firebasestorage.app',
+  messagingSenderId: '866079552751',
+  appId: '1:866079552751:web:29de8621b438e37ce3d71a',
+  measurementId: 'G-FNFLETJVZH',
 };
 
 export const appConfig: ApplicationConfig = {
