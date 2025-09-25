@@ -15,6 +15,7 @@ import { ToggleThemeComponent } from '../../components/toggle-theme/toggle-theme
 import { UserStore } from '../../stores/user/user.store';
 import { PROJECT_VERSION } from '../../version.config';
 import { RippleModule } from 'primeng/ripple';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -36,6 +37,7 @@ import { RippleModule } from 'primeng/ripple';
 export class LoginComponent {
   private readonly fb = inject(FormBuilder);
   private readonly userStore = inject(UserStore);
+  private readonly authService = inject(AuthService);
   public version = inject(PROJECT_VERSION).version;
 
   userForm = this.fb.group({
@@ -47,9 +49,12 @@ export class LoginComponent {
     if (this.userForm.controls.username.invalid) {
       return;
     }
-
-    this.userStore.updateUser({
-      username: this.userForm.controls.username.value || '',
-    });
+    const { username, password } = this.userForm.getRawValue();
+    this.authService
+      .login(username || '', password || '')
+      .subscribe(console.log);
+    // this.userStore.updateUser({
+    //   username: this.userForm.controls.username.value || '',
+    // });
   }
 }
