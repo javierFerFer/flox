@@ -19,6 +19,8 @@ type UserState = {
 const initialState: UserState = {
   user: {
     username: '',
+    email: '',
+    uid: '',
   },
   theme: 'light',
 };
@@ -70,5 +72,5 @@ export const UserStore = signalStore(
         store._updateUserIntoLocalStorage(user);
       });
     },
-  })
+  }),
 );
