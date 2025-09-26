@@ -1,4 +1,5 @@
 <ng-container *transloco="let t">
+  <p-toast></p-toast>
   <div class="flex h-full items-center justify-center">
     <p-card class="min-w-xs md:min-w-sm lg:min-w-md">
       <div class="mb-6 flex items-center justify-between">
@@ -31,9 +32,10 @@
         </div>
         <div class="flex flex-col items-center justify-center space-y-4">
           <p-button
+            [loading]="this.userStore.isLoading()"
             class="min-w-full lg:min-w-11/12"
             (onClick)="logIn()"
-            [disabled]="userForm.controls.username.invalid"
+            [disabled]="userForm.invalid"
             [label]="t('LOGIN_PAGE.LOGIN_BUTTON')"
           />
           <p-button
