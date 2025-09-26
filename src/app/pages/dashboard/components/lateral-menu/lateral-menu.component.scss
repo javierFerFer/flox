@@ -1,0 +1,25 @@
+::ng-deep {
+  p-menu {
+    .p-menu {
+      min-width: 4rem;
+
+      ul {
+        padding-top: 1.5rem;
+        li {
+          .p-menu-item-content {
+            a {
+              margin-left: 5px;
+              span {
+                font-size: 1.5rem;
+              }
+            }
+          }
+        }
+
+        li:not(:first-child) {
+          padding-top: 1.5rem;
+        }
+      }
+    }
+  }
+}

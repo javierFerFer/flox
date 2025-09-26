@@ -426,6 +426,7 @@ export const MyPreset = definePreset(Aura, {
           800: '#1e293b',
           900: '#0f172a',
           950: '#020617',
+          border: '#09090b',
         },
         background: '{slate.50}',
         primary: {
@@ -552,8 +553,9 @@ export const MyPreset = definePreset(Aura, {
           800: '#27272a',
           900: '#18181b',
           950: '#09090b',
+          border: '#09090b',
         },
-        background: '{zinc.850}',
+        background: '#09090b', // un gris azulado oscuro
         primary: {
           color: '{primary.400}',
           contrastColor: '{surface.900}',
