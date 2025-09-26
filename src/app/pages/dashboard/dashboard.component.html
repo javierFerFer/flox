@@ -1,6 +1,14 @@
-<p-button
+<app-custom-toolbar></app-custom-toolbar>
+<div class="custom-container flex flex-1">
+  <app-lateral-menu></app-lateral-menu>
+  <div class="inner-custom-container flex flex-1 flex-col">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<!-- <p-button
   class="min-w-full lg:min-w-11/12"
   severity="secondary"
   (onClick)="logout()"
   [label]="'log out'"
-/>
+/> -->

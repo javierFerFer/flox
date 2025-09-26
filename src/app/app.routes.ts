@@ -24,6 +24,20 @@ export const routes: Routes = [
       import('./pages/dashboard/dashboard.component').then(
         (m) => m.DashboardComponent,
       ),
+    children: [
+      {
+        path: '',
+        redirectTo: 'records',
+        pathMatch: 'full',
+      },
+      {
+        path: 'records',
+        loadComponent: () =>
+          import('./pages/dashboard/sub-pages/records/records.component').then(
+            (m) => m.RecordsComponent,
+          ),
+      },
+    ],
   },
   {
     path: '**',
