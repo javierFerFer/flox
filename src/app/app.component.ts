@@ -6,31 +6,24 @@ import { UserStore } from './stores/user/user.store';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterModule
-  ],
-  providers: [UserStore],
+  imports: [RouterModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-
   private userStore = inject(UserStore);
-  private theme$ = toObservable(this.userStore.themeAsBoolean)
-    .pipe(
-      tap((isLightTheme: boolean) => {
-        const element = document.querySelector('html');
-        if (isLightTheme) {
-          element!.classList.remove('dark-mode');
-        } else {
-          element!.classList.add('dark-mode');
-        }
+  private theme$ = toObservable(this.userStore.themeAsBoolean).pipe(
+    tap((isLightTheme: boolean) => {
+      const element = document.querySelector('html');
+      if (isLightTheme) {
+        element!.classList.remove('dark-mode');
+      } else {
+        element!.classList.add('dark-mode');
       }
-    )
+    }),
   );
 
   ngOnInit(): void {
     this.theme$.subscribe();
   }
-
 }

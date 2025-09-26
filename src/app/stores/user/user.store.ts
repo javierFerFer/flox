@@ -14,15 +14,17 @@ export type UserTheme = 'light' | 'dark';
 type UserState = {
   user: UserModel;
   theme: UserTheme;
+  isLoading: boolean;
 };
 
 const initialState: UserState = {
   user: {
-    username: '',
+    displayName: '',
     email: '',
     uid: '',
   },
   theme: 'light',
+  isLoading: false,
 };
 
 export const UserStore = signalStore(
@@ -40,6 +42,9 @@ export const UserStore = signalStore(
     updateUser(user: UserModel): void {
       patchState(store, (state) => ({ ...state, user }));
     },
+    setIsLoading(isLoading: boolean): void {
+      patchState(store, (state) => ({ ...state, isLoading }));
+    },
     _updateThemeIntoLocalStorage(theme: UserTheme): void {
       localStorageService.setItem<UserTheme>('theme', theme);
     },
@@ -53,7 +58,7 @@ export const UserStore = signalStore(
       const storedTheme =
         localStorageService.getItem<UserTheme>('theme') || 'light';
       const storedUser = localStorageService.getItem<UserModel>('user') || {
-        username: '',
+        displayName: '',
       };
 
       patchState(store, (state) => ({

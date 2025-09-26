@@ -5,6 +5,12 @@
     "USERNAME": "Username",
     "PASSWORD": "Password",
     "LOGIN_BUTTON": "Log In",
-    "SIGN_UP_BUTTON": "Sign Up"
+    "SIGN_UP_BUTTON": "Sign Up",
+    "ERRORS": {
+      "CREDENTIALS_ERROR": {
+        "TITLE": "Error",
+        "MESSAGE": "credentials are not valid!"
+      }
+    }
   }
 }
