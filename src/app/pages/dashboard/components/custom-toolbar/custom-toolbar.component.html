@@ -1,0 +1,19 @@
+<p-toolbar [style]="{ 'border-radius': '0', border: '0' }">
+  <ng-template #start>
+    <div class="flex items-center gap-2">
+      <strong class="text-2xl">
+        <span>Flox App</span>
+      </strong>
+    </div>
+  </ng-template>
+
+  <ng-template #end>
+    <div class="flex cursor-pointer items-center gap-2">
+      <span>{{ userStore.user().email }}</span>
+      <p-avatar
+        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+        [style]="{ width: '32px', height: '32px' }"
+      />
+    </div>
+  </ng-template>
+</p-toolbar>

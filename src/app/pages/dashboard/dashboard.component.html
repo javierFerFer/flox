@@ -1,30 +1,4 @@
-<p-toolbar [style]="{ 'border-radius': '0', border: '0' }">
-  <ng-template #start>
-    <div class="flex items-center gap-2">
-      <svg
-        width="31"
-        height="33"
-        viewBox="0 0 31 33"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        style="width: 2rem; margin-right: 1rem"
-      >
-        <path d="..." fill="var(--p-primary-color)" />
-        <!-- <mask id="mask0_1_52" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="31" height="33"> -->
-      </svg>
-    </div>
-  </ng-template>
-
-  <ng-template #end>
-    <div class="flex items-center gap-2">
-      <span>{{ userStore.user().email }}</span>
-      <p-avatar
-        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
-        [style]="{ width: '32px', height: '32px' }"
-      />
-    </div>
-  </ng-template>
-</p-toolbar>
+<app-custom-toolbar></app-custom-toolbar>
 <div class="custom-container flex flex-1">
   <app-lateral-menu></app-lateral-menu>
   <div class="inner-custom-container flex flex-1 flex-col">
@@ -32,9 +6,9 @@
   </div>
 </div>
 
-<p-button
+<!-- <p-button
   class="min-w-full lg:min-w-11/12"
   severity="secondary"
   (onClick)="logout()"
   [label]="'log out'"
-/>
+/> -->

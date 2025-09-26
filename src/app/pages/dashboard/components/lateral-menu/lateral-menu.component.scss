@@ -4,13 +4,16 @@
       min-width: 4rem;
 
       ul {
-        padding-top: 1.5rem;
+        padding-top: 2.5rem;
+        padding-right: 0;
         li {
           .p-menu-item-content {
             a {
-              margin-left: 5px;
+              padding-right: 5px;
+
               span {
                 font-size: 1.5rem;
+                padding-left: 5px;
               }
             }
           }
@@ -21,5 +24,10 @@
         }
       }
     }
+  }
+
+  // fix issue related with navigation elements
+  .p-menu-item-link-active {
+    background-color: var(--p-navigation-item-focus-background);
   }
 }
