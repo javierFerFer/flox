@@ -1,33 +1,35 @@
-::ng-deep {
-  p-menu {
-    .p-menu {
-      min-width: 4rem;
+:host {
+  ::ng-deep {
+    p-menu {
+      .p-menu {
+        min-width: 4rem;
 
-      ul {
-        padding-top: 2.5rem;
-        padding-right: 0;
-        li {
-          .p-menu-item-content {
-            a {
-              padding-right: 5px;
+        ul {
+          padding-top: 2.5rem;
+          padding-right: 0;
+          li {
+            .p-menu-item-content {
+              a {
+                padding-right: 5px;
 
-              span {
-                font-size: 1.5rem;
-                padding-left: 5px;
+                span {
+                  font-size: 1.5rem;
+                  padding-left: 5px;
+                }
               }
             }
           }
-        }
 
-        li:not(:first-child) {
-          padding-top: 1.5rem;
+          li:not(:first-child) {
+            padding-top: 1.5rem;
+          }
         }
       }
     }
-  }
 
-  // fix issue related with navigation elements
-  .p-menu-item-link-active {
-    background-color: var(--p-navigation-item-focus-background);
+    // fix issue related with navigation elements
+    .p-menu-item-link-active {
+      background-color: var(--p-navigation-item-focus-background);
+    }
   }
 }

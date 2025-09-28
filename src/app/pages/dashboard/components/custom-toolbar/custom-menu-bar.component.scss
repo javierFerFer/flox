@@ -1,0 +1,14 @@
+:host {
+  ::ng-deep {
+    p-menubar {
+      .p-menubar {
+        border-style: none;
+      }
+    }
+  }
+
+  // fix issue related with navigation elements
+  .p-menubar-item-link-active {
+    background-color: var(--p-navigation-item-focus-background);
+  }
+}
