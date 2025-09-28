@@ -12,8 +12,6 @@ export const AuthGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
 ) => {
-  // return userStore.user().accessToken ? router.navigate([redirectTo]) : true;
-
   const auth = inject(Auth);
   const router = inject(Router);
   return new Observable<boolean>((subscriber) => {

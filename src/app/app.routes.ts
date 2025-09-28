@@ -11,6 +11,17 @@ export const NAVIGATION_ELEMENTS: MenuItem[] = [
   },
 ];
 
+const MODAL_SHARED_ROUTES: Routes = [
+  {
+    path: 'user-config',
+    loadComponent: () =>
+      import('./components/modal-wrapper/modal-wrapper.component').then(
+        (m) => m.ModalWrapperComponent,
+      ),
+    outlet: 'modal',
+  },
+];
+
 export const routes: Routes = [
   {
     path: '',
@@ -46,8 +57,10 @@ export const routes: Routes = [
             (m) => m.RecordsComponent,
           ),
       },
+      ...MODAL_SHARED_ROUTES,
     ],
   },
+
   {
     path: '**',
     redirectTo: '/login',
