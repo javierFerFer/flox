@@ -1,0 +1,33 @@
+<ng-container *transloco="let t">
+  <p-menubar class="border-none" [model]="model">
+    <ng-template #item let-item let-root="root">
+      <a
+        [routerLink]="item.routerLink"
+        [routerLinkActive]="['p-menubar-item-link-active']"
+        pRipple
+        class="p-menubar-item-link items-center md:hidden!"
+      >
+        <i [class]="item.icon"></i>
+        <span>{{ t(item.label) }}</span>
+        <span
+          *ngIf="item.shortcut"
+          class="border-surface bg-emphasis text-muted-color ml-auto rounded border p-1 text-xs"
+          >{{ item.shortcut }}</span
+        >
+        <i
+          *ngIf="item.items"
+          [ngClass]="['pi ml-auto', root ? 'pi-angle-down' : 'pi-angle-right']"
+        ></i>
+      </a>
+    </ng-template>
+    <ng-template #end>
+      <div class="flex cursor-pointer items-center gap-2">
+        <span>{{ userStore.user().email }}</span>
+        <p-avatar
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          [style]="{ width: '32px', height: '32px' }"
+        />
+      </div>
+    </ng-template>
+  </p-menubar>
+</ng-container>

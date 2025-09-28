@@ -5,7 +5,7 @@ import { Auth, signOut } from '@angular/fire/auth';
 
 import { RouterModule } from '@angular/router';
 import { LateralMenuComponent } from './components/lateral-menu/lateral-menu.component';
-import { CustomToolbarComponent } from './components/custom-toolbar/custom-toolbar.component';
+import { CustomMenuBarComponent } from './components/custom-toolbar/custom-menu-bar.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +13,7 @@ import { CustomToolbarComponent } from './components/custom-toolbar/custom-toolb
     ButtonModule,
     RouterModule,
     LateralMenuComponent,
-    CustomToolbarComponent,
+    CustomMenuBarComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',

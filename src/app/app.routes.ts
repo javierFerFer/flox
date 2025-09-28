@@ -1,6 +1,15 @@
 import { Routes } from '@angular/router';
 import { InitGuard } from './guards/init.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { MenuItem } from 'primeng/api';
+
+export const NAVIGATION_ELEMENTS: MenuItem[] = [
+  {
+    label: 'NAVIGATION.STUDENTS.LABEL',
+    icon: 'pi pi-users',
+    routerLink: '/dashboard/records',
+  },
+];
 
 export const routes: Routes = [
   {

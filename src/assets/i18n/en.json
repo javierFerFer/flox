@@ -12,5 +12,10 @@
         "MESSAGE": "credentials are not valid!"
       }
     }
+  },
+  "NAVIGATION": {
+    "STUDENTS": {
+      "LABEL": "Students"
+    }
   }
 }
