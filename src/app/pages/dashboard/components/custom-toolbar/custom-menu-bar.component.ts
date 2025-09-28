@@ -8,7 +8,7 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { CommonModule } from '@angular/common';
 import { NAVIGATION_ELEMENTS } from '../../../../app.routes';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-custom-menu-bar',
@@ -26,6 +26,14 @@ import { RouterModule } from '@angular/router';
 })
 export class CustomMenuBarComponent {
   userStore = inject(UserStore);
-
   model: MenuItem[] = NAVIGATION_ELEMENTS;
+
+  constructor(private router: Router) {}
+
+  openUserSettings() {
+    this.router.navigate([
+      'dashboard',
+      { outlets: { modal: ['user-config'] } },
+    ]);
+  }
 }

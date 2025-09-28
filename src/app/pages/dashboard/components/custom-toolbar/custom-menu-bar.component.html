@@ -1,5 +1,5 @@
 <ng-container *transloco="let t">
-  <p-menubar class="border-none" [model]="model">
+  <p-menubar [breakpoint]="'64rem'" class="border-none" [model]="model">
     <ng-template #item let-item let-root="root">
       <a
         [routerLink]="item.routerLink"
@@ -9,19 +9,27 @@
       >
         <i [class]="item.icon"></i>
         <span>{{ t(item.label) }}</span>
-        <span
-          *ngIf="item.shortcut"
-          class="border-surface bg-emphasis text-muted-color ml-auto rounded border p-1 text-xs"
-          >{{ item.shortcut }}</span
-        >
-        <i
-          *ngIf="item.items"
-          [ngClass]="['pi ml-auto', root ? 'pi-angle-down' : 'pi-angle-right']"
-        ></i>
+        @if (item.shortcut) {
+          <span
+            class="border-surface bg-emphasis text-muted-color ml-auto rounded border p-1 text-xs"
+            >{{ item.shortcut }}</span
+          >
+        }
+        @if (item.items) {
+          <i
+            [ngClass]="[
+              'pi ml-auto',
+              root ? 'pi-angle-down' : 'pi-angle-right',
+            ]"
+          ></i>
+        }
       </a>
     </ng-template>
     <ng-template #end>
-      <div class="flex cursor-pointer items-center gap-2">
+      <div
+        (click)="openUserSettings()"
+        class="flex cursor-pointer items-center gap-2"
+      >
         <span>{{ userStore.user().email }}</span>
         <p-avatar
           image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
