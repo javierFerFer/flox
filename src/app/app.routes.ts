@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { InitGuard } from './guards/init.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { MenuItem } from 'primeng/api';
+import { UserConfigModalResolver } from './resolvers/user-config-modal.resolver';
 
 export const NAVIGATION_ELEMENTS: MenuItem[] = [
   {
@@ -18,6 +19,13 @@ const MODAL_SHARED_ROUTES: Routes = [
       import('./components/modal-wrapper/modal-wrapper.component').then(
         (m) => m.ModalWrapperComponent,
       ),
+    resolve: [UserConfigModalResolver],
+    data: {
+      modalTitleKey: 'SHARED_MODALS.USER_CONFIG.TITLE',
+      modalComponentPromise: import(
+        '../app/components/user-config/user-config.component'
+      ).then((m) => m.UserConfigModalComponent),
+    },
     outlet: 'modal',
   },
 ];

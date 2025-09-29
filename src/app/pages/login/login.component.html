@@ -6,7 +6,7 @@
         <h1 class="text-3xl">{{ t("LOGIN_PAGE.TITLE") }}</h1>
         <app-toggle-theme class="mt-2"></app-toggle-theme>
       </div>
-      <div [formGroup]="userForm">
+      <form [formGroup]="userForm">
         <div class="mb-4 flex items-center justify-center">
           <p-float-label class="w-full" variant="in">
             <input
@@ -46,7 +46,7 @@
             [label]="t('LOGIN_PAGE.SIGN_UP_BUTTON')"
           />
         </div>
-      </div>
+      </form>
       <p class="flex justify-end pt-4">v{{ version }}</p>
     </p-card>
   </div>

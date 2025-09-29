@@ -24,7 +24,6 @@ export class AuthService {
       }),
       tap(({ user, token }) => {
         this.userStore.updateUser({
-          displayName: user.displayName || undefined,
           email: user.email || undefined,
           uid: user.uid,
         });

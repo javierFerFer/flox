@@ -17,5 +17,16 @@
     "STUDENTS": {
       "LABEL": "Students"
     }
+  },
+  "SHARED_MODALS": {
+    "USER_CONFIG": {
+      "TITLE": "Edit profile",
+      "SUB_TITLE": "Update your information",
+      "FORM": {
+        "PHOTO": "User photo",
+        "USERNAME": "Username",
+        "APP_LANGUAGE": "Language to use inside of the application"
+      }
+    }
   }
 }

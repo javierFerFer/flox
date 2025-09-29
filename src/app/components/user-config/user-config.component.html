@@ -1,0 +1,43 @@
+{{ userStore.user().userConfig | json }}
+<!-- // continue here -->
+<!-- <form [formGroup]="userForm">
+  <div class="mb-4 flex items-center justify-center">
+    <p-float-label class="w-full" variant="in">
+      <input
+        class="w-full"
+        pInputText
+        id="username"
+        formControlName="username"
+      />
+      <label for="username">{{ t("LOGIN_PAGE.USERNAME") }}</label>
+    </p-float-label>
+  </div>
+  <div class="mb-8 flex items-center justify-center">
+    <p-float-label class="w-full" variant="in">
+      <input
+        pInputText
+        class="w-full"
+        id="password"
+        type="password"
+        formControlName="password"
+      />
+      <label for="password">{{ t("LOGIN_PAGE.PASSWORD") }}</label>
+    </p-float-label>
+  </div>
+  <div class="flex flex-col items-center justify-center space-y-4">
+    <p-button
+      [loading]="this.userStore.isLoading()"
+      class="min-w-full lg:min-w-11/12"
+      (onClick)="logIn()"
+      [disabled]="userForm.invalid"
+      [label]="t('LOGIN_PAGE.LOGIN_BUTTON')"
+    />
+    <p-button
+      class="min-w-full lg:min-w-11/12"
+      severity="secondary"
+      (onClick)="logIn()"
+      [disabled]="userForm.controls.username.invalid"
+      [label]="t('LOGIN_PAGE.SIGN_UP_BUTTON')"
+    />
+  </div>
+</form> -->

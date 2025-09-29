@@ -9,6 +9,7 @@ import {
 } from '@ngrx/signals';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 import { UserModel } from './user.model';
+import { FIREBASE_USER_CONFIG } from '../../resolvers/user-config-modal.resolver';
 export type UserTheme = 'light' | 'dark';
 
 type UserState = {
@@ -19,9 +20,13 @@ type UserState = {
 
 const initialState: UserState = {
   user: {
-    displayName: '',
     email: '',
     uid: '',
+    userConfig: {
+      appLanguage: '',
+      photo: '',
+      username: '',
+    },
   },
   theme: 'light',
   isLoading: false,
@@ -42,6 +47,15 @@ export const UserStore = signalStore(
     updateUser(user: UserModel): void {
       patchState(store, (state) => ({ ...state, user }));
     },
+    updateUserConfig(userConfig: FIREBASE_USER_CONFIG): void {
+      patchState(store, (state) => ({
+        ...state,
+        user: {
+          ...state.user,
+          userConfig,
+        },
+      }));
+    },
     setIsLoading(isLoading: boolean): void {
       patchState(store, (state) => ({ ...state, isLoading }));
     },
@@ -57,9 +71,7 @@ export const UserStore = signalStore(
       const localStorageService = inject(LocalStorageService);
       const storedTheme =
         localStorageService.getItem<UserTheme>('theme') || 'light';
-      const storedUser = localStorageService.getItem<UserModel>('user') || {
-        displayName: '',
-      };
+      const storedUser = localStorageService.getItem<UserModel>('user') || {};
 
       patchState(store, (state) => ({
         ...state,
