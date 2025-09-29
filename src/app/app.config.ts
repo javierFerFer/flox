@@ -18,6 +18,7 @@ import { PROJECT_VERSION } from './version.config';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from '@angular/fire/auth';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyA53tCg81VnygQLo6exgQsldVO_SfIe4b4',
@@ -33,6 +34,10 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy,
+    },
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
