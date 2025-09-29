@@ -24,8 +24,23 @@
       "SUB_TITLE": "Update your information",
       "FORM": {
         "PHOTO": "User photo",
-        "USERNAME": "Username",
-        "APP_LANGUAGE": "Language to use inside of the application"
+        "USERNAME": "Name to use:",
+        "APP_LANGUAGE": "Language to use",
+        "APP_THEME": "Color",
+        "ACTIONS": {
+          "SAVE": "Save changes",
+          "LOG_OUT": "Close session"
+        },
+        "MESSAGES": {
+          "USER_EDIT_SUCCESS": {
+            "SUMMARY": "Success",
+            "DETAIL": "User edited correctly!"
+          },
+          "USER_EDIT_UNSUCCESS": {
+            "SUMMARY": "Error",
+            "DETAIL": "Error trying to update the user configuration"
+          }
+        }
       }
     }
   }

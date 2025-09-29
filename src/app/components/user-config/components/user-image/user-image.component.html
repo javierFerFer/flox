@@ -1,0 +1,23 @@
+<p-fileUpload
+  #fileUploader
+  name="myFile"
+  [customUpload]="true"
+  (uploadHandler)="onUpload($event)"
+  [auto]="true"
+  chooseLabel=""
+  [showUploadButton]="false"
+  [showCancelButton]="false"
+  [style]="{ display: 'none' }"
+>
+</p-fileUpload>
+
+<!-- Circular image acting as the upload trigger -->
+<div
+  class="upload-circle"
+  (click)="fileUploader.choose()"
+  [ngStyle]="{
+    'background-image': imageUrl
+      ? 'url(' + imageUrl + ')'
+      : 'url(/assets/images/default_user.png)',
+  }"
+></div>

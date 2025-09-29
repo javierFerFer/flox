@@ -9,12 +9,19 @@ import {
 } from '@ngrx/signals';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 import { UserModel } from './user.model';
-import { FIREBASE_USER_CONFIG } from '../../resolvers/user-config-modal.resolver';
-export type UserTheme = 'light' | 'dark';
+import {
+  FIREBASE_USER_CONFIG,
+  UserTheme,
+} from '../../resolvers/user-config-modal.resolver';
+
+export const DEFAULT_THEME: UserTheme = 'light';
+export enum themesEnum {
+  LIGHT = 'light',
+  DARK = 'dark',
+}
 
 type UserState = {
   user: UserModel;
-  theme: UserTheme;
   isLoading: boolean;
 };
 
@@ -26,41 +33,64 @@ const initialState: UserState = {
       appLanguage: '',
       photo: '',
       username: '',
+      toggleTheme: DEFAULT_THEME,
     },
   },
-  theme: 'light',
   isLoading: false,
 };
 
 export const UserStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
-  withComputed(({ theme }) => ({
-    themeAsBoolean: computed(() => (theme() === 'light' ? true : false)),
+  withComputed(({ user }) => ({
+    themeAsBoolean: computed(() =>
+      user().userConfig?.toggleTheme === DEFAULT_THEME ? true : false,
+    ),
   })),
   withMethods((store, localStorageService = inject(LocalStorageService)) => ({
     updateTheme(theme: UserTheme): void {
       patchState(store, (state) => {
-        return { ...state, theme };
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            userConfig: {
+              ...state.user.userConfig,
+              toggleTheme: theme,
+            },
+          },
+        };
       });
     },
     updateUser(user: UserModel): void {
-      patchState(store, (state) => ({ ...state, user }));
+      patchState(store, (state) => ({
+        ...state,
+        user: {
+          ...user,
+          userConfig: state.user.userConfig,
+        },
+      }));
     },
     updateUserConfig(userConfig: FIREBASE_USER_CONFIG): void {
       patchState(store, (state) => ({
         ...state,
         user: {
           ...state.user,
-          userConfig,
+          userConfig: {
+            ...userConfig,
+            toggleTheme: userConfig.toggleTheme
+              ? userConfig.toggleTheme
+              : localStorageService.getItem<UserModel>('user')?.userConfig
+                    ?.toggleTheme
+                ? localStorageService.getItem<UserModel>('user')?.userConfig
+                    ?.toggleTheme
+                : DEFAULT_THEME,
+          },
         },
       }));
     },
     setIsLoading(isLoading: boolean): void {
       patchState(store, (state) => ({ ...state, isLoading }));
-    },
-    _updateThemeIntoLocalStorage(theme: UserTheme): void {
-      localStorageService.setItem<UserTheme>('theme', theme);
     },
     _updateUserIntoLocalStorage(user: UserModel): void {
       localStorageService.setItem<UserModel>('user', user);
@@ -69,19 +99,35 @@ export const UserStore = signalStore(
   withHooks({
     onInit: (store) => {
       const localStorageService = inject(LocalStorageService);
-      const storedTheme =
-        localStorageService.getItem<UserTheme>('theme') || 'light';
       const storedUser = localStorageService.getItem<UserModel>('user') || {};
-
       patchState(store, (state) => ({
         ...state,
-        theme: storedTheme,
-        user: storedUser,
+        user: {
+          ...storedUser,
+          userConfig: {
+            ...storedUser.userConfig,
+            toggleTheme: storedUser.userConfig?.toggleTheme
+              ? storedUser.userConfig?.toggleTheme
+              : DEFAULT_THEME,
+          },
+        },
       }));
 
       effect(() => {
-        const theme = store.theme();
-        store._updateThemeIntoLocalStorage(theme);
+        const theme = store.user().userConfig?.toggleTheme;
+        const user = store.user();
+        const storedUser = localStorageService.getItem<UserModel>('user') || {};
+        store._updateUserIntoLocalStorage({
+          ...user,
+          userConfig: {
+            ...user.userConfig,
+            toggleTheme: theme
+              ? theme
+              : storedUser.userConfig?.toggleTheme
+                ? storedUser.userConfig?.toggleTheme
+                : DEFAULT_THEME,
+          },
+        });
       });
 
       effect(() => {

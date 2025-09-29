@@ -5,8 +5,12 @@
   [(visible)]="visible"
   [closeOnEscape]="true"
   (onHide)="navigateBack()"
-  [style]="{ width: '25rem' }"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [style]="{ width: '24vw' }"
+  [draggable]="false"
+  [resizable]="false"
 >
+  <!-- <p-dialog header="Header" [(visible)]="visible" [modal]="true" [breakpoints]="{ '1199px': '75vw', ' -->
   <!-- // DEFINE TYPE HERE -->
   <ng-container #spot></ng-container>
 </p-dialog>

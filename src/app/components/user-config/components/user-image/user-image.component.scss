@@ -1,0 +1,14 @@
+.upload-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  display: inline-block;
+  transition: 0.3s;
+}
+
+.upload-circle:hover {
+  border-color: #007ad9;
+}

@@ -30,9 +30,13 @@
         (click)="openUserSettings()"
         class="flex cursor-pointer items-center gap-2"
       >
-        <span>{{ userStore.user().email }}</span>
+        <span>{{
+          userStore.user().userConfig?.username
+            ? userStore.user().userConfig?.username
+            : userStore.user().email
+        }}</span>
         <p-avatar
-          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          image="/assets/images/default_user.png"
           [style]="{ width: '32px', height: '32px' }"
         />
       </div>

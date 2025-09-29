@@ -3,10 +3,13 @@ import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from '../services/user/user.service';
 
+export type UserTheme = 'light' | 'dark';
+
 export interface FIREBASE_USER_CONFIG {
   photo?: string;
   appLanguage?: string;
   username?: string;
+  toggleTheme?: UserTheme;
 }
 
 @Injectable({ providedIn: 'root' })

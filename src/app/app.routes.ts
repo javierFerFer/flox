@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { InitGuard } from './guards/init.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { MenuItem } from 'primeng/api';
 import { UserConfigModalResolver } from './resolvers/user-config-modal.resolver';
+import { InitGuard } from './guards/init.guard';
 
 export const NAVIGATION_ELEMENTS: MenuItem[] = [
   {
@@ -48,6 +48,7 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     canActivate: [AuthGuard],
+    resolve: [UserConfigModalResolver],
     loadComponent: () =>
       import('./pages/dashboard/dashboard.component').then(
         (m) => m.DashboardComponent,

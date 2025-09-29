@@ -1,5 +1,6 @@
 import {
   ApplicationConfig,
+  importProvidersFrom,
   isDevMode,
   provideZoneChangeDetection,
 } from '@angular/core';
@@ -19,6 +20,8 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { ToastModule } from 'primeng/toast';
+import { ToastMessagingModule } from './services/toast/toast-messaging.module';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyA53tCg81VnygQLo6exgQsldVO_SfIe4b4',
@@ -38,6 +41,7 @@ export const appConfig: ApplicationConfig = {
       provide: LocationStrategy,
       useClass: HashLocationStrategy,
     },
+    importProvidersFrom(ToastModule, ToastMessagingModule),
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
