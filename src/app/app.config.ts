@@ -1,5 +1,6 @@
 import {
   ApplicationConfig,
+  importProvidersFrom,
   isDevMode,
   provideZoneChangeDetection,
 } from '@angular/core';
@@ -19,6 +20,8 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { ToastModule } from 'primeng/toast';
+import { ToastMessagingModule } from './services/toast/toast-messaging.module';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyA53tCg81VnygQLo6exgQsldVO_SfIe4b4',
@@ -30,6 +33,13 @@ const firebaseConfig = {
   measurementId: 'G-FNFLETJVZH',
 };
 
+export const AVAILABLE_LANGUAGES: Map<string, string> = new Map([
+  ['en', 'LANGUAGES.EN'],
+  ['es', 'LANGUAGES.ES'],
+]);
+
+export const DEFAULT_LANGUAGE = 'en';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -38,6 +48,7 @@ export const appConfig: ApplicationConfig = {
       provide: LocationStrategy,
       useClass: HashLocationStrategy,
     },
+    importProvidersFrom(ToastModule, ToastMessagingModule),
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
@@ -54,8 +65,8 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideTransloco({
       config: {
-        availableLangs: ['en', 'es'],
-        defaultLang: 'en',
+        availableLangs: Array.from(AVAILABLE_LANGUAGES.keys()),
+        defaultLang: DEFAULT_LANGUAGE,
         // Remove this option if your application doesn't support changing language in runtime.
         reRenderOnLangChange: true,
         prodMode: !isDevMode(),
@@ -64,7 +75,7 @@ export const appConfig: ApplicationConfig = {
     }),
     {
       provide: PROJECT_VERSION,
-      useValue: { version: '0.12.0' },
+      useValue: { version: '0.13.0' },
     },
   ],
 };

@@ -1,3 +1,47 @@
 {
-  "name": "es"
+  "name": "es",
+  "LOGIN_PAGE": {
+    "TITLE": "Login",
+    "USERNAME": "Usuario",
+    "PASSWORD": "Contraseña",
+    "LOGIN_BUTTON": "Iniciar sesión",
+    "ERRORS": {
+      "CREDENTIALS_ERROR": {
+        "TITLE": "Error",
+        "MESSAGE": "las credenciales no son validas!"
+      }
+    }
+  },
+  "NAVIGATION": {
+    "STUDENTS": {
+      "LABEL": "Estudiantes"
+    }
+  },
+  "SHARED_MODALS": {
+    "USER_CONFIG": {
+      "TITLE": "Editar perfil",
+      "SUB_TITLE": "Actualiza tu información",
+      "FORM": {
+        "APP_LANGUAGE": "Idioma de la interfaz",
+        "ACTIONS": {
+          "SAVE": "Guardar cambios",
+          "LOG_OUT": "Cerrar sesión"
+        },
+        "MESSAGES": {
+          "USER_EDIT_SUCCESS": {
+            "SUMMARY": "Éxito",
+            "DETAIL": "Usuario editado correctamente!"
+          },
+          "USER_EDIT_UNSUCCESS": {
+            "SUMMARY": "Error",
+            "DETAIL": "Error intentando actualizar la configuración del usuario"
+          }
+        }
+      }
+    }
+  },
+  "LANGUAGES": {
+    "EN": "Ingles",
+    "ES": "Español"
+  }
 }

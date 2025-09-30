@@ -24,4 +24,14 @@ export class ToastService {
     } as ToastMessageOptions;
     this.messageService.add(optionsToUse);
   }
+
+  showSuccessMessage(options: ToastMessageCustomOptions) {
+    const optionsToUse = {
+      severity: 'success',
+      summary: this.translocoService.translate(options.summaryToTranslate!),
+      detail: this.translocoService.translate(options.detailToTranslate!),
+      life: options.life ? options.life : 3000,
+    } as ToastMessageOptions;
+    this.messageService.add(optionsToUse);
+  }
 }

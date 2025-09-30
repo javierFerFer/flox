@@ -19,8 +19,7 @@ export const InitGuard: CanActivateFn = (
   return new Observable<boolean>((subscriber) => {
     // Escucha cambios en el estado de auth
     onAuthStateChanged(auth, (user) => {
-      if (!user) {
-      } else {
+      if (user) {
         const redirectTo = route.data['redirectTo'] as string;
         router.navigate([redirectTo]);
       }

@@ -5,7 +5,6 @@
     "USERNAME": "Username",
     "PASSWORD": "Password",
     "LOGIN_BUTTON": "Log In",
-    "SIGN_UP_BUTTON": "Sign Up",
     "ERRORS": {
       "CREDENTIALS_ERROR": {
         "TITLE": "Error",
@@ -17,5 +16,32 @@
     "STUDENTS": {
       "LABEL": "Students"
     }
+  },
+  "SHARED_MODALS": {
+    "USER_CONFIG": {
+      "TITLE": "Edit profile",
+      "SUB_TITLE": "Update your information",
+      "FORM": {
+        "APP_LANGUAGE": "Language to use",
+        "ACTIONS": {
+          "SAVE": "Save changes",
+          "LOG_OUT": "Close session"
+        },
+        "MESSAGES": {
+          "USER_EDIT_SUCCESS": {
+            "SUMMARY": "Success",
+            "DETAIL": "User edited correctly!"
+          },
+          "USER_EDIT_UNSUCCESS": {
+            "SUMMARY": "Error",
+            "DETAIL": "Error trying to update the user configuration"
+          }
+        }
+      }
+    }
+  },
+  "LANGUAGES": {
+    "EN": "English",
+    "ES": "Spanish"
   }
 }

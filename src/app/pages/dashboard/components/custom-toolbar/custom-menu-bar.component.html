@@ -26,15 +26,27 @@
       </a>
     </ng-template>
     <ng-template #end>
-      <div
-        (click)="openUserSettings()"
-        class="flex cursor-pointer items-center gap-2"
-      >
-        <span>{{ userStore.user().email }}</span>
-        <p-avatar
-          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
-          [style]="{ width: '32px', height: '32px' }"
-        />
+      <div class="flex cursor-pointer items-center gap-4">
+        <form class="mt-2" [formGroup]="toggleForm">
+          <app-toggle-theme formControlName="theme"></app-toggle-theme>
+        </form>
+        <div class="flex items-center" (click)="openUserSettings()">
+          <!-- <span class="mb-1">{{
+            userStore.user().userConfig?.username
+              ? userStore.user().userConfig?.username
+              : userStore.user().email
+          }}</span> -->
+          <p-avatar
+            (click)="openUserSettings()"
+            shape="circle"
+            [image]="
+              userStore.user().userConfig?.photo
+                ? userStore.user().userConfig?.photo
+                : '/assets/images/default_user.png'
+            "
+            [style]="{ width: '32px', height: '32px' }"
+          />
+        </div>
       </div>
     </ng-template>
   </p-menubar>

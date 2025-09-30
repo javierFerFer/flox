@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   private theme$ = toObservable(this.userStore.themeAsBoolean).pipe(
     tap((isLightTheme: boolean) => {
       const element = document.querySelector('html');
+      if (isLightTheme === undefined) return;
       if (isLightTheme) {
         element!.classList.remove('dark-mode');
       } else {

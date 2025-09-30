@@ -1,5 +1,7 @@
+import { FirebaseUserConfig } from '../../resolvers/user-config-modal.resolver';
+
 export interface UserModel {
-  displayName?: string;
   email?: string;
   uid?: string;
+  userConfig?: FirebaseUserConfig;
 }
