@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 
-import { UserStore } from '../../../../stores/user/user.store';
+import { DEFAULT_THEME, UserStore } from '../../../../stores/user/user.store';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuItem } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
@@ -9,6 +9,10 @@ import { CommonModule } from '@angular/common';
 import { NAVIGATION_ELEMENTS } from '../../../../app.routes';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { Router, RouterModule } from '@angular/router';
+import { ToggleThemeComponent } from '../../../../components/toggle-theme/toggle-theme.component';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConfigUserService } from '../../../../services/user/config-user.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-custom-menu-bar',
@@ -19,16 +23,37 @@ import { Router, RouterModule } from '@angular/router';
     CommonModule,
     TranslocoDirective,
     RouterModule,
+    ToggleThemeComponent,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   standalone: true,
   templateUrl: 'custom-menu-bar.component.html',
   styleUrl: 'custom-menu-bar.component.scss',
 })
-export class CustomMenuBarComponent {
+export class CustomMenuBarComponent implements OnInit {
   userStore = inject(UserStore);
   model: MenuItem[] = NAVIGATION_ELEMENTS;
+  private readonly fb = inject(FormBuilder);
+  private readonly configUserService = inject(ConfigUserService);
+  private readonly destroyRef = inject(DestroyRef);
+
+  toggleForm = this.fb.group({
+    theme: [this.userStore.user().userConfig?.toggleTheme],
+  });
 
   constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.toggleForm.controls.theme.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((themeValue) => {
+        this.configUserService.updateUserConfig({
+          ...this.userStore.user().userConfig,
+          toggleTheme: themeValue ?? DEFAULT_THEME,
+        });
+      });
+  }
 
   openUserSettings() {
     this.router.navigate([

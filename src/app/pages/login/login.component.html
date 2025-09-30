@@ -38,13 +38,6 @@
             [disabled]="userForm.invalid"
             [label]="t('LOGIN_PAGE.LOGIN_BUTTON')"
           />
-          <p-button
-            class="min-w-full lg:min-w-11/12"
-            severity="secondary"
-            (onClick)="logIn()"
-            [disabled]="userForm.controls.username.invalid"
-            [label]="t('LOGIN_PAGE.SIGN_UP_BUTTON')"
-          />
         </div>
       </form>
       <p class="flex justify-end pt-4">v{{ version }}</p>

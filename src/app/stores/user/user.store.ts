@@ -10,9 +10,11 @@ import {
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 import { UserModel } from './user.model';
 import {
-  FIREBASE_USER_CONFIG,
+  FirebaseUserConfig,
   UserTheme,
 } from '../../resolvers/user-config-modal.resolver';
+import { DEFAULT_LANGUAGE } from '../../app.config';
+import { TranslocoService } from '@jsverse/transloco';
 
 export const DEFAULT_THEME: UserTheme = 'light';
 export enum themesEnum {
@@ -30,9 +32,7 @@ const initialState: UserState = {
     email: '',
     uid: '',
     userConfig: {
-      appLanguage: '',
-      photo: '',
-      username: '',
+      appLanguage: DEFAULT_LANGUAGE,
       toggleTheme: DEFAULT_THEME,
     },
   },
@@ -71,13 +71,24 @@ export const UserStore = signalStore(
         },
       }));
     },
-    updateUserConfig(userConfig: FIREBASE_USER_CONFIG): void {
+    updateUserConfig(userConfig: FirebaseUserConfig): void {
       patchState(store, (state) => ({
         ...state,
         user: {
           ...state.user,
           userConfig: {
             ...userConfig,
+            appLanguage: userConfig.appLanguage
+              ? userConfig.appLanguage
+              : localStorageService.getItem<UserModel>('user')?.userConfig
+                    ?.appLanguage
+                ? localStorageService.getItem<UserModel>('user')?.userConfig
+                    ?.appLanguage
+                : DEFAULT_LANGUAGE,
+            photo: userConfig.photo
+              ? userConfig.photo
+              : localStorageService.getItem<UserModel>('user')?.userConfig
+                  ?.photo, // get from state = get from localStorage due to a free tier firebase
             toggleTheme: userConfig.toggleTheme
               ? userConfig.toggleTheme
               : localStorageService.getItem<UserModel>('user')?.userConfig
@@ -99,6 +110,8 @@ export const UserStore = signalStore(
   withHooks({
     onInit: (store) => {
       const localStorageService = inject(LocalStorageService);
+      const translocoService = inject(TranslocoService);
+
       const storedUser = localStorageService.getItem<UserModel>('user') || {};
       patchState(store, (state) => ({
         ...state,
@@ -128,6 +141,11 @@ export const UserStore = signalStore(
                 : DEFAULT_THEME,
           },
         });
+
+        // change app language
+        translocoService.setActiveLang(
+          user.userConfig?.appLanguage || DEFAULT_LANGUAGE,
+        );
       });
 
       effect(() => {

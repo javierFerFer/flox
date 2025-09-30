@@ -1,74 +1,71 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { InputTextModule } from 'primeng/inputtext';
-import { ToggleThemeComponent } from '../../components/toggle-theme/toggle-theme.component';
 import { RippleModule } from 'primeng/ripple';
 import { UserStore } from '../../stores/user/user.store';
-import { TranslocoDirective } from '@jsverse/transloco';
+import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { CardModule } from 'primeng/card';
-import { UserService } from '../../services/user/user.service';
-import { take } from 'rxjs';
+import { delay, take } from 'rxjs';
 import { ToastService } from '../../services/toast/toast.service';
 import { Auth, signOut } from '@angular/fire/auth';
 import { UserImageComponent } from './components/user-image/user-image.component';
+import { ConfigUserService } from '../../services/user/config-user.service';
+import { SelectModule } from 'primeng/select';
+import { TranslocoHelperService } from '../../services/transoloco-helper/transloco-helper.service';
 
 @Component({
   selector: 'app-user-config',
   imports: [
-    ToggleThemeComponent,
-    FloatLabelModule,
     ButtonModule,
     RippleModule,
-    InputTextModule,
     ReactiveFormsModule,
     TranslocoDirective,
+    SelectModule,
     CardModule,
     UserImageComponent,
   ],
   standalone: true,
   templateUrl: 'user-config.component.html',
 })
-export class UserConfigModalComponent {
+export class UserConfigModalComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly auth = inject(Auth);
-  private readonly userService = inject(UserService);
+  private readonly configUserService = inject(ConfigUserService);
   private readonly toastService = inject(ToastService);
-
+  private readonly translocoHelperService = inject(TranslocoHelperService);
+  private readonly translocoService = inject(TranslocoService);
   userStore = inject(UserStore);
   userConfigForm = this.fb.group({
     photo: [this.userStore.user().userConfig?.photo],
-    username: [
-      this.userStore.user().userConfig?.username,
-      [Validators.required, Validators.maxLength(12)],
-    ],
     appLanguage: [
       this.userStore.user().userConfig?.appLanguage,
-      // Validators.required,
-    ],
-    toggleTheme: [
-      this.userStore.user().userConfig?.toggleTheme,
       Validators.required,
     ],
   });
 
+  languages = [] as {}[];
+
+  ngOnInit(): void {
+    this.languages = this.translocoHelperService
+      .getTranslocoAvailableLangs()
+      .map((language) => {
+        return {
+          name: language.keyToTranslate,
+          code: language.key,
+        };
+      });
+  }
+
   updateUserConfig() {
-    const { appLanguage, photo, toggleTheme, username } =
-      this.userConfigForm.getRawValue();
+    const { appLanguage, photo } = this.userConfigForm.getRawValue();
     try {
-      console.log(appLanguage);
-      console.log(photo);
-      console.log(toggleTheme);
-      console.log(username);
-      this.userService
+      this.configUserService
         .updateUserConfig({
           appLanguage: appLanguage || '',
           photo: (photo as any) || '',
-          username: username || '',
-          toggleTheme: toggleTheme || undefined,
+          toggleTheme: this.userStore.user().userConfig?.toggleTheme,
         })
-        .pipe(take(1))
+        .pipe(take(1), delay(100))
         .subscribe(() => {
           this.toastService.showSuccessMessage({
             summaryToTranslate:

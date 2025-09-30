@@ -5,7 +5,6 @@
     "USERNAME": "Username",
     "PASSWORD": "Password",
     "LOGIN_BUTTON": "Log In",
-    "SIGN_UP_BUTTON": "Sign Up",
     "ERRORS": {
       "CREDENTIALS_ERROR": {
         "TITLE": "Error",
@@ -23,10 +22,7 @@
       "TITLE": "Edit profile",
       "SUB_TITLE": "Update your information",
       "FORM": {
-        "PHOTO": "User photo",
-        "USERNAME": "Name to use:",
         "APP_LANGUAGE": "Language to use",
-        "APP_THEME": "Color",
         "ACTIONS": {
           "SAVE": "Save changes",
           "LOG_OUT": "Close session"
@@ -43,5 +39,9 @@
         }
       }
     }
+  },
+  "LANGUAGES": {
+    "EN": "English",
+    "ES": "Spanish"
   }
 }

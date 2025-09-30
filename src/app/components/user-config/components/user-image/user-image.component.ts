@@ -23,10 +23,8 @@ import { UserStore } from '../../../../stores/user/user.store';
 })
 export class UserImageComponent implements ControlValueAccessor {
   readonly userStore = inject(UserStore);
-  imageUrl = this.userStore.user().userConfig?.photo;
+  imageUrl: string | undefined = '';
   disabled = false;
-
-  constructor() {}
 
   onUpload(event: any) {
     const file = event.files[0];
@@ -38,22 +36,12 @@ export class UserImageComponent implements ControlValueAccessor {
 
       this.onChange(this.imageUrl);
       this.onTouched();
-
-      console.log('this.imageUrl', this.imageUrl);
-
-      this.userStore.updateUserConfig({
-        ...this.userStore.user().userConfig,
-        photo: this.imageUrl,
-      });
     };
     reader.readAsDataURL(file);
   }
 
   onChange = (imageValue: string | undefined) => {
-    this.userStore.updateUserConfig({
-      ...this.userStore.user().userConfig,
-      photo: imageValue,
-    });
+    this.imageUrl = imageValue;
   };
   onTouched = () => {};
   writeValue(e: any): void {

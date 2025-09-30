@@ -1,5 +1,6 @@
 import {
   Component,
+  DestroyRef,
   inject,
   OnInit,
   viewChild,
@@ -10,7 +11,7 @@ import { ButtonModule } from 'primeng/button';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { TranslocoService } from '@jsverse/transloco';
-import { take } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-modal-wrapper',
@@ -24,6 +25,7 @@ export class ModalWrapperComponent implements OnInit {
   modalTitle: string = '';
   private readonly translocoService = inject(TranslocoService);
   private readonly location = inject(Location);
+  private readonly destroyRef = inject(DestroyRef);
 
   constructor(private activatedRoute: ActivatedRoute) {}
 
@@ -34,7 +36,7 @@ export class ModalWrapperComponent implements OnInit {
     ] as string;
     this.translocoService
       .selectTranslate(modalTitleKey)
-      .pipe(take(1))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((value) => {
         this.modalTitle = value;
       });

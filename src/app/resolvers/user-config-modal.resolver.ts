@@ -1,22 +1,21 @@
 import { inject, Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UserService } from '../services/user/user.service';
+import { ConfigUserService } from '../services/user/config-user.service';
 
 export type UserTheme = 'light' | 'dark';
 
-export interface FIREBASE_USER_CONFIG {
+export interface FirebaseUserConfig {
   photo?: string;
   appLanguage?: string;
-  username?: string;
   toggleTheme?: UserTheme;
 }
 
 @Injectable({ providedIn: 'root' })
 export class UserConfigModalResolver implements Resolve<any> {
-  private readonly userService = inject(UserService);
+  private readonly configUserService = inject(ConfigUserService);
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> | Promise<any> | any {
-    return this.userService.getUserConfig();
+    return this.configUserService.getUserConfig();
   }
 }

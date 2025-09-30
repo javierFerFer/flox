@@ -33,6 +33,13 @@ const firebaseConfig = {
   measurementId: 'G-FNFLETJVZH',
 };
 
+export const AVAILABLE_LANGUAGES: Map<string, string> = new Map([
+  ['en', 'LANGUAGES.EN'],
+  ['es', 'LANGUAGES.ES'],
+]);
+
+export const DEFAULT_LANGUAGE = 'en';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -58,8 +65,8 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideTransloco({
       config: {
-        availableLangs: ['en', 'es'],
-        defaultLang: 'en',
+        availableLangs: Array.from(AVAILABLE_LANGUAGES.keys()),
+        defaultLang: DEFAULT_LANGUAGE,
         // Remove this option if your application doesn't support changing language in runtime.
         reRenderOnLangChange: true,
         prodMode: !isDevMode(),
@@ -68,7 +75,7 @@ export const appConfig: ApplicationConfig = {
     }),
     {
       provide: PROJECT_VERSION,
-      useValue: { version: '0.12.0' },
+      useValue: { version: '0.13.0' },
     },
   ],
 };
