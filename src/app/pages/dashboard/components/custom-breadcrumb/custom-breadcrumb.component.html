@@ -1,0 +1,18 @@
+<ng-container *transloco="let t">
+  <p-breadcrumb
+    [style]="{ 'background-color': 'transparent', 'padding-left': '0' }"
+    class="max-w-full"
+    [model]="navigationElements"
+    [home]="home"
+  >
+    <ng-template #item let-item>
+      <a
+        class="p-breadcrumb-item-link cursor-pointer"
+        [routerLink]="item.routerLink"
+      >
+        <span [class]="'p-breadcrumb-item-icon ' + item.icon"></span>
+        <span class="p-breadcrumb-item-label">{{ t(item.label) }}</span>
+      </a>
+    </ng-template>
+  </p-breadcrumb>
+</ng-container>
