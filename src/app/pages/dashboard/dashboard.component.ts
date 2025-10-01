@@ -6,6 +6,8 @@ import { LateralMenuComponent } from './components/lateral-menu/lateral-menu.com
 import { CustomMenuBarComponent } from './components/custom-toolbar/custom-menu-bar.component';
 import { ToastModule } from 'primeng/toast';
 
+import { CustomBreadCrumbComponent } from './components/custom-breadcrumb/custom-breadcrumb.component';
+
 @Component({
   selector: 'app-dashboard',
   imports: [
@@ -14,6 +16,7 @@ import { ToastModule } from 'primeng/toast';
     LateralMenuComponent,
     CustomMenuBarComponent,
     ToastModule,
+    CustomBreadCrumbComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
