@@ -17,6 +17,15 @@
       "LABEL": "Estudiantes"
     }
   },
+  "DASHBOARD": {
+    "RECORDS": {
+      "MODALS": {
+        "CREATE_NEW_CLASS": {
+          "TITLE": "Crear nueva clase"
+        }
+      }
+    }
+  },
   "SHARED_MODALS": {
     "USER_CONFIG": {
       "TITLE": "Editar perfil",

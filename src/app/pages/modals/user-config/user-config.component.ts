@@ -2,16 +2,16 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
-import { UserStore } from '../../stores/user/user.store';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import { CardModule } from 'primeng/card';
 import { delay, take } from 'rxjs';
-import { ToastService } from '../../services/toast/toast.service';
 import { Auth, signOut } from '@angular/fire/auth';
 import { UserImageComponent } from './components/user-image/user-image.component';
-import { ConfigUserService } from '../../services/user/config-user.service';
 import { SelectModule } from 'primeng/select';
-import { TranslocoHelperService } from '../../services/transoloco-helper/transloco-helper.service';
+import { ToastService } from '../../../services/toast/toast.service';
+import { TranslocoHelperService } from '../../../services/transoloco-helper/transloco-helper.service';
+import { ConfigUserService } from '../../../services/user/config-user.service';
+import { UserStore } from '../../../stores/user/user.store';
 
 @Component({
   selector: 'app-user-config',
