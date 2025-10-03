@@ -1,5 +1,6 @@
 import {
   Component,
+  ComponentRef,
   DestroyRef,
   inject,
   OnInit,
@@ -12,6 +13,11 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { TranslocoService } from '@jsverse/transloco';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CloseModal } from '../../pages/modals/close-modal-interface';
+
+type CustomComponentIntance = {
+  instance: ComponentRef<unknown>['instance'] & CloseModal;
+} & ComponentRef<unknown>;
 
 @Component({
   selector: 'app-modal-wrapper',
@@ -21,8 +27,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class ModalWrapperComponent implements OnInit {
   visible = true;
+
   componentSpot = viewChild.required('spot', { read: ViewContainerRef });
   modalTitle: string = '';
+  private componentRef!: CustomComponentIntance;
   private readonly translocoService = inject(TranslocoService);
   private readonly location = inject(Location);
   private readonly destroyRef = inject(DestroyRef);
@@ -48,10 +56,14 @@ export class ModalWrapperComponent implements OnInit {
     ] as Promise<any>;
     const componentToRender = await modalComponentPromise;
 
-    this.componentSpot().createComponent(componentToRender);
+    this.componentRef = this.componentSpot().createComponent(componentToRender);
+    this.componentRef.setInput('modalWrapperRef', this);
   }
 
-  navigateBack() {
+  public close() {
+    if (this.componentRef.instance?.onClose) {
+      this.componentRef.instance?.onClose();
+    }
     this.location.back();
   }
 }

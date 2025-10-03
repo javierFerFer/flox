@@ -3,6 +3,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { MenuItem } from 'primeng/api';
 import { UserConfigModalResolver } from './resolvers/user-config-modal.resolver';
 import { InitGuard } from './guards/init.guard';
+import { UserClassesResolver } from './resolvers/user-classes.resolver';
 
 export const NAVIGATION_ELEMENTS: MenuItem[] = [
   {
@@ -61,6 +62,7 @@ export const routes: Routes = [
       },
       {
         path: 'records',
+        resolve: [UserClassesResolver],
         loadComponent: () =>
           import('./pages/dashboard/sub-pages/records/records.component').then(
             (m) => m.RecordsComponent,

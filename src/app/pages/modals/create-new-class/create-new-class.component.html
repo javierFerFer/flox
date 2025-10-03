@@ -1,51 +1,32 @@
-<!-- <ng-container *transloco="let t">
-  <form
-    class="overflow-hidden"
-    [formGroup]="userConfigForm"
-    (submit)="updateUserConfig()"
-  >
+<ng-container *transloco="let t">
+  <form [formGroup]="newClassForm" (submit)="createNewClass()">
     <div class="flex items-center justify-center">
-      <app-user-image id="photo" formControlName="photo"></app-user-image>
+      <p-float-label class="w-full" variant="in">
+        <input
+          class="w-full"
+          pInputText
+          id="className"
+          formControlName="className"
+        />
+        <label for="className">{{
+          t("DASHBOARD.RECORDS.MODALS.CREATE_NEW_CLASS.FORM.CLASS_NAME")
+        }}</label>
+      </p-float-label>
     </div>
-    <div class="mt-8 flex items-center">
-      <span class="w-full">{{
-        t("SHARED_MODALS.USER_CONFIG.FORM.APP_LANGUAGE")
-      }}</span>
-      <p-select
-        [options]="languages"
-        formControlName="appLanguage"
-        optionLabel="name"
-        optionValue="code"
-        placeholder="Select a City"
-        class="w-full md:w-56"
-      >
-        <ng-template #selectedItem let-selectedOption>
-          @if (selectedOption) {
-            <div class="flex items-center gap-2">
-              <div>{{ t(selectedOption.name) }}</div>
-            </div>
-          }
-        </ng-template>
-        <ng-template let-element #item>
-          <div class="flex items-center gap-2">
-            <div>{{ t(element.name) }}</div>
-          </div>
-        </ng-template>
-      </p-select>
-    </div>
-    <div class="mt-16 flex items-center justify-between">
+    <div class="mt-16 flex items-center justify-end gap-4">
       <p-button
-        (onClick)="closeSession()"
-        severity="danger"
-        [label]="t('SHARED_MODALS.USER_CONFIG.FORM.ACTIONS.LOG_OUT')"
+        (onClick)="close()"
+        [disabled]="classStore.isLoading()"
+        severity="secondary"
+        [label]="t('DASHBOARD.RECORDS.MODALS.CREATE_NEW_CLASS.ACTIONS.CLOSE')"
       />
       <p-button
-        severity="success"
+        [loading]="classStore.isLoading()"
+        severity="primary"
         type="submit"
-        [loading]="this.userStore.isLoading()"
-        [disabled]="userConfigForm.invalid || !userConfigForm.dirty"
-        [label]="t('SHARED_MODALS.USER_CONFIG.FORM.ACTIONS.SAVE')"
+        [disabled]="newClassForm.invalid || !newClassForm.dirty"
+        [label]="t('DASHBOARD.RECORDS.MODALS.CREATE_NEW_CLASS.ACTIONS.SAVE')"
       />
     </div>
   </form>
-</ng-container> -->
+</ng-container>

@@ -19,9 +19,29 @@
   },
   "DASHBOARD": {
     "RECORDS": {
+      "COMPONENTS": {
+        "CREATE_NEW_CLASS_BUTTON": "Create a new class"
+      },
       "MODALS": {
         "CREATE_NEW_CLASS": {
-          "TITLE": "Create new class"
+          "TITLE": "Create new class",
+          "FORM": {
+            "CLASS_NAME": "Name of the class",
+            "MESSAGES": {
+              "CLASS_CREATE_SUCCESS": {
+                "SUMMARY": "Success",
+                "DETAIL": "Class created correctly!"
+              },
+              "CLASS_CREATE_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "Class was no created"
+              }
+            }
+          },
+          "ACTIONS": {
+            "SAVE": "Save changes",
+            "CLOSE": "Discard changes"
+          }
         }
       }
     }

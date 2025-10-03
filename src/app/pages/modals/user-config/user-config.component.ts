@@ -1,8 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
-import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
+import { TranslocoDirective } from '@jsverse/transloco';
 import { CardModule } from 'primeng/card';
 import { delay, take } from 'rxjs';
 import { Auth, signOut } from '@angular/fire/auth';
@@ -10,8 +10,10 @@ import { UserImageComponent } from './components/user-image/user-image.component
 import { SelectModule } from 'primeng/select';
 import { ToastService } from '../../../services/toast/toast.service';
 import { TranslocoHelperService } from '../../../services/transoloco-helper/transloco-helper.service';
-import { ConfigUserService } from '../../../services/user/config-user.service';
+import { ConfigUserService } from '../../../services/config-user/config-user.service';
 import { UserStore } from '../../../stores/user/user.store';
+import { CloseModal } from '../close-modal-interface';
+import { ModalWrapperComponent } from '../../../components/modal-wrapper/modal-wrapper.component';
 
 @Component({
   selector: 'app-user-config',
@@ -27,13 +29,16 @@ import { UserStore } from '../../../stores/user/user.store';
   standalone: true,
   templateUrl: 'user-config.component.html',
 })
-export class UserConfigModalComponent implements OnInit {
+export class UserConfigModalComponent implements OnInit, CloseModal {
+  @Input('modalWrapperRef')
+  ModalWrapperRef!: ModalWrapperComponent;
+
   private readonly fb = inject(FormBuilder);
   private readonly auth = inject(Auth);
   private readonly configUserService = inject(ConfigUserService);
   private readonly toastService = inject(ToastService);
   private readonly translocoHelperService = inject(TranslocoHelperService);
-  private readonly translocoService = inject(TranslocoService);
+
   userStore = inject(UserStore);
   userConfigForm = this.fb.group({
     photo: [this.userStore.user().userConfig?.photo],
@@ -87,5 +92,9 @@ export class UserConfigModalComponent implements OnInit {
 
   closeSession() {
     signOut(this.auth);
+  }
+
+  public close() {
+    this.ModalWrapperRef.close();
   }
 }
