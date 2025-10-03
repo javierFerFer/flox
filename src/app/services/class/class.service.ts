@@ -7,32 +7,46 @@ import { ClassModel } from '../../stores/class/class.model';
 @Injectable({ providedIn: 'root' })
 export class ClassService {
   private readonly classApiService = inject(ClassApiService);
-  private readonly classesStore = inject(ClassStore);
+  private readonly classStore = inject(ClassStore);
 
   getUserClasses() {
-    this.classesStore.setIsLoading(true);
+    this.classStore.setIsLoading(true);
     return this.classApiService.getUserClasses().pipe(
       tap((result) => {
         if (result) {
-          this.classesStore.updateClasses(result);
+          this.classStore.updateClasses(result);
         }
       }),
       finalize(() => {
-        this.classesStore.setIsLoading(false);
+        this.classStore.setIsLoading(false);
       }),
     );
   }
 
   createNewClass(newClassEntity: ClassModel) {
-    this.classesStore.setIsLoading(true);
-    const currentClasses = this.classesStore.classes().concat(newClassEntity);
+    this.classStore.setIsLoading(true);
+    const currentClasses = this.classStore.classes().concat(newClassEntity);
     return this.classApiService.createNewClass(currentClasses).pipe(
       tap(() => {
-        console.log('currentClasses', currentClasses);
-        this.classesStore.updateClasses(currentClasses);
+        this.classStore.updateClasses(currentClasses);
       }),
       finalize(() => {
-        this.classesStore.setIsLoading(false);
+        this.classStore.setIsLoading(false);
+      }),
+    );
+  }
+
+  deleteClass(classToDelete: ClassModel) {
+    this.classStore.setIsLoading(true);
+    return this.classApiService.deleteClass(classToDelete).pipe(
+      tap(() => {
+        const classesFiltered = this.classStore
+          .classes()
+          .filter((c) => c.uuid !== classToDelete.uuid);
+        this.classStore.updateClasses(classesFiltered);
+      }),
+      finalize(() => {
+        this.classStore.setIsLoading(false);
       }),
     );
   }

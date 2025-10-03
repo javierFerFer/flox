@@ -1,5 +1,11 @@
 import { inject, Injectable } from '@angular/core';
-import { doc, docData, Firestore, updateDoc } from '@angular/fire/firestore';
+import {
+  arrayRemove,
+  doc,
+  docData,
+  Firestore,
+  updateDoc,
+} from '@angular/fire/firestore';
 import { from, map } from 'rxjs';
 import { UserStore } from '../../stores/user/user.store';
 import { ClassStore } from '../../stores/class/class.store';
@@ -24,9 +30,15 @@ export class ClassApiService {
       }),
     );
   }
-  createNewClass(newClassEntity: ClassModel[]) {
+  createNewClass(newClassEntities: ClassModel[]) {
     return from(
-      updateDoc(this.classesDoc, { user_classes: newClassEntity }),
+      updateDoc(this.classesDoc, { user_classes: newClassEntities }),
+    ).pipe(map((_) => true));
+  }
+
+  deleteClass(classToDelete: ClassModel) {
+    return from(
+      updateDoc(this.classesDoc, { user_classes: arrayRemove(classToDelete) }),
     ).pipe(map((_) => true));
   }
 }

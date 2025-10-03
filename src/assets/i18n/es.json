@@ -20,7 +20,31 @@
   "DASHBOARD": {
     "RECORDS": {
       "COMPONENTS": {
-        "CREATE_NEW_CLASS_BUTTON": "Crear una nueva clase"
+        "CREATE_NEW_CLASS_BUTTON": "Crear una nueva clase",
+        "CLASS": {
+          "ACTIONS": {
+            "ADD_NEW_STUDENT": "Agregar nuevo alumno",
+            "DELETE_CLASS": "Borrar clase"
+          },
+          "CONFIRM_DELETE_CLASS_DIALOG": {
+            "HEADER": "Peligro",
+            "MESSAGE": " ¿Quieres borrar la clase seleccionada? Tambien se borraran todos los estudiantes asociados",
+            "ACTIONS": {
+              "DELETE": "Si, borrar",
+              "CANCEL": "No, cancela"
+            },
+            "RESULT": {
+              "SUCCESS": {
+                "SUMMARY": "Éxito",
+                "DETAIL": "La clase fue borrada exitosamente!"
+              },
+              "ERROR": {
+                "SUMMARY": "Error",
+                "DETAIL": "No se pudo borrar la clase"
+              }
+            }
+          }
+        }
       },
       "MODALS": {
         "CREATE_NEW_CLASS": {

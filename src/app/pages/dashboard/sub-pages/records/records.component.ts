@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  effect,
-  ViewChild,
-} from '@angular/core';
+import { Component, computed, inject, effect, ViewChild } from '@angular/core';
 import { TabList, TabsModule } from 'primeng/tabs';
 import { CardModule } from 'primeng/card';
 import { CommonModule } from '@angular/common';
@@ -33,7 +26,6 @@ interface TabsElements {
   ],
   selector: 'app-records',
   templateUrl: 'records.component.html',
-  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class RecordsComponent {
   @ViewChild('tabListRef') tabListRef!: TabList;
@@ -56,8 +48,7 @@ export class RecordsComponent {
         return {
           value: classObject.uuid,
           title: classObject.name,
-          // @TODO: pending this
-          routerLink: { outlets: { recordsModals: ['create-new-class'] } },
+          routerLink: { outlets: { classTable: ['class', classObject.uuid] } },
         } as TabsElements;
       })
       .concat(this.lastElementOfTheTabs);

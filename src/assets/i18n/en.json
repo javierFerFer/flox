@@ -20,7 +20,31 @@
   "DASHBOARD": {
     "RECORDS": {
       "COMPONENTS": {
-        "CREATE_NEW_CLASS_BUTTON": "Create a new class"
+        "CREATE_NEW_CLASS_BUTTON": "Create a new class",
+        "CLASS": {
+          "ACTIONS": {
+            "ADD_NEW_STUDENT": "Add new students",
+            "DELETE_CLASS": "Delete class"
+          },
+          "CONFIRM_DELETE_CLASS_DIALOG": {
+            "HEADER": "Danger Zone",
+            "MESSAGE": "Do you want to delete the selected class? It will delete all the students related with it",
+            "ACTIONS": {
+              "DELETE": "Yes, delete it",
+              "CANCEL": "No, cancel"
+            },
+            "RESULT": {
+              "SUCCESS": {
+                "SUMMARY": "Success",
+                "DETAIL": "Class deleted correctly!"
+              },
+              "ERROR": {
+                "SUMMARY": "Error",
+                "DETAIL": "Class was no deleted"
+              }
+            }
+          }
+        }
       },
       "MODALS": {
         "CREATE_NEW_CLASS": {

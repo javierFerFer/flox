@@ -4,6 +4,7 @@ import { MenuItem } from 'primeng/api';
 import { UserConfigModalResolver } from './resolvers/user-config-modal.resolver';
 import { InitGuard } from './guards/init.guard';
 import { UserClassesResolver } from './resolvers/user-classes.resolver';
+import { ClassIdResolver } from './resolvers/class-id.resolver';
 
 export const NAVIGATION_ELEMENTS: MenuItem[] = [
   {
@@ -81,6 +82,15 @@ export const routes: Routes = [
               ).then((m) => m.CreateNewClassModalComponent),
             },
             outlet: 'recordsModals',
+          },
+          {
+            path: 'class/:id',
+            resolve: [ClassIdResolver],
+            loadComponent: () =>
+              import(
+                './pages/dashboard/sub-pages/class-id/class-id.component'
+              ).then((m) => m.ClassIdComponent),
+            outlet: 'classTable',
           },
         ],
       },
