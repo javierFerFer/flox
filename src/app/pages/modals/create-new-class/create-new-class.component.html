@@ -1,0 +1,32 @@
+<ng-container *transloco="let t">
+  <form [formGroup]="newClassForm" (submit)="createNewClass()">
+    <div class="flex items-center justify-center">
+      <p-float-label class="w-full" variant="in">
+        <input
+          class="w-full"
+          pInputText
+          id="className"
+          formControlName="className"
+        />
+        <label for="className">{{
+          t("DASHBOARD.RECORDS.MODALS.CREATE_NEW_CLASS.FORM.CLASS_NAME")
+        }}</label>
+      </p-float-label>
+    </div>
+    <div class="mt-16 flex items-center justify-end gap-4">
+      <p-button
+        (onClick)="close()"
+        [disabled]="classStore.isLoading()"
+        severity="secondary"
+        [label]="t('DASHBOARD.RECORDS.MODALS.CREATE_NEW_CLASS.ACTIONS.CLOSE')"
+      />
+      <p-button
+        [loading]="classStore.isLoading()"
+        severity="primary"
+        type="submit"
+        [disabled]="newClassForm.invalid || !newClassForm.dirty"
+        [label]="t('DASHBOARD.RECORDS.MODALS.CREATE_NEW_CLASS.ACTIONS.SAVE')"
+      />
+    </div>
+  </form>
+</ng-container>

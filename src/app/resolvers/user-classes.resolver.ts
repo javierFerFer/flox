@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ConfigUserService } from '../services/config-user/config-user.service';
+import { ClassService } from '../services/class/class.service';
 
 export type UserTheme = 'light' | 'dark';
 
@@ -12,10 +12,10 @@ export interface FirebaseUserConfig {
 }
 
 @Injectable({ providedIn: 'root' })
-export class UserConfigModalResolver implements Resolve<any> {
-  private readonly configUserService = inject(ConfigUserService);
+export class UserClassesResolver implements Resolve<any> {
+  private readonly classService = inject(ClassService);
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> | Promise<any> | any {
-    return this.configUserService.getUserConfig();
+    return this.classService.getUserClasses();
   }
 }

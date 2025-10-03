@@ -6,7 +6,7 @@ import {
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 import { FileUploadModule } from 'primeng/fileupload';
-import { UserStore } from '../../../../stores/user/user.store';
+import { UserStore } from '../../../../../stores/user/user.store';
 
 @Component({
   selector: 'app-user-image',

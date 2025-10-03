@@ -3,6 +3,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { MenuItem } from 'primeng/api';
 import { UserConfigModalResolver } from './resolvers/user-config-modal.resolver';
 import { InitGuard } from './guards/init.guard';
+import { UserClassesResolver } from './resolvers/user-classes.resolver';
+import { ClassIdResolver } from './resolvers/class-id.resolver';
 
 export const NAVIGATION_ELEMENTS: MenuItem[] = [
   {
@@ -23,7 +25,7 @@ const MODAL_SHARED_ROUTES: Routes = [
     data: {
       modalTitleKey: 'SHARED_MODALS.USER_CONFIG.TITLE',
       modalComponentPromise: import(
-        '../app/components/user-config/user-config.component'
+        '../app/pages/modals/user-config/user-config.component'
       ).then((m) => m.UserConfigModalComponent),
     },
     outlet: 'modal',
@@ -61,10 +63,36 @@ export const routes: Routes = [
       },
       {
         path: 'records',
+        resolve: [UserClassesResolver],
         loadComponent: () =>
           import('./pages/dashboard/sub-pages/records/records.component').then(
             (m) => m.RecordsComponent,
           ),
+        children: [
+          {
+            path: 'create-new-class',
+            loadComponent: () =>
+              import('./components/modal-wrapper/modal-wrapper.component').then(
+                (m) => m.ModalWrapperComponent,
+              ),
+            data: {
+              modalTitleKey: 'DASHBOARD.RECORDS.MODALS.CREATE_NEW_CLASS.TITLE',
+              modalComponentPromise: import(
+                '../app/pages/modals/create-new-class/create-new-class.component'
+              ).then((m) => m.CreateNewClassModalComponent),
+            },
+            outlet: 'recordsModals',
+          },
+          {
+            path: 'class/:id',
+            resolve: [ClassIdResolver],
+            loadComponent: () =>
+              import(
+                './pages/dashboard/sub-pages/class-id/class-id.component'
+              ).then((m) => m.ClassIdComponent),
+            outlet: 'classTable',
+          },
+        ],
       },
       ...MODAL_SHARED_ROUTES,
     ],

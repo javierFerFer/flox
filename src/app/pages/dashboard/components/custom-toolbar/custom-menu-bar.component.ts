@@ -11,7 +11,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
 import { Router, RouterModule } from '@angular/router';
 import { ToggleThemeComponent } from '../../../../components/toggle-theme/toggle-theme.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ConfigUserService } from '../../../../services/user/config-user.service';
+import { ConfigUserService } from '../../../../services/config-user/config-user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({

@@ -1,0 +1,75 @@
+<ng-container *transloco="let t">
+  <div class="card">
+    <p-table [value]="[]" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template #header>
+        <tr>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Quantity</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-product>
+        <tr>
+          <td>{{ product.code }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.category }}</td>
+          <td>{{ product.quantity }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <footer class="mt-12 flex items-center justify-end gap-4">
+      <p-button
+        (onClick)="deleteClass($event)"
+        severity="danger"
+        [label]="t('DASHBOARD.RECORDS.COMPONENTS.CLASS.ACTIONS.DELETE_CLASS')"
+      />
+      <p-button
+        (onClick)="addNewStudent($event)"
+        severity="primary"
+        [label]="
+          t('DASHBOARD.RECORDS.COMPONENTS.CLASS.ACTIONS.ADD_NEW_STUDENT')
+        "
+      />
+    </footer>
+  </div>
+  <!-- dialog component -->
+  <p-confirmdialog #cd>
+    <ng-template
+      #headless
+      let-message
+      let-rejectButtonProps
+      let-acceptLabel
+      let-rejectLabel
+      let-onAccept="onAccept"
+      let-onReject="onReject"
+    >
+      <div class="flex flex-col items-center rounded p-8">
+        <div
+          [style.background]="'var(--p-button-danger-background)'"
+          class="text-primary-contrast -mt-20 inline-flex h-24 w-24 rotate-180 items-center justify-center rounded-full"
+        >
+          <i class="pi pi-info !text-5xl"></i>
+        </div>
+        <span class="mt-6 mb-2 block text-2xl font-bold">{{
+          t(message.header)
+        }}</span>
+        <p class="mb-0">{{ t(message.message) }}</p>
+        <div class="mt-6 flex items-center gap-2">
+          <p-button
+            [label]="t(rejectLabel.rejectLabel)"
+            (onClick)="onReject()"
+            styleClass="w-32"
+          ></p-button>
+          <p-button
+            [loading]="classStore.isLoading()"
+            [label]="t(acceptLabel.acceptLabel)"
+            severity="danger"
+            (onClick)="onAccept()"
+            styleClass="w-32"
+          ></p-button>
+        </div>
+      </div>
+    </ng-template>
+  </p-confirmdialog>
+</ng-container>

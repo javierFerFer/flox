@@ -1,1 +1,32 @@
-<div>hola!</div>
+<ng-container *transloco="let t">
+  <p-card>
+    <p-tabs value="0" scrollable>
+      <p-tablist #tabListRef>
+        @for (tabElement of tabListElements(); track tabElement.value) {
+          <p-tab
+            [value]="tabElement.value"
+            [routerLink]="[tabElement.routerLink]"
+          >
+            @if (tabElement?.title) {
+              <span>
+                {{ tabElement.title! }}
+              </span>
+            }
+            @if (tabElement?.keyToTranslate) {
+              <span>
+                <i
+                  [ngClass]="tabElement.cssClass ? tabElement.cssClass : ''"
+                ></i>
+                {{ t(tabElement?.keyToTranslate!) }}
+              </span>
+            }
+          </p-tab>
+        }
+      </p-tablist>
+      <p-tabpanels class="mt-4">
+        <router-outlet name="classTable"></router-outlet>
+      </p-tabpanels>
+    </p-tabs>
+  </p-card>
+  <router-outlet name="recordsModals"></router-outlet>
+</ng-container>
