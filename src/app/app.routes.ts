@@ -5,6 +5,7 @@ import { UserConfigModalResolver } from './resolvers/user-config-modal.resolver'
 import { InitGuard } from './guards/init.guard';
 import { UserClassesResolver } from './resolvers/user-classes.resolver';
 import { ClassIdResolver } from './resolvers/class-id.resolver';
+import { ExistClassGuard } from './guards/exist-class.guard';
 
 export const NAVIGATION_ELEMENTS: MenuItem[] = [
   {
@@ -86,6 +87,7 @@ export const routes: Routes = [
           {
             path: 'class/:id',
             resolve: [ClassIdResolver],
+            canActivate: [ExistClassGuard],
             loadComponent: () =>
               import(
                 './pages/dashboard/sub-pages/class-id/class-id.component'

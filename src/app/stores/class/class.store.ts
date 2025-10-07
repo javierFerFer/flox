@@ -2,11 +2,13 @@ import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { ClassModel } from './class.model';
 
 type ClassState = {
+  activeClass: ClassModel | undefined;
   classes: ClassModel[];
   isLoading: boolean;
 };
 
 const initialState: ClassState = {
+  activeClass: undefined,
   classes: [],
   isLoading: false,
 };
@@ -23,6 +25,10 @@ export const ClassStore = signalStore(
     },
     setIsLoading(isLoading: boolean): void {
       patchState(store, (state) => ({ ...state, isLoading }));
+    },
+
+    setActiveClass(activeClass: ClassModel | undefined): void {
+      patchState(store, (state) => ({ ...state, activeClass }));
     },
 
     findClassByUuid(uuid: string) {
