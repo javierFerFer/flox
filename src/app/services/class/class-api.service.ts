@@ -4,6 +4,7 @@ import {
   doc,
   docData,
   Firestore,
+  setDoc,
   updateDoc,
 } from '@angular/fire/firestore';
 import { from, map } from 'rxjs';
@@ -23,7 +24,7 @@ export class ClassApiService {
   getUserClasses() {
     return docData(this.classesDoc).pipe(
       map((result) => {
-        if (!result!['user_classes']) {
+        if (!result || !result!['user_classes']) {
           return undefined;
         }
         return [...result!['user_classes']];
@@ -32,7 +33,7 @@ export class ClassApiService {
   }
   createNewClass(newClassEntities: ClassModel[]) {
     return from(
-      updateDoc(this.classesDoc, { user_classes: newClassEntities }),
+      setDoc(this.classesDoc, { user_classes: newClassEntities }),
     ).pipe(map((_) => true));
   }
 

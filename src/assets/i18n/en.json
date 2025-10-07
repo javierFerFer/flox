@@ -66,6 +66,26 @@
             "SAVE": "Save changes",
             "CLOSE": "Discard changes"
           }
+        },
+        "CREATE_NEW_STUDENT": {
+          "TITLE": "Create new student",
+          "FORM": {
+            "STUDENT_NAME": "Name",
+            "MESSAGES": {
+              "STUDENT_CREATE_SUCCESS": {
+                "SUMMARY": "Success",
+                "DETAIL": "Student added correctly!"
+              },
+              "STUDENT_CREATE_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "student was no added"
+              }
+            }
+          },
+          "ACTIONS": {
+            "SAVE": "Save changes",
+            "CLOSE": "Discard changes"
+          }
         }
       }
     }

@@ -66,6 +66,26 @@
             "SAVE": "Guardar cambios",
             "CLOSE": "Descartar cambios"
           }
+        },
+        "CREATE_NEW_STUDENT": {
+          "TITLE": "Crear nuevo estudiante",
+          "FORM": {
+            "STUDENT_NAME": "Nombre",
+            "MESSAGES": {
+              "STUDENT_CREATE_SUCCESS": {
+                "SUMMARY": "Éxito",
+                "DETAIL": "Estudiante agregado correctamente!"
+              },
+              "STUDENT_CREATE_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "El estudiante no fue agregado"
+              }
+            }
+          },
+          "ACTIONS": {
+            "SAVE": "Guardar cambios",
+            "CLOSE": "Descartar cambios"
+          }
         }
       }
     }
