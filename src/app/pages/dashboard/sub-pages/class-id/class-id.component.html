@@ -1,20 +1,18 @@
 <ng-container *transloco="let t">
   <div class="card">
-    <p-table [value]="[]" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-table [value]="studentsList()" [tableStyle]="{ 'min-width': '50rem' }">
       <ng-template #header>
         <tr>
-          <th>Code</th>
           <th>Name</th>
-          <th>Category</th>
-          <th>Quantity</th>
+          <th></th>
         </tr>
       </ng-template>
-      <ng-template #body let-product>
+      <ng-template #body let-student>
         <tr>
-          <td>{{ product.code }}</td>
-          <td>{{ product.name }}</td>
-          <td>{{ product.category }}</td>
-          <td>{{ product.quantity }}</td>
+          <td>{{ student.name }}</td>
+          <td>
+            <!-- @TODO: ACTIONS SHOULD BE HERE -->
+          </td>
         </tr>
       </ng-template>
     </p-table>
@@ -25,7 +23,7 @@
         [label]="t('DASHBOARD.RECORDS.COMPONENTS.CLASS.ACTIONS.DELETE_CLASS')"
       />
       <p-button
-        (onClick)="addNewStudent($event)"
+        (onClick)="navigateToCreateNewStudent()"
         severity="primary"
         [label]="
           t('DASHBOARD.RECORDS.COMPONENTS.CLASS.ACTIONS.ADD_NEW_STUDENT')
@@ -73,3 +71,5 @@
     </ng-template>
   </p-confirmdialog>
 </ng-container>
+
+<router-outlet name="createStudent"></router-outlet>

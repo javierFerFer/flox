@@ -7,9 +7,10 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { ClassStore } from '../../../../stores/class/class.store';
 import { ClassService } from '../../../../services/class/class.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { take } from 'rxjs';
 import { ToastService } from '../../../../services/toast/toast.service';
+import { StudentStore } from '../../../../stores/student/student.store';
 
 @Component({
   selector: 'app-class-id',
@@ -20,19 +21,21 @@ import { ToastService } from '../../../../services/toast/toast.service';
     RippleModule,
     TranslocoDirective,
     ConfirmDialogModule,
+    RouterOutlet,
   ],
   providers: [ConfirmationService],
 })
 export class ClassIdComponent implements OnInit {
   readonly classStore = inject(ClassStore);
   readonly classService = inject(ClassService);
+  private readonly studentStore = inject(StudentStore);
   private readonly confirmationService = inject(ConfirmationService);
   private readonly toastService = inject(ToastService);
-
+  readonly studentsList = this.studentStore.students;
   private classUuid!: string;
 
   constructor(
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     private router: Router,
   ) {}
 
@@ -42,7 +45,18 @@ export class ClassIdComponent implements OnInit {
     });
   }
 
-  addNewStudent(event: Event) {}
+  navigateToCreateNewStudent() {
+    this.router.navigate(
+      [
+        {
+          outlets: {
+            createStudent: ['create-new-student'],
+          },
+        },
+      ],
+      { relativeTo: this.route },
+    );
+  }
 
   deleteClass(event: Event) {
     this.confirmationService.confirm({

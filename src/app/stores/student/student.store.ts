@@ -15,12 +15,12 @@ export const StudentStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
   withMethods((store) => ({
-    // updateClasses(classes: ClassModel[]): void {
-    //   patchState(store, (state) => ({
-    //     ...state,
-    //     classes: [...classes],
-    //   }));
-    // },
+    updateStudents(students: StudentModel[]): void {
+      patchState(store, (state) => ({
+        ...state,
+        students: [...students],
+      }));
+    },
     setIsLoading(isLoading: boolean): void {
       patchState(store, (state) => ({ ...state, isLoading }));
     },

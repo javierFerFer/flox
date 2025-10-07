@@ -88,11 +88,29 @@ export const routes: Routes = [
             path: 'class/:id',
             resolve: [ClassIdResolver],
             canActivate: [ExistClassGuard],
+            // @TODO: find a better solution for this
             loadComponent: () =>
               import(
                 './pages/dashboard/sub-pages/class-id/class-id.component'
               ).then((m) => m.ClassIdComponent),
             outlet: 'classTable',
+            children: [
+              {
+                path: 'create-new-student',
+                loadComponent: () =>
+                  import(
+                    './components/modal-wrapper/modal-wrapper.component'
+                  ).then((m) => m.ModalWrapperComponent),
+                data: {
+                  modalTitleKey:
+                    'DASHBOARD.RECORDS.MODALS.CREATE_NEW_STUDENT.TITLE',
+                  modalComponentPromise: import(
+                    '../app/pages/modals/create-new-student/create-new-student.component'
+                  ).then((m) => m.CreateNewStudentModalComponent),
+                },
+                outlet: 'createStudent',
+              },
+            ],
           },
         ],
       },
