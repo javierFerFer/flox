@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
@@ -11,6 +11,7 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { take } from 'rxjs';
 import { ToastService } from '../../../../services/toast/toast.service';
 import { StudentStore } from '../../../../stores/student/student.store';
+import { ClassModel } from '../../../../stores/class/class.model';
 
 @Component({
   selector: 'app-class-id',
@@ -32,12 +33,16 @@ export class ClassIdComponent {
   private readonly confirmationService = inject(ConfirmationService);
   private readonly toastService = inject(ToastService);
   readonly studentsList = this.studentStore.students;
-  private activeClass = this.classStore.activeClass()!;
+  private activeClass!: ClassModel;
 
   constructor(
     public route: ActivatedRoute,
     private router: Router,
-  ) {}
+  ) {
+    effect(() => {
+      this.activeClass = this.classStore.activeClass()!;
+    });
+  }
 
   navigateToCreateNewStudent() {
     this.router.navigate(

@@ -21,12 +21,16 @@ export const StudentStore = signalStore(
         students: [...students],
       }));
     },
+
+    clearStudents(): void {
+      patchState(store, (state) => ({
+        ...state,
+        students: [],
+      }));
+    },
+
     setIsLoading(isLoading: boolean): void {
       patchState(store, (state) => ({ ...state, isLoading }));
     },
-
-    // findClassByUuid(uuid: string) {
-    //   return store.classes().find((c) => c.uuid === uuid);
-    // },
   })),
 );

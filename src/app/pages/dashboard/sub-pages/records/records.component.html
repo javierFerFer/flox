@@ -24,7 +24,13 @@
         }
       </p-tablist>
       <p-tabpanels class="mt-4">
-        <router-outlet name="classTable"></router-outlet>
+        @if (classStore.activeClass()) {
+          <router-outlet name="classTable"></router-outlet>
+        } @else {
+          <span class="items-center text-xl">{{
+            t("DASHBOARD.RECORDS.LABEL")
+          }}</span>
+        }
       </p-tabpanels>
     </p-tabs>
   </p-card>

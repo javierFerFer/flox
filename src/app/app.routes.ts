@@ -88,7 +88,6 @@ export const routes: Routes = [
             path: 'class/:id',
             resolve: [ClassIdResolver],
             canActivate: [ExistClassGuard],
-            // @TODO: find a better solution for this
             loadComponent: () =>
               import(
                 './pages/dashboard/sub-pages/class-id/class-id.component'

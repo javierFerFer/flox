@@ -19,9 +19,11 @@
   },
   "DASHBOARD": {
     "RECORDS": {
+      "LABEL": "Selecciona o crea una clase para empezar!",
       "COMPONENTS": {
         "CREATE_NEW_CLASS_BUTTON": "Crear una nueva clase",
         "CLASS": {
+          "LABEL": "Clase sin estudiantes! Prueba a agregar uno",
           "ACTIONS": {
             "ADD_NEW_STUDENT": "Agregar nuevo alumno",
             "DELETE_CLASS": "Borrar clase"

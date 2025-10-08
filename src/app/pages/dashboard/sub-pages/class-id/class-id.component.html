@@ -1,21 +1,27 @@
 <ng-container *transloco="let t">
   <div class="card">
-    <p-table [value]="studentsList()" [tableStyle]="{ 'min-width': '50rem' }">
-      <ng-template #header>
-        <tr>
-          <th>Name</th>
-          <th></th>
-        </tr>
-      </ng-template>
-      <ng-template #body let-student>
-        <tr>
-          <td>{{ student.name }}</td>
-          <td>
-            <!-- @TODO: ACTIONS SHOULD BE HERE -->
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
+    @if (studentsList().length) {
+      <p-table [value]="studentsList()" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template #header>
+          <tr>
+            <th>Name</th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template #body let-student>
+          <tr>
+            <td>{{ student.name }}</td>
+            <td>
+              <!-- @TODO: ACTIONS SHOULD BE HERE -->
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    } @else {
+      <span class="items-center text-xl">{{
+        t("DASHBOARD.RECORDS.COMPONENTS.CLASS.LABEL")
+      }}</span>
+    }
     <footer class="mt-12 flex items-center justify-end gap-4">
       <p-button
         (onClick)="deleteClass($event)"

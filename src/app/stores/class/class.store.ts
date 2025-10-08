@@ -30,6 +30,14 @@ export const ClassStore = signalStore(
         activeClass: selectedClass,
       }));
     },
+
+    clearActiveClass() {
+      patchState(store, (state) => ({
+        ...state,
+        activeClass: undefined,
+      }));
+    },
+
     setIsLoading(isLoading: boolean): void {
       patchState(store, (state) => ({ ...state, isLoading }));
     },

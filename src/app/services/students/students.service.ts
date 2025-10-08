@@ -8,6 +8,7 @@ import { tap, finalize } from 'rxjs';
 export class StudentsService {
   private readonly studentsApiService = inject(StudentsApiService);
   private readonly studentStore = inject(StudentStore);
+
   getStudentsByClassUuid(classUuid: string) {
     this.studentStore.setIsLoading(true);
     return this.studentsApiService.getStudentsByClassUuid(classUuid).pipe(
@@ -26,6 +27,18 @@ export class StudentsService {
       tap(() => {
         const currentStudents = this.studentStore.students().concat(newStudent);
         this.studentStore.updateStudents(currentStudents);
+      }),
+      finalize(() => {
+        this.studentStore.setIsLoading(false);
+      }),
+    );
+  }
+
+  deleteStudents(classUuid: string) {
+    this.studentStore.setIsLoading(true);
+    return this.studentsApiService.deleteStudents(classUuid).pipe(
+      tap(() => {
+        this.studentStore.clearStudents();
       }),
       finalize(() => {
         this.studentStore.setIsLoading(false);
