@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
@@ -13,7 +13,7 @@ import { take } from 'rxjs';
 import { ToastService } from '../../../services/toast/toast.service';
 import { StudentStore } from '../../../stores/student/student.store';
 import { StudentsService } from '../../../services/students/students.service';
-import { ActivatedRoute } from '@angular/router';
+import { ClassStore } from '../../../stores/class/class.store';
 
 @Component({
   selector: 'app-create-new-class',
@@ -32,26 +32,19 @@ import { ActivatedRoute } from '@angular/router';
   standalone: true,
   templateUrl: 'create-new-student.component.html',
 })
-export class CreateNewStudentModalComponent implements OnInit, CloseModal {
+export class CreateNewStudentModalComponent implements CloseModal {
   @Input('modalWrapperRef')
   public ModalWrapperRef!: ModalWrapperComponent;
 
   readonly studentStore = inject(StudentStore);
   private readonly studentsService = inject(StudentsService);
   private readonly toastService = inject(ToastService);
+  private readonly classStore = inject(ClassStore);
   private readonly fb = inject(FormBuilder);
   newStudentForm = this.fb.group({
     studentName: ['', Validators.required],
   });
-  private classUuid!: string;
-
-  constructor(private route: ActivatedRoute) {}
-
-  ngOnInit(): void {
-    this.route.parent!.params.pipe(take(1)).subscribe((params) => {
-      this.classUuid = params['id'];
-    });
-  }
+  private classUuid = this.classStore.activeClass()?.uuid!;
 
   createNewClass() {
     const { studentName } = this.newStudentForm.getRawValue();
