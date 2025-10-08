@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import {
   arrayUnion,
+  deleteDoc,
   doc,
   docData,
   Firestore,
@@ -41,5 +42,13 @@ export class StudentsApiService {
         { merge: true },
       ),
     ).pipe(map((_) => true));
+  }
+
+  deleteStudents(classUuid: string) {
+    const studentsDoc = doc(
+      this.firestore,
+      `students/${this.userStore.user().uid}/${classUuid}/students_members`,
+    );
+    return from(deleteDoc(studentsDoc)).pipe(map((_) => true));
   }
 }

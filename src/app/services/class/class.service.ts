@@ -1,12 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { ClassStore } from '../../stores/class/class.store';
 import { ClassApiService } from './class-api.service';
-import { tap, finalize } from 'rxjs';
+import { tap, finalize, switchMap } from 'rxjs';
 import { ClassModel } from '../../stores/class/class.model';
+import { StudentsService } from '../students/students.service';
 
 @Injectable({ providedIn: 'root' })
 export class ClassService {
   private readonly classApiService = inject(ClassApiService);
+  private readonly studentsService = inject(StudentsService);
   private readonly classStore = inject(ClassStore);
 
   getUserClasses() {
@@ -38,12 +40,17 @@ export class ClassService {
 
   deleteClass(classToDelete: ClassModel) {
     this.classStore.setIsLoading(true);
-    return this.classApiService.deleteClass(classToDelete).pipe(
-      tap(() => {
-        const classesFiltered = this.classStore
-          .classes()
-          .filter((c) => c.uuid !== classToDelete.uuid);
-        this.classStore.updateClasses(classesFiltered);
+    return this.studentsService.deleteStudents(classToDelete.uuid).pipe(
+      switchMap(() => {
+        return this.classApiService.deleteClass(classToDelete).pipe(
+          tap(() => {
+            const classesFiltered = this.classStore
+              .classes()
+              .filter((c) => c.uuid !== classToDelete.uuid);
+            this.classStore.updateClasses(classesFiltered);
+            this.classStore.clearActiveClass();
+          }),
+        );
       }),
       finalize(() => {
         this.classStore.setIsLoading(false);

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
@@ -11,6 +11,7 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { take } from 'rxjs';
 import { ToastService } from '../../../../services/toast/toast.service';
 import { StudentStore } from '../../../../stores/student/student.store';
+import { ClassModel } from '../../../../stores/class/class.model';
 
 @Component({
   selector: 'app-class-id',
@@ -25,23 +26,21 @@ import { StudentStore } from '../../../../stores/student/student.store';
   ],
   providers: [ConfirmationService],
 })
-export class ClassIdComponent implements OnInit {
+export class ClassIdComponent {
   readonly classStore = inject(ClassStore);
   readonly classService = inject(ClassService);
   private readonly studentStore = inject(StudentStore);
   private readonly confirmationService = inject(ConfirmationService);
   private readonly toastService = inject(ToastService);
   readonly studentsList = this.studentStore.students;
-  private classUuid!: string;
+  private activeClass!: ClassModel;
 
   constructor(
     public route: ActivatedRoute,
     private router: Router,
-  ) {}
-
-  ngOnInit(): void {
-    this.route.params.pipe(take(1)).subscribe((params) => {
-      this.classUuid = params['id'];
+  ) {
+    effect(() => {
+      this.activeClass = this.classStore.activeClass()!;
     });
   }
 
@@ -72,11 +71,8 @@ export class ClassIdComponent implements OnInit {
         'DASHBOARD.RECORDS.COMPONENTS.CLASS.CONFIRM_DELETE_CLASS_DIALOG.ACTIONS.CANCEL',
       accept: () => {
         try {
-          const selectedClass = this.classStore.findClassByUuid(
-            this.classUuid,
-          )!;
           this.classService
-            .deleteClass({ ...selectedClass })
+            .deleteClass({ ...this.activeClass })
             .pipe(take(1))
             .subscribe(() => {
               this.router.navigate(['../']).then(() => {
