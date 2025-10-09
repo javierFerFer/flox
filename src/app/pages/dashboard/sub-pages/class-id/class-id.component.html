@@ -1,16 +1,16 @@
 <ng-container *transloco="let t">
   <div class="card">
-    @if (studentsList().length) {
-      <p-table [value]="studentsList()" [tableStyle]="{ 'min-width': '50rem' }">
+    @if (unitsList().length) {
+      <p-table [value]="unitsList()" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template #header>
           <tr>
             <th>Name</th>
             <th></th>
           </tr>
         </ng-template>
-        <ng-template #body let-student>
+        <ng-template #body let-unit>
           <tr>
-            <td>{{ student.name }}</td>
+            <td>{{ unit.name }}</td>
             <td>
               <!-- @TODO: ACTIONS SHOULD BE HERE -->
             </td>
@@ -29,11 +29,9 @@
         [label]="t('DASHBOARD.RECORDS.COMPONENTS.CLASS.ACTIONS.DELETE_CLASS')"
       />
       <p-button
-        (onClick)="navigateToCreateNewStudent()"
+        (onClick)="navigateToCreateNewUnit()"
         severity="primary"
-        [label]="
-          t('DASHBOARD.RECORDS.COMPONENTS.CLASS.ACTIONS.ADD_NEW_STUDENT')
-        "
+        [label]="t('DASHBOARD.RECORDS.COMPONENTS.CLASS.ACTIONS.ADD_NEW_UNIT')"
       />
     </footer>
   </div>
@@ -78,4 +76,4 @@
   </p-confirmdialog>
 </ng-container>
 
-<router-outlet name="createStudent"></router-outlet>
+<router-outlet name="createUnit"></router-outlet>

@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
@@ -10,8 +10,7 @@ import { ClassService } from '../../../../services/class/class.service';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { take } from 'rxjs';
 import { ToastService } from '../../../../services/toast/toast.service';
-import { StudentStore } from '../../../../stores/student/student.store';
-import { ClassModel } from '../../../../stores/class/class.model';
+import { UnityStore } from '../../../../stores/unity/unity.store';
 
 @Component({
   selector: 'app-class-id',
@@ -29,27 +28,22 @@ import { ClassModel } from '../../../../stores/class/class.model';
 export class ClassIdComponent {
   readonly classStore = inject(ClassStore);
   readonly classService = inject(ClassService);
-  private readonly studentStore = inject(StudentStore);
+  private readonly unityStore = inject(UnityStore);
   private readonly confirmationService = inject(ConfirmationService);
   private readonly toastService = inject(ToastService);
-  readonly studentsList = this.studentStore.students;
-  private activeClass!: ClassModel;
+  readonly unitsList = this.unityStore.units;
 
   constructor(
     public route: ActivatedRoute,
     private router: Router,
-  ) {
-    effect(() => {
-      this.activeClass = this.classStore.activeClass()!;
-    });
-  }
+  ) {}
 
-  navigateToCreateNewStudent() {
+  navigateToCreateNewUnit() {
     this.router.navigate(
       [
         {
           outlets: {
-            createStudent: ['create-new-student'],
+            createUnit: ['create-new-unit'],
           },
         },
       ],
@@ -71,8 +65,9 @@ export class ClassIdComponent {
         'DASHBOARD.RECORDS.COMPONENTS.CLASS.CONFIRM_DELETE_CLASS_DIALOG.ACTIONS.CANCEL',
       accept: () => {
         try {
+          const activeClass = this.classStore.activeClass()!;
           this.classService
-            .deleteClass({ ...this.activeClass })
+            .deleteClass({ ...activeClass })
             .pipe(take(1))
             .subscribe(() => {
               this.router.navigate(['../']).then(() => {

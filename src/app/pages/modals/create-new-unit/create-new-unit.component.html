@@ -1,0 +1,32 @@
+<ng-container *transloco="let t">
+  <form [formGroup]="newUnityForm" (submit)="createNewUnit()">
+    <div class="flex items-center justify-center">
+      <p-float-label class="w-full" variant="in">
+        <input
+          class="w-full"
+          pInputText
+          id="unityName"
+          formControlName="unityName"
+        />
+        <label for="unityName">{{
+          t("DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.UNIT_NAME")
+        }}</label>
+      </p-float-label>
+    </div>
+    <div class="mt-16 flex items-center justify-end gap-4">
+      <p-button
+        (onClick)="close()"
+        [disabled]="unityStore.isLoading()"
+        severity="secondary"
+        [label]="t('DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.ACTIONS.CLOSE')"
+      />
+      <p-button
+        [loading]="unityStore.isLoading()"
+        severity="primary"
+        type="submit"
+        [disabled]="newUnityForm.invalid || !newUnityForm.dirty"
+        [label]="t('DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.ACTIONS.SAVE')"
+      />
+    </div>
+  </form>
+</ng-container>

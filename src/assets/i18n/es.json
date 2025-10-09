@@ -13,8 +13,8 @@
     }
   },
   "NAVIGATION": {
-    "STUDENTS": {
-      "LABEL": "Estudiantes"
+    "CLASSES": {
+      "LABEL": "Clases"
     }
   },
   "DASHBOARD": {
@@ -23,14 +23,14 @@
       "COMPONENTS": {
         "CREATE_NEW_CLASS_BUTTON": "Crear una nueva clase",
         "CLASS": {
-          "LABEL": "Clase sin estudiantes! Prueba a agregar uno",
+          "LABEL": "Clase sin unidades! Prueba a agregar una",
           "ACTIONS": {
-            "ADD_NEW_STUDENT": "Agregar nuevo alumno",
+            "ADD_NEW_UNIT": "Agregar nueva unidad",
             "DELETE_CLASS": "Borrar clase"
           },
           "CONFIRM_DELETE_CLASS_DIALOG": {
             "HEADER": "Peligro",
-            "MESSAGE": " ¿Quieres borrar la clase seleccionada? Tambien se borraran todos los estudiantes asociados",
+            "MESSAGE": " ¿Quieres borrar la clase seleccionada? Tambien se borraran todos las unidades asociadas",
             "ACTIONS": {
               "DELETE": "Si, borrar",
               "CANCEL": "No, cancela"
@@ -69,18 +69,18 @@
             "CLOSE": "Descartar cambios"
           }
         },
-        "CREATE_NEW_STUDENT": {
-          "TITLE": "Crear nuevo estudiante",
+        "CREATE_NEW_UNIT": {
+          "TITLE": "Crear nueva unidad",
           "FORM": {
-            "STUDENT_NAME": "Nombre",
+            "UNIT_NAME": "Nombre",
             "MESSAGES": {
-              "STUDENT_CREATE_SUCCESS": {
+              "UNIT_CREATE_SUCCESS": {
                 "SUMMARY": "Éxito",
-                "DETAIL": "Estudiante agregado correctamente!"
+                "DETAIL": "Unidad agregada correctamente!"
               },
-              "STUDENT_CREATE_UNSUCCESS": {
+              "UNIT_CREATE_UNSUCCESS": {
                 "SUMMARY": "Error",
-                "DETAIL": "El estudiante no fue agregado"
+                "DETAIL": "La unidad no fue agregada"
               }
             }
           },

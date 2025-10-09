@@ -1,31 +1,31 @@
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
-import { StudentModel } from './student.model';
+import { UnityModel } from './unity.model';
 
-type StudentState = {
-  students: StudentModel[];
+type UnityState = {
+  units: UnityModel[];
   isLoading: boolean;
 };
 
-const initialState: StudentState = {
-  students: [],
+const initialState: UnityState = {
+  units: [],
   isLoading: false,
 };
 
-export const StudentStore = signalStore(
+export const UnityStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
   withMethods((store) => ({
-    updateStudents(students: StudentModel[]): void {
+    updateUnits(units: UnityModel[]): void {
       patchState(store, (state) => ({
         ...state,
-        students: [...students],
+        units: [...units],
       }));
     },
 
-    clearStudents(): void {
+    clearUnits(): void {
       patchState(store, (state) => ({
         ...state,
-        students: [],
+        units: [],
       }));
     },
 
