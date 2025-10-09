@@ -45,4 +45,19 @@ export class UnitsService {
       }),
     );
   }
+
+  deleteUnit(classUuid: string, unitUuidToDelete: string) {
+    this.unityStore.setIsLoading(true);
+    const filteredUnits = this.unityStore
+      .units()
+      .filter((u) => u.uuid !== unitUuidToDelete);
+    return this.unitsApiService.deleteUnit(classUuid, filteredUnits).pipe(
+      tap(() => {
+        this.unityStore.updateUnits(filteredUnits);
+      }),
+      finalize(() => {
+        this.unityStore.setIsLoading(false);
+      }),
+    );
+  }
 }

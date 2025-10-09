@@ -6,6 +6,7 @@ import {
   docData,
   Firestore,
   setDoc,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { UserStore } from '../../stores/user/user.store';
 import { from, map } from 'rxjs';
@@ -46,5 +47,15 @@ export class UnitsApiService {
       `units/${this.userStore.user().uid}/${classUuid}/units_members`,
     );
     return from(deleteDoc(unitsDoc)).pipe(map((_) => true));
+  }
+
+  deleteUnit(classUuid: string, filteredUnits: UnityModel[]) {
+    const unitsDoc = doc(
+      this.firestore,
+      `units/${this.userStore.user().uid}/${classUuid}/units_members`,
+    );
+    return from(updateDoc(unitsDoc, { units: [...filteredUnits] })).pipe(
+      map((_) => true),
+    );
   }
 }

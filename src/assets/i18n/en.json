@@ -45,6 +45,30 @@
                 "DETAIL": "Class was no deleted"
               }
             }
+          },
+          "UNITS_TABLE": {
+            "CONTEXT_MENU_ACTIONS": {
+              "EDIT": "Edit the unit",
+              "DELETE": "Delete the unit"
+            },
+            "CONFIRM_DELETE_UNIT_DIALOG": {
+              "HEADER": "Danger Zone",
+              "MESSAGE": "Do you want to delete the selected unit?",
+              "ACTIONS": {
+                "DELETE": "Yes, delete it",
+                "CANCEL": "No, cancel"
+              },
+              "RESULT": {
+                "SUCCESS": {
+                  "SUMMARY": "Success",
+                  "DETAIL": "Unit deleted correctly!"
+                },
+                "ERROR": {
+                  "SUMMARY": "Error",
+                  "DETAIL": "Unit was no deleted"
+                }
+              }
+            }
           }
         }
       },

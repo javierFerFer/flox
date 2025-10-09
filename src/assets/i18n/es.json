@@ -45,6 +45,30 @@
                 "DETAIL": "No se pudo borrar la clase"
               }
             }
+          },
+          "UNITS_TABLE": {
+            "CONTEXT_MENU_ACTIONS": {
+              "EDIT": "Editar la unidad",
+              "DELETE": "Borrar la unidad"
+            },
+            "CONFIRM_DELETE_UNIT_DIALOG": {
+              "HEADER": "Peligro",
+              "MESSAGE": " ¿Quieres borrar la unidad seleccionada?",
+              "ACTIONS": {
+                "DELETE": "Si, borrar",
+                "CANCEL": "No, cancela"
+              },
+              "RESULT": {
+                "SUCCESS": {
+                  "SUMMARY": "Éxito",
+                  "DETAIL": "Unidad borrada correctamente!"
+                },
+                "ERROR": {
+                  "SUMMARY": "Error",
+                  "DETAIL": "La unidad no fue borrada"
+                }
+              }
+            }
           }
         }
       },
