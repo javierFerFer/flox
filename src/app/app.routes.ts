@@ -9,7 +9,7 @@ import { ExistClassGuard } from './guards/exist-class.guard';
 
 export const NAVIGATION_ELEMENTS: MenuItem[] = [
   {
-    label: 'NAVIGATION.STUDENTS.LABEL',
+    label: 'NAVIGATION.CLASSES.LABEL',
     icon: 'pi pi-users',
     routerLink: '/dashboard/records',
   },
@@ -95,19 +95,19 @@ export const routes: Routes = [
             outlet: 'classTable',
             children: [
               {
-                path: 'create-new-student',
+                path: 'create-new-unit',
                 loadComponent: () =>
                   import(
                     './components/modal-wrapper/modal-wrapper.component'
                   ).then((m) => m.ModalWrapperComponent),
                 data: {
                   modalTitleKey:
-                    'DASHBOARD.RECORDS.MODALS.CREATE_NEW_STUDENT.TITLE',
+                    'DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.TITLE',
                   modalComponentPromise: import(
-                    '../app/pages/modals/create-new-student/create-new-student.component'
-                  ).then((m) => m.CreateNewStudentModalComponent),
+                    './pages/modals/create-new-unit/create-new-unit.component'
+                  ).then((m) => m.CreateNewUnitModalComponent),
                 },
-                outlet: 'createStudent',
+                outlet: 'createUnit',
               },
             ],
           },

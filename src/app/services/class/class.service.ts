@@ -3,12 +3,12 @@ import { ClassStore } from '../../stores/class/class.store';
 import { ClassApiService } from './class-api.service';
 import { tap, finalize, switchMap } from 'rxjs';
 import { ClassModel } from '../../stores/class/class.model';
-import { StudentsService } from '../students/students.service';
+import { UnitsService } from '../unity/unity.service';
 
 @Injectable({ providedIn: 'root' })
 export class ClassService {
   private readonly classApiService = inject(ClassApiService);
-  private readonly studentsService = inject(StudentsService);
+  private readonly unitsService = inject(UnitsService);
   private readonly classStore = inject(ClassStore);
 
   getUserClasses() {
@@ -40,7 +40,7 @@ export class ClassService {
 
   deleteClass(classToDelete: ClassModel) {
     this.classStore.setIsLoading(true);
-    return this.studentsService.deleteStudents(classToDelete.uuid).pipe(
+    return this.unitsService.deleteUnits(classToDelete.uuid).pipe(
       switchMap(() => {
         return this.classApiService.deleteClass(classToDelete).pipe(
           tap(() => {

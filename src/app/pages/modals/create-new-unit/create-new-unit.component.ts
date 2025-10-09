@@ -11,8 +11,8 @@ import { CloseModal } from '../close-modal-interface';
 import { ModalWrapperComponent } from '../../../components/modal-wrapper/modal-wrapper.component';
 import { take } from 'rxjs';
 import { ToastService } from '../../../services/toast/toast.service';
-import { StudentStore } from '../../../stores/student/student.store';
-import { StudentsService } from '../../../services/students/students.service';
+import { UnityStore } from '../../../stores/unity/unity.store';
+import { UnitsService } from '../../../services/unity/unity.service';
 import { ClassStore } from '../../../stores/class/class.store';
 
 @Component({
@@ -30,48 +30,48 @@ import { ClassStore } from '../../../stores/class/class.store';
     InputTextModule,
   ],
   standalone: true,
-  templateUrl: 'create-new-student.component.html',
+  templateUrl: 'create-new-unit.component.html',
 })
-export class CreateNewStudentModalComponent implements CloseModal {
+export class CreateNewUnitModalComponent implements CloseModal {
   @Input('modalWrapperRef')
   public ModalWrapperRef!: ModalWrapperComponent;
 
-  readonly studentStore = inject(StudentStore);
-  private readonly studentsService = inject(StudentsService);
+  readonly unityStore = inject(UnityStore);
+  private readonly unitsService = inject(UnitsService);
   private readonly toastService = inject(ToastService);
   private readonly classStore = inject(ClassStore);
   private readonly fb = inject(FormBuilder);
-  newStudentForm = this.fb.group({
-    studentName: ['', Validators.required],
+  newUnityForm = this.fb.group({
+    unityName: ['', Validators.required],
   });
   private classUuid = this.classStore.activeClass()?.uuid!;
 
-  createNewClass() {
-    const { studentName } = this.newStudentForm.getRawValue();
+  createNewUnit() {
+    const { unityName } = this.newUnityForm.getRawValue();
 
     try {
-      this.studentsService
-        .createNewStudent(this.classUuid, {
+      this.unitsService
+        .createNewUnit(this.classUuid, {
           uuid: crypto.randomUUID(),
-          name: studentName!,
+          name: unityName!,
         })
         .pipe(take(1))
         .subscribe(() => {
           this.toastService.showSuccessMessage({
             summaryToTranslate:
-              'DASHBOARD.RECORDS.MODALS.CREATE_NEW_STUDENT.FORM.MESSAGES.STUDENT_CREATE_SUCCESS.SUMMARY',
+              'DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.MESSAGES.UNIT_CREATE_SUCCESS.SUMMARY',
             detailToTranslate:
-              'DASHBOARD.RECORDS.MODALS.CREATE_NEW_STUDENT.FORM.MESSAGES.STUDENT_CREATE_SUCCESS.DETAIL',
+              'DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.MESSAGES.UNIT_CREATE_SUCCESS.DETAIL',
           });
-          this.newStudentForm.reset();
+          this.newUnityForm.reset();
         });
     } catch (error) {
-      this.studentStore.setIsLoading(false);
+      this.unityStore.setIsLoading(false);
       this.toastService.showErrorMessage({
         summaryToTranslate:
-          'DASHBOARD.RECORDS.MODALS.CREATE_NEW_STUDENT.FORM.MESSAGES.STUDENT_CREATE_UNSUCCESS.SUMMARY',
+          'DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.MESSAGES.UNIT_CREATE_UNSUCCESS.SUMMARY',
         detailToTranslate:
-          'DASHBOARD.RECORDS.MODALS.CREATE_NEW_STUDENT.FORM.MESSAGES.STUDENT_CREATE_UNSUCCESS.DETAIL',
+          'DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.MESSAGES.UNIT_CREATE_UNSUCCESS.DETAIL',
       });
     }
   }

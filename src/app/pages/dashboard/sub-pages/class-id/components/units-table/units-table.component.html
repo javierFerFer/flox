@@ -1,21 +1,37 @@
 <ng-container *transloco="let t">
-  <div class="card">
-    <app-units-table></app-units-table>
-    <footer class="mt-12 flex items-center justify-end gap-4">
-      <p-button
-        (onClick)="deleteClass($event)"
-        severity="danger"
-        [label]="t('DASHBOARD.RECORDS.COMPONENTS.CLASS.ACTIONS.DELETE_CLASS')"
-      />
-      <p-button
-        (onClick)="navigateToCreateNewUnit()"
-        severity="primary"
-        [label]="t('DASHBOARD.RECORDS.COMPONENTS.CLASS.ACTIONS.ADD_NEW_UNIT')"
-      />
-    </footer>
-  </div>
+  @if (unitsList().length) {
+    <p-table [value]="unitsList()" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template #header>
+        <tr>
+          <th>Name</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-unit>
+        <tr (contextmenu)="onContextMenu($event, unit)" class="cursor-pointer">
+          <td>{{ unit.name }}</td>
+          <td>
+            <!-- @TODO: ACTIONS SHOULD BE HERE -->
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  } @else {
+    <span class="items-center text-xl">{{
+      t("DASHBOARD.RECORDS.COMPONENTS.CLASS.LABEL")
+    }}</span>
+  }
+  <p-contextmenu #cm [model]="items">
+    <ng-template #item let-item>
+      <a pRipple class="p-contextmenu-item-link flex items-center">
+        <span [class]="item.icon"></span>
+        <span class="ml-2">{{ t(item.label) }}</span>
+      </a>
+    </ng-template>
+  </p-contextmenu>
+
   <!-- dialog component -->
-  <p-confirmdialog [key]="'deleteClassConfirmDialog'">
+  <p-confirmdialog [key]="'deleteUnitConfirmDialog'">
     <ng-template
       #headless
       let-message
@@ -43,7 +59,7 @@
             styleClass="w-32"
           ></p-button>
           <p-button
-            [loading]="classStore.isLoading()"
+            [loading]="unitStore.isLoading()"
             [label]="t(acceptLabel.acceptLabel)"
             severity="danger"
             (onClick)="onAccept()"
@@ -54,5 +70,3 @@
     </ng-template>
   </p-confirmdialog>
 </ng-container>
-
-<router-outlet name="createUnit"></router-outlet>

@@ -1,4 +1,4 @@
-export interface StudentModel {
+export interface UnityModel {
   uuid: string;
   name: string;
 }

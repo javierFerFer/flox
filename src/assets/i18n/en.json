@@ -13,8 +13,8 @@
     }
   },
   "NAVIGATION": {
-    "STUDENTS": {
-      "LABEL": "Students"
+    "CLASSES": {
+      "LABEL": "Classes"
     }
   },
   "DASHBOARD": {
@@ -23,14 +23,14 @@
       "COMPONENTS": {
         "CREATE_NEW_CLASS_BUTTON": "Create a new class",
         "CLASS": {
-          "LABEL": "Class without students!, try to add a new one",
+          "LABEL": "Class without units!, try to add a new one",
           "ACTIONS": {
-            "ADD_NEW_STUDENT": "Add new students",
+            "ADD_NEW_UNIT": "Add new unit",
             "DELETE_CLASS": "Delete class"
           },
           "CONFIRM_DELETE_CLASS_DIALOG": {
             "HEADER": "Danger Zone",
-            "MESSAGE": "Do you want to delete the selected class? It will delete all the students related with it",
+            "MESSAGE": "Do you want to delete the selected class? It will delete all the units related with it",
             "ACTIONS": {
               "DELETE": "Yes, delete it",
               "CANCEL": "No, cancel"
@@ -43,6 +43,30 @@
               "ERROR": {
                 "SUMMARY": "Error",
                 "DETAIL": "Class was no deleted"
+              }
+            }
+          },
+          "UNITS_TABLE": {
+            "CONTEXT_MENU_ACTIONS": {
+              "EDIT": "Edit the unit",
+              "DELETE": "Delete the unit"
+            },
+            "CONFIRM_DELETE_UNIT_DIALOG": {
+              "HEADER": "Danger Zone",
+              "MESSAGE": "Do you want to delete the selected unit?",
+              "ACTIONS": {
+                "DELETE": "Yes, delete it",
+                "CANCEL": "No, cancel"
+              },
+              "RESULT": {
+                "SUCCESS": {
+                  "SUMMARY": "Success",
+                  "DETAIL": "Unit deleted correctly!"
+                },
+                "ERROR": {
+                  "SUMMARY": "Error",
+                  "DETAIL": "Unit was no deleted"
+                }
               }
             }
           }
@@ -69,18 +93,18 @@
             "CLOSE": "Discard changes"
           }
         },
-        "CREATE_NEW_STUDENT": {
-          "TITLE": "Create new student",
+        "CREATE_NEW_UNIT": {
+          "TITLE": "Create new unit",
           "FORM": {
-            "STUDENT_NAME": "Name",
+            "UNIT_NAME": "Name",
             "MESSAGES": {
-              "STUDENT_CREATE_SUCCESS": {
+              "UNIT_CREATE_SUCCESS": {
                 "SUMMARY": "Success",
-                "DETAIL": "Student added correctly!"
+                "DETAIL": "Unit added correctly!"
               },
-              "STUDENT_CREATE_UNSUCCESS": {
+              "UNIT_CREATE_UNSUCCESS": {
                 "SUMMARY": "Error",
-                "DETAIL": "student was no added"
+                "DETAIL": "Unit was no added"
               }
             }
           },
