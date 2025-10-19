@@ -97,6 +97,7 @@
           "TITLE": "Crear nueva unidad",
           "FORM": {
             "UNIT_NAME": "Nombre",
+            "SUMMARY": "Resumen",
             "MESSAGES": {
               "UNIT_CREATE_SUCCESS": {
                 "SUMMARY": "Éxito",

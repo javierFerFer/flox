@@ -1,6 +1,6 @@
 <ng-container *transloco="let t">
   <form [formGroup]="newUnityForm" (submit)="createNewUnit()">
-    <div class="flex items-center justify-center">
+    <div class="flex items-center justify-center flex-col">
       <p-float-label class="w-full" variant="in">
         <input
           class="w-full"
@@ -12,6 +12,10 @@
           t("DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.UNIT_NAME")
         }}</label>
       </p-float-label>
+      <p-floatlabel class="w-full mt-6" variant="in">
+        <textarea class="w-full" pTextarea></textarea>
+        <label for="in_label">{{t('DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.SUMMARY')}}</label>
+      </p-floatlabel>
     </div>
     <div class="mt-16 flex items-center justify-end gap-4">
       <p-button

@@ -14,6 +14,7 @@ import { ToastService } from '../../../services/toast/toast.service';
 import { UnityStore } from '../../../stores/unity/unity.store';
 import { UnitsService } from '../../../services/unity/unity.service';
 import { ClassStore } from '../../../stores/class/class.store';
+import { TextareaModule } from 'primeng/textarea';
 
 @Component({
   selector: 'app-create-new-class',
@@ -28,6 +29,7 @@ import { ClassStore } from '../../../stores/class/class.store';
     ButtonModule,
     RippleModule,
     InputTextModule,
+    TextareaModule
   ],
   standalone: true,
   templateUrl: 'create-new-unit.component.html',
@@ -43,17 +45,19 @@ export class CreateNewUnitModalComponent implements CloseModal {
   private readonly fb = inject(FormBuilder);
   newUnityForm = this.fb.group({
     unityName: ['', Validators.required],
+    summary: ['']
   });
   private classUuid = this.classStore.activeClass()?.uuid!;
 
   createNewUnit() {
-    const { unityName } = this.newUnityForm.getRawValue();
+    const { unityName, summary } = this.newUnityForm.getRawValue();
 
     try {
       this.unitsService
         .createNewUnit(this.classUuid, {
           uuid: crypto.randomUUID(),
           name: unityName!,
+          summary: summary || ''
         })
         .pipe(take(1))
         .subscribe(() => {
