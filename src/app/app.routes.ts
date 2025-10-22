@@ -109,6 +109,20 @@ export const routes: Routes = [
                 },
                 outlet: 'createUnit',
               },
+              {
+                path: 'unit-details/:id',
+                loadComponent: () =>
+                  import(
+                    './components/modal-wrapper/modal-wrapper.component'
+                  ).then((m) => m.ModalWrapperComponent),
+                data: {
+                  modalTitleKey: 'DASHBOARD.RECORDS.MODALS.UNIT_DETAILS.TITLE',
+                  modalComponentPromise: import(
+                    '../app/pages/modals/unit-details/units-details.component'
+                  ).then((m) => m.UnitsDetailComponent),
+                },
+                outlet: 'unitDetails',
+              },
             ],
           },
         ],

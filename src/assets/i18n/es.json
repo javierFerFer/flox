@@ -113,6 +113,13 @@
             "SAVE": "Guardar cambios",
             "CLOSE": "Descartar cambios"
           }
+        },
+        "UNIT_DETAILS": {
+          "TITLE": "Datos de la unidad",
+          "FORM": {
+            "UNIT_NAME": "Nombre de la unidad",
+            "SUMMARY": "Resumen"
+          }
         }
       }
     }
