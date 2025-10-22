@@ -12,6 +12,7 @@ import { UnitsService } from '../../../../../../services/unity/unity.service';
 import { take } from 'rxjs';
 import { ClassStore } from '../../../../../../stores/class/class.store';
 import { ToastService } from '../../../../../../services/toast/toast.service';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-units-table',
@@ -23,6 +24,7 @@ import { ToastService } from '../../../../../../services/toast/toast.service';
     ConfirmDialogModule,
     ButtonModule,
     RippleModule,
+    RouterOutlet,
   ],
 })
 export class UnitsTableComponent {
@@ -33,12 +35,26 @@ export class UnitsTableComponent {
   readonly classStore = inject(ClassStore);
   private readonly unitsService = inject(UnitsService);
   private readonly toastService = inject(ToastService);
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
 
   items: MenuItem[] | undefined = [
     {
       label:
         'DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.CONTEXT_MENU_ACTIONS.EDIT',
       icon: 'pi pi-file-edit',
+      command: () => {
+        this.router.navigate(
+          [
+            {
+              outlets: {
+                unitDetails: ['unit-details', this.selectedUuid],
+              },
+            },
+          ],
+          { relativeTo: this.route },
+        );
+      },
     },
     {
       label:

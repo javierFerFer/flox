@@ -4,15 +4,13 @@
       <ng-template #header>
         <tr>
           <th>Name</th>
-          <th></th>
+          <th>Summary</th>
         </tr>
       </ng-template>
       <ng-template #body let-unit>
         <tr (contextmenu)="onContextMenu($event, unit)" class="cursor-pointer">
           <td>{{ unit.name }}</td>
-          <td>
-            <!-- @TODO: ACTIONS SHOULD BE HERE -->
-          </td>
+          <td>{{ unit.summary }}</td>
         </tr>
       </ng-template>
     </p-table>
@@ -70,3 +68,4 @@
     </ng-template>
   </p-confirmdialog>
 </ng-container>
+<router-outlet name="unitDetails"></router-outlet>

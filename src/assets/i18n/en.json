@@ -113,6 +113,13 @@
             "SAVE": "Save changes",
             "CLOSE": "Discard changes"
           }
+        },
+        "UNIT_DETAILS": {
+          "TITLE": "Unit info",
+          "FORM": {
+            "UNIT_NAME": "Unit name",
+            "SUMMARY": "Summary"
+          }
         }
       }
     }

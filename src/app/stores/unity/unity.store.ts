@@ -32,5 +32,9 @@ export const UnityStore = signalStore(
     setIsLoading(isLoading: boolean): void {
       patchState(store, (state) => ({ ...state, isLoading }));
     },
+
+    findUnit(unitUuid: string) {
+      return store.units().find((u) => u.uuid === unitUuid);
+    },
   })),
 );
