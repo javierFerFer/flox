@@ -4,12 +4,14 @@
       <ng-template #header>
         <tr>
           <th>Name</th>
+          <th>Summary</th>
           <th></th>
         </tr>
       </ng-template>
       <ng-template #body let-unit>
         <tr (contextmenu)="onContextMenu($event, unit)" class="cursor-pointer">
           <td>{{ unit.name }}</td>
+          <td>{{ unit.summary }}</td>
           <td>
             <!-- @TODO: ACTIONS SHOULD BE HERE -->
           </td>
