@@ -16,6 +16,10 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { ButtonModule } from 'primeng/button';
+import { UnitsService } from '../../../services/unity/unity.service';
+import { take } from 'rxjs';
+import { ToastService } from '../../../services/toast/toast.service';
 
 @Component({
   selector: 'app-units-details',
@@ -27,6 +31,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
     InputTextModule,
     TextareaModule,
     FloatLabelModule,
+    ButtonModule,
   ],
 })
 export class UnitsDetailComponent {
@@ -35,8 +40,11 @@ export class UnitsDetailComponent {
 
   private readonly route = inject(ActivatedRoute);
   private readonly uuid = toSignal(this.route.params);
-  private readonly unityStore = inject(UnityStore);
   private readonly fb = inject(FormBuilder);
+  private readonly unitService = inject(UnitsService);
+  private readonly toastService = inject(ToastService);
+
+  protected unityStore = inject(UnityStore);
 
   protected selectedUnit = computed(() => {
     return this.unityStore.findUnit(this.uuid()?.['id'])!;
@@ -63,7 +71,34 @@ export class UnitsDetailComponent {
     });
   }
 
-  public saveChanges() {}
+  public saveChanges() {
+    try {
+      const { summary, unitTitle } = this.unitForm.getRawValue();
+      this.unitService
+        .updateUnit({
+          name: unitTitle!,
+          summary: summary || '',
+          uuid: this.uuid()?.['id'],
+        })
+        .pipe(take(1))
+        .subscribe(() => {
+          this.toastService.showSuccessMessage({
+            summaryToTranslate:
+              'DASHBOARD.RECORDS.MODALS.UNIT_DETAILS.FORM.MESSAGES.UNIT_DETAILS_EDIT_SUCCESS.SUMMARY',
+            detailToTranslate:
+              'DASHBOARD.RECORDS.MODALS.UNIT_DETAILS.FORM.MESSAGES.UNIT_DETAILS_EDIT_SUCCESS.DETAIL',
+          });
+        });
+    } catch (error) {
+      this.unityStore.setIsLoading(false);
+      this.toastService.showErrorMessage({
+        summaryToTranslate:
+          'DASHBOARD.RECORDS.MODALS.UNIT_DETAILS.FORM.MESSAGES.UNIT_DETAILS_EDIT_UNSUCCESS.SUMMARY',
+        detailToTranslate:
+          'DASHBOARD.RECORDS.MODALS.UNIT_DETAILS.FORM.MESSAGES.UNIT_DETAILS_EDIT_UNSUCCESS.DETAIL',
+      });
+    }
+  }
 
   public close() {
     this.ModalWrapperRef.close();

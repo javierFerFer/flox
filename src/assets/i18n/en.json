@@ -118,7 +118,21 @@
           "TITLE": "Unit info",
           "FORM": {
             "UNIT_NAME": "Unit name",
-            "SUMMARY": "Summary"
+            "SUMMARY": "Summary",
+            "MESSAGES": {
+              "UNIT_DETAILS_EDIT_SUCCESS": {
+                "SUMMARY": "Success",
+                "DETAIL": "Unit edited correctly"
+              },
+              "UNIT_DETAILS_EDIT_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "Unit was no edited"
+              }
+            }
+          },
+          "ACTIONS": {
+            "CLOSE": "Discard changes",
+            "SAVE": "Save changes"
           }
         }
       }

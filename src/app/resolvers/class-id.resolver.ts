@@ -17,6 +17,6 @@ export class ClassIdResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot): Observable<any> | Promise<any> | any {
     const classUuid = route.params['id'];
     this.classStore.setActiveClass(classUuid);
-    return this.unitsService.getUnitsByClassUuid(classUuid);
+    return this.unitsService.getUnitsByClassUuid();
   }
 }

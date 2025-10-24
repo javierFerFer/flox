@@ -40,7 +40,7 @@ export class ClassService {
 
   deleteClass(classToDelete: ClassModel) {
     this.classStore.setIsLoading(true);
-    return this.unitsService.deleteUnits(classToDelete.uuid).pipe(
+    return this.unitsService.deleteUnits().pipe(
       switchMap(() => {
         return this.classApiService.deleteClass(classToDelete).pipe(
           tap(() => {

@@ -22,6 +22,14 @@ export const UnityStore = signalStore(
       }));
     },
 
+    updateUnit(unit: UnityModel): void {
+      const filteredList = store.units().filter((u) => u.uuid !== unit.uuid);
+      patchState(store, (state) => ({
+        ...state,
+        units: [...filteredList].concat(unit),
+      }));
+    },
+
     clearUnits(): void {
       patchState(store, (state) => ({
         ...state,
