@@ -29,7 +29,7 @@ import { TextareaModule } from 'primeng/textarea';
     ButtonModule,
     RippleModule,
     InputTextModule,
-    TextareaModule
+    TextareaModule,
   ],
   standalone: true,
   templateUrl: 'create-new-unit.component.html',
@@ -45,19 +45,18 @@ export class CreateNewUnitModalComponent implements CloseModal {
   private readonly fb = inject(FormBuilder);
   newUnityForm = this.fb.group({
     unityName: ['', Validators.required],
-    summary: ['']
+    summary: [''],
   });
-  private classUuid = this.classStore.activeClass()?.uuid!;
 
   createNewUnit() {
     const { unityName, summary } = this.newUnityForm.getRawValue();
 
     try {
       this.unitsService
-        .createNewUnit(this.classUuid, {
+        .createNewUnit({
           uuid: crypto.randomUUID(),
           name: unityName!,
-          summary: summary || ''
+          summary: summary || '',
         })
         .pipe(take(1))
         .subscribe(() => {

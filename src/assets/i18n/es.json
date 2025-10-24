@@ -118,7 +118,21 @@
           "TITLE": "Datos de la unidad",
           "FORM": {
             "UNIT_NAME": "Nombre de la unidad",
-            "SUMMARY": "Resumen"
+            "SUMMARY": "Resumen",
+            "MESSAGES": {
+              "UNIT_DETAILS_EDIT_SUCCESS": {
+                "SUMMARY": "Éxito",
+                "DETAIL": "Unidad editada correctamente"
+              },
+              "UNIT_DETAILS_EDIT_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "No se pudo editar la unidad"
+              }
+            }
+          },
+          "ACTIONS": {
+            "CLOSE": "Descartar cambios",
+            "SAVE": "Guardar cambios"
           }
         }
       }

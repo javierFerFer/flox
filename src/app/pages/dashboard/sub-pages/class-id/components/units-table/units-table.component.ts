@@ -75,9 +75,8 @@ export class UnitsTableComponent {
             'DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.CONFIRM_DELETE_UNIT_DIALOG.ACTIONS.CANCEL',
           accept: () => {
             try {
-              const activeClass = this.classStore.activeClass()!;
               this.unitsService
-                .deleteUnit(activeClass.uuid, this.selectedUuid!)
+                .deleteUnit(this.selectedUuid!)
                 .pipe(take(1))
                 .subscribe(() => {
                   this.selectedUuid = undefined;

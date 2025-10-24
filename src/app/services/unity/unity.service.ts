@@ -9,9 +9,9 @@ export class UnitsService {
   private readonly unitsApiService = inject(UnitsApiService);
   private readonly unityStore = inject(UnityStore);
 
-  getUnitsByClassUuid(classUuid: string) {
+  getUnitsByClassUuid() {
     this.unityStore.setIsLoading(true);
-    return this.unitsApiService.getUnitsByClassUuid(classUuid).pipe(
+    return this.unitsApiService.getUnitsByClassUuid().pipe(
       tap((result) => {
         this.unityStore.updateUnits(result || []);
       }),
@@ -21,9 +21,9 @@ export class UnitsService {
     );
   }
 
-  createNewUnit(classUuid: string, newUnit: UnityModel) {
+  createNewUnit(newUnit: UnityModel) {
     this.unityStore.setIsLoading(true);
-    return this.unitsApiService.createNewUnit(classUuid, newUnit).pipe(
+    return this.unitsApiService.createNewUnit(newUnit).pipe(
       tap(() => {
         const currentUnits = this.unityStore.units().concat(newUnit);
         this.unityStore.updateUnits(currentUnits);
@@ -34,9 +34,25 @@ export class UnitsService {
     );
   }
 
-  deleteUnits(classUuid: string) {
+  updateUnit(updatedUnit: UnityModel) {
     this.unityStore.setIsLoading(true);
-    return this.unitsApiService.deleteUnits(classUuid).pipe(
+    const filteredUnits = this.unityStore
+      .units()
+      .filter((u) => u.uuid !== updatedUnit.uuid)
+      .concat(updatedUnit);
+    return this.unitsApiService.updateUnit(filteredUnits).pipe(
+      tap(() => {
+        this.unityStore.updateUnit(updatedUnit);
+      }),
+      finalize(() => {
+        this.unityStore.setIsLoading(false);
+      }),
+    );
+  }
+
+  deleteUnits() {
+    this.unityStore.setIsLoading(true);
+    return this.unitsApiService.deleteUnits().pipe(
       tap(() => {
         this.unityStore.clearUnits();
       }),
@@ -46,12 +62,12 @@ export class UnitsService {
     );
   }
 
-  deleteUnit(classUuid: string, unitUuidToDelete: string) {
+  deleteUnit(unitUuidToDelete: string) {
     this.unityStore.setIsLoading(true);
     const filteredUnits = this.unityStore
       .units()
       .filter((u) => u.uuid !== unitUuidToDelete);
-    return this.unitsApiService.deleteUnit(classUuid, filteredUnits).pipe(
+    return this.unitsApiService.deleteUnit(filteredUnits).pipe(
       tap(() => {
         this.unityStore.updateUnits(filteredUnits);
       }),

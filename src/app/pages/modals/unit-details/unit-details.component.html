@@ -25,19 +25,19 @@
       </p-floatlabel>
     </div>
     <div class="mt-16 flex items-center justify-end gap-4">
-      <!-- <p-button
+      <p-button
         (onClick)="close()"
         [disabled]="unityStore.isLoading()"
         severity="secondary"
-        [label]="t('DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.ACTIONS.CLOSE')"
+        [label]="t('DASHBOARD.RECORDS.MODALS.UNIT_DETAILS.ACTIONS.CLOSE')"
       />
       <p-button
         [loading]="unityStore.isLoading()"
         severity="primary"
         type="submit"
-        [disabled]="newUnityForm.invalid || !newUnityForm.dirty"
-        [label]="t('DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.ACTIONS.SAVE')"
-      /> -->
+        [disabled]="unitForm.invalid || !unitForm.dirty"
+        [label]="t('DASHBOARD.RECORDS.MODALS.UNIT_DETAILS.ACTIONS.SAVE')"
+      />
     </div>
   </form>
 </ng-container>
