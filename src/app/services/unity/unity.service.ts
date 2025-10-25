@@ -50,6 +50,22 @@ export class UnitsService {
     );
   }
 
+  deleteUnitSession(updatedUnit: UnityModel) {
+    this.unityStore.setIsLoading(true);
+    const filteredUnits = this.unityStore
+      .units()
+      .filter((u) => u.uuid !== updatedUnit.uuid)
+      .concat(updatedUnit);
+    return this.unitsApiService.updateUnit(filteredUnits).pipe(
+      tap(() => {
+        this.unityStore.updateUnit(updatedUnit);
+      }),
+      finalize(() => {
+        this.unityStore.setIsLoading(false);
+      }),
+    );
+  }
+
   deleteUnits() {
     this.unityStore.setIsLoading(true);
     return this.unitsApiService.deleteUnits().pipe(

@@ -1,0 +1,80 @@
+<ng-container *transloco="let t">
+  <form [formGroup]="newSessionForm" (submit)="createNewUnit()">
+    <div class="flex flex-col items-center justify-center">
+      <p-float-label class="w-full" variant="in">
+        <input
+          class="w-full"
+          pInputText
+          id="sessionName"
+          formControlName="sessionName"
+        />
+        <label for="unityName">{{
+          t("DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_NAME")
+        }}</label>
+      </p-float-label>
+      <p-floatlabel class="mt-6 w-full" variant="in">
+        <textarea
+          formControlName="activities"
+          class="w-full"
+          pTextarea
+        ></textarea>
+        <label for="in_label">{{
+          t(
+            "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ACTIVITIES"
+          )
+        }}</label>
+      </p-floatlabel>
+      <p-floatlabel class="mt-6 w-full" variant="in">
+        <textarea
+          formControlName="evaluation"
+          class="w-full"
+          pTextarea
+        ></textarea>
+        <label for="in_label">{{
+          t(
+            "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_EVALUATION"
+          )
+        }}</label>
+      </p-floatlabel>
+      <p-floatlabel class="mt-6 w-full" variant="in">
+        <textarea
+          formControlName="attentionOfDiversity"
+          class="w-full"
+          pTextarea
+        ></textarea>
+        <label for="in_label">{{
+          t(
+            "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ATTENTION_OF_DIVERSITY"
+          )
+        }}</label>
+      </p-floatlabel>
+      <p-floatlabel class="mt-6 w-full" variant="in">
+        <textarea
+          formControlName="observations"
+          class="w-full"
+          pTextarea
+        ></textarea>
+        <label for="in_label">{{
+          t(
+            "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_OBSERVATIONS"
+          )
+        }}</label>
+      </p-floatlabel>
+    </div>
+    <div class="mt-16 flex items-center justify-end gap-4">
+      <p-button
+        (onClick)="close()"
+        [disabled]="unityStore.isLoading()"
+        severity="secondary"
+        [label]="t('DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.ACTIONS.CLOSE')"
+      />
+      <p-button
+        [loading]="unityStore.isLoading()"
+        severity="primary"
+        type="submit"
+        [disabled]="newSessionForm.invalid || !newSessionForm.dirty"
+        [label]="t('DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.ACTIONS.SAVE')"
+      />
+    </div>
+  </form>
+</ng-container>

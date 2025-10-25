@@ -134,6 +134,69 @@
             "CLOSE": "Discard changes",
             "SAVE": "Save changes"
           }
+        },
+        "CREATE_NEW_SESSION": {
+          "TITLE": "Create new session",
+          "FORM": {
+            "SESSION_NAME": "Session name",
+            "SESSION_ACTIVITIES": "Activities",
+            "SESSION_EVALUATION": "Evaluations",
+            "SESSION_ATTENTION_OF_DIVERSITY": "Diversity attention",
+            "SESSION_OBSERVATIONS": "Observations",
+            "MESSAGES": {
+              "NEW_SESSION_CREATE_SUCCESS": {
+                "SUMMARY": "Success",
+                "DETAIL": "Session created correctly!"
+              },
+              "NEW_SESSION_CREATE_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "Session was no created"
+              }
+            }
+          },
+          "TABLE": {
+            "LABELS": {
+              "NO_SESSIONS": "Unit without sessions, try to create a new one"
+            },
+            "HEADERS": {
+              "NAME": "Name",
+              "ACTIVITIES": "Activities",
+              "EVALUATIONS": "Evaluations",
+              "ATTENTION_OF_DIVERSITY": "Diversity attention",
+              "OBSERVATIONS": "Observations"
+            },
+            "ACTIONS": {
+              "ADD_NEW_SESSION": "Add session"
+            }
+          },
+          "ACTIONS": {
+            "CLOSE": "Discard changes",
+            "SAVE": "Save changes"
+          }
+        },
+        "EDIT_NEW_SESSION": {
+          "TITLE": "Edit session",
+          "FORM": {
+            "SESSION_NAME": "Session name",
+            "SESSION_ACTIVITIES": "Activites",
+            "SESSION_EVALUATION": "Evaluations",
+            "SESSION_ATTENTION_OF_DIVERSITY": "Diversity attention",
+            "SESSION_OBSERVATIONS": "Observations",
+            "MESSAGES": {
+              "NEW_SESSION_EDIT_SUCCESS": {
+                "SUMMARY": "Success",
+                "DETAIL": "The session was edited successfully!"
+              },
+              "NEW_SESSION_EDIT_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "The session was not edited successfully"
+              }
+            }
+          },
+          "ACTIONS": {
+            "CLOSE": "Discard changes",
+            "SAVE": "Save changes"
+          }
         }
       }
     }

@@ -20,6 +20,7 @@ import { ButtonModule } from 'primeng/button';
 import { UnitsService } from '../../../services/unity/unity.service';
 import { take } from 'rxjs';
 import { ToastService } from '../../../services/toast/toast.service';
+import { UnitDetailsTableComponent } from './components/unit-details-table/unit-details-table.component';
 
 @Component({
   selector: 'app-units-details',
@@ -32,6 +33,7 @@ import { ToastService } from '../../../services/toast/toast.service';
     TextareaModule,
     FloatLabelModule,
     ButtonModule,
+    UnitDetailsTableComponent,
   ],
 })
 export class UnitsDetailComponent {
@@ -73,12 +75,14 @@ export class UnitsDetailComponent {
 
   public saveChanges() {
     try {
+      const selectedUnit = this.selectedUnit();
       const { summary, unitTitle } = this.unitForm.getRawValue();
       this.unitService
         .updateUnit({
           name: unitTitle!,
           summary: summary || '',
           uuid: this.uuid()?.['id'],
+          sessions: selectedUnit.sessions,
         })
         .pipe(take(1))
         .subscribe(() => {
