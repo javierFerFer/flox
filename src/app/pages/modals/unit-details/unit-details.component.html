@@ -24,7 +24,10 @@
         }}</label>
       </p-floatlabel>
     </div>
-    <div class="mt-16 flex items-center justify-end gap-4">
+    <div class="mt-4 mb-6 flex min-h-48 items-center justify-center">
+      <app-unit-details-table></app-unit-details-table>
+    </div>
+    <div class="flex items-center justify-end gap-4">
       <p-button
         (onClick)="close()"
         [disabled]="unityStore.isLoading()"

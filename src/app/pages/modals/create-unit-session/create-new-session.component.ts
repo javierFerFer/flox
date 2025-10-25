@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, computed, inject, Input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
@@ -15,6 +15,9 @@ import { UnityStore } from '../../../stores/unity/unity.store';
 import { UnitsService } from '../../../services/unity/unity.service';
 import { ClassStore } from '../../../stores/class/class.store';
 import { TextareaModule } from 'primeng/textarea';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute } from '@angular/router';
+import { UnityModel } from '../../../stores/unity/unity.model';
 
 @Component({
   selector: 'app-create-new-class',
@@ -32,9 +35,9 @@ import { TextareaModule } from 'primeng/textarea';
     TextareaModule,
   ],
   standalone: true,
-  templateUrl: 'create-new-unit.component.html',
+  templateUrl: 'create-new-session.component.html',
 })
-export class CreateNewUnitModalComponent implements CloseModal {
+export class CreateNewSessionModalComponent implements CloseModal {
   @Input('modalWrapperRef')
   public ModalWrapperRef!: ModalWrapperComponent;
 
@@ -42,40 +45,64 @@ export class CreateNewUnitModalComponent implements CloseModal {
   private readonly unitsService = inject(UnitsService);
   private readonly toastService = inject(ToastService);
   private readonly classStore = inject(ClassStore);
+  private readonly route = inject(ActivatedRoute);
+  private readonly uuid = toSignal(this.route.parent?.params!);
   private readonly fb = inject(FormBuilder);
-  newUnityForm = this.fb.group({
-    unityName: ['', Validators.required],
-    summary: [''],
+  newSessionForm = this.fb.group({
+    sessionName: ['', Validators.required],
+    activities: [''],
+    evaluation: [''],
+    attentionOfDiversity: [''],
+    observations: [''],
+  });
+  protected selectedUnit = computed(() => {
+    return this.unityStore.findUnit(this.uuid()?.['id'])!;
   });
 
   createNewUnit() {
-    const { unityName, summary } = this.newUnityForm.getRawValue();
+    const {
+      sessionName,
+      activities,
+      evaluation,
+      attentionOfDiversity,
+      observations,
+    } = this.newSessionForm.getRawValue();
+
+    const unitToUpdate: UnityModel = {
+      ...this.selectedUnit(),
+      sessions: [
+        ...this.selectedUnit().sessions,
+        {
+          uuid: crypto.randomUUID(),
+          name: sessionName!,
+          activities: activities || '',
+          evaluation: evaluation || '',
+          attentionOfDiversity: attentionOfDiversity || '',
+          observations: observations || '',
+        },
+      ],
+    };
 
     try {
       this.unitsService
-        .createNewUnit({
-          uuid: crypto.randomUUID(),
-          name: unityName!,
-          summary: summary || '',
-          sessions: [],
-        })
+        .updateUnit(unitToUpdate)
         .pipe(take(1))
         .subscribe(() => {
           this.toastService.showSuccessMessage({
             summaryToTranslate:
-              'DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.MESSAGES.UNIT_CREATE_SUCCESS.SUMMARY',
+              'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.MESSAGES.NEW_SESSION_CREATE_SUCCESS.SUMMARY',
             detailToTranslate:
-              'DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.MESSAGES.UNIT_CREATE_SUCCESS.DETAIL',
+              'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.MESSAGES.NEW_SESSION_CREATE_SUCCESS.DETAIL',
           });
-          this.newUnityForm.reset();
+          this.close();
         });
     } catch (error) {
       this.unityStore.setIsLoading(false);
       this.toastService.showErrorMessage({
         summaryToTranslate:
-          'DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.MESSAGES.UNIT_CREATE_UNSUCCESS.SUMMARY',
+          'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.MESSAGES.NEW_SESSION_CREATE_UNSUCCESS.SUMMARY',
         detailToTranslate:
-          'DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.MESSAGES.UNIT_CREATE_UNSUCCESS.DETAIL',
+          'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.MESSAGES.NEW_SESSION_CREATE_UNSUCCESS.DETAIL',
       });
     }
   }

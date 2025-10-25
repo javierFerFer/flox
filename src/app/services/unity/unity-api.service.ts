@@ -53,6 +53,16 @@ export class UnitsApiService {
     ).pipe(map((_) => true));
   }
 
+  deleteUnitSession(updatedUnits: UnityModel[]) {
+    const unitsDoc = doc(
+      this.firestore,
+      `units/${this.userStore.user().uid}/${this.classStore.activeClass()?.uuid}/units_members`,
+    );
+    return from(
+      setDoc(unitsDoc, { units: [...updatedUnits] }, { merge: true }),
+    ).pipe(map((_) => true));
+  }
+
   deleteUnits() {
     const unitsDoc = doc(
       this.firestore,
