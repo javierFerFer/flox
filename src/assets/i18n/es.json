@@ -47,6 +47,10 @@
             }
           },
           "UNITS_TABLE": {
+            "HEADERS": {
+              "NAME": "Nombre",
+              "SUMMARY": "Resumen"
+            },
             "CONTEXT_MENU_ACTIONS": {
               "EDIT": "Editar la unidad",
               "DELETE": "Borrar la unidad"

@@ -3,8 +3,18 @@
     <p-table [value]="unitsList()" [tableStyle]="{ 'min-width': '50rem' }">
       <ng-template #header>
         <tr>
-          <th>Name</th>
-          <th>Summary</th>
+          <th>
+            {{
+              t("DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.HEADERS.NAME")
+            }}
+          </th>
+          <th>
+            {{
+              t(
+                "DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.HEADERS.SUMMARY"
+              )
+            }}
+          </th>
         </tr>
       </ng-template>
       <ng-template #body let-unit>
