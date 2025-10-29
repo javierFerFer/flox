@@ -32,6 +32,9 @@ import { ToastService } from '../../../../../services/toast/toast.service';
     ConfirmDialogModule,
   ],
   standalone: true,
+  host: {
+    class: 'w-full',
+  },
 })
 export class UnitDetailsTableComponent {
   private readonly route = inject(ActivatedRoute);
