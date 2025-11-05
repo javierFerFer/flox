@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal, untracked } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 
 import { RouterModule } from '@angular/router';
@@ -42,11 +42,10 @@ export class DashboardComponent {
   protected readonly version = inject(PROJECT_VERSION).version;
 
   private readonly userStateEffect = effect(() => {
-    const userConfig = this.userStore.user().userConfig;
-    if (userConfig?.lastVersionReadIt !== this.version && !this.isClosed()) {
+    if (this.projectVersionStore.info() && !this.isClosed()) {
       this.openConfirmReadNewChangesDialog(
-        this.projectVersionStore.info()?.content?.[
-          userConfig?.appLanguage || DEFAULT_LANGUAGE
+        untracked(this.projectVersionStore.info)?.content?.[
+          this.userStore.user().userConfig?.appLanguage || DEFAULT_LANGUAGE
         ],
       );
     }
