@@ -34,6 +34,7 @@ const initialState: UserState = {
     userConfig: {
       appLanguage: DEFAULT_LANGUAGE,
       toggleTheme: DEFAULT_THEME,
+      lastVersionReadIt: undefined,
     },
   },
   isLoading: false,
@@ -67,7 +68,9 @@ export const UserStore = signalStore(
         ...state,
         user: {
           ...user,
-          userConfig: state.user.userConfig,
+          userConfig: {
+            ...state.user.userConfig,
+          },
         },
       }));
     },
