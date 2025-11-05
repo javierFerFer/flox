@@ -1,10 +1,52 @@
-<app-custom-menu-bar></app-custom-menu-bar>
-<p-toast></p-toast>
-<div class="custom-container flex flex-1">
-  <app-lateral-menu></app-lateral-menu>
-  <div class="inner-custom-container flex flex-1 flex-col">
-    <app-custom-breadcrumb></app-custom-breadcrumb>
-    <router-outlet class="mt-4"></router-outlet>
-    <router-outlet name="modal"></router-outlet>
+<ng-container *transloco="let t">
+  <app-custom-menu-bar></app-custom-menu-bar>
+  <p-toast></p-toast>
+  <div class="custom-container flex flex-1">
+    <app-lateral-menu></app-lateral-menu>
+    <div class="inner-custom-container flex flex-1 flex-col">
+      <app-custom-breadcrumb></app-custom-breadcrumb>
+      <router-outlet class="mt-4"></router-outlet>
+      <router-outlet name="modal"></router-outlet>
+    </div>
   </div>
-</div>
+
+  <!-- dialog component -->
+  <p-confirmdialog
+    [key]="'confirmReadNewChanges'"
+    (onHide)="confirmReadNewChanges()"
+  >
+    <ng-template
+      #headless
+      let-message
+      let-rejectButtonProps
+      let-acceptLabel
+      let-rejectLabel
+      let-onAccept="onAccept"
+      let-onReject="onReject"
+    >
+      <div class="flex flex-col items-center rounded p-8">
+        <div
+          [style.background]="'var(--p-button-info-background)'"
+          class="text-primary-contrast -mt-20 inline-flex h-24 w-24 items-center justify-center rounded-full"
+        >
+          <i class="pi pi-bell !text-5xl"></i>
+        </div>
+        <span class="mt-6 mb-2 block text-2xl font-bold">{{
+          t(message.header, { version: version })
+        }}</span>
+        <p
+          class="mt-1 mb-0 flex flex-col justify-center gap-1"
+          [innerHTML]="message.message"
+        ></p>
+        <div class="mt-6 flex items-center gap-2">
+          <p-button
+            [label]="t(acceptLabel.acceptLabel)"
+            severity="info"
+            (onClick)="onAccept()"
+            styleClass="w-32"
+          ></p-button>
+        </div>
+      </div>
+    </ng-template>
+  </p-confirmdialog>
+</ng-container>

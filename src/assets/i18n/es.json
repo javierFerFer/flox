@@ -46,6 +46,12 @@
               }
             }
           },
+          "CONFIRM_READ_NEW_CHANGES_DIALOG": {
+            "HEADER": "Notas de la versión: {{version}}",
+            "ACTIONS": {
+              "CLOSE": "Cerrar"
+            }
+          },
           "UNITS_TABLE": {
             "HEADERS": {
               "NAME": "Nombre",
