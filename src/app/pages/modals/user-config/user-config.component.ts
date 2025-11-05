@@ -14,6 +14,7 @@ import { ConfigUserService } from '../../../services/config-user/config-user.ser
 import { UserStore } from '../../../stores/user/user.store';
 import { CloseModal } from '../close-modal-interface';
 import { ModalWrapperComponent } from '../../../components/modal-wrapper/modal-wrapper.component';
+import { DEFAULT_LANGUAGE } from '../../../app.config';
 
 @Component({
   selector: 'app-user-config',
@@ -66,7 +67,7 @@ export class UserConfigModalComponent implements OnInit, CloseModal {
     try {
       this.configUserService
         .updateUserConfig({
-          appLanguage: appLanguage || '',
+          appLanguage: appLanguage || DEFAULT_LANGUAGE,
           photo: (photo as any) || '',
           toggleTheme: this.userStore.user().userConfig?.toggleTheme,
         })

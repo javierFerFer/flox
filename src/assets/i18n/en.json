@@ -46,6 +46,12 @@
               }
             }
           },
+          "CONFIRM_READ_NEW_CHANGES_DIALOG": {
+            "HEADER": "Patch notes: {{version}}",
+            "ACTIONS": {
+              "CLOSE": "Close"
+            }
+          },
           "UNITS_TABLE": {
             "HEADERS": {
               "NAME": "Name",

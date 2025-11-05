@@ -6,6 +6,7 @@ import { InitGuard } from './guards/init.guard';
 import { UserClassesResolver } from './resolvers/user-classes.resolver';
 import { ClassIdResolver } from './resolvers/class-id.resolver';
 import { ExistClassGuard } from './guards/exist-class.guard';
+import { NewUpdatesResolver } from './resolvers/new-updates.resolver';
 
 export const NAVIGATION_ELEMENTS: MenuItem[] = [
   {
@@ -51,7 +52,7 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     canActivate: [AuthGuard],
-    resolve: [UserConfigModalResolver],
+    resolve: [UserConfigModalResolver, NewUpdatesResolver],
     loadComponent: () =>
       import('./pages/dashboard/dashboard.component').then(
         (m) => m.DashboardComponent,

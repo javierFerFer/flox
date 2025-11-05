@@ -33,12 +33,17 @@ const firebaseConfig = {
   measurementId: 'G-FNFLETJVZH',
 };
 
+export enum LanguagesEnum {
+  en = 'en',
+  es = 'es',
+}
+
 export const AVAILABLE_LANGUAGES: Map<string, string> = new Map([
-  ['en', 'LANGUAGES.EN'],
-  ['es', 'LANGUAGES.ES'],
+  [LanguagesEnum.en, 'LANGUAGES.EN'],
+  [LanguagesEnum.es, 'LANGUAGES.ES'],
 ]);
 
-export const DEFAULT_LANGUAGE = 'en';
+export const DEFAULT_LANGUAGE = LanguagesEnum.en;
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -75,7 +80,7 @@ export const appConfig: ApplicationConfig = {
     }),
     {
       provide: PROJECT_VERSION,
-      useValue: { version: '0.26.0' },
+      useValue: { version: '0.27.0' },
     },
   ],
 };
