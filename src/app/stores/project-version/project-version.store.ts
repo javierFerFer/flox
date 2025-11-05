@@ -1,5 +1,6 @@
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { ProjectVersionModel } from './project-version.model';
+import { withReset } from '@angular-architects/ngrx-toolkit';
 
 type ProjectVersionState = {
   info: ProjectVersionModel | undefined;
@@ -14,6 +15,7 @@ const initialState: ProjectVersionState = {
 export const ProjectVersionStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
+  withReset(),
   withMethods((store) => ({
     updateState(info: ProjectVersionModel): void {
       patchState(store, (state) => ({

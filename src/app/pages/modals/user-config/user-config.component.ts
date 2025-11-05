@@ -15,6 +15,7 @@ import { UserStore } from '../../../stores/user/user.store';
 import { CloseModal } from '../close-modal-interface';
 import { ModalWrapperComponent } from '../../../components/modal-wrapper/modal-wrapper.component';
 import { DEFAULT_LANGUAGE } from '../../../app.config';
+import { ProjectVersionStore } from '../../../stores/project-version/project-version.store';
 
 @Component({
   selector: 'app-user-config',
@@ -39,6 +40,7 @@ export class UserConfigModalComponent implements OnInit, CloseModal {
   private readonly configUserService = inject(ConfigUserService);
   private readonly toastService = inject(ToastService);
   private readonly translocoHelperService = inject(TranslocoHelperService);
+  private readonly projectVersionStore = inject(ProjectVersionStore);
 
   userStore = inject(UserStore);
   userConfigForm = this.fb.group({
@@ -92,7 +94,9 @@ export class UserConfigModalComponent implements OnInit, CloseModal {
   }
 
   closeSession() {
-    signOut(this.auth);
+    signOut(this.auth).then(() => {
+      this.projectVersionStore.resetState();
+    });
   }
 
   public close() {
