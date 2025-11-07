@@ -6,13 +6,13 @@ import { MenuItem } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { CommonModule } from '@angular/common';
-import { NAVIGATION_ELEMENTS } from '../../../../app.routes';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { Router, RouterModule } from '@angular/router';
 import { ToggleThemeComponent } from '../../../../components/toggle-theme/toggle-theme.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfigUserService } from '../../../../services/config-user/config-user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RoutingService } from '../../../../services/routing/routing.service';
 
 @Component({
   selector: 'app-custom-menu-bar',
@@ -33,7 +33,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class CustomMenuBarComponent implements OnInit {
   userStore = inject(UserStore);
-  model: MenuItem[] = NAVIGATION_ELEMENTS;
+  private readonly routingService = inject(RoutingService);
+  model: MenuItem[] = this.routingService.getRoutingConfig();
   private readonly fb = inject(FormBuilder);
   private readonly configUserService = inject(ConfigUserService);
   private readonly destroyRef = inject(DestroyRef);

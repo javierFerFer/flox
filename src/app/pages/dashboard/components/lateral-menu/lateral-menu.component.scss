@@ -5,8 +5,8 @@
         min-width: 4rem;
 
         ul {
-          padding-top: 2.5rem;
-          padding-right: 0;
+          padding: 2.5rem 0 0 0;
+          height: 100%;
           li {
             .p-menu-item-content {
               a {
@@ -22,6 +22,19 @@
 
           li:not(:first-child) {
             padding-top: 1.5rem;
+          }
+
+          li:last-child {
+            margin-top: auto;
+            padding: 0;
+
+            div {
+              a {
+                span:first-child {
+                  color: var(--p-red-500) !important;
+                }
+              }
+            }
           }
         }
       }

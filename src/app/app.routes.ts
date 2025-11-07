@@ -1,20 +1,11 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
-import { MenuItem } from 'primeng/api';
 import { UserConfigModalResolver } from './resolvers/user-config-modal.resolver';
 import { InitGuard } from './guards/init.guard';
 import { UserClassesResolver } from './resolvers/user-classes.resolver';
 import { ClassIdResolver } from './resolvers/class-id.resolver';
 import { ExistClassGuard } from './guards/exist-class.guard';
 import { DashBoardResolver } from './resolvers/dashboard.resolver';
-
-export const NAVIGATION_ELEMENTS: MenuItem[] = [
-  {
-    label: 'NAVIGATION.CLASSES.LABEL',
-    icon: 'pi pi-users',
-    routerLink: '/dashboard/records',
-  },
-];
 
 const MODAL_SHARED_ROUTES: Routes = [
   {

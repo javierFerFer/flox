@@ -15,6 +15,9 @@
   "NAVIGATION": {
     "CLASSES": {
       "LABEL": "Classes"
+    },
+    "SIGN-OUT": {
+      "LABEL": "Close session"
     }
   },
   "DASHBOARD": {
@@ -218,8 +221,7 @@
       "FORM": {
         "APP_LANGUAGE": "Language to use",
         "ACTIONS": {
-          "SAVE": "Save changes",
-          "LOG_OUT": "Close session"
+          "SAVE": "Save changes"
         },
         "MESSAGES": {
           "USER_EDIT_SUCCESS": {
