@@ -35,11 +35,6 @@
     </div>
     <div class="mt-16 flex items-center justify-end gap-4">
       <p-button
-        (onClick)="closeSession()"
-        severity="danger"
-        [label]="t('SHARED_MODALS.USER_CONFIG.FORM.ACTIONS.LOG_OUT')"
-      />
-      <p-button
         severity="success"
         type="submit"
         [loading]="this.userStore.isLoading()"

@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { TranslocoModule } from '@jsverse/transloco';
 import { MenuItem } from 'primeng/api';
-import { NAVIGATION_ELEMENTS } from '../../../../app.routes';
 import { RouterModule } from '@angular/router';
+import { RoutingService } from '../../../../services/routing/routing.service';
 
 @Component({
   selector: 'app-custom-breadcrumb',
@@ -13,5 +13,6 @@ import { RouterModule } from '@angular/router';
 })
 export class CustomBreadCrumbComponent {
   home: MenuItem | undefined = { icon: 'pi pi-home', routerLink: '/dashboard' };
-  navigationElements = NAVIGATION_ELEMENTS;
+  private readonly routingService = inject(RoutingService);
+  navigationElements = this.routingService.getRoutingConfig().slice(0, 1);
 }

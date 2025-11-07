@@ -7,8 +7,18 @@
         pRipple
         class="p-menubar-item-link items-center lg:hidden!"
       >
-        <i [class]="item.icon"></i>
-        <span>{{ t(item.label) }}</span>
+        <i
+          [style.color]="
+            item.icon === 'pi pi-sign-out' ? 'var(--p-red-500)' : ''
+          "
+          [class]="item.icon"
+        ></i>
+        <span
+          [style.color]="
+            item.icon === 'pi pi-sign-out' ? 'var(--p-red-500)' : ''
+          "
+          >{{ t(item.label) }}</span
+        >
         @if (item.shortcut) {
           <span
             class="border-surface bg-emphasis text-muted-color ml-auto rounded border p-1 text-xs"
@@ -31,11 +41,6 @@
           <app-toggle-theme formControlName="theme"></app-toggle-theme>
         </form>
         <div class="flex items-center" (click)="openUserSettings()">
-          <!-- <span class="mb-1">{{
-            userStore.user().userConfig?.username
-              ? userStore.user().userConfig?.username
-              : userStore.user().email
-          }}</span> -->
           <p-avatar
             (click)="openUserSettings()"
             shape="circle"
