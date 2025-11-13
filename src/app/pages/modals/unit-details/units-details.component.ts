@@ -21,6 +21,7 @@ import { UnitsService } from '../../../services/unity/unity.service';
 import { take } from 'rxjs';
 import { ToastService } from '../../../services/toast/toast.service';
 import { UnitDetailsTableComponent } from './components/unit-details-table/unit-details-table.component';
+import { NoSuggestDirective } from '../../../directives/no-suggest.directive';
 
 @Component({
   selector: 'app-units-details',
@@ -34,6 +35,7 @@ import { UnitDetailsTableComponent } from './components/unit-details-table/unit-
     FloatLabelModule,
     ButtonModule,
     UnitDetailsTableComponent,
+    NoSuggestDirective,
   ],
 })
 export class UnitsDetailComponent {

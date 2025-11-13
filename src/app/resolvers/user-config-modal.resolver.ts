@@ -11,6 +11,7 @@ export interface FirebaseUserConfig {
   appLanguage?: LanguagesEnum;
   toggleTheme?: UserTheme;
   lastVersionReadIt?: string;
+  suggestInputs?: boolean;
 }
 
 @Injectable({ providedIn: 'root' })
