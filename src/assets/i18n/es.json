@@ -238,6 +238,13 @@
       "SUB_TITLE": "Actualiza tu información",
       "FORM": {
         "APP_LANGUAGE": "Idioma de la interfaz",
+        "AUTO_SUGGEST_INPUTS": {
+          "LABEL": "Autocompletar",
+          "OPTIONS": {
+            "ON": "Activado",
+            "OFF": "Desactivado"
+          }
+        },
         "ACTIONS": {
           "SAVE": "Guardar cambios"
         },

@@ -15,6 +15,7 @@ import { UnityStore } from '../../../stores/unity/unity.store';
 import { UnitsService } from '../../../services/unity/unity.service';
 import { ClassStore } from '../../../stores/class/class.store';
 import { TextareaModule } from 'primeng/textarea';
+import { NoSuggestDirective } from '../../../directives/no-suggest.directive';
 
 @Component({
   selector: 'app-create-new-class',
@@ -30,6 +31,7 @@ import { TextareaModule } from 'primeng/textarea';
     RippleModule,
     InputTextModule,
     TextareaModule,
+    NoSuggestDirective,
   ],
   standalone: true,
   templateUrl: 'create-new-unit.component.html',

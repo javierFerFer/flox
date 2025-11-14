@@ -18,6 +18,7 @@ import { TextareaModule } from 'primeng/textarea';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { UnityModel } from '../../../stores/unity/unity.model';
+import { NoSuggestDirective } from '../../../directives/no-suggest.directive';
 
 @Component({
   selector: 'app-create-new-class',
@@ -33,6 +34,7 @@ import { UnityModel } from '../../../stores/unity/unity.model';
     RippleModule,
     InputTextModule,
     TextareaModule,
+    NoSuggestDirective,
   ],
   standalone: true,
   templateUrl: 'create-new-session.component.html',

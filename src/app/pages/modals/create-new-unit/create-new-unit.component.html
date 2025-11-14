@@ -7,6 +7,7 @@
           pInputText
           id="unityName"
           formControlName="unityName"
+          noSuggest
         />
         <label for="unityName">{{
           t("DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.UNIT_NAME")
@@ -18,6 +19,7 @@
           class="w-full"
           pTextarea
           [autoResize]="true"
+          noSuggest
         ></textarea>
         <label for="in_label">{{
           t("DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.SUMMARY")

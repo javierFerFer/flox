@@ -45,9 +45,23 @@ export class UserConfigModalComponent implements OnInit, CloseModal {
       this.userStore.user().userConfig?.appLanguage,
       Validators.required,
     ],
+    autoComplete: [
+      this.userStore.user().userConfig?.suggestInputs || false,
+      Validators.required,
+    ],
   });
 
   languages = [] as {}[];
+  autoCompleteOptions = [
+    {
+      name: 'SHARED_MODALS.USER_CONFIG.FORM.AUTO_SUGGEST_INPUTS.OPTIONS.ON',
+      value: true,
+    },
+    {
+      name: 'SHARED_MODALS.USER_CONFIG.FORM.AUTO_SUGGEST_INPUTS.OPTIONS.OFF',
+      value: false,
+    },
+  ];
 
   ngOnInit(): void {
     this.languages = this.translocoHelperService
@@ -61,13 +75,15 @@ export class UserConfigModalComponent implements OnInit, CloseModal {
   }
 
   updateUserConfig() {
-    const { appLanguage, photo } = this.userConfigForm.getRawValue();
+    const { appLanguage, photo, autoComplete } =
+      this.userConfigForm.getRawValue();
     try {
       this.configUserService
         .updateUserConfig({
           appLanguage: appLanguage || DEFAULT_LANGUAGE,
           photo: (photo as any) || '',
           toggleTheme: this.userStore.user().userConfig?.toggleTheme,
+          suggestInputs: autoComplete || false,
         })
         .pipe(take(1), delay(100))
         .subscribe(() => {

@@ -1,7 +1,6 @@
 import { Directive, ElementRef, inject, OnInit } from '@angular/core';
 import { UserStore } from '../stores/user/user.store';
 
-// @TODO: Javi, aplicar la directiva a los inputs
 @Directive({ selector: '[noSuggest]' })
 export class NoSuggestDirective implements OnInit {
   private readonly elementRef = inject(ElementRef);
