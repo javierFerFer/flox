@@ -18,6 +18,7 @@ import { ConfirmationService, MenuItem } from 'primeng/api';
 import { UnitsService } from '../../../../../services/unity/unity.service';
 import { take } from 'rxjs';
 import { ToastService } from '../../../../../services/toast/toast.service';
+import { NoSuggestDirective } from '../../../../../directives/no-suggest.directive';
 
 @Component({
   selector: 'app-unit-details-table',

@@ -35,6 +35,7 @@ const initialState: UserState = {
       appLanguage: DEFAULT_LANGUAGE,
       toggleTheme: DEFAULT_THEME,
       lastVersionReadIt: undefined,
+      suggestInputs: false,
     },
   },
   isLoading: false,

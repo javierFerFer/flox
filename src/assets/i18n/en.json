@@ -220,6 +220,13 @@
       "SUB_TITLE": "Update your information",
       "FORM": {
         "APP_LANGUAGE": "Language to use",
+        "AUTO_SUGGEST_INPUTS": {
+          "LABEL": "Autocomplete",
+          "OPTIONS": {
+            "ON": "Active",
+            "OFF": "Inactive"
+          }
+        },
         "ACTIONS": {
           "SAVE": "Save changes"
         },
