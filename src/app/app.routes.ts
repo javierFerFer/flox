@@ -17,9 +17,10 @@ const MODAL_SHARED_ROUTES: Routes = [
     resolve: [UserConfigModalResolver],
     data: {
       modalTitleKey: 'SHARED_MODALS.USER_CONFIG.TITLE',
-      modalComponentPromise: import(
-        '../app/pages/modals/user-config/user-config.component'
-      ).then((m) => m.UserConfigModalComponent),
+      modalComponentPromise: () =>
+        import('../app/pages/modals/user-config/user-config.component').then(
+          (m) => m.UserConfigModalComponent,
+        ),
     },
     outlet: 'modal',
   },
@@ -70,9 +71,10 @@ export const routes: Routes = [
               ),
             data: {
               modalTitleKey: 'DASHBOARD.RECORDS.MODALS.CREATE_NEW_CLASS.TITLE',
-              modalComponentPromise: import(
-                '../app/pages/modals/create-new-class/create-new-class.component'
-              ).then((m) => m.CreateNewClassModalComponent),
+              modalComponentPromise: () =>
+                import(
+                  '../app/pages/modals/create-new-class/create-new-class.component'
+                ).then((m) => m.CreateNewClassModalComponent),
             },
             outlet: 'recordsModals',
           },
@@ -95,9 +97,10 @@ export const routes: Routes = [
                 data: {
                   modalTitleKey:
                     'DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.TITLE',
-                  modalComponentPromise: import(
-                    './pages/modals/create-new-unit/create-new-unit.component'
-                  ).then((m) => m.CreateNewUnitModalComponent),
+                  modalComponentPromise: () =>
+                    import(
+                      './pages/modals/create-new-unit/create-new-unit.component'
+                    ).then((m) => m.CreateNewUnitModalComponent),
                 },
                 outlet: 'createUnit',
               },
@@ -109,9 +112,10 @@ export const routes: Routes = [
                   ).then((m) => m.ModalWrapperComponent),
                 data: {
                   modalTitleKey: 'DASHBOARD.RECORDS.MODALS.UNIT_DETAILS.TITLE',
-                  modalComponentPromise: import(
-                    '../app/pages/modals/unit-details/units-details.component'
-                  ).then((m) => m.UnitsDetailComponent),
+                  modalComponentPromise: () =>
+                    import(
+                      '../app/pages/modals/unit-details/units-details.component'
+                    ).then((m) => m.UnitsDetailComponent),
                 },
                 outlet: 'unitDetails',
                 children: [
@@ -124,9 +128,10 @@ export const routes: Routes = [
                     data: {
                       modalTitleKey:
                         'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.TITLE',
-                      modalComponentPromise: import(
-                        '../app/pages/modals/create-unit-session/create-new-session.component'
-                      ).then((m) => m.CreateNewSessionModalComponent),
+                      modalComponentPromise: () =>
+                        import(
+                          '../app/pages/modals/create-unit-session/create-new-session.component'
+                        ).then((m) => m.CreateNewSessionModalComponent),
                     },
                     outlet: 'createUnitSession',
                   },
@@ -139,9 +144,10 @@ export const routes: Routes = [
                     data: {
                       modalTitleKey:
                         'DASHBOARD.RECORDS.MODALS.EDIT_NEW_SESSION.TITLE',
-                      modalComponentPromise: import(
-                        '../app/pages/modals/session-detail/session-detail.component'
-                      ).then((m) => m.SessionDetailModalComponent),
+                      modalComponentPromise: () =>
+                        import(
+                          '../app/pages/modals/session-detail/session-detail.component'
+                        ).then((m) => m.SessionDetailModalComponent),
                     },
                     outlet: 'sessionDetails',
                   },
