@@ -51,11 +51,9 @@ export class ModalWrapperComponent implements OnInit {
   }
 
   private async renderComponent() {
-    const modalComponentPromise = this.activatedRoute.snapshot.data[
-      'modalComponentPromise'
-    ] as Promise<any>;
-    const componentToRender = await modalComponentPromise;
-
+    const modalComponentPromise =
+      this.activatedRoute.snapshot.data['modalComponentPromise'];
+    const componentToRender = await modalComponentPromise();
     this.componentRef = this.componentSpot().createComponent(componentToRender);
     this.componentRef.setInput('modalWrapperRef', this);
   }
