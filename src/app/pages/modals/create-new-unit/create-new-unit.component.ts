@@ -16,6 +16,7 @@ import { UnitsService } from '../../../services/unity/unity.service';
 import { ClassStore } from '../../../stores/class/class.store';
 import { TextareaModule } from 'primeng/textarea';
 import { NoSuggestDirective } from '../../../directives/no-suggest.directive';
+import { TextEditorComponent } from '../../../components/text-editor/text-editor.component';
 
 @Component({
   selector: 'app-create-new-class',
@@ -32,6 +33,7 @@ import { NoSuggestDirective } from '../../../directives/no-suggest.directive';
     InputTextModule,
     TextareaModule,
     NoSuggestDirective,
+    TextEditorComponent,
   ],
   standalone: true,
   templateUrl: 'create-new-unit.component.html',
