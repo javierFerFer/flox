@@ -1,0 +1,12 @@
+<div class="flex justify-end">
+  <span
+    (click)="setVisibility(!isVisible())"
+    class="p-breadcrumb-item-icon pi pb-2"
+    [ngClass]="isVisible() ? 'pi-wrench' : 'pi-pencil'"
+  ></span>
+</div>
+@if (isVisible()) {
+  <ng-container *ngTemplateOutlet="contentFirstElement()"></ng-container>
+} @else {
+  <ng-container *ngTemplateOutlet="contentSecondElement()"></ng-container>
+}
