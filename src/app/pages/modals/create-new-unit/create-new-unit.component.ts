@@ -20,11 +20,6 @@ import { SwapperComponentsComponent } from '../../../components/swapper-componen
 import { SanitizeHTMLPipe } from '../../../pipes/sanitize-html.pipe';
 import { take } from 'rxjs';
 
-export enum TextTypes {
-  simple = 'simple',
-  complex = 'complex',
-}
-
 @Component({
   selector: 'app-create-new-class',
   imports: [

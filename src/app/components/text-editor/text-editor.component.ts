@@ -31,8 +31,8 @@ export class TextEditorComponent implements ControlValueAccessor {
   value: string | undefined = '';
 
   @Input({ transform: booleanAttribute })
-  @HostBinding('class.is-disabled')
-  disabled = false;
+  @HostBinding('class.is-read-only')
+  readOnly = false;
 
   @Input()
   editorModules: Object = {
@@ -66,6 +66,6 @@ export class TextEditorComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
   setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.readOnly = isDisabled;
   }
 }

@@ -1,7 +1,7 @@
-:host(.is-disabled) {
+:host(.is-read-only) {
   ::ng-deep {
     .p-editor-content {
-      border: none;
+      border: none !important;
 
       .ql-editor {
         margin-left: 0;
