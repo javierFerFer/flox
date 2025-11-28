@@ -1,0 +1,7 @@
+:host(.is-disabled) {
+  ::ng-deep {
+    .p-editor-content {
+      border: none !important;
+    }
+  }
+}

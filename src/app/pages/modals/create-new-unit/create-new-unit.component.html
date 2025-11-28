@@ -13,20 +13,31 @@
           t("DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.UNIT_NAME")
         }}</label>
       </p-float-label>
-      <!-- TODO:@JAVI, continue here -->
-      <!-- <p-floatlabel class="mt-6 w-full" variant="in">
-        <textarea
-          formControlName="summary"
-          class="w-full"
-          pTextarea
-          [autoResize]="true"
-          noSuggest
-        ></textarea>
-        <label for="in_label">{{
-          t("DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.SUMMARY")
-        }}</label>
-      </p-floatlabel> -->
-      <app-text-editor class="w-full"></app-text-editor>
+      <app-swapper-components class="mt-6">
+        <ng-template #firstElement>
+          <p-floatlabel class="w-full" variant="in">
+            <textarea
+              formControlName="summary"
+              [ngModel]="
+                this.newUnityForm.controls.summary.value | sanitizeHTML
+              "
+              class="w-full"
+              pTextarea
+              [autoResize]="true"
+              noSuggest
+            ></textarea>
+            <label for="in_label">{{
+              t("DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.SUMMARY")
+            }}</label>
+          </p-floatlabel>
+        </ng-template>
+        <ng-template #secondElement>
+          <app-text-editor
+            formControlName="summary"
+            class="w-full"
+          ></app-text-editor>
+        </ng-template>
+      </app-swapper-components>
     </div>
     <div class="mt-16 flex items-center justify-end gap-4">
       <p-button

@@ -1,17 +1,9 @@
-<p-editor styleClass="h-32">
-  <ng-template #header>
-    @if (header_content()) {
-      <ng-container *ngTemplateOutlet="header_content()"></ng-container>
-    } @else {
-      <span class="ql-formats">
-        <button type="button" class="ql-bold" aria-label="Bold"></button>
-        <button type="button" class="ql-italic" aria-label="Italic"></button>
-        <button
-          type="button"
-          class="ql-underline"
-          aria-label="Underline"
-        ></button>
-      </span>
-    }
-  </ng-template>
+<p-editor
+  [readonly]="disabled"
+  (onTextChange)="onChange($event.htmlValue)"
+  [(ngModel)]="value"
+  styleClass="h-auto"
+  [modules]="editorModules"
+>
+  <ng-template #header> </ng-template>
 </p-editor>

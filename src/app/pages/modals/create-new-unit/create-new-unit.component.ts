@@ -9,7 +9,6 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { CloseModal } from '../close-modal-interface';
 import { ModalWrapperComponent } from '../../../components/modal-wrapper/modal-wrapper.component';
-import { take } from 'rxjs';
 import { ToastService } from '../../../services/toast/toast.service';
 import { UnityStore } from '../../../stores/unity/unity.store';
 import { UnitsService } from '../../../services/unity/unity.service';
@@ -17,6 +16,14 @@ import { ClassStore } from '../../../stores/class/class.store';
 import { TextareaModule } from 'primeng/textarea';
 import { NoSuggestDirective } from '../../../directives/no-suggest.directive';
 import { TextEditorComponent } from '../../../components/text-editor/text-editor.component';
+import { SwapperComponentsComponent } from '../../../components/swapper-components/swapper-components.component';
+import { SanitizeHTMLPipe } from '../../../pipes/sanitize-html.pipe';
+import { take } from 'rxjs';
+
+export enum TextTypes {
+  simple = 'simple',
+  complex = 'complex',
+}
 
 @Component({
   selector: 'app-create-new-class',
@@ -34,6 +41,8 @@ import { TextEditorComponent } from '../../../components/text-editor/text-editor
     TextareaModule,
     NoSuggestDirective,
     TextEditorComponent,
+    SwapperComponentsComponent,
+    SanitizeHTMLPipe,
   ],
   standalone: true,
   templateUrl: 'create-new-unit.component.html',
@@ -54,13 +63,12 @@ export class CreateNewUnitModalComponent implements CloseModal {
 
   createNewUnit() {
     const { unityName, summary } = this.newUnityForm.getRawValue();
-
     try {
       this.unitsService
         .createNewUnit({
           uuid: crypto.randomUUID(),
           name: unityName!,
-          summary: summary || '',
+          summary: summary!,
           sessions: [],
         })
         .pipe(take(1))
