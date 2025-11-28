@@ -1,7 +1,12 @@
 :host(.is-disabled) {
   ::ng-deep {
     .p-editor-content {
-      border: none !important;
+      border: none;
+
+      .ql-editor {
+        margin-left: 0;
+        padding-left: 0;
+      }
     }
   }
 }
