@@ -1,0 +1,12 @@
+:host(.is-read-only) {
+  ::ng-deep {
+    .p-editor-content {
+      border: none !important;
+
+      .ql-editor {
+        margin-left: 0;
+        padding-left: 0;
+      }
+    }
+  }
+}

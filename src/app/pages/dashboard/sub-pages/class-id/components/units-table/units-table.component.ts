@@ -13,6 +13,7 @@ import { take } from 'rxjs';
 import { ClassStore } from '../../../../../../stores/class/class.store';
 import { ToastService } from '../../../../../../services/toast/toast.service';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { TextEditorComponent } from '../../../../../../components/text-editor/text-editor.component';
 
 @Component({
   selector: 'app-units-table',
@@ -25,6 +26,7 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
     ButtonModule,
     RippleModule,
     RouterOutlet,
+    TextEditorComponent,
   ],
 })
 export class UnitsTableComponent {

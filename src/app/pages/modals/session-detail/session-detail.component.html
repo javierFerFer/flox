@@ -13,62 +13,158 @@
           t("DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_NAME")
         }}</label>
       </p-float-label>
-      <p-floatlabel class="mt-6 w-full" variant="in">
-        <textarea
-          formControlName="activities"
-          class="w-full"
-          pTextarea
-          [autoResize]="true"
-          noSuggest
-        ></textarea>
-        <label for="in_label">{{
+      @let activitiesComplexText =
+        this.sessionForm.get("activities")?.value || "" | checkComplexHTML;
+      <app-swapper
+        class="mt-6"
+        [isVisible]="!activitiesComplexText"
+        [headerText]="
           t(
-            "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ACTIVITIES"
+            'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ACTIVITIES'
           )
-        }}</label>
-      </p-floatlabel>
-      <p-floatlabel class="mt-6 w-full" variant="in">
-        <textarea
-          formControlName="evaluation"
-          class="w-full"
-          pTextarea
-          [autoResize]="true"
-          noSuggest
-        ></textarea>
-        <label for="in_label">{{
+        "
+      >
+        <ng-template #firstComponent>
+          <p-floatlabel class="w-full" variant="in">
+            <textarea
+              formControlName="activities"
+              [ngModel]="
+                this.sessionForm.controls.activities.value | sanitizeHTML
+              "
+              class="w-full"
+              pTextarea
+              [autoResize]="true"
+              noSuggest
+            ></textarea>
+            <label for="in_label">{{
+              t(
+                "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ACTIVITIES"
+              )
+            }}</label>
+          </p-floatlabel>
+        </ng-template>
+        <ng-template #secondComponent>
+          <app-text-editor
+            formControlName="activities"
+            class="w-full"
+          ></app-text-editor>
+        </ng-template>
+      </app-swapper>
+
+      @let evaluationComplexText =
+        this.sessionForm.get("evaluation")?.value || "" | checkComplexHTML;
+      <app-swapper
+        class="mt-6"
+        [isVisible]="!evaluationComplexText"
+        [headerText]="
           t(
-            "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_EVALUATION"
+            'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_EVALUATION'
           )
-        }}</label>
-      </p-floatlabel>
-      <p-floatlabel class="mt-6 w-full" variant="in">
-        <textarea
-          formControlName="attentionOfDiversity"
-          class="w-full"
-          pTextarea
-          [autoResize]="true"
-          noSuggest
-        ></textarea>
-        <label for="in_label">{{
+        "
+      >
+        <ng-template #firstComponent>
+          <p-floatlabel class="w-full" variant="in">
+            <textarea
+              formControlName="evaluation"
+              [ngModel]="
+                this.sessionForm.controls.evaluation.value | sanitizeHTML
+              "
+              class="w-full"
+              pTextarea
+              [autoResize]="true"
+              noSuggest
+            ></textarea>
+            <label for="in_label">{{
+              t(
+                "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_EVALUATION"
+              )
+            }}</label>
+          </p-floatlabel>
+        </ng-template>
+        <ng-template #secondComponent>
+          <app-text-editor
+            formControlName="evaluation"
+            class="w-full"
+          ></app-text-editor>
+        </ng-template>
+      </app-swapper>
+
+      @let attentionOfDiversityComplexText =
+        this.sessionForm.get("attentionOfDiversity")?.value || ""
+          | checkComplexHTML;
+      <app-swapper
+        class="mt-6"
+        [isVisible]="!attentionOfDiversityComplexText"
+        [headerText]="
           t(
-            "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ATTENTION_OF_DIVERSITY"
+            'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ATTENTION_OF_DIVERSITY'
           )
-        }}</label>
-      </p-floatlabel>
-      <p-floatlabel class="mt-6 w-full" variant="in">
-        <textarea
-          formControlName="observations"
-          class="w-full"
-          pTextarea
-          [autoResize]="true"
-          noSuggest
-        ></textarea>
-        <label for="in_label">{{
+        "
+      >
+        <ng-template #firstComponent>
+          <p-floatlabel class="w-full" variant="in">
+            <textarea
+              formControlName="attentionOfDiversity"
+              [ngModel]="
+                this.sessionForm.controls.attentionOfDiversity.value
+                  | sanitizeHTML
+              "
+              class="w-full"
+              pTextarea
+              [autoResize]="true"
+              noSuggest
+            ></textarea>
+            <label for="in_label">{{
+              t(
+                "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ATTENTION_OF_DIVERSITY"
+              )
+            }}</label>
+          </p-floatlabel>
+        </ng-template>
+        <ng-template #secondComponent>
+          <app-text-editor
+            formControlName="attentionOfDiversity"
+            class="w-full"
+          ></app-text-editor>
+        </ng-template>
+      </app-swapper>
+      @let observationsComplexText =
+        this.sessionForm.get("observations")?.value || "" | checkComplexHTML;
+      <app-swapper
+        class="mt-6"
+        [isVisible]="!observationsComplexText"
+        [headerText]="
           t(
-            "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_OBSERVATIONS"
+            'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_OBSERVATIONS'
           )
-        }}</label>
-      </p-floatlabel>
+        "
+      >
+        <ng-template #firstComponent>
+          <p-floatlabel class="w-full" variant="in">
+            <textarea
+              formControlName="observations"
+              [ngModel]="
+                this.sessionForm.controls.observations.value | sanitizeHTML
+              "
+              class="w-full"
+              pTextarea
+              [autoResize]="true"
+              noSuggest
+            ></textarea>
+            <label for="in_label">{{
+              t(
+                "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_OBSERVATIONS"
+              )
+            }}</label>
+          </p-floatlabel>
+        </ng-template>
+        <ng-template #secondComponent>
+          <app-text-editor
+            formControlName="observations"
+            class="w-full"
+          ></app-text-editor>
+        </ng-template>
+      </app-swapper>
     </div>
     <div class="mt-16 flex items-center justify-end gap-4">
       <p-button

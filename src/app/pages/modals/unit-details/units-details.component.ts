@@ -1,15 +1,7 @@
-import {
-  Component,
-  computed,
-  effect,
-  inject,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { Component, computed, effect, inject, Input } from '@angular/core';
 import { ModalWrapperComponent } from '../../../components/modal-wrapper/modal-wrapper.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ClassStore } from '../../../stores/class/class.store';
 import { UnityStore } from '../../../stores/unity/unity.store';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -22,6 +14,10 @@ import { take } from 'rxjs';
 import { ToastService } from '../../../services/toast/toast.service';
 import { UnitDetailsTableComponent } from './components/unit-details-table/unit-details-table.component';
 import { NoSuggestDirective } from '../../../directives/no-suggest.directive';
+import { SwapperComponent } from '../../../components/swapper-components/swapper.component';
+import { CheckComplexHTMLPipe } from '../../../pipes/check-complex-html.pipe';
+import { SanitizeHTMLPipe } from '../../../pipes/sanitize-html.pipe';
+import { TextEditorComponent } from '../../../components/text-editor/text-editor.component';
 
 @Component({
   selector: 'app-units-details',
@@ -36,6 +32,10 @@ import { NoSuggestDirective } from '../../../directives/no-suggest.directive';
     ButtonModule,
     UnitDetailsTableComponent,
     NoSuggestDirective,
+    CheckComplexHTMLPipe,
+    SwapperComponent,
+    SanitizeHTMLPipe,
+    TextEditorComponent,
   ],
 })
 export class UnitsDetailComponent {
