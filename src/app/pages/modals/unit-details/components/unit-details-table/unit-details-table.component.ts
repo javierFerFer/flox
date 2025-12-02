@@ -1,15 +1,13 @@
-import { Component, computed, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, computed, inject, ViewChild } from '@angular/core';
 import { ContextMenu, ContextMenuModule } from 'primeng/contextmenu';
 import { TableModule } from 'primeng/table';
 import { UnityStore } from '../../../../../stores/unity/unity.store';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { Button, ButtonModule } from 'primeng/button';
+import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
-import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { Card, CardModule } from 'primeng/card';
 import {
   SessionModel,
   UnityModel,
@@ -18,7 +16,7 @@ import { ConfirmationService, MenuItem } from 'primeng/api';
 import { UnitsService } from '../../../../../services/unity/unity.service';
 import { take } from 'rxjs';
 import { ToastService } from '../../../../../services/toast/toast.service';
-import { NoSuggestDirective } from '../../../../../directives/no-suggest.directive';
+import { TextEditorComponent } from '../../../../../components/text-editor/text-editor.component';
 
 @Component({
   selector: 'app-unit-details-table',
@@ -31,6 +29,7 @@ import { NoSuggestDirective } from '../../../../../directives/no-suggest.directi
     RippleModule,
     RouterModule,
     ConfirmDialogModule,
+    TextEditorComponent,
   ],
   standalone: true,
   host: {

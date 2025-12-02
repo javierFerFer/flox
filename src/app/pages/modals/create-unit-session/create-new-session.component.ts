@@ -19,6 +19,9 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { UnityModel } from '../../../stores/unity/unity.model';
 import { NoSuggestDirective } from '../../../directives/no-suggest.directive';
+import { SwapperComponent } from '../../../components/swapper-components/swapper.component';
+import { SanitizeHTMLPipe } from '../../../pipes/sanitize-html.pipe';
+import { TextEditorComponent } from '../../../components/text-editor/text-editor.component';
 
 @Component({
   selector: 'app-create-new-class',
@@ -35,6 +38,9 @@ import { NoSuggestDirective } from '../../../directives/no-suggest.directive';
     InputTextModule,
     TextareaModule,
     NoSuggestDirective,
+    SwapperComponent,
+    SanitizeHTMLPipe,
+    TextEditorComponent,
   ],
   standalone: true,
   templateUrl: 'create-new-session.component.html',

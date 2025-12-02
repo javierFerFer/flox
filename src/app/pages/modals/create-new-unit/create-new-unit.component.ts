@@ -16,9 +16,9 @@ import { ClassStore } from '../../../stores/class/class.store';
 import { TextareaModule } from 'primeng/textarea';
 import { NoSuggestDirective } from '../../../directives/no-suggest.directive';
 import { TextEditorComponent } from '../../../components/text-editor/text-editor.component';
-import { SwapperComponentsComponent } from '../../../components/swapper-components/swapper-components.component';
 import { SanitizeHTMLPipe } from '../../../pipes/sanitize-html.pipe';
 import { take } from 'rxjs';
+import { SwapperComponent } from '../../../components/swapper-components/swapper.component';
 
 @Component({
   selector: 'app-create-new-class',
@@ -36,7 +36,7 @@ import { take } from 'rxjs';
     TextareaModule,
     NoSuggestDirective,
     TextEditorComponent,
-    SwapperComponentsComponent,
+    SwapperComponent,
     SanitizeHTMLPipe,
   ],
   standalone: true,
