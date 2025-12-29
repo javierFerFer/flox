@@ -19,8 +19,7 @@ export class SwapperComponent {
   @Input({ transform: booleanAttribute })
   isVisible = true;
 
-  @Input()
-  headerText = '';
+  headerContent: Signal<any> = contentChild('headerContent');
   contentFirstComponent: Signal<any> = contentChild('firstComponent');
   contentSecondComponent: Signal<any> = contentChild('secondComponent');
 

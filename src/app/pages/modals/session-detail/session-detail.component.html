@@ -15,15 +15,12 @@
       </p-float-label>
       @let activitiesComplexText =
         this.sessionForm.get("activities")?.value || "" | checkComplexHTML;
-      <app-swapper
-        class="mt-6"
-        [isVisible]="!activitiesComplexText"
-        [headerText]="
+      <app-swapper class="mt-6" [isVisible]="!activitiesComplexText">
+        <ng-template #headerContent>{{
           t(
-            'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ACTIVITIES'
+            "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ACTIVITIES"
           )
-        "
-      >
+        }}</ng-template>
         <ng-template #firstComponent>
           <p-floatlabel class="w-full" variant="in">
             <textarea
@@ -53,15 +50,12 @@
 
       @let evaluationComplexText =
         this.sessionForm.get("evaluation")?.value || "" | checkComplexHTML;
-      <app-swapper
-        class="mt-6"
-        [isVisible]="!evaluationComplexText"
-        [headerText]="
+      <app-swapper class="mt-6" [isVisible]="!evaluationComplexText">
+        <ng-template #headerContent>{{
           t(
-            'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_EVALUATION'
+            "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_EVALUATION"
           )
-        "
-      >
+        }}</ng-template>
         <ng-template #firstComponent>
           <p-floatlabel class="w-full" variant="in">
             <textarea
@@ -92,15 +86,12 @@
       @let attentionOfDiversityComplexText =
         this.sessionForm.get("attentionOfDiversity")?.value || ""
           | checkComplexHTML;
-      <app-swapper
-        class="mt-6"
-        [isVisible]="!attentionOfDiversityComplexText"
-        [headerText]="
+      <app-swapper class="mt-6" [isVisible]="!attentionOfDiversityComplexText">
+        <ng-template #headerContent>{{
           t(
-            'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ATTENTION_OF_DIVERSITY'
+            "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ATTENTION_OF_DIVERSITY"
           )
-        "
-      >
+        }}</ng-template>
         <ng-template #firstComponent>
           <p-floatlabel class="w-full" variant="in">
             <textarea
@@ -130,15 +121,12 @@
       </app-swapper>
       @let observationsComplexText =
         this.sessionForm.get("observations")?.value || "" | checkComplexHTML;
-      <app-swapper
-        class="mt-6"
-        [isVisible]="!observationsComplexText"
-        [headerText]="
+      <app-swapper class="mt-6" [isVisible]="!observationsComplexText">
+        <ng-template #headerContent>{{
           t(
-            'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_OBSERVATIONS'
+            "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_OBSERVATIONS"
           )
-        "
-      >
+        }}</ng-template>
         <ng-template #firstComponent>
           <p-floatlabel class="w-full" variant="in">
             <textarea

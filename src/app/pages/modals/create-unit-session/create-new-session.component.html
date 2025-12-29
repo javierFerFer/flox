@@ -13,14 +13,12 @@
           t("DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_NAME")
         }}</label>
       </p-float-label>
-      <app-swapper
-        class="mt-6"
-        [headerText]="
+      <app-swapper class="mt-6">
+        <ng-template #headerContent>{{
           t(
-            'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ACTIVITIES'
+            "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ACTIVITIES"
           )
-        "
-      >
+        }}</ng-template>
         <ng-template #firstComponent>
           <p-floatlabel class="w-full" variant="in">
             <textarea
@@ -47,14 +45,12 @@
           ></app-text-editor>
         </ng-template>
       </app-swapper>
-      <app-swapper
-        class="mt-6"
-        [headerText]="
+      <app-swapper class="mt-6">
+        <ng-template #headerContent>{{
           t(
-            'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_EVALUATION'
+            "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_EVALUATION"
           )
-        "
-      >
+        }}</ng-template>
         <ng-template #firstComponent>
           <p-floatlabel class="w-full" variant="in">
             <textarea
@@ -81,14 +77,12 @@
           ></app-text-editor>
         </ng-template>
       </app-swapper>
-      <app-swapper
-        class="mt-6"
-        [headerText]="
+      <app-swapper class="mt-6">
+        <ng-template #headerContent>{{
           t(
-            'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ATTENTION_OF_DIVERSITY'
+            "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ATTENTION_OF_DIVERSITY"
           )
-        "
-      >
+        }}</ng-template>
         <ng-template #firstComponent>
           <p-floatlabel class="w-full" variant="in">
             <textarea
@@ -116,14 +110,12 @@
           ></app-text-editor>
         </ng-template>
       </app-swapper>
-      <app-swapper
-        class="mt-6"
-        [headerText]="
+      <app-swapper class="mt-6">
+        <ng-template #headerContent>{{
           t(
-            'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_OBSERVATIONS'
+            "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_OBSERVATIONS"
           )
-        "
-      >
+        }}</ng-template>
         <ng-template #firstComponent>
           <p-floatlabel class="w-full" variant="in">
             <textarea
