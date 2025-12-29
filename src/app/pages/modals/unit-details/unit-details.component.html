@@ -15,11 +15,10 @@
       </p-float-label>
       @let isComplexText =
         this.unitForm.get("summary")?.value || "" | checkComplexHTML;
-      <app-swapper
-        class="mt-6"
-        [isVisible]="!isComplexText"
-        [headerText]="t('DASHBOARD.RECORDS.MODALS.UNIT_DETAILS.FORM.SUMMARY')"
-      >
+      <app-swapper class="mt-6" [isVisible]="!isComplexText">
+        <ng-template #headerContent>{{
+          t("DASHBOARD.RECORDS.MODALS.UNIT_DETAILS.FORM.SUMMARY")
+        }}</ng-template>
         <ng-template #firstComponent>
           <p-floatlabel class="w-full" variant="in">
             <textarea

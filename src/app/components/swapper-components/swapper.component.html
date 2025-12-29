@@ -1,6 +1,6 @@
 <div class="flex justify-between" [class.justify-end]="isVisible">
-  @if (!isVisible) {
-    {{ headerText }}
+  @if (!isVisible && headerContent()) {
+    <ng-container *ngTemplateOutlet="headerContent()"></ng-container>
   }
   <div class="flex justify-end">
     <span
@@ -11,8 +11,10 @@
     </span>
   </div>
 </div>
-@if (isVisible) {
+@if (isVisible && contentFirstComponent()) {
   <ng-container *ngTemplateOutlet="contentFirstComponent()"></ng-container>
-} @else {
+}
+
+@if (!isVisible && contentSecondComponent()) {
   <ng-container *ngTemplateOutlet="contentSecondComponent()"></ng-container>
 }

@@ -13,12 +13,10 @@
           t("DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.UNIT_NAME")
         }}</label>
       </p-float-label>
-      <app-swapper
-        class="mt-6"
-        [headerText]="
-          t('DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.SUMMARY')
-        "
-      >
+      <app-swapper class="mt-6">
+        <ng-template #headerContent>{{
+          t("DASHBOARD.RECORDS.MODALS.CREATE_NEW_UNIT.FORM.SUMMARY")
+        }}</ng-template>
         <ng-template #firstComponent>
           <p-floatlabel class="w-full" variant="in">
             <textarea

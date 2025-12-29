@@ -153,7 +153,7 @@
           "FORM": {
             "SESSION_NAME": "Nombre de la sesion",
             "SESSION_ACTIVITIES": "Actividades",
-            "SESSION_EVALUATION": "Evaluaciones",
+            "SESSION_EVALUATION": "Evaluacion",
             "SESSION_ATTENTION_OF_DIVERSITY": "Atencion a la diversidad",
             "SESSION_OBSERVATIONS": "Observaciones",
             "MESSAGES": {
@@ -174,7 +174,7 @@
             "HEADERS": {
               "NAME": "Nombre",
               "ACTIVITIES": "Actividades",
-              "EVALUATIONS": "Evaluaciones",
+              "EVALUATIONS": "Evaluacion",
               "ATTENTION_OF_DIVERSITY": "Atencion a la diversidad",
               "OBSERVATIONS": "Observaciones"
             },
@@ -210,7 +210,7 @@
           "FORM": {
             "SESSION_NAME": "Nombre de la sesion",
             "SESSION_ACTIVITIES": "Actividades",
-            "SESSION_EVALUATION": "Evaluaciones",
+            "SESSION_EVALUATION": "Evaluacion",
             "SESSION_ATTENTION_OF_DIVERSITY": "Atencion a la diversidad",
             "SESSION_OBSERVATIONS": "Observaciones",
             "MESSAGES": {
