@@ -1,0 +1,21 @@
+:host {
+  ::ng-deep {
+    p-float-label {
+      .p-inputtext:disabled {
+        opacity: 1;
+        background-color: initial;
+        color: initial;
+      }
+
+      .p-component:disabled {
+        opacity: initial;
+      }
+    }
+
+    textarea:disabled {
+      opacity: initial;
+      background: initial;
+      color: initial;
+    }
+  }
+}

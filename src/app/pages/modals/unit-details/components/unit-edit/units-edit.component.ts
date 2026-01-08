@@ -1,27 +1,27 @@
 import { Component, computed, effect, inject, Input } from '@angular/core';
-import { ModalWrapperComponent } from '../../../components/modal-wrapper/modal-wrapper.component';
+import { ModalWrapperComponent } from '../../../../../components/modal-wrapper/modal-wrapper.component';
 import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { UnityStore } from '../../../stores/unity/unity.store';
+import { UnityStore } from '../../../../../stores/unity/unity.store';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { ButtonModule } from 'primeng/button';
-import { UnitsService } from '../../../services/unity/unity.service';
+import { UnitsService } from '../../../../../services/unity/unity.service';
 import { take } from 'rxjs';
-import { ToastService } from '../../../services/toast/toast.service';
-import { UnitDetailsTableComponent } from './components/unit-details-table/unit-details-table.component';
-import { NoSuggestDirective } from '../../../directives/no-suggest.directive';
-import { SwapperComponent } from '../../../components/swapper-components/swapper.component';
-import { CheckComplexHTMLPipe } from '../../../pipes/check-complex-html.pipe';
-import { SanitizeHTMLPipe } from '../../../pipes/sanitize-html.pipe';
-import { TextEditorComponent } from '../../../components/text-editor/text-editor.component';
+import { ToastService } from '../../../../../services/toast/toast.service';
+import { UnitDetailsTableComponent } from '../unit-details-table/unit-details-table.component';
+import { NoSuggestDirective } from '../../../../../directives/no-suggest.directive';
+import { SwapperComponent } from '../../../../../components/swapper-components/swapper.component';
+import { CheckComplexHTMLPipe } from '../../../../../pipes/check-complex-html.pipe';
+import { SanitizeHTMLPipe } from '../../../../../pipes/sanitize-html.pipe';
+import { TextEditorComponent } from '../../../../../components/text-editor/text-editor.component';
 
 @Component({
-  selector: 'app-units-details',
-  templateUrl: 'unit-details.component.html',
+  selector: 'app-units-edit',
+  templateUrl: 'unit-edit.component.html',
   standalone: true,
   imports: [
     TranslocoDirective,
@@ -38,7 +38,7 @@ import { TextEditorComponent } from '../../../components/text-editor/text-editor
     TextEditorComponent,
   ],
 })
-export class UnitsDetailComponent {
+export class UnitsEditComponent {
   @Input('modalWrapperRef')
   public ModalWrapperRef!: ModalWrapperComponent;
 

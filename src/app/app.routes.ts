@@ -105,51 +105,73 @@ export const routes: Routes = [
                 outlet: 'createUnit',
               },
               {
-                path: 'unit-details/:id',
-                loadComponent: () =>
-                  import(
-                    './components/modal-wrapper/modal-wrapper.component'
-                  ).then((m) => m.ModalWrapperComponent),
-                data: {
-                  modalTitleKey: 'DASHBOARD.RECORDS.MODALS.UNIT_DETAILS.TITLE',
-                  modalComponentPromise: () =>
-                    import(
-                      '../app/pages/modals/unit-details/units-details.component'
-                    ).then((m) => m.UnitsDetailComponent),
-                },
+                path: 'unit-details',
                 outlet: 'unitDetails',
                 children: [
                   {
-                    path: 'create-unit-session',
+                    path: 'edit/:id',
                     loadComponent: () =>
                       import(
                         './components/modal-wrapper/modal-wrapper.component'
                       ).then((m) => m.ModalWrapperComponent),
                     data: {
                       modalTitleKey:
-                        'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.TITLE',
+                        'DASHBOARD.RECORDS.MODALS.UNIT_DETAILS.TITLE',
                       modalComponentPromise: () =>
                         import(
-                          '../app/pages/modals/create-unit-session/create-new-session.component'
-                        ).then((m) => m.CreateNewSessionModalComponent),
+                          './pages/modals/unit-details/components/unit-edit/units-edit.component'
+                        ).then((m) => m.UnitsEditComponent),
                     },
-                    outlet: 'createUnitSession',
+                    children: [
+                      {
+                        path: 'create-unit-session',
+                        loadComponent: () =>
+                          import(
+                            './components/modal-wrapper/modal-wrapper.component'
+                          ).then((m) => m.ModalWrapperComponent),
+                        data: {
+                          modalTitleKey:
+                            'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.TITLE',
+                          modalComponentPromise: () =>
+                            import(
+                              '../app/pages/modals/create-unit-session/create-new-session.component'
+                            ).then((m) => m.CreateNewSessionModalComponent),
+                        },
+                        outlet: 'createUnitSession',
+                      },
+                      {
+                        path: 'session-details/:id',
+                        loadComponent: () =>
+                          import(
+                            './components/modal-wrapper/modal-wrapper.component'
+                          ).then((m) => m.ModalWrapperComponent),
+                        data: {
+                          modalTitleKey:
+                            'DASHBOARD.RECORDS.MODALS.EDIT_NEW_SESSION.TITLE',
+                          modalComponentPromise: () =>
+                            import(
+                              '../app/pages/modals/session-detail/session-detail.component'
+                            ).then((m) => m.SessionDetailModalComponent),
+                        },
+                        outlet: 'sessionDetails',
+                      },
+                    ],
                   },
                   {
-                    path: 'session-details/:id',
+                    path: 'show/:id',
                     loadComponent: () =>
                       import(
                         './components/modal-wrapper/modal-wrapper.component'
                       ).then((m) => m.ModalWrapperComponent),
                     data: {
                       modalTitleKey:
-                        'DASHBOARD.RECORDS.MODALS.EDIT_NEW_SESSION.TITLE',
+                        'DASHBOARD.RECORDS.MODALS.UNIT_DETAILS.TITLE',
+                      autoMaximize: true,
                       modalComponentPromise: () =>
                         import(
-                          '../app/pages/modals/session-detail/session-detail.component'
-                        ).then((m) => m.SessionDetailModalComponent),
+                          './pages/modals/unit-details/components/unit-show/units-show.component'
+                        ).then((m) => m.UnitsShowComponent),
                     },
-                    outlet: 'sessionDetails',
                   },
                 ],
               },

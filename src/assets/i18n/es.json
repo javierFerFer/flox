@@ -61,6 +61,7 @@
               "SUMMARY": "Resumen"
             },
             "CONTEXT_MENU_ACTIONS": {
+              "SHOW": "Ver la unidad",
               "EDIT": "Editar la unidad",
               "DELETE": "Borrar la unidad"
             },
@@ -145,7 +146,8 @@
           },
           "ACTIONS": {
             "CLOSE": "Descartar cambios",
-            "SAVE": "Guardar cambios"
+            "SAVE": "Guardar cambios",
+            "CLOSE_READ_ONLY": "Cerrar"
           }
         },
         "CREATE_NEW_SESSION": {

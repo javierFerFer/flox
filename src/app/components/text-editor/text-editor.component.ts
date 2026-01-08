@@ -65,6 +65,7 @@ export class TextEditorComponent implements ControlValueAccessor {
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
+
   setDisabledState?(isDisabled: boolean): void {
     this.readOnly = isDisabled;
   }
