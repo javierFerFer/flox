@@ -1,4 +1,11 @@
-import { Component, computed, inject, ViewChild } from '@angular/core';
+import {
+  booleanAttribute,
+  Component,
+  computed,
+  inject,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { ContextMenu, ContextMenuModule } from 'primeng/contextmenu';
 import { TableModule } from 'primeng/table';
 import { UnityStore } from '../../../../../stores/unity/unity.store';
@@ -51,6 +58,9 @@ export class UnitDetailsTableComponent {
 
   @ViewChild('cm') cm!: ContextMenu;
   selectedUuid!: string | undefined;
+
+  @Input({ transform: booleanAttribute })
+  readOnly = false;
 
   items: MenuItem[] | undefined = [
     {

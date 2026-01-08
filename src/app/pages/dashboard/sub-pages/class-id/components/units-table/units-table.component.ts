@@ -43,6 +43,23 @@ export class UnitsTableComponent {
   items: MenuItem[] | undefined = [
     {
       label:
+        'DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.CONTEXT_MENU_ACTIONS.SHOW',
+      icon: 'pi pi-eye',
+      command: () => {
+        this.router.navigate(
+          [
+            {
+              outlets: {
+                unitDetails: ['unit-details', 'show', this.selectedUuid],
+              },
+            },
+          ],
+          { relativeTo: this.route },
+        );
+      },
+    },
+    {
+      label:
         'DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.CONTEXT_MENU_ACTIONS.EDIT',
       icon: 'pi pi-file-edit',
       command: () => {
@@ -50,7 +67,7 @@ export class UnitsTableComponent {
           [
             {
               outlets: {
-                unitDetails: ['unit-details', this.selectedUuid],
+                unitDetails: ['unit-details', 'edit', this.selectedUuid],
               },
             },
           ],

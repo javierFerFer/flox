@@ -1,5 +1,6 @@
 <!-- translate this -->
 <p-dialog
+  #dialog
   [header]="modalTitle"
   [modal]="true"
   [(visible)]="visible"
@@ -10,6 +11,7 @@
   [draggable]="false"
   [resizable]="false"
   [maximizable]="true"
+  (onShow)="autoMaximize ? dialog.maximize() : null"
 >
   <ng-container #spot></ng-container>
 </p-dialog>

@@ -27,6 +27,7 @@ type CustomComponentIntance = {
 })
 export class ModalWrapperComponent implements OnInit {
   visible = true;
+  autoMaximize = false;
 
   componentSpot = viewChild.required('spot', { read: ViewContainerRef });
   modalTitle: string = '';
@@ -42,6 +43,15 @@ export class ModalWrapperComponent implements OnInit {
     const modalTitleKey = this.activatedRoute.snapshot.data[
       'modalTitleKey'
     ] as string;
+
+    const autoMaximize = this.activatedRoute.snapshot.data[
+      'autoMaximize'
+    ] as string;
+
+    if (autoMaximize) {
+      this.autoMaximize = true;
+    }
+
     this.translocoService
       .selectTranslate(modalTitleKey)
       .pipe(takeUntilDestroyed(this.destroyRef))
