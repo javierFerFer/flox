@@ -1,13 +1,12 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { UnityStore } from '../../../../../../stores/unity/unity.store';
 import { TableModule } from 'primeng/table';
-import { ContextMenu, ContextMenuModule } from 'primeng/contextmenu';
+import { ContextMenuModule } from 'primeng/contextmenu';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
-import { UnityModel } from '../../../../../../stores/unity/unity.model';
 import { UnitsService } from '../../../../../../services/unity/unity.service';
 import { take } from 'rxjs';
 import { ClassStore } from '../../../../../../stores/class/class.store';
@@ -30,7 +29,6 @@ import { TextEditorComponent } from '../../../../../../components/text-editor/te
   ],
 })
 export class UnitsTableComponent {
-  @ViewChild('cm') cm!: ContextMenu;
   selectedUuid!: string | undefined;
   private readonly confirmationService = inject(ConfirmationService);
   readonly unitStore = inject(UnityStore);
@@ -82,7 +80,7 @@ export class UnitsTableComponent {
       command: (event: any) => {
         this.confirmationService.confirm({
           key: 'deleteUnitConfirmDialog',
-          target: event.originalEvent.target as EventTarget,
+          target: event.target as EventTarget,
           message:
             'DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.CONFIRM_DELETE_UNIT_DIALOG.MESSAGE',
           header:
@@ -123,10 +121,4 @@ export class UnitsTableComponent {
   ];
   private readonly unityStore = inject(UnityStore);
   readonly unitsList = this.unityStore.units;
-
-  onContextMenu(event: any, selectedUnit: UnityModel) {
-    this.cm.target = event.currentTarget;
-    this.selectedUuid = selectedUnit.uuid;
-    this.cm.show(event);
-  }
 }
