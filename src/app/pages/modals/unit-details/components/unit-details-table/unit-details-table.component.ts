@@ -5,7 +5,6 @@ import {
   inject,
   Input,
 } from '@angular/core';
-import { ContextMenuModule } from 'primeng/contextmenu';
 import { TableModule } from 'primeng/table';
 import { UnityStore } from '../../../../../stores/unity/unity.store';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -26,7 +25,6 @@ import { TextEditorComponent } from '../../../../../components/text-editor/text-
   templateUrl: 'unit-details-table.component.html',
   imports: [
     TableModule,
-    ContextMenuModule,
     TranslocoDirective,
     ButtonModule,
     RippleModule,
