@@ -1,11 +1,6 @@
 <ng-container *transloco="let t">
   @if (unitsList().length) {
-    <p-table
-      [value]="unitsList()"
-      [tableStyle]="{ 'min-width': '50rem' }"
-      [autoLayout]="true"
-      [resizableColumns]="true"
-    >
+    <p-table [value]="unitsList()" [tableStyle]="{ 'min-width': '50rem' }">
       <ng-template #header>
         <tr>
           <th>
