@@ -38,14 +38,13 @@
               )
             }}
           </th>
-          <th></th>
+          @if (!readOnly) {
+            <th></th>
+          }
         </tr>
       </ng-template>
       <ng-template #body let-session>
-        <tr
-          (contextmenu)="readOnly ? null : (selectedUuid = session.uuid)"
-          [class.cursor-pointer]="!readOnly"
-        >
+        <tr (contextmenu)="readOnly ? null : (selectedUuid = session.uuid)">
           <td>{{ session.name }}</td>
           <td>
             <app-text-editor
@@ -75,16 +74,20 @@
               [value]="session.observations"
             ></app-text-editor>
           </td>
-          <td class="w-30">
-            <div class="flex items-center gap-6">
-              @for (item of items; track $index) {
-                <i
-                  [class]="'cursor-pointer ' + item.icon"
-                  (click)="selectedUuid = session.uuid; item?.command(session)"
-                ></i>
-              }
-            </div>
-          </td>
+          @if (!readOnly) {
+            <td class="w-30">
+              <div class="flex items-center gap-6">
+                @for (item of items; track $index) {
+                  <i
+                    [class]="'cursor-pointer ' + item.icon"
+                    (click)="
+                      selectedUuid = session.uuid; item?.command(session)
+                    "
+                  ></i>
+                }
+              </div>
+            </td>
+          }
         </tr>
       </ng-template>
     </p-table>
