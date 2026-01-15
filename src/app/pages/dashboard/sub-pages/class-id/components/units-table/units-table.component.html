@@ -15,10 +15,11 @@
               )
             }}
           </th>
+          <th></th>
         </tr>
       </ng-template>
       <ng-template #body let-unit>
-        <tr (contextmenu)="onContextMenu($event, unit)" class="cursor-pointer">
+        <tr>
           <td>{{ unit.name }}</td>
           <td>
             <app-text-editor
@@ -26,6 +27,16 @@
               readOnly
               [value]="unit.summary"
             ></app-text-editor>
+          </td>
+          <td class="w-30">
+            <div class="flex items-center gap-6">
+              @for (item of items; track $index) {
+                <i
+                  [class]="'cursor-pointer ' + item.icon"
+                  (click)="this.selectedUuid = unit.uuid; item?.command(unit)"
+                ></i>
+              }
+            </div>
           </td>
         </tr>
       </ng-template>

@@ -4,9 +4,8 @@ import {
   computed,
   inject,
   Input,
-  ViewChild,
 } from '@angular/core';
-import { ContextMenu, ContextMenuModule } from 'primeng/contextmenu';
+import { ContextMenuModule } from 'primeng/contextmenu';
 import { TableModule } from 'primeng/table';
 import { UnityStore } from '../../../../../stores/unity/unity.store';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -15,10 +14,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import {
-  SessionModel,
-  UnityModel,
-} from '../../../../../stores/unity/unity.model';
+import { UnityModel } from '../../../../../stores/unity/unity.model';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { UnitsService } from '../../../../../services/unity/unity.service';
 import { take } from 'rxjs';
@@ -56,7 +52,6 @@ export class UnitDetailsTableComponent {
     return this.unityStore.findUnit(this.uuid()?.['id'])!;
   });
 
-  @ViewChild('cm') cm!: ContextMenu;
   selectedUuid!: string | undefined;
 
   @Input({ transform: booleanAttribute })
@@ -87,7 +82,7 @@ export class UnitDetailsTableComponent {
       command: (event: any) => {
         this.confirmationService.confirm({
           key: 'deleteSessionConfirmDialog',
-          target: event.originalEvent.target as EventTarget,
+          target: event.target as EventTarget,
           message:
             'DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.TABLE.CONFIRM_DELETE_SESSION_DIALOG.MESSAGE',
           header:
@@ -147,11 +142,5 @@ export class UnitDetailsTableComponent {
       ],
       { relativeTo: this.route },
     );
-  }
-
-  onContextMenu(event: any, selectedSession: SessionModel) {
-    this.cm.target = event.currentTarget;
-    this.selectedUuid = selectedSession.uuid;
-    this.cm.show(event);
   }
 }
