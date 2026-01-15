@@ -46,14 +46,6 @@
       t("DASHBOARD.RECORDS.COMPONENTS.CLASS.LABEL")
     }}</span>
   }
-  <p-contextmenu #cm [model]="items">
-    <ng-template #item let-item>
-      <a pRipple class="p-contextmenu-item-link flex items-center">
-        <span [class]="item.icon"></span>
-        <span class="ml-2">{{ t(item.label) }}</span>
-      </a>
-    </ng-template>
-  </p-contextmenu>
 
   <!-- dialog component -->
   <p-confirmdialog [key]="'deleteUnitConfirmDialog'">

@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { UnityStore } from '../../../../../../stores/unity/unity.store';
 import { TableModule } from 'primeng/table';
-import { ContextMenuModule } from 'primeng/contextmenu';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ButtonModule } from 'primeng/button';
@@ -20,7 +19,6 @@ import { TextEditorComponent } from '../../../../../../components/text-editor/te
   imports: [
     TranslocoDirective,
     TableModule,
-    ContextMenuModule,
     ConfirmDialogModule,
     ButtonModule,
     RippleModule,
