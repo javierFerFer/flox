@@ -7,6 +7,7 @@ export class NoSuggestDirective implements OnInit {
   private readonly userStore = inject(UserStore);
 
   ngOnInit(): void {
+    console.log('test', this.userStore.user().userConfig?.suggestInputs)
     if (!this.userStore.user().userConfig?.suggestInputs) {
       (this.elementRef.nativeElement as HTMLInputElement).autocomplete = 'off';
     } else {
