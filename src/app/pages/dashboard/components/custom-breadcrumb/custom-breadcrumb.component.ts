@@ -18,7 +18,7 @@ interface CustomMenuItem extends MenuItem {
 @Component({
   selector: 'app-custom-breadcrumb',
   templateUrl: 'custom-breadcrumb.component.html',
-  imports: [BreadcrumbModule, TranslocoModule, RouterModule, CommonModule],
+  imports: [BreadcrumbModule, TranslocoModule, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomBreadCrumbComponent {
