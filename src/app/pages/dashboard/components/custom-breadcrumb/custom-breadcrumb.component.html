@@ -2,7 +2,7 @@
   <p-breadcrumb
     [style]="{ 'background-color': 'transparent', 'padding-left': '0' }"
     class="max-w-full"
-    [model]="navigationElements"
+    [model]="navigationElements()"
     [home]="home"
   >
     <ng-template #item let-item>
@@ -11,7 +11,14 @@
         [routerLink]="item.routerLink"
       >
         <span [class]="'p-breadcrumb-item-icon ' + item.icon"></span>
-        <span class="p-breadcrumb-item-label">{{ t(item.label) }}</span>
+        @if (!!item.property) {
+          <span class="p-breadcrumb-item-label">{{ t(item.label, {
+            variable: item.property.value
+          }) }}</span>
+        }
+        @if (!item.property) {
+          <span class="p-breadcrumb-item-label">{{ t(item.label) }}</span>
+        }
       </a>
     </ng-template>
   </p-breadcrumb>
