@@ -12,7 +12,6 @@ import { ButtonModule } from 'primeng/button';
 import { UnitsService } from '../../../../../services/unity/unity.service';
 import { ToastService } from '../../../../../services/toast/toast.service';
 import { UnitDetailsTableComponent } from '../unit-details-table/unit-details-table.component';
-import { NoSuggestDirective } from '../../../../../directives/no-suggest.directive';
 import { SwapperComponent } from '../../../../../components/swapper-components/swapper.component';
 import { CheckComplexHTMLPipe } from '../../../../../pipes/check-complex-html.pipe';
 import { SanitizeHTMLPipe } from '../../../../../pipes/sanitize-html.pipe';
@@ -31,7 +30,6 @@ import { TextEditorComponent } from '../../../../../components/text-editor/text-
     FloatLabelModule,
     ButtonModule,
     UnitDetailsTableComponent,
-    NoSuggestDirective,
     CheckComplexHTMLPipe,
     SwapperComponent,
     SanitizeHTMLPipe,

@@ -13,6 +13,7 @@ import { ClassService } from '../../../services/class/class.service';
 import { ClassStore } from '../../../stores/class/class.store';
 import { take } from 'rxjs';
 import { ToastService } from '../../../services/toast/toast.service';
+import { NoSuggestDirective } from '../../../directives/no-suggest.directive';
 
 @Component({
   selector: 'app-create-new-class',
@@ -27,6 +28,7 @@ import { ToastService } from '../../../services/toast/toast.service';
     ButtonModule,
     RippleModule,
     InputTextModule,
+    NoSuggestDirective
   ],
   standalone: true,
   templateUrl: 'create-new-class.component.html',
