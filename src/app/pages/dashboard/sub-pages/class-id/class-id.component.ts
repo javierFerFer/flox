@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
@@ -24,7 +24,7 @@ import { UnitsTableComponent } from './components/units-table/units-table.compon
   ],
   providers: [ConfirmationService],
 })
-export class ClassIdComponent {
+export class ClassIdComponent implements OnDestroy {
   readonly classStore = inject(ClassStore);
   readonly classService = inject(ClassService);
   private readonly confirmationService = inject(ConfirmationService);
@@ -34,6 +34,10 @@ export class ClassIdComponent {
     public route: ActivatedRoute,
     private router: Router,
   ) {}
+
+  ngOnDestroy(): void {
+    this.classStore.clearActiveClass();
+  }
 
   navigateToCreateNewUnit() {
     this.router.navigate(
