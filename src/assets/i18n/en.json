@@ -16,6 +16,9 @@
     "CLASSES": {
       "LABEL": "Classes"
     },
+    "SELECTED_CLASS": {
+      "LABEL": "{{variable}}"
+    },
     "SIGN-OUT": {
       "LABEL": "Close session"
     }
