@@ -4,6 +4,8 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 import { definePreset } from '@primeng/themes';
 
+export const DEFAULT_COLOR = '#99c1f1';
+
 export const MyPreset = definePreset(Aura, {
   primitive: {
     borderRadius: {

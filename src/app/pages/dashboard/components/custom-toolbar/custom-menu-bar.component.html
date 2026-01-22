@@ -37,7 +37,8 @@
     </ng-template>
     <ng-template #end>
       <div class="flex cursor-pointer items-center gap-4">
-        <form class="mt-2" [formGroup]="toggleForm">
+        <form class="flex gap-4 mt-2" [formGroup]="toggleForm">
+          <p-colorpicker formControlName="userColorScheme" (onHide)="updateUserColorInterface()" />
           <app-toggle-theme formControlName="theme"></app-toggle-theme>
         </form>
         <div class="flex items-center" (click)="openUserSettings()">

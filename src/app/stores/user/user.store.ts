@@ -48,6 +48,9 @@ export const UserStore = signalStore(
     themeAsBoolean: computed(() =>
       user().userConfig?.toggleTheme === DEFAULT_THEME ? true : false,
     ),
+    userColorScheme: computed(() =>
+      user().userConfig?.userColorScheme,
+    ),
   })),
   withMethods((store, localStorageService = inject(LocalStorageService)) => ({
     updateTheme(theme: UserTheme): void {
