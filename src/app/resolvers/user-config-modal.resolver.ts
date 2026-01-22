@@ -12,6 +12,7 @@ export interface FirebaseUserConfig {
   toggleTheme?: UserTheme;
   lastVersionReadIt?: string;
   suggestInputs?: boolean;
+  userColorScheme?: string;
 }
 
 @Injectable({ providedIn: 'root' })

@@ -1,5 +1,5 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { TranslocoDirective } from '@jsverse/transloco';
@@ -14,6 +14,9 @@ import { UserStore } from '../../../stores/user/user.store';
 import { CloseModal } from '../close-modal-interface';
 import { ModalWrapperComponent } from '../../../components/modal-wrapper/modal-wrapper.component';
 import { DEFAULT_LANGUAGE } from '../../../app.config';
+
+
+
 
 @Component({
   selector: 'app-user-config',

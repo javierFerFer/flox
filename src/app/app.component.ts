@@ -1,8 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { RouterModule } from '@angular/router';
 import { tap } from 'rxjs';
 import { UserStore } from './stores/user/user.store';
+import { DEFAULT_COLOR } from '../../app.theme';
+import { palette, updatePrimaryPalette } from '@primeng/themes';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +25,14 @@ export class AppComponent implements OnInit {
       }
     }),
   );
+
+  constructor() {
+    effect(() => {
+      const currentUserColorScheme = this.userStore.userColorScheme() ?? DEFAULT_COLOR;
+      const paletteOfColors = palette(currentUserColorScheme);
+      updatePrimaryPalette(paletteOfColors);
+    });
+  }
 
   ngOnInit(): void {
     this.theme$.subscribe();
