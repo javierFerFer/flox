@@ -14,7 +14,6 @@ import { UserStore } from '../../../stores/user/user.store';
 import { CloseModal } from '../close-modal-interface';
 import { ModalWrapperComponent } from '../../../components/modal-wrapper/modal-wrapper.component';
 import { DEFAULT_LANGUAGE } from '../../../app.config';
-import { ColorPickerModule } from 'primeng/colorpicker';
 
 
 
@@ -29,7 +28,6 @@ import { ColorPickerModule } from 'primeng/colorpicker';
     SelectModule,
     CardModule,
     UserImageComponent,
-    ColorPickerModule
   ],
   standalone: true,
   templateUrl: 'user-config.component.html',
@@ -42,9 +40,6 @@ export class UserConfigModalComponent implements OnInit, CloseModal {
   private readonly configUserService = inject(ConfigUserService);
   private readonly toastService = inject(ToastService);
   private readonly translocoHelperService = inject(TranslocoHelperService);
-
-  color: string | undefined = '#2a2aa1';
-
 
   userStore = inject(UserStore);
   userConfigForm = this.fb.group({

@@ -27,12 +27,8 @@ export class AppComponent implements OnInit {
   );
 
   constructor() {
-    setInterval(() => {
-      console.log(this.userStore.user().userConfig?.userColorScheme)
-    }, 3000)
     effect(() => {
       const currentUserColorScheme = this.userStore.userColorScheme() ?? DEFAULT_COLOR;
-      console.log('hola?')
       const paletteOfColors = palette(currentUserColorScheme);
       updatePrimaryPalette(paletteOfColors);
     });
