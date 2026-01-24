@@ -1,0 +1,64 @@
+<ng-container *transloco="let t">
+  <form [formGroup]="unitForm" (submit)="saveChanges()">
+    <div class="flex flex-col items-center justify-center">
+      <p-float-label class="w-full" variant="in">
+        <input
+          class="w-full"
+          pInputText
+          id="unitTitle"
+          formControlName="unitTitle"
+          noSuggest
+        />
+        <label for="unitTitle">{{
+          t("DASHBOARD.RECORDS.MODALS.UNIT_DETAILS.FORM.UNIT_NAME")
+        }}</label>
+      </p-float-label>
+      @let isComplexText =
+        this.unitForm.get("summary")?.value || "" | checkComplexHTML;
+      <app-swapper class="mt-6" [isVisible]="!isComplexText">
+        <ng-template #headerContent>{{
+          t("DASHBOARD.RECORDS.MODALS.UNIT_DETAILS.FORM.SUMMARY")
+        }}</ng-template>
+        <ng-template #firstComponent>
+          <p-floatlabel class="w-full" variant="in">
+            <textarea
+              formControlName="summary"
+              [ngModel]="this.unitForm.controls.summary.value | sanitizeHTML"
+              class="w-full"
+              pTextarea
+              [autoResize]="true"
+              noSuggest
+            ></textarea>
+            <label for="in_label">{{
+              t("DASHBOARD.RECORDS.MODALS.UNIT_DETAILS.FORM.SUMMARY")
+            }}</label>
+          </p-floatlabel>
+        </ng-template>
+        <ng-template #secondComponent>
+          <app-text-editor
+            formControlName="summary"
+            class="w-full"
+          ></app-text-editor>
+        </ng-template>
+      </app-swapper>
+    </div>
+    <div class="mt-4 mb-6 flex min-h-48 items-center justify-center">
+      <app-unit-details-table></app-unit-details-table>
+    </div>
+    <div class="flex items-center justify-end gap-4">
+      <p-button
+        (onClick)="close()"
+        [disabled]="unityStore.isLoading()"
+        severity="secondary"
+        [label]="t('DASHBOARD.RECORDS.MODALS.UNIT_DETAILS.ACTIONS.CLOSE')"
+      />
+      <p-button
+        [loading]="unityStore.isLoading()"
+        severity="primary"
+        type="submit"
+        [disabled]="unitForm.invalid || !unitForm.dirty"
+        [label]="t('DASHBOARD.RECORDS.MODALS.UNIT_DETAILS.ACTIONS.SAVE')"
+      />
+    </div>
+  </form>
+</ng-container>

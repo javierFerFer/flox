@@ -1,0 +1,9 @@
+<p-editor
+  [readonly]="readOnly"
+  (onTextChange)="onChange($event.htmlValue)"
+  [(ngModel)]="value"
+  styleClass="h-auto"
+  [modules]="editorModules"
+>
+  <ng-template #header> </ng-template>
+</p-editor>

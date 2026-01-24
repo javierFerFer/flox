@@ -1,0 +1,20 @@
+<div class="flex justify-between" [class.justify-end]="isVisible">
+  @if (!isVisible && headerContent()) {
+    <ng-container *ngTemplateOutlet="headerContent()"></ng-container>
+  }
+  <div class="flex justify-end">
+    <span
+      (click)="setVisibility(!isVisible)"
+      class="p-breadcrumb-item-icon pi pb-2"
+      [ngClass]="isVisible ? 'pi-wrench' : 'pi-pencil'"
+    >
+    </span>
+  </div>
+</div>
+@if (isVisible && contentFirstComponent()) {
+  <ng-container *ngTemplateOutlet="contentFirstComponent()"></ng-container>
+}
+
+@if (!isVisible && contentSecondComponent()) {
+  <ng-container *ngTemplateOutlet="contentSecondComponent()"></ng-container>
+}

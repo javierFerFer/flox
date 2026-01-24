@@ -1,3 +1,258 @@
 {
-  "name": "en"
+  "name": "en",
+  "LOGIN_PAGE": {
+    "TITLE": "Login",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "LOGIN_BUTTON": "Log In",
+    "ERRORS": {
+      "CREDENTIALS_ERROR": {
+        "TITLE": "Error",
+        "MESSAGE": "credentials are not valid!"
+      }
+    }
+  },
+  "NAVIGATION": {
+    "CLASSES": {
+      "LABEL": "Classes"
+    },
+    "SELECTED_CLASS": {
+      "LABEL": "{{variable}}"
+    },
+    "SIGN-OUT": {
+      "LABEL": "Close session"
+    }
+  },
+  "DASHBOARD": {
+    "RECORDS": {
+      "LABEL": "Select or create a class to start!",
+      "COMPONENTS": {
+        "CREATE_NEW_CLASS_BUTTON": "Create a new class",
+        "CLASS": {
+          "LABEL": "Class without units!, try to add a new one",
+          "ACTIONS": {
+            "ADD_NEW_UNIT": "Add new unit",
+            "DELETE_CLASS": "Delete class"
+          },
+          "CONFIRM_DELETE_CLASS_DIALOG": {
+            "HEADER": "Danger Zone",
+            "MESSAGE": "Do you want to delete the selected class? It will delete all the units related with it",
+            "ACTIONS": {
+              "DELETE": "Yes, delete it",
+              "CANCEL": "No, cancel"
+            },
+            "RESULT": {
+              "SUCCESS": {
+                "SUMMARY": "Success",
+                "DETAIL": "Class deleted correctly!"
+              },
+              "ERROR": {
+                "SUMMARY": "Error",
+                "DETAIL": "Class was no deleted"
+              }
+            }
+          },
+          "CONFIRM_READ_NEW_CHANGES_DIALOG": {
+            "HEADER": "Patch notes: {{version}}",
+            "ACTIONS": {
+              "CLOSE": "Close"
+            }
+          },
+          "UNITS_TABLE": {
+            "HEADERS": {
+              "NAME": "Name",
+              "SUMMARY": "Summary"
+            },
+            "CONTEXT_MENU_ACTIONS": {
+              "SHOW": "Show the unit",
+              "EDIT": "Edit the unit",
+              "DELETE": "Delete the unit"
+            },
+            "CONFIRM_DELETE_UNIT_DIALOG": {
+              "HEADER": "Danger Zone",
+              "MESSAGE": "Do you want to delete the selected unit?",
+              "ACTIONS": {
+                "DELETE": "Yes, delete it",
+                "CANCEL": "No, cancel"
+              },
+              "RESULT": {
+                "SUCCESS": {
+                  "SUMMARY": "Success",
+                  "DETAIL": "Unit deleted correctly!"
+                },
+                "ERROR": {
+                  "SUMMARY": "Error",
+                  "DETAIL": "Unit was no deleted"
+                }
+              }
+            }
+          }
+        }
+      },
+      "MODALS": {
+        "CREATE_NEW_CLASS": {
+          "TITLE": "Create new class",
+          "FORM": {
+            "CLASS_NAME": "Name of the class",
+            "MESSAGES": {
+              "CLASS_CREATE_SUCCESS": {
+                "SUMMARY": "Success",
+                "DETAIL": "Class created correctly!"
+              },
+              "CLASS_CREATE_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "Class was no created"
+              }
+            }
+          },
+          "ACTIONS": {
+            "SAVE": "Save changes",
+            "CLOSE": "Discard changes"
+          }
+        },
+        "CREATE_NEW_UNIT": {
+          "TITLE": "Create new unit",
+          "FORM": {
+            "UNIT_NAME": "Name",
+            "SUMMARY": "Summary",
+            "MESSAGES": {
+              "UNIT_CREATE_SUCCESS": {
+                "SUMMARY": "Success",
+                "DETAIL": "Unit added correctly!"
+              },
+              "UNIT_CREATE_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "Unit was no added"
+              }
+            }
+          },
+          "ACTIONS": {
+            "SAVE": "Save changes",
+            "CLOSE": "Discard changes"
+          }
+        },
+        "UNIT_DETAILS": {
+          "TITLE": "Unit info",
+          "FORM": {
+            "UNIT_NAME": "Unit name",
+            "SUMMARY": "Summary",
+            "MESSAGES": {
+              "UNIT_DETAILS_EDIT_SUCCESS": {
+                "SUMMARY": "Success",
+                "DETAIL": "Unit edited correctly"
+              },
+              "UNIT_DETAILS_EDIT_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "Unit was no edited"
+              }
+            }
+          },
+          "ACTIONS": {
+            "CLOSE": "Discard changes",
+            "SAVE": "Save changes",
+            "CLOSE_READ_ONLY": "Close"
+          }
+        },
+        "CREATE_NEW_SESSION": {
+          "TITLE": "Create new session",
+          "FORM": {
+            "SESSION_NAME": "Session name",
+            "SESSION_ACTIVITIES": "Activities",
+            "SESSION_EVALUATION": "Evaluation",
+            "SESSION_ATTENTION_OF_DIVERSITY": "Diversity attention",
+            "SESSION_OBSERVATIONS": "Observations",
+            "MESSAGES": {
+              "NEW_SESSION_CREATE_SUCCESS": {
+                "SUMMARY": "Success",
+                "DETAIL": "Session created correctly!"
+              },
+              "NEW_SESSION_CREATE_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "Session was no created"
+              }
+            }
+          },
+          "TABLE": {
+            "LABELS": {
+              "NO_SESSIONS": "Unit without sessions, try to create a new one"
+            },
+            "HEADERS": {
+              "NAME": "Name",
+              "ACTIVITIES": "Activities",
+              "EVALUATIONS": "Evaluation",
+              "ATTENTION_OF_DIVERSITY": "Diversity attention",
+              "OBSERVATIONS": "Observations"
+            },
+            "ACTIONS": {
+              "ADD_NEW_SESSION": "Add session"
+            }
+          },
+          "ACTIONS": {
+            "CLOSE": "Discard changes",
+            "SAVE": "Save changes"
+          }
+        },
+        "EDIT_NEW_SESSION": {
+          "TITLE": "Edit session",
+          "FORM": {
+            "SESSION_NAME": "Session name",
+            "SESSION_ACTIVITIES": "Activites",
+            "SESSION_EVALUATION": "Evaluation",
+            "SESSION_ATTENTION_OF_DIVERSITY": "Diversity attention",
+            "SESSION_OBSERVATIONS": "Observations",
+            "MESSAGES": {
+              "NEW_SESSION_EDIT_SUCCESS": {
+                "SUMMARY": "Success",
+                "DETAIL": "The session was edited successfully!"
+              },
+              "NEW_SESSION_EDIT_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "The session was not edited successfully"
+              }
+            }
+          },
+          "ACTIONS": {
+            "CLOSE": "Discard changes",
+            "SAVE": "Save changes"
+          }
+        }
+      }
+    }
+  },
+  "SHARED_MODALS": {
+    "USER_CONFIG": {
+      "TITLE": "Edit profile",
+      "SUB_TITLE": "Update your information",
+      "FORM": {
+        "APP_LANGUAGE": "Language to use",
+        "AUTO_SUGGEST_INPUTS": {
+          "LABEL": "Autocomplete",
+          "OPTIONS": {
+            "ON": "Active",
+            "OFF": "Inactive"
+          }
+        },
+        "ACTIONS": {
+          "SAVE": "Save changes"
+        },
+        "MESSAGES": {
+          "USER_EDIT_SUCCESS": {
+            "SUMMARY": "Success",
+            "DETAIL": "User edited correctly!"
+          },
+          "USER_EDIT_UNSUCCESS": {
+            "SUMMARY": "Error",
+            "DETAIL": "Error trying to update the user configuration"
+          }
+        }
+      },
+      "ACTIONS": {
+        "RESET_COLOR_SCHEME": "Reset color scheme"
+      }
+    }
+  },
+  "LANGUAGES": {
+    "EN": "English",
+    "ES": "Spanish"
+  }
 }

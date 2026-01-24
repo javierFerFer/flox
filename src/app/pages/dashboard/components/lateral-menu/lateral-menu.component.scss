@@ -1,0 +1,48 @@
+:host {
+  ::ng-deep {
+    p-menu {
+      .p-menu {
+        min-width: 4rem;
+
+        ul {
+          padding: 2.5rem 0 0 0;
+          height: 100%;
+          li {
+            .p-menu-item-content {
+              a {
+                padding-right: 5px;
+
+                span {
+                  font-size: 1.5rem;
+                  padding-left: 5px;
+                }
+              }
+            }
+          }
+
+          li:not(:first-child) {
+            padding-top: 1.5rem;
+          }
+
+          li:last-child {
+            margin-top: auto;
+            padding: 0;
+
+            div {
+              a {
+                span:first-child {
+                  color: var(--p-red-500) !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // fix issue related with navigation elements
+    .p-menu-item-link-active {
+      background-color: var(--p-navigation-item-focus-background);
+    }
+  }
+}

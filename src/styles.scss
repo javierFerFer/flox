@@ -2,7 +2,9 @@
 @import "primeicons/primeicons.css";
 @plugin "tailwindcss-primeui";
 
-* {
-   padding: 0;
-   margin: 0; 
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  background: var(--p-background);
 }

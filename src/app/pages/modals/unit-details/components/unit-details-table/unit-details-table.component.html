@@ -1,0 +1,177 @@
+<ng-container *transloco="let t">
+  @if (selectedUnit().sessions.length) {
+    <p-table [value]="selectedUnit().sessions">
+      <ng-template #header>
+        <tr>
+          <th>
+            {{
+              t(
+                "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.TABLE.HEADERS.NAME"
+              )
+            }}
+          </th>
+          <th>
+            {{
+              t(
+                "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.TABLE.HEADERS.ACTIVITIES"
+              )
+            }}
+          </th>
+          <th>
+            {{
+              t(
+                "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.TABLE.HEADERS.EVALUATIONS"
+              )
+            }}
+          </th>
+          <th>
+            {{
+              t(
+                "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.TABLE.HEADERS.ATTENTION_OF_DIVERSITY"
+              )
+            }}
+          </th>
+          <th>
+            {{
+              t(
+                "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.TABLE.HEADERS.OBSERVATIONS"
+              )
+            }}
+          </th>
+          @if (!readOnly) {
+            <th></th>
+          }
+        </tr>
+      </ng-template>
+      <ng-template #body let-session>
+        <tr (contextmenu)="readOnly ? null : (selectedUuid = session.uuid)">
+          <td>{{ session.name }}</td>
+          <td>
+            <app-text-editor
+              [editorModules]="{ toolbar: false }"
+              readOnly
+              [value]="session.activities"
+            ></app-text-editor>
+          </td>
+          <td>
+            <app-text-editor
+              [editorModules]="{ toolbar: false }"
+              readOnly
+              [value]="session.evaluation"
+            ></app-text-editor>
+          </td>
+          <td>
+            <app-text-editor
+              [editorModules]="{ toolbar: false }"
+              readOnly
+              [value]="session.attentionOfDiversity"
+            ></app-text-editor>
+          </td>
+          <td>
+            <app-text-editor
+              [editorModules]="{ toolbar: false }"
+              readOnly
+              [value]="session.observations"
+            ></app-text-editor>
+          </td>
+          @if (!readOnly) {
+            <td class="w-30">
+              <div class="flex items-center gap-6">
+                @for (item of items; track $index) {
+                  <i
+                    [class]="'cursor-pointer ' + item.icon"
+                    (click)="
+                      selectedUuid = session.uuid; item?.command(session)
+                    "
+                  ></i>
+                }
+              </div>
+            </td>
+          }
+        </tr>
+      </ng-template>
+    </p-table>
+    @if (!readOnly) {
+      <div class="mt-4 flex justify-end">
+        <p-button
+          class="mt-4"
+          severity="info"
+          variant="outlined"
+          (onClick)="addNewSession()"
+        >
+          {{
+            t(
+              "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.TABLE.ACTIONS.ADD_NEW_SESSION"
+            )
+          }}
+        </p-button>
+      </div>
+    }
+  } @else {
+    <div class="flex flex-col items-center justify-center">
+      <span>
+        {{
+          t(
+            "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.TABLE.LABELS.NO_SESSIONS"
+          )
+        }}
+      </span>
+      @if (!readOnly) {
+        <p-button
+          class="mt-4"
+          severity="info"
+          variant="outlined"
+          (onClick)="addNewSession()"
+        >
+          {{
+            t(
+              "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.TABLE.ACTIONS.ADD_NEW_SESSION"
+            )
+          }}
+        </p-button>
+      }
+    </div>
+  }
+
+  <!-- dialog component -->
+  <p-confirmdialog [key]="'deleteSessionConfirmDialog'">
+    <ng-template
+      #headless
+      let-message
+      let-rejectButtonProps
+      let-acceptLabel
+      let-rejectLabel
+      let-onAccept="onAccept"
+      let-onReject="onReject"
+    >
+      <div class="flex flex-col items-center rounded p-8">
+        <div
+          [style.background]="'var(--p-button-danger-background)'"
+          class="text-primary-contrast -mt-20 inline-flex h-24 w-24 rotate-180 items-center justify-center rounded-full"
+        >
+          <i class="pi pi-info !text-5xl"></i>
+        </div>
+        <span class="mt-6 mb-2 block text-2xl font-bold">{{
+          t(message.header)
+        }}</span>
+        <p class="mb-0">{{ t(message.message) }}</p>
+        <div class="mt-6 flex items-center gap-2">
+          <p-button
+            [label]="t(rejectLabel.rejectLabel)"
+            (onClick)="onReject()"
+            styleClass="w-32"
+          ></p-button>
+          <p-button
+            [loading]="unityStore.isLoading()"
+            [label]="t(acceptLabel.acceptLabel)"
+            severity="danger"
+            (onClick)="onAccept()"
+            styleClass="w-32"
+          ></p-button>
+        </div>
+      </div>
+    </ng-template>
+  </p-confirmdialog>
+</ng-container>
+<router-outlet name="createUnitSession"></router-outlet>
+<router-outlet name="sessionDetails"></router-outlet>

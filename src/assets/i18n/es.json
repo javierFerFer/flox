@@ -1,3 +1,276 @@
 {
-  "name": "es"
+  "name": "es",
+  "LOGIN_PAGE": {
+    "TITLE": "Login",
+    "USERNAME": "Usuario",
+    "PASSWORD": "Contraseña",
+    "LOGIN_BUTTON": "Iniciar sesión",
+    "ERRORS": {
+      "CREDENTIALS_ERROR": {
+        "TITLE": "Error",
+        "MESSAGE": "las credenciales no son validas!"
+      }
+    }
+  },
+  "NAVIGATION": {
+    "CLASSES": {
+      "LABEL": "Clases"
+    },
+    "SELECTED_CLASS": {
+      "LABEL": "{{variable}}"
+    },
+    "SIGN-OUT": {
+      "LABEL": "Cerrar sesión"
+    }
+  },
+  "DASHBOARD": {
+    "RECORDS": {
+      "LABEL": "Selecciona o crea una clase para empezar!",
+      "COMPONENTS": {
+        "CREATE_NEW_CLASS_BUTTON": "Crear una nueva clase",
+        "CLASS": {
+          "LABEL": "Clase sin unidades! Prueba a agregar una",
+          "ACTIONS": {
+            "ADD_NEW_UNIT": "Agregar nueva unidad",
+            "DELETE_CLASS": "Borrar clase"
+          },
+          "CONFIRM_DELETE_CLASS_DIALOG": {
+            "HEADER": "Peligro",
+            "MESSAGE": " ¿Quieres borrar la clase seleccionada? Tambien se borraran todos las unidades asociadas",
+            "ACTIONS": {
+              "DELETE": "Si, borrar",
+              "CANCEL": "No, cancela"
+            },
+            "RESULT": {
+              "SUCCESS": {
+                "SUMMARY": "Éxito",
+                "DETAIL": "La clase fue borrada exitosamente!"
+              },
+              "ERROR": {
+                "SUMMARY": "Error",
+                "DETAIL": "No se pudo borrar la clase"
+              }
+            }
+          },
+          "CONFIRM_READ_NEW_CHANGES_DIALOG": {
+            "HEADER": "Notas de la versión: {{version}}",
+            "ACTIONS": {
+              "CLOSE": "Cerrar"
+            }
+          },
+          "UNITS_TABLE": {
+            "HEADERS": {
+              "NAME": "Nombre",
+              "SUMMARY": "Resumen"
+            },
+            "CONTEXT_MENU_ACTIONS": {
+              "SHOW": "Ver la unidad",
+              "EDIT": "Editar la unidad",
+              "DELETE": "Borrar la unidad"
+            },
+            "CONFIRM_DELETE_UNIT_DIALOG": {
+              "HEADER": "Peligro",
+              "MESSAGE": " ¿Quieres borrar la unidad seleccionada?",
+              "ACTIONS": {
+                "DELETE": "Si, borrar",
+                "CANCEL": "No, cancela"
+              },
+              "RESULT": {
+                "SUCCESS": {
+                  "SUMMARY": "Éxito",
+                  "DETAIL": "Unidad borrada correctamente!"
+                },
+                "ERROR": {
+                  "SUMMARY": "Error",
+                  "DETAIL": "La unidad no fue borrada"
+                }
+              }
+            }
+          }
+        }
+      },
+      "MODALS": {
+        "CREATE_NEW_CLASS": {
+          "TITLE": "Crear nueva clase",
+          "FORM": {
+            "CLASS_NAME": "Nombre de la clase",
+            "MESSAGES": {
+              "CLASS_CREATE_SUCCESS": {
+                "SUMMARY": "Éxito",
+                "DETAIL": "Clase creada correctamente!"
+              },
+              "CLASS_CREATE_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "No se pudo crear la clase"
+              }
+            }
+          },
+          "ACTIONS": {
+            "SAVE": "Guardar cambios",
+            "CLOSE": "Descartar cambios"
+          }
+        },
+        "CREATE_NEW_UNIT": {
+          "TITLE": "Crear nueva unidad",
+          "FORM": {
+            "UNIT_NAME": "Nombre",
+            "SUMMARY": "Resumen",
+            "MESSAGES": {
+              "UNIT_CREATE_SUCCESS": {
+                "SUMMARY": "Éxito",
+                "DETAIL": "Unidad agregada correctamente!"
+              },
+              "UNIT_CREATE_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "La unidad no fue agregada"
+              }
+            }
+          },
+          "ACTIONS": {
+            "SAVE": "Guardar cambios",
+            "CLOSE": "Descartar cambios"
+          }
+        },
+        "UNIT_DETAILS": {
+          "TITLE": "Datos de la unidad",
+          "FORM": {
+            "UNIT_NAME": "Nombre de la unidad",
+            "SUMMARY": "Resumen",
+            "MESSAGES": {
+              "UNIT_DETAILS_EDIT_SUCCESS": {
+                "SUMMARY": "Éxito",
+                "DETAIL": "Unidad editada correctamente"
+              },
+              "UNIT_DETAILS_EDIT_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "No se pudo editar la unidad"
+              }
+            }
+          },
+          "ACTIONS": {
+            "CLOSE": "Descartar cambios",
+            "SAVE": "Guardar cambios",
+            "CLOSE_READ_ONLY": "Cerrar"
+          }
+        },
+        "CREATE_NEW_SESSION": {
+          "TITLE": "Crear nueva session",
+          "FORM": {
+            "SESSION_NAME": "Nombre de la sesion",
+            "SESSION_ACTIVITIES": "Actividades",
+            "SESSION_EVALUATION": "Evaluación",
+            "SESSION_ATTENTION_OF_DIVERSITY": "Atencion a la diversidad",
+            "SESSION_OBSERVATIONS": "Observaciones",
+            "MESSAGES": {
+              "NEW_SESSION_CREATE_SUCCESS": {
+                "SUMMARY": "Éxito",
+                "DETAIL": "La sesion fue creada exitosamente!"
+              },
+              "NEW_SESSION_CREATE_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "La sesion no fue creada"
+              }
+            }
+          },
+          "TABLE": {
+            "LABELS": {
+              "NO_SESSIONS": "Unidades sin sesiones, prueba a crear una"
+            },
+            "HEADERS": {
+              "NAME": "Nombre",
+              "ACTIVITIES": "Actividades",
+              "EVALUATIONS": "Evaluación",
+              "ATTENTION_OF_DIVERSITY": "Atencion a la diversidad",
+              "OBSERVATIONS": "Observaciones"
+            },
+            "CONTEXT_MENU_ACTIONS": {
+              "EDIT": "Editar la sesion",
+              "DELETE": "Borrar la session"
+            },
+            "CONFIRM_DELETE_SESSION_DIALOG": {
+              "MESSAGE": " ¿Quieres borrar la sesion seleccionada?",
+              "HEADER": "Peligro",
+              "RESULT": {
+                "SUCCESS": {
+                  "SUMMARY": "Éxito",
+                  "DETAIL": "La session fue borrada exitosamente!"
+                },
+                "ERROR": {
+                  "SUMMARY": "Éxito",
+                  "DETAIL": "La session fue borrada exitosamente!"
+                }
+              }
+            },
+            "ACTIONS": {
+              "ADD_NEW_SESSION": "Agregar session"
+            }
+          },
+          "ACTIONS": {
+            "CLOSE": "Descartar cambios",
+            "SAVE": "Guardar cambios"
+          }
+        },
+        "EDIT_NEW_SESSION": {
+          "TITLE": "Editar session",
+          "FORM": {
+            "SESSION_NAME": "Nombre de la sesion",
+            "SESSION_ACTIVITIES": "Actividades",
+            "SESSION_EVALUATION": "Evaluación",
+            "SESSION_ATTENTION_OF_DIVERSITY": "Atencion a la diversidad",
+            "SESSION_OBSERVATIONS": "Observaciones",
+            "MESSAGES": {
+              "NEW_SESSION_EDIT_SUCCESS": {
+                "SUMMARY": "Éxito",
+                "DETAIL": "La sesion fue editada exitosamente!"
+              },
+              "NEW_SESSION_EDIT_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "La sesion no fue editada"
+              }
+            }
+          },
+          "ACTIONS": {
+            "CLOSE": "Descartar cambios",
+            "SAVE": "Guardar cambios"
+          }
+        }
+      }
+    }
+  },
+  "SHARED_MODALS": {
+    "USER_CONFIG": {
+      "TITLE": "Editar perfil",
+      "SUB_TITLE": "Actualiza tu información",
+      "FORM": {
+        "APP_LANGUAGE": "Idioma de la interfaz",
+        "AUTO_SUGGEST_INPUTS": {
+          "LABEL": "Autocompletar",
+          "OPTIONS": {
+            "ON": "Activado",
+            "OFF": "Desactivado"
+          }
+        },
+        "ACTIONS": {
+          "SAVE": "Guardar cambios"
+        },
+        "MESSAGES": {
+          "USER_EDIT_SUCCESS": {
+            "SUMMARY": "Éxito",
+            "DETAIL": "Usuario editado correctamente!"
+          },
+          "USER_EDIT_UNSUCCESS": {
+            "SUMMARY": "Error",
+            "DETAIL": "Error intentando actualizar la configuración del usuario"
+          }
+        }
+      },
+      "ACTIONS": {
+        "RESET_COLOR_SCHEME": "Restablecer color por defecto"
+      }
+    }
+  },
+  "LANGUAGES": {
+    "EN": "Ingles",
+    "ES": "Español"
+  }
 }

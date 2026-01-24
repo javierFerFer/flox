@@ -1,0 +1,59 @@
+<ng-container *transloco="let t">
+  <p-menubar [breakpoint]="'64rem'" class="border-none" [model]="model">
+    <ng-template #item let-item let-root="root">
+      <a
+        [routerLink]="item.routerLink"
+        [routerLinkActive]="['p-menubar-item-link-active']"
+        pRipple
+        class="p-menubar-item-link items-center lg:hidden!"
+      >
+        <i
+          [style.color]="
+            item.icon === 'pi pi-sign-out' ? 'var(--p-red-500)' : ''
+          "
+          [class]="item.icon"
+        ></i>
+        <span
+          [style.color]="
+            item.icon === 'pi pi-sign-out' ? 'var(--p-red-500)' : ''
+          "
+          >{{ t(item.label) }}</span
+        >
+        @if (item.shortcut) {
+          <span
+            class="border-surface bg-emphasis text-muted-color ml-auto rounded border p-1 text-xs"
+            >{{ item.shortcut }}</span
+          >
+        }
+        @if (item.items) {
+          <i
+            [ngClass]="[
+              'pi ml-auto',
+              root ? 'pi-angle-down' : 'pi-angle-right',
+            ]"
+          ></i>
+        }
+      </a>
+    </ng-template>
+    <ng-template #end>
+      <div class="flex cursor-pointer items-center gap-4">
+        <form class="flex gap-4 mt-2" [formGroup]="toggleForm">
+          <p-colorpicker formControlName="userColorScheme" (onHide)="updateUserColorInterface()" />
+          <app-toggle-theme formControlName="theme"></app-toggle-theme>
+        </form>
+        <div class="flex items-center" (click)="openUserSettings()">
+          <p-avatar
+            (click)="openUserSettings()"
+            shape="circle"
+            [image]="
+              userStore.user().userConfig?.photo
+                ? userStore.user().userConfig?.photo
+                : './assets/images/default_user.png'
+            "
+            [style]="{ width: '32px', height: '32px' }"
+          />
+        </div>
+      </div>
+    </ng-template>
+  </p-menubar>
+</ng-container>

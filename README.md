@@ -1,59 +1,153 @@
 # Flox
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.10.
+Flox is a modern web application for educational planning and class
+management built with Angular. It helps educators organize classes,
+units, and sessions with an intuitive interface and powerful planning
+features.
 
-## Development server
+## Overview
 
-To start a local development server, run:
+Flox allows teachers to:
+
+- Create and manage multiple classes
+- Organize units within each class
+- Plan detailed sessions with activities, evaluations,
+  diversity-attention strategies, and observations
+- Manage user preferences such as language and theme
+- Sync data in real time using Firebase
+
+## Features
+
+- **Authentication System**: Secure login with Firebase
+  Authentication
+- **Class Management**: Create, edit, and delete classes
+- **Unit Organization**: Add and manage units with names and
+  summaries
+- **Session Planning**: Detailed planning for each session
+- **Multi-language Support**: English and Spanish
+- **Theme Support**: Light and dark mode
+- **Color Scheme Support**: Option to change the primary color of the interface
+- **Real-time Sync**: Powered by Firebase Firestore
+
+## Tech Stack
+
+- **Framework**: Angular 19
+- **State Management**: NgRx Signals & Toolkit
+- **Backend**: Firebase Authentication & Firestore
+- **UI Framework**: PrimeNG 19
+- **Styling**: Tailwind CSS 4
+- **Internationalization**: Transloco
+- **Language**: TypeScript 5.7
+
+## Prerequisites
+
+- Node.js (LTS recommended)
+- npm or yarn
+- Angular CLI 19
+
+## Installation
+
+1.  Clone the repository:
 
 ```bash
-ng serve
+git clone https://github.com/javierFerFer/flox.git
+cd flox
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+2.  Install dependencies:
 
 ```bash
-ng generate component component-name
+npm install --legacy-peer-deps
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Firebase Configuration
+
+The application uses Firebase for both authentication and data storage.
+A default Firebase configuration is provided in the project.
+
+> **Important:**
+> Replace the default Firebase configuration with your own credentials
+> when deploying to production.
+> Using environment-specific configuration files is strongly
+> recommended.
+
+## Development
+
+### Start the Development Server
 
 ```bash
-ng generate --help
+npm start
 ```
 
-## Building
+Navigate to **http://localhost:4200/**.
+The app will reload automatically when you make changes.
 
-To build the project run:
+### Build the Project
+
+Development build:
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Production build:
 
 ```bash
-ng test
+npm run build:prod
 ```
 
-## Running end-to-end tests
+Artifacts will be generated in the `dist/` folder.
 
-For end-to-end (e2e) testing, run:
+### Run Tests
 
 ```bash
-ng e2e
+npm test
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Project Structure
 
-## Additional Resources
+    src/
+    ├── app/
+    │   ├── components/      # Reusable UI components
+    │   ├── guards/          # Route guards
+    │   ├── pages/           # Major application pages
+    │   │   ├── dashboard/   # Dashboard & records management
+    │   │   ├── login/       # Login page
+    │   │   └── modals/      # Modal components
+    │   ├── resolvers/       # Route data resolvers
+    │   ├── services/        # Business logic & APIs
+    │   └── stores/          # NgRx Signal stores
+    ├── assets/
+    │   └── i18n/            # Translation files
+    └── ...
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Available Scripts
+
+- `npm start` --- Start development server
+- `npm run build` --- Build for development
+- `npm run build:prod` --- Production build (with base href for
+  deployment)
+- `npm run watch` --- Build in watch mode
+- `npm test` --- Run unit tests
+
+## Internationalization
+
+Flox supports multiple languages using Transloco.
+
+Available languages:
+
+- English (`en`)
+- Spanish (`es`)
+
+Translation files are stored in:
+
+    src/assets/i18n/
+
+## License
+
+This project is licensed under the **GNU General Public License v3.0**.
+See the `LICENSE` file for more details.
+
+## Version
+
+Current version: **1.0.0**

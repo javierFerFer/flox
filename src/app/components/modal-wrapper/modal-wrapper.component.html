@@ -1,0 +1,17 @@
+<!-- translate this -->
+<p-dialog
+  #dialog
+  [header]="modalTitle"
+  [modal]="true"
+  [(visible)]="visible"
+  [closeOnEscape]="true"
+  (onHide)="close()"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [style]="{ width: '50vw', transform: 'none' }"
+  [draggable]="false"
+  [resizable]="false"
+  [maximizable]="true"
+  (onShow)="autoMaximize ? dialog.maximize() : null"
+>
+  <ng-container #spot></ng-container>
+</p-dialog>

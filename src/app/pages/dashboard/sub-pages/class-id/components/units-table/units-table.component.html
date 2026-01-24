@@ -1,0 +1,90 @@
+<ng-container *transloco="let t">
+  @if (unitsList().length) {
+    <p-table [value]="unitsList()" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template #header>
+        <tr>
+          <th>
+            {{
+              t("DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.HEADERS.NAME")
+            }}
+          </th>
+          <th>
+            {{
+              t(
+                "DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.HEADERS.SUMMARY"
+              )
+            }}
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-unit>
+        <tr>
+          <td>{{ unit.name }}</td>
+          <td>
+            <app-text-editor
+              [editorModules]="{ toolbar: false }"
+              readOnly
+              [value]="unit.summary"
+            ></app-text-editor>
+          </td>
+          <td class="w-30">
+            <div class="flex items-center gap-6">
+              @for (item of items; track $index) {
+                <i
+                  [class]="'cursor-pointer ' + item.icon"
+                  (click)="this.selectedUuid = unit.uuid; item?.command(unit)"
+                ></i>
+              }
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  } @else {
+    <span class="items-center text-xl">{{
+      t("DASHBOARD.RECORDS.COMPONENTS.CLASS.LABEL")
+    }}</span>
+  }
+
+  <!-- dialog component -->
+  <p-confirmdialog [key]="'deleteUnitConfirmDialog'">
+    <ng-template
+      #headless
+      let-message
+      let-rejectButtonProps
+      let-acceptLabel
+      let-rejectLabel
+      let-onAccept="onAccept"
+      let-onReject="onReject"
+    >
+      <div class="flex flex-col items-center rounded p-8">
+        <div
+          [style.background]="'var(--p-button-danger-background)'"
+          class="text-primary-contrast -mt-20 inline-flex h-24 w-24 rotate-180 items-center justify-center rounded-full"
+        >
+          <i class="pi pi-info !text-5xl"></i>
+        </div>
+        <span class="mt-6 mb-2 block text-2xl font-bold">{{
+          t(message.header)
+        }}</span>
+        <p class="mb-0">{{ t(message.message) }}</p>
+        <div class="mt-6 flex items-center gap-2">
+          <p-button
+            [label]="t(rejectLabel.rejectLabel)"
+            (onClick)="onReject()"
+            styleClass="w-32"
+          ></p-button>
+          <p-button
+            [loading]="unitStore.isLoading()"
+            [label]="t(acceptLabel.acceptLabel)"
+            severity="danger"
+            (onClick)="onAccept()"
+            styleClass="w-32"
+          ></p-button>
+        </div>
+      </div>
+    </ng-template>
+  </p-confirmdialog>
+</ng-container>
+<router-outlet name="unitDetails"></router-outlet>
