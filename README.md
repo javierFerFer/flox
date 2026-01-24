@@ -9,53 +9,54 @@ features.
 
 Flox allows teachers to:
 
--   Create and manage multiple classes
--   Organize units within each class
--   Plan detailed sessions with activities, evaluations,
-    diversity-attention strategies, and observations
--   Manage user preferences such as language and theme
--   Sync data in real time using Firebase
+- Create and manage multiple classes
+- Organize units within each class
+- Plan detailed sessions with activities, evaluations,
+  diversity-attention strategies, and observations
+- Manage user preferences such as language and theme
+- Sync data in real time using Firebase
 
 ## Features
 
--   **Authentication System**: Secure login with Firebase
-    Authentication
--   **Class Management**: Create, edit, and delete classes
--   **Unit Organization**: Add and manage units with names and
-    summaries
--   **Session Planning**: Detailed planning for each session
--   **Multi-language Support**: English and Spanish
--   **Theme Support**: Light and dark mode
--   **Real-time Sync**: Powered by Firebase Firestore
+- **Authentication System**: Secure login with Firebase
+  Authentication
+- **Class Management**: Create, edit, and delete classes
+- **Unit Organization**: Add and manage units with names and
+  summaries
+- **Session Planning**: Detailed planning for each session
+- **Multi-language Support**: English and Spanish
+- **Theme Support**: Light and dark mode
+- **Color Scheme Support**: Option to change the primary color of the interface
+- **Real-time Sync**: Powered by Firebase Firestore
 
 ## Tech Stack
 
--   **Framework**: Angular 19
--   **State Management**: NgRx Signals & Toolkit
--   **Backend**: Firebase Authentication & Firestore
--   **UI Framework**: PrimeNG 19
--   **Styling**: Tailwind CSS 4
--   **Internationalization**: Transloco
--   **Language**: TypeScript 5.7
+- **Framework**: Angular 19
+- **State Management**: NgRx Signals & Toolkit
+- **Backend**: Firebase Authentication & Firestore
+- **UI Framework**: PrimeNG 19
+- **Styling**: Tailwind CSS 4
+- **Internationalization**: Transloco
+- **Language**: TypeScript 5.7
 
 ## Prerequisites
 
--   Node.js (LTS recommended)
--   npm or yarn
--   Angular CLI 19
+- Node.js (LTS recommended)
+- npm or yarn
+- Angular CLI 19
 
 ## Installation
 
 1.  Clone the repository:
 
-``` bash
+```bash
 git clone https://github.com/javierFerFer/flox.git
 cd flox
 ```
 
 2.  Install dependencies:
 
-``` bash
+```bash
 npm install --legacy-peer-deps
 ```
 
@@ -74,7 +75,7 @@ A default Firebase configuration is provided in the project.
 
 ### Start the Development Server
 
-``` bash
+```bash
 npm start
 ```
 
@@ -85,13 +86,13 @@ The app will reload automatically when you make changes.
 
 Development build:
 
-``` bash
+```bash
 npm run build
 ```
 
 Production build:
 
-``` bash
+```bash
 npm run build:prod
 ```
 
@@ -99,7 +100,7 @@ Artifacts will be generated in the `dist/` folder.
 
 ### Run Tests
 
-``` bash
+```bash
 npm test
 ```
 
@@ -122,12 +123,12 @@ npm test
 
 ## Available Scripts
 
--   `npm start` --- Start development server
--   `npm run build` --- Build for development
--   `npm run build:prod` --- Production build (with base href for
-    deployment)
--   `npm run watch` --- Build in watch mode
--   `npm test` --- Run unit tests
+- `npm start` --- Start development server
+- `npm run build` --- Build for development
+- `npm run build:prod` --- Production build (with base href for
+  deployment)
+- `npm run watch` --- Build in watch mode
+- `npm test` --- Run unit tests
 
 ## Internationalization
 
@@ -135,8 +136,8 @@ Flox supports multiple languages using Transloco.
 
 Available languages:
 
--   English (`en`)
--   Spanish (`es`)
+- English (`en`)
+- Spanish (`es`)
 
 Translation files are stored in:
 
@@ -149,4 +150,4 @@ See the `LICENSE` file for more details.
 
 ## Version
 
-Current version: **0.28.0**
+Current version: **1.0.0**
