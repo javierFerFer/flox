@@ -1,5 +1,10 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { TranslocoDirective } from '@jsverse/transloco';
@@ -14,9 +19,7 @@ import { UserStore } from '../../../stores/user/user.store';
 import { CloseModal } from '../close-modal-interface';
 import { ModalWrapperComponent } from '../../../components/modal-wrapper/modal-wrapper.component';
 import { DEFAULT_LANGUAGE } from '../../../app.config';
-
-
-
+import { DEFAULT_COLOR } from '../../../../../app.theme';
 
 @Component({
   selector: 'app-user-config',
@@ -42,6 +45,9 @@ export class UserConfigModalComponent implements OnInit, CloseModal {
   private readonly translocoHelperService = inject(TranslocoHelperService);
 
   userStore = inject(UserStore);
+  protected readonly userColorScheme = this.userStore.userColorScheme;
+  protected readonly DEFAULT_COLOR = DEFAULT_COLOR;
+
   userConfigForm = this.fb.group({
     photo: [this.userStore.user().userConfig?.photo],
     appLanguage: [
@@ -77,6 +83,16 @@ export class UserConfigModalComponent implements OnInit, CloseModal {
       });
   }
 
+  resetDefaultColorScheme() {
+    this.configUserService
+      .updateUserConfig({
+        ...this.userStore.user().userConfig,
+        userColorScheme: DEFAULT_COLOR,
+      })
+      .pipe(take(1))
+      .subscribe();
+  }
+
   updateUserConfig() {
     const { appLanguage, photo, autoComplete } =
       this.userConfigForm.getRawValue();
@@ -87,6 +103,7 @@ export class UserConfigModalComponent implements OnInit, CloseModal {
           photo: (photo as any) || '',
           toggleTheme: this.userStore.user().userConfig?.toggleTheme,
           suggestInputs: autoComplete || false,
+          userColorScheme: this.userStore.userColorScheme(),
         })
         .pipe(take(1), delay(100))
         .subscribe(() => {
