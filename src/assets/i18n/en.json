@@ -245,6 +245,9 @@
             "DETAIL": "Error trying to update the user configuration"
           }
         }
+      },
+      "ACTIONS": {
+        "RESET_COLOR_SCHEME": "Reset color scheme"
       }
     }
   },

@@ -263,6 +263,9 @@
             "DETAIL": "Error intentando actualizar la configuración del usuario"
           }
         }
+      },
+      "ACTIONS": {
+        "RESET_COLOR_SCHEME": "Restablecer color por defecto"
       }
     }
   },

@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, effect, inject, OnInit } from '@angular/core';
 
 import { DEFAULT_THEME, UserStore } from '../../../../stores/user/user.store';
 import { MenubarModule } from 'primeng/menubar';
@@ -30,7 +30,7 @@ import { switchMap, take } from 'rxjs';
     ToggleThemeComponent,
     ReactiveFormsModule,
     FormsModule,
-    ColorPickerModule
+    ColorPickerModule,
   ],
   standalone: true,
   templateUrl: 'custom-menu-bar.component.html',
@@ -46,37 +46,48 @@ export class CustomMenuBarComponent implements OnInit {
 
   toggleForm = this.fb.group({
     theme: [this.userStore.user().userConfig?.toggleTheme],
-    userColorScheme: [this.userStore.user().userConfig?.userColorScheme ?? DEFAULT_COLOR]
+    userColorScheme: [
+      this.userStore.user().userConfig?.userColorScheme ?? DEFAULT_COLOR,
+    ],
   });
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    effect(() => {
+      const colorScheme = this.userStore.userColorScheme();
+      this.toggleForm.patchValue(
+        {
+          ...this.toggleForm.getRawValue(),
+          userColorScheme: colorScheme,
+        },
+        { emitEvent: false, onlySelf: true },
+      );
+    });
+  }
 
   ngOnInit(): void {
     this.toggleForm.controls.theme.valueChanges
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         switchMap((theme) => {
-          return this.configUserService.updateUserConfig({
-            ...this.userStore.user().userConfig,
-            toggleTheme: theme ?? DEFAULT_THEME,
-          })
-          .pipe(
-            take(1)
-          );
-        })
+          return this.configUserService
+            .updateUserConfig({
+              ...this.userStore.user().userConfig,
+              toggleTheme: theme ?? DEFAULT_THEME,
+            })
+            .pipe(take(1));
+        }),
       )
       .subscribe();
   }
 
   updateUserColorInterface() {
-    this.configUserService.updateUserConfig({
-      ...this.userStore.user().userConfig,
-      userColorScheme: this.toggleForm.controls.userColorScheme.value!
-    })
-    .pipe(
-      take(1)
-    )
-    .subscribe();
+    this.configUserService
+      .updateUserConfig({
+        ...this.userStore.user().userConfig,
+        userColorScheme: this.toggleForm.controls.userColorScheme.value!,
+      })
+      .pipe(take(1))
+      .subscribe();
   }
 
   openUserSettings() {

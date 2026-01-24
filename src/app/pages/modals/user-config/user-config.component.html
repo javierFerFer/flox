@@ -59,6 +59,13 @@
     </div>
     <div class="mt-16 flex items-center justify-end gap-4">
       <p-button
+        severity="secondary"
+        (onClick)="resetDefaultColorScheme()"
+        [disabled]="userColorScheme() === DEFAULT_COLOR"
+        [loading]="this.userStore.isLoading()"
+        [label]="t('SHARED_MODALS.USER_CONFIG.ACTIONS.RESET_COLOR_SCHEME')"
+      />
+      <p-button
         severity="success"
         type="submit"
         [loading]="this.userStore.isLoading()"
