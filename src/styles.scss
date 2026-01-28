@@ -8,3 +8,49 @@ body {
   height: 100%;
   background: var(--p-background);
 }
+
+.equalizer-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  .equalizer {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.8rem;
+    height: 4rem;
+
+    span {
+      width: 1.2rem;
+      height: 100%;
+      border-radius: 0.2rem;
+      transform-origin: bottom;
+      animation:
+        pulse 1s ease-in-out infinite,
+        up-to-down 1s ease-in-out infinite;
+
+      @keyframes up-to-down {
+        0%,
+        100% {
+          transform: scaleY(0.4);
+        }
+        50% {
+          transform: scaleY(1);
+        }
+      }
+    }
+
+    span:nth-child(1) {
+      background: #4f46e5;
+    }
+    span:nth-child(2) {
+      background: #6366f1;
+      animation-delay: 0.15s;
+    }
+    span:nth-child(3) {
+      background: #8b5cf6;
+      animation-delay: 0.3s;
+    }
+  }
+}

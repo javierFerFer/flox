@@ -14,6 +14,7 @@ import { palette, updatePrimaryPalette } from '@primeng/themes';
 })
 export class AppComponent implements OnInit {
   private userStore = inject(UserStore);
+
   private theme$ = toObservable(this.userStore.themeAsBoolean).pipe(
     tap((isLightTheme: boolean) => {
       const element = document.querySelector('html');
@@ -28,7 +29,8 @@ export class AppComponent implements OnInit {
 
   constructor() {
     effect(() => {
-      const currentUserColorScheme = this.userStore.userColorScheme() ?? DEFAULT_COLOR;
+      const currentUserColorScheme =
+        this.userStore.userColorScheme() ?? DEFAULT_COLOR;
       const paletteOfColors = palette(currentUserColorScheme);
       updatePrimaryPalette(paletteOfColors);
     });
