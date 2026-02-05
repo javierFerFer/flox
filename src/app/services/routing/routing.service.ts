@@ -16,6 +16,11 @@ export class RoutingService {
         routerLink: '/dashboard/records',
       },
       {
+        label: 'NAVIGATION.CALENDAR.LABEL',
+        icon: 'pi pi-calendar-clock',
+        routerLink: '/dashboard/calendar',
+      },
+      {
         label: 'NAVIGATION.SIGN-OUT.LABEL',
         icon: 'pi pi-sign-out',
         command: () => {

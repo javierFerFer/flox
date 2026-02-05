@@ -16,6 +16,9 @@
     "CLASSES": {
       "LABEL": "Classes"
     },
+    "CALENDAR": {
+      "LABEL": "Calendar"
+    },
     "SELECTED_CLASS": {
       "LABEL": "{{variable}}"
     },

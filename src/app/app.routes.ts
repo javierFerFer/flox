@@ -179,6 +179,14 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'calendar',
+        resolve: [], //TODO
+        loadComponent: () =>
+          import(
+            './pages/dashboard/sub-pages/calendar/calendar.component'
+          ).then((m) => m.CalendarComponent),
+      },
       ...MODAL_SHARED_ROUTES,
     ],
   },
