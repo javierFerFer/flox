@@ -1,0 +1,26 @@
+<ng-container *transloco="let t">
+  <p-card>
+    <form class="pr-4.5 pb-4.5 pl-4.5" [formGroup]="datePickerForm">
+      <div
+        class="flex w-full flex-col md:flex-row md:items-center md:justify-between"
+      >
+        <h1 class="mb-3 font-bold md:mb-0">Calendario</h1>
+        <p-float-label variant="in">
+          <p-datepicker
+            size="large"
+            inputId="selectedDate"
+            formControlName="selectedDate"
+          />
+          <label for="selectedDate">Fecha</label>
+        </p-float-label>
+      </div>
+      <div class="mt-6">
+        <p-divider></p-divider>
+      </div>
+      <div class="mt-4 pt-4.5">
+        <span class="text-xl">Selecciona una fecha para empezar!</span>
+        <!-- TABLE HERE -->
+      </div>
+    </form>
+  </p-card>
+</ng-container>

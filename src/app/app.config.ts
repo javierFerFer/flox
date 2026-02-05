@@ -11,7 +11,7 @@ import { routes } from './app.routes';
 
 import { providePrimeNG } from 'primeng/config';
 
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { provideTransloco } from '@jsverse/transloco';
 import { MyPreset } from '../../app.theme';
 import { TranslocoHttpLoader } from './transloco-loader';

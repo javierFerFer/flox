@@ -16,6 +16,7 @@ import { ProjectVersionStore } from '../../stores/project-version/project-versio
 import { DEFAULT_LANGUAGE } from '../../app.config';
 import { ConfigUserService } from '../../services/config-user/config-user.service';
 import { take } from 'rxjs';
+import { CustomProgressBarComponent } from '../../components/custom-progress-bar/custom-progress-bar.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,6 +29,7 @@ import { take } from 'rxjs';
     CustomBreadCrumbComponent,
     ConfirmDialogModule,
     TranslocoDirective,
+    CustomProgressBarComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
