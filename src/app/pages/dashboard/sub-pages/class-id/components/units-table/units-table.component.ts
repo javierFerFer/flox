@@ -1,17 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { TranslocoDirective } from '@jsverse/transloco';
-import { UnityStore } from '../../../../../../stores/unity/unity.store';
-import { TableModule } from 'primeng/table';
-import { ConfirmationService, MenuItem } from 'primeng/api';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ButtonModule } from 'primeng/button';
-import { RippleModule } from 'primeng/ripple';
-import { UnitsService } from '../../../../../../services/unity/unity.service';
-import { take } from 'rxjs';
-import { ClassStore } from '../../../../../../stores/class/class.store';
-import { ToastService } from '../../../../../../services/toast/toast.service';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { ConfirmationService, MenuItem } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { RippleModule } from 'primeng/ripple';
+import { TableModule } from 'primeng/table';
+import { take } from 'rxjs';
 import { TextEditorComponent } from '../../../../../../components/text-editor/text-editor.component';
+import { ToastService } from '../../../../../../services/toast/toast.service';
+import { UnitsService } from '../../../../../../services/unity/unity.service';
+import { ClassStore } from '../../../../../../stores/class/class.store';
+import { UnityStore } from '../../../../../../stores/unity/unity.store';
 
 @Component({
   selector: 'app-units-table',
@@ -35,6 +35,9 @@ export class UnitsTableComponent {
   private readonly toastService = inject(ToastService);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+
+  private readonly unityStore = inject(UnityStore);
+  readonly unitsList = this.unityStore.units;
 
   items: MenuItem[] | undefined = [
     {
@@ -117,6 +120,4 @@ export class UnitsTableComponent {
       },
     },
   ];
-  private readonly unityStore = inject(UnityStore);
-  readonly unitsList = this.unityStore.units;
 }

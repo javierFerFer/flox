@@ -1,11 +1,12 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
-import { UserConfigModalResolver } from './resolvers/user-config-modal.resolver';
-import { InitGuard } from './guards/init.guard';
-import { UserClassesResolver } from './resolvers/user-classes.resolver';
-import { ClassIdResolver } from './resolvers/class-id.resolver';
 import { ExistClassGuard } from './guards/exist-class.guard';
+import { InitGuard } from './guards/init.guard';
+import { CalendarResolver } from './resolvers/calendar.resolver';
+import { ClassIdResolver } from './resolvers/class-id.resolver';
 import { DashBoardResolver } from './resolvers/dashboard.resolver';
+import { UserClassesResolver } from './resolvers/user-classes.resolver';
+import { UserConfigModalResolver } from './resolvers/user-config-modal.resolver';
 
 const MODAL_SHARED_ROUTES: Routes = [
   {
@@ -181,7 +182,8 @@ export const routes: Routes = [
       },
       {
         path: 'calendar',
-        resolve: [], //TODO
+        resolve: [CalendarResolver],
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         loadComponent: () =>
           import(
             './pages/dashboard/sub-pages/calendar/calendar.component'
