@@ -2,21 +2,20 @@ import { Component, effect, inject, signal, untracked } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 
 import { RouterModule } from '@angular/router';
-import { LateralMenuComponent } from './components/lateral-menu/lateral-menu.component';
-import { CustomMenuBarComponent } from './components/custom-toolbar/custom-menu-bar.component';
 import { ToastModule } from 'primeng/toast';
+import { CustomMenuBarComponent } from './components/custom-toolbar/custom-menu-bar.component';
+import { LateralMenuComponent } from './components/lateral-menu/lateral-menu.component';
 
-import { CustomBreadCrumbComponent } from './components/custom-breadcrumb/custom-breadcrumb.component';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { ConfirmationService } from 'primeng/api';
-import { UserStore } from '../../stores/user/user.store';
-import { PROJECT_VERSION } from '../../version.config';
-import { ProjectVersionStore } from '../../stores/project-version/project-version.store';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { take } from 'rxjs';
 import { DEFAULT_LANGUAGE } from '../../app.config';
 import { ConfigUserService } from '../../services/config-user/config-user.service';
-import { take } from 'rxjs';
-import { CustomProgressBarComponent } from '../../components/custom-progress-bar/custom-progress-bar.component';
+import { ProjectVersionStore } from '../../stores/project-version/project-version.store';
+import { UserStore } from '../../stores/user/user.store';
+import { PROJECT_VERSION } from '../../version.config';
+import { CustomBreadCrumbComponent } from './components/custom-breadcrumb/custom-breadcrumb.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,7 +28,6 @@ import { CustomProgressBarComponent } from '../../components/custom-progress-bar
     CustomBreadCrumbComponent,
     ConfirmDialogModule,
     TranslocoDirective,
-    CustomProgressBarComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
