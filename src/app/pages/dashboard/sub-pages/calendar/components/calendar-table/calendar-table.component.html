@@ -1,26 +1,61 @@
 <ng-container *transloco="let t">
   @if (calendarInfo().length) {
-    <p-table [value]="[]" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-table [value]="calendarInfo()" [tableStyle]="{ 'min-width': '50rem' }">
       <ng-template #header>
         <tr>
           <th>
-            {{
-              t("DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.HEADERS.NAME")
-            }}
+            <!-- {{ t("DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.HEADERS.NAME") }} -->
+            Lunes
           </th>
           <th>
-            {{
-              t(
-                "DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.HEADERS.SUMMARY"
-              )
-            }}
+            <!-- {{ t("DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.HEADERS.NAME") }} -->
+            Martes
+          </th>
+          <th>
+            <!-- {{ t("DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.HEADERS.NAME") }} -->
+            Miercoles
+          </th>
+          <th>
+            <!-- {{ t("DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.HEADERS.NAME") }} -->
+            Jueves
+          </th>
+          <th>
+            <!-- {{ t("DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.HEADERS.NAME") }} -->
+            Viernes
           </th>
           <th></th>
         </tr>
       </ng-template>
       <ng-template #body let-unit>
         <tr>
-          <td>{{ unit.name }}</td>
+          <td>
+            <app-text-editor
+              [editorModules]="{ toolbar: false }"
+              readOnly
+              [value]="unit.summary"
+            ></app-text-editor>
+          </td>
+          <td>
+            <app-text-editor
+              [editorModules]="{ toolbar: false }"
+              readOnly
+              [value]="unit.summary"
+            ></app-text-editor>
+          </td>
+          <td>
+            <app-text-editor
+              [editorModules]="{ toolbar: false }"
+              readOnly
+              [value]="unit.summary"
+            ></app-text-editor>
+          </td>
+          <td>
+            <app-text-editor
+              [editorModules]="{ toolbar: false }"
+              readOnly
+              [value]="unit.summary"
+            ></app-text-editor>
+          </td>
           <td>
             <app-text-editor
               [editorModules]="{ toolbar: false }"
@@ -43,9 +78,14 @@
       </ng-template>
     </p-table>
   } @else {
-    <span class="items-center text-xl">{{
-      t("DASHBOARD.RECORDS.COMPONENTS.CLASS.LABEL")
-    }}</span>
+    <span class="flex items-center text-xl"
+      >{{ "dia sin info, prueba a agregar algo de info" }}
+      <p-button
+        class="pl-2"
+        [label]="t('Click me!')"
+        severity="info"
+      ></p-button>
+    </span>
   }
 
   <!-- dialog component -->
