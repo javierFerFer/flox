@@ -24,6 +24,8 @@ import { CalendarTableComponent } from './components/calendar-table/calendar-tab
   ],
 })
 export class CalendarComponent implements OnInit {
+  // TODO:@Javi, continue doing the click me button to navigate to a modal to populate the initial info of the day
+  // think about the struct of the data to save it into firebase
   private readonly fb = inject(FormBuilder);
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
