@@ -1,23 +1,14 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  FormBuilder,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { DatePickerModule } from 'primeng/datepicker';
 import { DividerModule } from 'primeng/divider';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { TextareaModule } from 'primeng/textarea';
 import { map, take } from 'rxjs';
-import { SwapperComponent } from '../../../../components/swapper-components/swapper.component';
-import { TextEditorComponent } from '../../../../components/text-editor/text-editor.component';
-import { SanitizeHTMLPipe } from '../../../../pipes/sanitize-html.pipe';
+import { CalendarInfoFormComponent } from './components/calendar-info-form/calendar-info-form.component';
 import { CalendarTableComponent } from './components/calendar-table/calendar-table.component';
 
 @Component({
@@ -27,17 +18,12 @@ import { CalendarTableComponent } from './components/calendar-table/calendar-tab
   imports: [
     CardModule,
     TranslocoDirective,
-    FormsModule,
     ReactiveFormsModule,
     DatePickerModule,
     FloatLabelModule,
     DividerModule,
     CalendarTableComponent,
-    SwapperComponent,
-    SanitizeHTMLPipe,
-    TextareaModule,
-    TextEditorComponent,
-    ButtonModule,
+    CalendarInfoFormComponent,
   ],
 })
 export class CalendarComponent implements OnInit {
