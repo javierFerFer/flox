@@ -1,26 +1,43 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoDirective } from '@jsverse/transloco';
+import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { DatePickerModule } from 'primeng/datepicker';
 import { DividerModule } from 'primeng/divider';
-import { FloatLabel } from 'primeng/floatlabel';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { TextareaModule } from 'primeng/textarea';
 import { map, take } from 'rxjs';
+import { SwapperComponent } from '../../../../components/swapper-components/swapper.component';
+import { TextEditorComponent } from '../../../../components/text-editor/text-editor.component';
+import { SanitizeHTMLPipe } from '../../../../pipes/sanitize-html.pipe';
 import { CalendarTableComponent } from './components/calendar-table/calendar-table.component';
 
 @Component({
   selector: 'app-calender',
   templateUrl: 'calendar.component.html',
+  styleUrl: 'calendar.component.scss',
   imports: [
     CardModule,
     TranslocoDirective,
+    FormsModule,
     ReactiveFormsModule,
     DatePickerModule,
-    FloatLabel,
+    FloatLabelModule,
     DividerModule,
     CalendarTableComponent,
+    SwapperComponent,
+    SanitizeHTMLPipe,
+    TextareaModule,
+    TextEditorComponent,
+    ButtonModule,
   ],
 })
 export class CalendarComponent implements OnInit {
@@ -35,6 +52,12 @@ export class CalendarComponent implements OnInit {
       new Date(new Date().setHours(0, 0, 0, 0)),
       Validators.required,
     ],
+    project: [],
+    proposals: [],
+    materials: [],
+    weeklyTutorials: [],
+    doNotForget: [],
+    tableInfo: [],
   });
 
   ngOnInit(): void {
@@ -66,6 +89,4 @@ export class CalendarComponent implements OnInit {
         });
       });
   }
-
-  // para la busqueda por fecha, recuerda usar toUTCString para evitar problemas segun entorno
 }
