@@ -59,4 +59,6 @@ export class CalendarInfoFormComponent implements OnInit {
   ngOnInit(): void {
     this.datePickerForm = this.formGroupDirective.form;
   }
+
+  saveInfo() {}
 }

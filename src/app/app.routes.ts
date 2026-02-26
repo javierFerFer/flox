@@ -188,6 +188,23 @@ export const routes: Routes = [
           import(
             './pages/dashboard/sub-pages/calendar/calendar.component'
           ).then((m) => m.CalendarComponent),
+        children: [
+          {
+            path: 'add-calendar-info',
+            loadComponent: () =>
+              import('./components/modal-wrapper/modal-wrapper.component').then(
+                (m) => m.ModalWrapperComponent,
+              ),
+            data: {
+              modalTitleKey: 'DASHBOARD.RECORDS.MODALS.CREATE_NEW_CLASS.TITLE',
+              modalComponentPromise: () =>
+                import(
+                  '../app/pages/modals/add-calendar-info/add-calendar-info.component'
+                ).then((m) => m.AddCalendarInfoModalComponent),
+            },
+            outlet: 'calendarAddInfo',
+          },
+        ],
       },
       ...MODAL_SHARED_ROUTES,
     ],

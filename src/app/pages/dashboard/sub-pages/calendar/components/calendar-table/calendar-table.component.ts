@@ -1,5 +1,5 @@
 import { Component, computed, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -11,7 +11,13 @@ import { CalendarStore } from '../../../../../../stores/calendar/calendar.store'
   selector: 'app-calendar-table',
   templateUrl: 'calendar-table.component.html',
   standalone: true,
-  imports: [TableModule, TextEditorComponent, TranslocoDirective, ButtonModule],
+  imports: [
+    TableModule,
+    TextEditorComponent,
+    TranslocoDirective,
+    ButtonModule,
+    RouterOutlet,
+  ],
 })
 export class CalendarTableComponent {
   private readonly calendarStore = inject(CalendarStore);
@@ -19,6 +25,7 @@ export class CalendarTableComponent {
     return this.calendarStore.calendarInfo()?.calendarData.tableInfo || [];
   });
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
   items: MenuItem[] | undefined = [
     {
       label:
@@ -100,4 +107,11 @@ export class CalendarTableComponent {
       },
     },
   ];
+
+  navigateToModalToAddDailyInfo() {
+    this.router.navigate(
+      [{ outlets: { calendarAddInfo: ['add-calendar-info'] } }],
+      { relativeTo: this.route, queryParamsHandling: 'preserve' },
+    );
+  }
 }

@@ -1,5 +1,5 @@
 <ng-container *transloco="let t">
-  <ng-container [formGroup]="datePickerForm">
+  <ng-container [formGroup]="datePickerForm" (ngSubmit)="saveInfo()">
     <div class="pr-4.5 pb-4.5 pl-4.5">
       <h1 class="mt-3 mb-3 font-bold">Información del día</h1>
       <p-divider></p-divider>
@@ -79,9 +79,9 @@
           <ng-template #firstComponent>
             <p-floatlabel class="w-full" variant="in">
               <textarea
-                formControlName="project"
+                formControlName="materials"
                 [ngModel]="
-                  this.datePickerForm.controls.project.value | sanitizeHTML
+                  this.datePickerForm.controls.materials.value | sanitizeHTML
                 "
                 class="w-full"
                 pTextarea
@@ -97,7 +97,7 @@
           </ng-template>
           <ng-template #secondComponent>
             <app-text-editor
-              formControlName="project"
+              formControlName="materials"
               class="w-full"
             ></app-text-editor>
           </ng-template>
@@ -113,9 +113,10 @@
           <ng-template #firstComponent>
             <p-floatlabel class="w-full" variant="in">
               <textarea
-                formControlName="project"
+                formControlName="weeklyTutorials"
                 [ngModel]="
-                  this.datePickerForm.controls.project.value | sanitizeHTML
+                  this.datePickerForm.controls.weeklyTutorials.value
+                    | sanitizeHTML
                 "
                 class="w-full"
                 pTextarea
@@ -131,7 +132,7 @@
           </ng-template>
           <ng-template #secondComponent>
             <app-text-editor
-              formControlName="project"
+              formControlName="weeklyTutorials"
               class="w-full"
             ></app-text-editor>
           </ng-template>
@@ -145,9 +146,9 @@
           <ng-template #firstComponent>
             <p-floatlabel class="w-full" variant="in">
               <textarea
-                formControlName="proposals"
+                formControlName="doNotForget"
                 [ngModel]="
-                  this.datePickerForm.controls.proposals.value | sanitizeHTML
+                  this.datePickerForm.controls.doNotForget.value | sanitizeHTML
                 "
                 class="w-full"
                 pTextarea
@@ -163,7 +164,7 @@
           </ng-template>
           <ng-template #secondComponent>
             <app-text-editor
-              formControlName="proposals"
+              formControlName="doNotForget"
               class="w-full"
             ></app-text-editor>
           </ng-template>
@@ -172,6 +173,8 @@
     </div>
     <div class="flex w-full items-center justify-end-safe pr-4.5 pl-4.5">
       <p-button
+        [disabled]="!this.datePickerForm.dirty"
+        type="submit"
         [label]="'Save!'"
         severity="success"
         styleClass="w-32"

@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { doc, docData, Firestore } from '@angular/fire/firestore';
-import { map } from 'rxjs';
+import { doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
+import { from, map } from 'rxjs';
+import { CalendarModel } from '../../stores/calendar/calendar.model';
 import { UserStore } from '../../stores/user/user.store';
 
 @Injectable({ providedIn: 'root' })
@@ -22,5 +23,16 @@ export class CalendarApiService {
         return { ...result!['calendar_info'] };
       }),
     );
+  }
+
+  updateCalendarWeeklyInfo(date: string, calendarData: CalendarModel) {
+    const calendarDoc = doc(
+      this.firestore,
+      `calendar/${this.userStore.user().uid}/${date}/calendar_info`,
+    );
+
+    return from(
+      setDoc(calendarDoc, { calendar_info: calendarData }, { merge: true }),
+    ).pipe(map((_) => true));
   }
 }

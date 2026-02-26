@@ -32,7 +32,7 @@
             <app-text-editor
               [editorModules]="{ toolbar: false }"
               readOnly
-              [value]="unit.summary"
+              [value]="unit.monday"
             ></app-text-editor>
           </td>
           <td>
@@ -80,13 +80,17 @@
   } @else {
     <span class="flex items-center text-xl"
       >{{ "dia sin info, prueba a agregar algo de info" }}
-      <p-button
-        class="pl-2"
-        [label]="t('Click me!')"
-        severity="info"
-      ></p-button>
     </span>
   }
+  <div class="mt-12 flex items-center justify-end-safe">
+    <p-button
+      class="pl-2"
+      (onClick)="navigateToModalToAddDailyInfo()"
+      [label]="t('Agregar elemento')"
+      severity="info"
+    >
+    </p-button>
+  </div>
 
   <!-- dialog component -->
   <!-- <p-confirmdialog [key]="'deleteUnitConfirmDialog'">
@@ -128,4 +132,4 @@
     </ng-template>
   </p-confirmdialog> -->
 </ng-container>
-<!-- <router-outlet name="unitDetails"></router-outlet> -->
+<router-outlet name="calendarAddInfo"></router-outlet>

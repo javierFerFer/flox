@@ -7,12 +7,12 @@ import { CardModule } from 'primeng/card';
 import { DatePickerModule } from 'primeng/datepicker';
 import { DividerModule } from 'primeng/divider';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { map, take } from 'rxjs';
+import { map, take, tap } from 'rxjs';
 import { CalendarInfoFormComponent } from './components/calendar-info-form/calendar-info-form.component';
 import { CalendarTableComponent } from './components/calendar-table/calendar-table.component';
 
 @Component({
-  selector: 'app-calender',
+  selector: 'app-calendar',
   templateUrl: 'calendar.component.html',
   styleUrl: 'calendar.component.scss',
   imports: [
@@ -27,15 +27,13 @@ import { CalendarTableComponent } from './components/calendar-table/calendar-tab
   ],
 })
 export class CalendarComponent implements OnInit {
-  // TODO:@Javi, continue doing the click me button to navigate to a modal to populate the initial info of the day
-  // think about the struct of the data to save it into firebase
   private readonly fb = inject(FormBuilder);
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   protected datePickerForm = this.fb.group({
     selectedDate: [
-      new Date(new Date().setHours(0, 0, 0, 0)),
+      this.selectRange(new Date(new Date().setHours(0, 0, 0, 0))),
       Validators.required,
     ],
     project: [],
@@ -47,7 +45,7 @@ export class CalendarComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    const selectedDate = this.route.queryParams
+    this.route.queryParams
       .pipe(
         map((params) => params['selectedDate']),
         take(1),
@@ -55,7 +53,7 @@ export class CalendarComponent implements OnInit {
       .subscribe((selectedDate) => {
         if (selectedDate) {
           this.datePickerForm.controls.selectedDate.patchValue(
-            new Date(selectedDate),
+            this.selectRange(new Date(selectedDate)),
             {
               onlySelf: true,
               emitEvent: false,
@@ -65,14 +63,34 @@ export class CalendarComponent implements OnInit {
       });
 
     this.datePickerForm.controls.selectedDate.valueChanges
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        tap((value) => {
+          let start = new Date(value![0].setHours(0, 0, 0, 0));
+          start.setDate(start.getDate() - start.getDay());
+          let end = new Date(start.setHours(0, 0, 0, 0));
+          end.setDate(start.getDate() + 6);
+          this.datePickerForm.controls.selectedDate.patchValue([start, end], {
+            emitEvent: false,
+            onlySelf: true,
+          });
+        }),
+      )
       .subscribe(() => {
         this.router.navigate(['dashboard', 'calendar'], {
           queryParams: {
             selectedDate:
-              this.datePickerForm.controls.selectedDate.value?.toUTCString(),
+              this.datePickerForm.controls.selectedDate.value![0].toUTCString(),
           },
         });
       });
+  }
+
+  selectRange(evt: Date) {
+    let start = new Date(evt);
+    start.setDate(start.getDate() - start.getDay());
+    let end = new Date(start);
+    end.setDate(start.getDate() + 6);
+    return [start, end];
   }
 }
