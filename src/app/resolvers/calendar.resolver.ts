@@ -8,9 +8,19 @@ export class CalendarResolver implements Resolve<any> {
   private calendarService = inject(CalendarService);
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> | Promise<any> | any {
+    const start = this.selectFirstDay(new Date());
+
     const selectedDate =
-      route.queryParams['selectedDate'] ||
-      new Date(new Date().setHours(0, 0, 0, 0)).toUTCString();
+      route.queryParams['selectedDate'] || start.toUTCString();
+
     return this.calendarService.getCalendarInfo(selectedDate);
+  }
+
+  selectFirstDay(evt: Date) {
+    let start = new Date(evt);
+    start.setDate(start.getDate() - start.getDay());
+    start.setHours(0, 0, 0, 0);
+    start.setDate(start.getDate() - start.getDay());
+    return start;
   }
 }

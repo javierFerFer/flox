@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import {
   Component,
   ComponentRef,
@@ -7,12 +8,11 @@ import {
   viewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { DialogModule } from 'primeng/dialog';
-import { ButtonModule } from 'primeng/button';
-import { Location } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { TranslocoService } from '@jsverse/transloco';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
 import { CloseModal } from '../../pages/modals/close-modal-interface';
 
 type CustomComponentIntance = {
@@ -28,6 +28,7 @@ type CustomComponentIntance = {
 export class ModalWrapperComponent implements OnInit {
   visible = true;
   autoMaximize = false;
+  modalClosable = true;
 
   componentSpot = viewChild.required('spot', { read: ViewContainerRef });
   modalTitle: string = '';
@@ -48,8 +49,16 @@ export class ModalWrapperComponent implements OnInit {
       'autoMaximize'
     ] as string;
 
-    if (autoMaximize) {
+    const modalClosable = this.activatedRoute.snapshot.data[
+      'modalClosable'
+    ] as boolean;
+
+    if (autoMaximize !== undefined) {
       this.autoMaximize = true;
+    }
+
+    if (modalClosable !== undefined) {
+      this.modalClosable = modalClosable;
     }
 
     this.translocoService

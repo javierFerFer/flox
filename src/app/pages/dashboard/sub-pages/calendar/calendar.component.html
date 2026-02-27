@@ -20,7 +20,9 @@
           <p-divider></p-divider>
         </div>
         <div class="mt-4 pt-4.5">
-          <app-calendar-table></app-calendar-table>
+          <app-calendar-table
+            [selectedDate]="selectedDateValue()"
+          ></app-calendar-table>
         </div>
       </div>
     </p-card>
@@ -29,3 +31,4 @@
     </p-card>
   </form>
 </ng-container>
+<router-outlet name="calendarUserConfig"></router-outlet>

@@ -1,7 +1,11 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
+import { CanActivateCalendarUserInfoGuard } from './guards/can-activate-calendar-user-info.guard';
+import { CanDeactivateCalendarUserInfoGuard } from './guards/can-deactivate-calendar-user-info.guard';
 import { ExistClassGuard } from './guards/exist-class.guard';
 import { InitGuard } from './guards/init.guard';
+import { CalendarGlobalConfigResolver } from './resolvers/calendar-global-config.resolver';
+import { CalendarUserConfigResolver } from './resolvers/calendar-user-config.resolver';
 import { CalendarResolver } from './resolvers/calendar.resolver';
 import { ClassIdResolver } from './resolvers/class-id.resolver';
 import { DashBoardResolver } from './resolvers/dashboard.resolver';
@@ -182,7 +186,11 @@ export const routes: Routes = [
       },
       {
         path: 'calendar',
-        resolve: [CalendarResolver],
+        resolve: [
+          CalendarGlobalConfigResolver,
+          CalendarUserConfigResolver,
+          CalendarResolver,
+        ],
         runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         loadComponent: () =>
           import(
@@ -190,19 +198,22 @@ export const routes: Routes = [
           ).then((m) => m.CalendarComponent),
         children: [
           {
-            path: 'add-calendar-info',
+            path: 'calendar-user-config',
+            canActivate: [CanActivateCalendarUserInfoGuard],
+            canDeactivate: [CanDeactivateCalendarUserInfoGuard],
             loadComponent: () =>
               import('./components/modal-wrapper/modal-wrapper.component').then(
                 (m) => m.ModalWrapperComponent,
               ),
             data: {
               modalTitleKey: 'DASHBOARD.RECORDS.MODALS.CREATE_NEW_CLASS.TITLE',
+              modalClosable: false,
               modalComponentPromise: () =>
                 import(
-                  '../app/pages/modals/add-calendar-info/add-calendar-info.component'
-                ).then((m) => m.AddCalendarInfoModalComponent),
+                  '../app/pages/modals/user-calendar-info/user-calendar-info.component'
+                ).then((m) => m.UserCalendarInfoModalComponent),
             },
-            outlet: 'calendarAddInfo',
+            outlet: 'calendarUserConfig',
           },
         ],
       },

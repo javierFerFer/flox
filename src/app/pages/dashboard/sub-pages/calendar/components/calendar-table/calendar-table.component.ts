@@ -1,10 +1,18 @@
-import { Component, computed, inject } from '@angular/core';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Component, computed, inject, input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterOutlet } from '@angular/router';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { ChipModule } from 'primeng/chip';
 import { TableModule } from 'primeng/table';
-import { TextEditorComponent } from '../../../../../../components/text-editor/text-editor.component';
+import { take } from 'rxjs';
+import { CalendarService } from '../../../../../../services/calendar/calendar.service';
+import { ToastService } from '../../../../../../services/toast/toast.service';
+import {
+  CalendarInnerConfig,
+  CalendarInnerElement,
+} from '../../../../../../stores/calendar/calendar.model';
 import { CalendarStore } from '../../../../../../stores/calendar/calendar.store';
 
 @Component({
@@ -13,105 +21,106 @@ import { CalendarStore } from '../../../../../../stores/calendar/calendar.store'
   standalone: true,
   imports: [
     TableModule,
-    TextEditorComponent,
     TranslocoDirective,
     ButtonModule,
     RouterOutlet,
+    FormsModule,
+    ChipModule,
+    CommonModule,
   ],
 })
 export class CalendarTableComponent {
-  private readonly calendarStore = inject(CalendarStore);
+  protected readonly calendarStore = inject(CalendarStore);
+  private readonly calendarService = inject(CalendarService);
+  private readonly toastService = inject(ToastService);
+  selectedDate = input.required<string>();
   readonly calendarInfo = computed(() => {
-    return this.calendarStore.calendarInfo()?.calendarData.tableInfo || [];
-  });
-  private readonly router = inject(Router);
-  private readonly route = inject(ActivatedRoute);
-  items: MenuItem[] | undefined = [
-    {
-      label:
-        'DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.CONTEXT_MENU_ACTIONS.SHOW',
-      icon: 'pi pi-eye',
-      command: () => {
-        this.router.navigate(
-          [
-            {
-              outlets: {
-                // unitDetails: ['unit-details', 'show', this.selectedUuid],
-              },
-            },
-          ],
-          // { relativeTo: this.route },
-        );
-      },
-    },
-    {
-      label:
-        'DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.CONTEXT_MENU_ACTIONS.EDIT',
-      icon: 'pi pi-file-edit',
-      command: () => {
-        this.router.navigate(
-          [
-            {
-              outlets: {
-                // unitDetails: ['unit-details', 'edit', this.selectedUuid],
-              },
-            },
-          ],
-          // { relativeTo: this.route },
-        );
-      },
-    },
-    {
-      label:
-        'DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.CONTEXT_MENU_ACTIONS.DELETE',
-      icon: 'pi pi-trash',
-      command: (event: any) => {
-        // this.confirmationService.confirm({
-        //   key: 'deleteUnitConfirmDialog',
-        //   target: event.target as EventTarget,
-        //   message:
-        //     'DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.CONFIRM_DELETE_UNIT_DIALOG.MESSAGE',
-        //   header:
-        //     'DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.CONFIRM_DELETE_UNIT_DIALOG.HEADER',
-        //   icon: 'pi pi-info-circle',
-        //   acceptLabel:
-        //     'DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.CONFIRM_DELETE_UNIT_DIALOG.ACTIONS.DELETE',
-        //   rejectLabel:
-        //     'DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.CONFIRM_DELETE_UNIT_DIALOG.ACTIONS.CANCEL',
-        //   accept: () => {
-        //     try {
-        //       this.unitsService
-        //         .deleteUnit(this.selectedUuid!)
-        //         .pipe(take(1))
-        //         .subscribe(() => {
-        //           this.selectedUuid = undefined;
-        //           this.toastService.showSuccessMessage({
-        //             summaryToTranslate:
-        //               'DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.CONFIRM_DELETE_UNIT_DIALOG.RESULT.SUCCESS.SUMMARY',
-        //             detailToTranslate:
-        //               'DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.CONFIRM_DELETE_UNIT_DIALOG.RESULT.SUCCESS.DETAIL',
-        //           });
-        //         });
-        //     } catch (error) {
-        //       this.unitStore.setIsLoading(false);
-        //       this.selectedUuid = undefined;
-        //       this.toastService.showErrorMessage({
-        //         summaryToTranslate:
-        //           'DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.CONFIRM_DELETE_UNIT_DIALOG.RESULT.ERROR.SUMMARY',
-        //         detailToTranslate:
-        //           'DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.CONFIRM_DELETE_UNIT_DIALOG.RESULT.ERROR.DETAIL',
-        //       });
-        //     }
-        //   },
-        // });
-      },
-    },
-  ];
-
-  navigateToModalToAddDailyInfo() {
-    this.router.navigate(
-      [{ outlets: { calendarAddInfo: ['add-calendar-info'] } }],
-      { relativeTo: this.route, queryParamsHandling: 'preserve' },
+    const calendarUserInfo = this.calendarStore.calendarUserConfig()!;
+    const mapedResult = (
+      this.calendarStore.calendarInfo()?.calendarData.tableInfo ||
+      calendarUserInfo ||
+      []
+    ).map(
+      (c) =>
+        ({
+          value: c.value,
+          monday: {
+            tag:
+              typeof c.monday === 'object'
+                ? (c.monday as CalendarInnerElement).tag
+                : c.monday,
+            value:
+              typeof c.monday === 'object'
+                ? (c.monday as CalendarInnerElement).value
+                : '',
+          },
+          tuesday: {
+            tag:
+              typeof c.tuesday === 'object'
+                ? (c.tuesday as CalendarInnerElement).tag
+                : c.tuesday,
+            value:
+              typeof c.tuesday === 'object'
+                ? (c.tuesday as CalendarInnerElement).value
+                : '',
+          },
+          wednesday: {
+            tag:
+              typeof c.wednesday === 'object'
+                ? (c.wednesday as CalendarInnerElement).tag
+                : c.wednesday,
+            value:
+              typeof c.wednesday === 'object'
+                ? (c.wednesday as CalendarInnerElement).value
+                : '',
+          },
+          thursday: {
+            tag:
+              typeof c.thursday === 'object'
+                ? (c.thursday as CalendarInnerElement).tag
+                : c.thursday,
+            value:
+              typeof c.thursday === 'object'
+                ? (c.thursday as CalendarInnerElement).value
+                : '',
+          },
+          friday: {
+            tag:
+              typeof c.friday === 'object'
+                ? (c.friday as CalendarInnerElement).tag
+                : c.friday,
+            value:
+              typeof c.friday === 'object'
+                ? (c.friday as CalendarInnerElement).value
+                : '',
+          },
+        }) as CalendarInnerConfig,
     );
+    return mapedResult;
+  });
+
+  save() {
+    const calendarTableInfo = this.calendarInfo();
+    try {
+      this.calendarService
+        .updateCalendarWeeklyInfo(this.selectedDate(), calendarTableInfo)
+        .pipe(take(1))
+        .subscribe(() => {
+          this.toastService.showSuccessMessage({
+            summaryToTranslate:
+              'DASHBOARD.RECORDS.MODALS.EDIT_NEW_SESSION.FORM.MESSAGES.NEW_SESSION_EDIT_SUCCESS.SUMMARY',
+            detailToTranslate:
+              'DASHBOARD.RECORDS.MODALS.EDIT_NEW_SESSION.FORM.MESSAGES.NEW_SESSION_EDIT_SUCCESS.DETAIL',
+          });
+        });
+    } catch (error) {
+      this.calendarStore.setIsLoading(false);
+      this.toastService.showErrorMessage({
+        summaryToTranslate:
+          'DASHBOARD.RECORDS.MODALS.EDIT_NEW_SESSION.FORM.MESSAGES.NEW_SESSION_EDIT_UNSUCCESS.SUMMARY',
+        detailToTranslate:
+          'DASHBOARD.RECORDS.MODALS.EDIT_NEW_SESSION.FORM.MESSAGES.NEW_SESSION_EDIT_UNSUCCESS.DETAIL',
+      });
+    }
   }
 }

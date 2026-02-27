@@ -1,13 +1,22 @@
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
-import { CalendarModel, TableInfo } from './calendar.model';
+import {
+  CalendarGlobalInfo,
+  CalendarInnerConfig,
+  CalendarModel,
+  CalendarUserConfig,
+} from './calendar.model';
 
 type CalendarState = {
   calendarInfo: CalendarModel | undefined;
+  calendarGlobalInfo: CalendarGlobalInfo | undefined;
+  calendarUserConfig: CalendarUserConfig[] | undefined;
   isLoading: boolean;
 };
 
 const initialState: CalendarState = {
   calendarInfo: undefined,
+  calendarGlobalInfo: undefined,
+  calendarUserConfig: undefined,
   isLoading: false,
 };
 
@@ -27,7 +36,24 @@ export const CalendarStore = signalStore(
         calendarInfo: undefined,
       }));
     },
-    updateCalendarWeeklyInfo(date: string, calendarInfo: TableInfo): void {
+    updateCalendarGlobalInfo(calendarGlobalInfo: { [key: string]: string }) {
+      patchState(store, (state) => ({
+        ...state,
+        calendarGlobalInfo: {
+          calendarInfo: { ...calendarGlobalInfo },
+        },
+      }));
+    },
+    updateCalendarUserConfig(calendarUserConfig: CalendarUserConfig[]) {
+      patchState(store, (state) => ({
+        ...state,
+        calendarUserConfig,
+      }));
+    },
+    updateCalendarWeeklyInfo(
+      date: string,
+      calendarInfo: CalendarInnerConfig[],
+    ): void {
       patchState(store, (state) => ({
         ...state,
         calendarInfo: {
@@ -35,8 +61,8 @@ export const CalendarStore = signalStore(
           calendarData: {
             ...state.calendarInfo?.calendarData!,
             tableInfo: [
-              ...(state.calendarInfo?.calendarData.tableInfo || []),
-              calendarInfo,
+              // ...(state.calendarInfo?.calendarData.tableInfo || []),
+              ...calendarInfo,
             ],
           },
         },

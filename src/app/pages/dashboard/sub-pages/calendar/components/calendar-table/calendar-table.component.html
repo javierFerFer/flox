@@ -5,6 +5,10 @@
         <tr>
           <th>
             <!-- {{ t("DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.HEADERS.NAME") }} -->
+            horario
+          </th>
+          <th>
+            <!-- {{ t("DASHBOARD.RECORDS.COMPONENTS.CLASS.UNITS_TABLE.HEADERS.NAME") }} -->
             Lunes
           </th>
           <th>
@@ -26,53 +30,175 @@
           <th></th>
         </tr>
       </ng-template>
-      <ng-template #body let-unit>
+      <ng-template #body let-hour let-editing="editing">
         <tr>
           <td>
-            <app-text-editor
-              [editorModules]="{ toolbar: false }"
-              readOnly
-              [value]="unit.monday"
-            ></app-text-editor>
+            {{ hour.value }}
           </td>
-          <td>
-            <app-text-editor
-              [editorModules]="{ toolbar: false }"
-              readOnly
-              [value]="unit.summary"
-            ></app-text-editor>
+          <td
+            [pEditableColumn]="hour.monday.value"
+            pEditableColumnField="value"
+          >
+            <p-cellEditor>
+              <ng-template #input>
+                <div class="flex flex-col gap-3">
+                  @if (hour.monday.tag) {
+                    <p-chip class="w-fit">
+                      {{ hour.monday.tag }}
+                    </p-chip>
+                  }
+                  <input
+                    pInputText
+                    type="text"
+                    [(ngModel)]="hour.monday.value"
+                  />
+                </div>
+              </ng-template>
+              <ng-template #output>
+                <div class="flex flex-col">
+                  @if (hour.monday.tag) {
+                    <p-chip class="w-fit">
+                      {{ hour.monday.tag }}
+                    </p-chip>
+                  }
+                  <div class="pl-3">
+                    {{ hour.monday.value }}
+                  </div>
+                </div>
+              </ng-template>
+            </p-cellEditor>
           </td>
-          <td>
-            <app-text-editor
-              [editorModules]="{ toolbar: false }"
-              readOnly
-              [value]="unit.summary"
-            ></app-text-editor>
+          <td
+            [pEditableColumn]="hour.tuesday.value"
+            pEditableColumnField="value"
+          >
+            <p-cellEditor>
+              <ng-template #input>
+                <div class="flex flex-col gap-3">
+                  @if (hour.tuesday.tag) {
+                    <p-chip class="w-fit">
+                      {{ hour.tuesday.tag }}
+                    </p-chip>
+                  }
+                  <input
+                    pInputText
+                    type="text"
+                    [(ngModel)]="hour.tuesday.value"
+                  />
+                </div>
+              </ng-template>
+              <ng-template #output>
+                <div class="flex flex-col">
+                  @if (hour.tuesday.tag) {
+                    <p-chip class="w-fit">
+                      {{ hour.tuesday.tag }}
+                    </p-chip>
+                  }
+                  <div class="pl-3">
+                    {{ hour.tuesday.value }}
+                  </div>
+                </div>
+              </ng-template>
+            </p-cellEditor>
           </td>
-          <td>
-            <app-text-editor
-              [editorModules]="{ toolbar: false }"
-              readOnly
-              [value]="unit.summary"
-            ></app-text-editor>
+          <td
+            [pEditableColumn]="hour.wednesday.value"
+            pEditableColumnField="value"
+          >
+            <p-cellEditor>
+              <ng-template #input>
+                <div class="flex flex-col gap-3">
+                  @if (hour.wednesday.tag) {
+                    <p-chip class="w-fit">
+                      {{ hour.wednesday.tag }}
+                    </p-chip>
+                  }
+                  <input
+                    pInputText
+                    type="text"
+                    [(ngModel)]="hour.wednesday.value"
+                  />
+                </div>
+              </ng-template>
+              <ng-template #output>
+                <div class="flex flex-col">
+                  @if (hour.wednesday.tag) {
+                    <p-chip class="w-fit">
+                      {{ hour.wednesday.tag }}
+                    </p-chip>
+                  }
+                  <div class="pl-3">
+                    {{ hour.wednesday.value }}
+                  </div>
+                </div>
+              </ng-template>
+            </p-cellEditor>
           </td>
-          <td>
-            <app-text-editor
-              [editorModules]="{ toolbar: false }"
-              readOnly
-              [value]="unit.summary"
-            ></app-text-editor>
+          <td
+            [pEditableColumn]="hour.thursday.value"
+            pEditableColumnField="value"
+          >
+            <p-cellEditor>
+              <ng-template #input>
+                <div class="flex flex-col gap-3">
+                  @if (hour.thursday.tag) {
+                    <p-chip class="w-fit">
+                      {{ hour.thursday.tag }}
+                    </p-chip>
+                  }
+                  <input
+                    pInputText
+                    type="text"
+                    [(ngModel)]="hour.thursday.value"
+                  />
+                </div>
+              </ng-template>
+              <ng-template #output>
+                <div class="flex flex-col">
+                  @if (hour.thursday.tag) {
+                    <p-chip class="w-fit">
+                      {{ hour.thursday.tag }}
+                    </p-chip>
+                  }
+                  <div class="pl-3">
+                    {{ hour.thursday.value }}
+                  </div>
+                </div>
+              </ng-template>
+            </p-cellEditor>
           </td>
-          <td class="w-30">
-            <!-- actions here -->
-            <!-- <div class="flex items-center gap-6">
-              @for (item of items; track $index) {
-                <i
-                  [class]="'cursor-pointer ' + item.icon"
-                  (click)="this.selectedUuid = unit.uuid; item?.command(unit)"
-                ></i>
-              }
-            </div> -->
+          <td
+            [pEditableColumn]="hour.friday.value"
+            pEditableColumnField="value"
+          >
+            <p-cellEditor>
+              <ng-template #input>
+                <div class="flex flex-col gap-3">
+                  @if (hour.friday.tag) {
+                    <p-chip class="w-fit">
+                      {{ hour.friday.tag }}
+                    </p-chip>
+                  }
+                  <input
+                    pInputText
+                    type="text"
+                    [(ngModel)]="hour.friday.value"
+                  />
+                </div>
+              </ng-template>
+              <ng-template #output>
+                <div class="flex flex-col">
+                  @if (hour.friday.tag) {
+                    <p-chip class="w-fit">
+                      {{ hour.friday.tag }}
+                    </p-chip>
+                  }
+                  <div class="pl-3">
+                    {{ hour.friday.value }}
+                  </div>
+                </div>
+              </ng-template>
+            </p-cellEditor>
           </td>
         </tr>
       </ng-template>
@@ -85,51 +211,12 @@
   <div class="mt-12 flex items-center justify-end-safe">
     <p-button
       class="pl-2"
-      (onClick)="navigateToModalToAddDailyInfo()"
-      [label]="t('Agregar elemento')"
+      [disabled]="this.calendarStore.isLoading()"
+      (onClick)="save()"
+      [label]="t('save info')"
       severity="info"
     >
     </p-button>
   </div>
-
-  <!-- dialog component -->
-  <!-- <p-confirmdialog [key]="'deleteUnitConfirmDialog'">
-    <ng-template
-      #headless
-      let-message
-      let-rejectButtonProps
-      let-acceptLabel
-      let-rejectLabel
-      let-onAccept="onAccept"
-      let-onReject="onReject"
-    >
-      <div class="flex flex-col items-center rounded p-8">
-        <div
-          [style.background]="'var(--p-button-danger-background)'"
-          class="text-primary-contrast -mt-20 inline-flex h-24 w-24 rotate-180 items-center justify-center rounded-full"
-        >
-          <i class="pi pi-info !text-5xl"></i>
-        </div>
-        <span class="mt-6 mb-2 block text-2xl font-bold">{{
-          t(message.header)
-        }}</span>
-        <p class="mb-0">{{ t(message.message) }}</p>
-        <div class="mt-6 flex items-center gap-2">
-          <p-button
-            [label]="t(rejectLabel.rejectLabel)"
-            (onClick)="onReject()"
-            styleClass="w-32"
-          ></p-button>
-          <p-button
-            [loading]="unitStore.isLoading()"
-            [label]="t(acceptLabel.acceptLabel)"
-            severity="danger"
-            (onClick)="onAccept()"
-            styleClass="w-32"
-          ></p-button>
-        </div>
-      </div>
-    </ng-template>
-  </p-confirmdialog> -->
 </ng-container>
 <router-outlet name="calendarAddInfo"></router-outlet>
