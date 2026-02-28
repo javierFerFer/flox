@@ -1,14 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { ButtonModule } from 'primeng/button';
 import { ChipModule } from 'primeng/chip';
 import { TableModule } from 'primeng/table';
-import { take } from 'rxjs';
-import { CalendarService } from '../../../../../../services/calendar/calendar.service';
-import { ToastService } from '../../../../../../services/toast/toast.service';
 import {
   CalendarInnerConfig,
   CalendarInnerElement,
@@ -31,9 +28,8 @@ import { CalendarStore } from '../../../../../../stores/calendar/calendar.store'
 })
 export class CalendarTableComponent {
   protected readonly calendarStore = inject(CalendarStore);
-  private readonly calendarService = inject(CalendarService);
-  private readonly toastService = inject(ToastService);
-  selectedDate = input.required<string>();
+  public tableInfoEmitter = output<CalendarInnerConfig[]>();
+
   readonly calendarInfo = computed(() => {
     const calendarUserInfo = this.calendarStore.calendarUserConfig()!;
     const mapedResult = (
@@ -96,31 +92,11 @@ export class CalendarTableComponent {
           },
         }) as CalendarInnerConfig,
     );
+    this.tableInfoEmitter.emit(mapedResult);
     return mapedResult;
   });
 
-  save() {
-    const calendarTableInfo = this.calendarInfo();
-    try {
-      this.calendarService
-        .updateCalendarWeeklyInfo(this.selectedDate(), calendarTableInfo)
-        .pipe(take(1))
-        .subscribe(() => {
-          this.toastService.showSuccessMessage({
-            summaryToTranslate:
-              'DASHBOARD.RECORDS.MODALS.EDIT_NEW_SESSION.FORM.MESSAGES.NEW_SESSION_EDIT_SUCCESS.SUMMARY',
-            detailToTranslate:
-              'DASHBOARD.RECORDS.MODALS.EDIT_NEW_SESSION.FORM.MESSAGES.NEW_SESSION_EDIT_SUCCESS.DETAIL',
-          });
-        });
-    } catch (error) {
-      this.calendarStore.setIsLoading(false);
-      this.toastService.showErrorMessage({
-        summaryToTranslate:
-          'DASHBOARD.RECORDS.MODALS.EDIT_NEW_SESSION.FORM.MESSAGES.NEW_SESSION_EDIT_UNSUCCESS.SUMMARY',
-        detailToTranslate:
-          'DASHBOARD.RECORDS.MODALS.EDIT_NEW_SESSION.FORM.MESSAGES.NEW_SESSION_EDIT_UNSUCCESS.DETAIL',
-      });
-    }
+  emitNewChanges() {
+    this.tableInfoEmitter.emit(this.calendarInfo());
   }
 }

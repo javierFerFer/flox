@@ -2,9 +2,11 @@ import {
   Component,
   computed,
   DestroyRef,
+  effect,
   inject,
   OnInit,
   signal,
+  WritableSignal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -15,6 +17,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { DividerModule } from 'primeng/divider';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { map, take, tap } from 'rxjs';
+import { CalendarInnerConfig } from '../../../../stores/calendar/calendar.model';
 import { CalendarStore } from '../../../../stores/calendar/calendar.store';
 import { CalendarInfoFormComponent } from './components/calendar-info-form/calendar-info-form.component';
 import { CalendarTableComponent } from './components/calendar-table/calendar-table.component';
@@ -41,6 +44,9 @@ export class CalendarComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly calendarStore = inject(CalendarStore);
+  protected tableInfo: WritableSignal<CalendarInnerConfig[]> = signal([]);
+  protected saveInfo = signal(false);
+
   private selectedDate = signal(this.selectFirstDay(new Date()));
 
   protected selectedDateValue = computed(() => {
@@ -52,13 +58,29 @@ export class CalendarComponent implements OnInit {
       this.selectRange(new Date(new Date().setHours(0, 0, 0, 0))),
       Validators.required,
     ],
-    project: [],
-    proposals: [],
-    materials: [],
-    weeklyTutorials: [],
-    doNotForget: [],
-    tableInfo: [],
+    project: [''],
+    proposals: [''],
+    materials: [''],
+    weeklyTutorials: [''],
+    doNotForget: [''],
   });
+
+  constructor() {
+    effect(() => {
+      const calendarInfo = this.calendarStore.calendarInfo()?.calendarData;
+      this.datePickerForm.patchValue(
+        {
+          selectedDate: this.datePickerForm.controls.selectedDate.value,
+          doNotForget: calendarInfo?.doNotForget,
+          materials: calendarInfo?.materials,
+          weeklyTutorials: calendarInfo?.weeklyTutorials,
+          project: calendarInfo?.project,
+          proposals: calendarInfo?.proposals,
+        },
+        { emitEvent: false, onlySelf: true },
+      );
+    });
+  }
 
   ngOnInit(): void {
     this.checkInitialUserCalendarConfig();
@@ -103,6 +125,11 @@ export class CalendarComponent implements OnInit {
           },
         });
       });
+  }
+
+  tableHasChanged(tableInfo: CalendarInnerConfig[]) {
+    this.tableInfo.update(() => tableInfo);
+    this.saveInfo.update(() => true);
   }
 
   private checkInitialUserCalendarConfig() {

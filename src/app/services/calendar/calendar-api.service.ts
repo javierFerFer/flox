@@ -57,14 +57,14 @@ export class CalendarApiService {
     );
   }
 
-  updateCalendarWeeklyInfo(date: string, calendarData: CalendarModel) {
+  updateCalendarWeeklyInfo(calendarModel: CalendarModel) {
     const calendarDoc = doc(
       this.firestore,
-      `calendar/${this.userStore.user().uid}/${date}/calendar_info`,
+      `calendar/${this.userStore.user().uid}/${calendarModel.date}/calendar_info`,
     );
 
     return from(
-      setDoc(calendarDoc, { calendar_info: calendarData }, { merge: true }),
+      setDoc(calendarDoc, { calendar_info: calendarModel }, { merge: true }),
     ).pipe(map((_) => true));
   }
 

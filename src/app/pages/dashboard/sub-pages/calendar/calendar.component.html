@@ -21,13 +21,17 @@
         </div>
         <div class="mt-4 pt-4.5">
           <app-calendar-table
-            [selectedDate]="selectedDateValue()"
+            (tableInfoEmitter)="tableHasChanged($event)"
           ></app-calendar-table>
         </div>
       </div>
     </p-card>
     <p-card>
-      <app-calendar-info-form></app-calendar-info-form>
+      <app-calendar-info-form
+        [canSave]="saveInfo()"
+        [tableInfo]="tableInfo()"
+        [selectedDate]="this.selectedDateValue()"
+      ></app-calendar-info-form>
     </p-card>
   </form>
 </ng-container>

@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { finalize, tap } from 'rxjs';
+import { finalize, of, tap } from 'rxjs';
 import {
-  CalendarInnerConfig,
+  CalendarModel,
   CalendarUserConfig,
 } from '../../stores/calendar/calendar.model';
 import { CalendarStore } from '../../stores/calendar/calendar.store';
@@ -14,31 +14,39 @@ export class CalendarService {
 
   public getCalendarGlobalConfig() {
     this.calendarStore.setIsLoading(true);
-    return this.calendarApiService.getCalendarGlobalConfig().pipe(
-      tap((result) => {
-        if (result) {
-          this.calendarStore.updateCalendarGlobalInfo(result);
-        }
-      }),
-      finalize(() => {
-        this.calendarStore.setIsLoading(false);
-      }),
-    );
+    const calendarGlobalInfo =
+      this.calendarStore.calendarGlobalInfo()?.calendarInfo;
+    return calendarGlobalInfo
+      ? of(calendarGlobalInfo)
+      : this.calendarApiService.getCalendarGlobalConfig().pipe(
+          tap((result) => {
+            if (result) {
+              this.calendarStore.updateCalendarGlobalInfo(result);
+            }
+          }),
+          finalize(() => {
+            this.calendarStore.setIsLoading(false);
+          }),
+        );
   }
 
   public getCalendarUserConfig() {
     this.calendarStore.setIsLoading(true);
-    return this.calendarApiService.getCalendarUserConfig().pipe(
-      tap((result) => {
-        if (result) {
-          const convertedToArray: CalendarUserConfig[] = Object.values(result);
-          this.calendarStore.updateCalendarUserConfig(convertedToArray);
-        }
-      }),
-      finalize(() => {
-        this.calendarStore.setIsLoading(false);
-      }),
-    );
+    const calendarUserConfig = this.calendarStore.calendarUserConfig();
+    return !!calendarUserConfig
+      ? of(calendarUserConfig)
+      : this.calendarApiService.getCalendarUserConfig().pipe(
+          tap((result) => {
+            if (result) {
+              const convertedToArray: CalendarUserConfig[] =
+                Object.values(result);
+              this.calendarStore.updateCalendarUserConfig(convertedToArray);
+            }
+          }),
+          finalize(() => {
+            this.calendarStore.setIsLoading(false);
+          }),
+        );
   }
 
   public getCalendarInfo(date: string) {
@@ -57,35 +65,17 @@ export class CalendarService {
     );
   }
 
-  public updateCalendarWeeklyInfo(
-    date: string,
-    weeklyInfo: CalendarInnerConfig[],
-  ) {
+  public updateCalendarWeeklyInfo(calendarModel: CalendarModel) {
     this.calendarStore.setIsLoading(true);
 
-    let selectedCalendarInfo = this.calendarStore.calendarInfo();
-    selectedCalendarInfo = {
-      ...selectedCalendarInfo,
-      date,
-      calendarData: {
-        ...(selectedCalendarInfo?.calendarData || {}),
-        tableInfo: [
-          // ...(selectedCalendarInfo?.calendarData?.tableInfo || []),
-          ...weeklyInfo,
-        ],
-      },
-    };
-
-    return this.calendarApiService
-      .updateCalendarWeeklyInfo(date, selectedCalendarInfo)
-      .pipe(
-        tap(() => {
-          this.calendarStore.updateCalendarWeeklyInfo(date, weeklyInfo);
-        }),
-        finalize(() => {
-          this.calendarStore.setIsLoading(false);
-        }),
-      );
+    return this.calendarApiService.updateCalendarWeeklyInfo(calendarModel).pipe(
+      tap(() => {
+        this.calendarStore.updateCalendarWeeklyInfo(calendarModel);
+      }),
+      finalize(() => {
+        this.calendarStore.setIsLoading(false);
+      }),
+    );
   }
 
   public updateUserCalendarConfig(data: CalendarUserConfig[]) {

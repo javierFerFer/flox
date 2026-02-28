@@ -1,7 +1,6 @@
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import {
   CalendarGlobalInfo,
-  CalendarInnerConfig,
   CalendarModel,
   CalendarUserConfig,
 } from './calendar.model';
@@ -50,22 +49,10 @@ export const CalendarStore = signalStore(
         calendarUserConfig,
       }));
     },
-    updateCalendarWeeklyInfo(
-      date: string,
-      calendarInfo: CalendarInnerConfig[],
-    ): void {
+    updateCalendarWeeklyInfo(calendarModel: CalendarModel): void {
       patchState(store, (state) => ({
         ...state,
-        calendarInfo: {
-          date: date,
-          calendarData: {
-            ...state.calendarInfo?.calendarData!,
-            tableInfo: [
-              // ...(state.calendarInfo?.calendarData.tableInfo || []),
-              ...calendarInfo,
-            ],
-          },
-        },
+        calendarInfo: calendarModel,
       }));
     },
     setIsLoading(isLoading: boolean): void {
