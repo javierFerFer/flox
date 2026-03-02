@@ -199,7 +199,6 @@ export const routes: Routes = [
           {
             path: 'calendar-user-config',
             canActivate: [CanActivateCalendarUserInfoGuard],
-            // canDeactivate: [CanDeactivateCalendarUserInfoGuard],
             loadComponent: () =>
               import('./components/modal-wrapper/modal-wrapper.component').then(
                 (m) => m.ModalWrapperComponent,
