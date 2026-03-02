@@ -1,27 +1,27 @@
 import { Component, inject, Input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { RippleModule } from 'primeng/ripple';
 import { TranslocoDirective } from '@jsverse/transloco';
+import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { SelectModule } from 'primeng/select';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
-import { CloseModal } from '../close-modal-interface';
+import { RippleModule } from 'primeng/ripple';
+import { SelectModule } from 'primeng/select';
+import { TextareaModule } from 'primeng/textarea';
+import { take } from 'rxjs';
 import { ModalWrapperComponent } from '../../../components/modal-wrapper/modal-wrapper.component';
+import { SwapperComponent } from '../../../components/swapper-components/swapper.component';
+import { TextEditorComponent } from '../../../components/text-editor/text-editor.component';
+import { NoSuggestDirective } from '../../../directives/no-suggest.directive';
+import { SanitizeHTMLPipe } from '../../../pipes/sanitize-html.pipe';
 import { ToastService } from '../../../services/toast/toast.service';
-import { UnityStore } from '../../../stores/unity/unity.store';
 import { UnitsService } from '../../../services/unity/unity.service';
 import { ClassStore } from '../../../stores/class/class.store';
-import { TextareaModule } from 'primeng/textarea';
-import { NoSuggestDirective } from '../../../directives/no-suggest.directive';
-import { TextEditorComponent } from '../../../components/text-editor/text-editor.component';
-import { SanitizeHTMLPipe } from '../../../pipes/sanitize-html.pipe';
-import { take } from 'rxjs';
-import { SwapperComponent } from '../../../components/swapper-components/swapper.component';
+import { UnityStore } from '../../../stores/unity/unity.store';
+import { CloseModal } from '../close-modal-interface';
 
 @Component({
-  selector: 'app-create-new-class',
+  selector: 'app-create-new-unit',
   imports: [
     ButtonModule,
     RippleModule,

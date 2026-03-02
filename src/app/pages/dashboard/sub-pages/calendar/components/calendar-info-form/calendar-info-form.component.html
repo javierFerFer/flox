@@ -1,0 +1,208 @@
+<ng-container *transloco="let t">
+  <form [formGroup]="datePickerForm" (ngSubmit)="saveInfo()">
+    <div class="pr-4.5 pb-4.5 pl-4.5">
+      <h1 class="mt-3 mb-3 font-bold">
+        {{ t("DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.LABEL") }}
+      </h1>
+      <p-divider></p-divider>
+      <div class="flex flex-col gap-6 md:flex-row">
+        @let isComplexProject =
+          this.datePickerForm.get("project")?.value || "" | checkComplexHTML;
+        <app-swapper class="mt-6" [isVisible]="!isComplexProject">
+          <ng-template #headerContent>
+            {{ t("DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.PROJECT") }}
+          </ng-template>
+          <ng-template #firstComponent>
+            <p-floatlabel class="w-full" variant="in">
+              <textarea
+                formControlName="project"
+                [ngModel]="
+                  this.datePickerForm.controls.project.value | sanitizeHTML
+                "
+                class="w-full"
+                pTextarea
+                [autoResize]="true"
+                noSuggest
+              ></textarea>
+              <label for="in_label">
+                {{
+                  t("DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.PROJECT")
+                }}
+              </label>
+            </p-floatlabel>
+          </ng-template>
+          <ng-template #secondComponent>
+            <app-text-editor
+              formControlName="project"
+              class="w-full"
+            ></app-text-editor>
+          </ng-template>
+        </app-swapper>
+        @let isComplexProposals =
+          this.datePickerForm.get("proposals")?.value || "" | checkComplexHTML;
+        <app-swapper class="mt-6" [isVisible]="!isComplexProposals">
+          <ng-template #headerContent>
+            {{
+              t("DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.PROPOSALS")
+            }}
+          </ng-template>
+          <ng-template #firstComponent>
+            <p-floatlabel class="w-full" variant="in">
+              <textarea
+                formControlName="proposals"
+                [ngModel]="
+                  this.datePickerForm.controls.proposals.value | sanitizeHTML
+                "
+                class="w-full"
+                pTextarea
+                [autoResize]="true"
+                noSuggest
+              ></textarea>
+              <label for="in_label">
+                {{
+                  t(
+                    "DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.PROPOSALS"
+                  )
+                }}
+              </label>
+            </p-floatlabel>
+          </ng-template>
+          <ng-template #secondComponent>
+            <app-text-editor
+              formControlName="proposals"
+              class="w-full"
+            ></app-text-editor>
+          </ng-template>
+        </app-swapper>
+      </div>
+      <div class="flex">
+        @let isComplexMaterials =
+          this.datePickerForm.get("materials")?.value || "" | checkComplexHTML;
+        <app-swapper class="mt-6" [isVisible]="!isComplexMaterials">
+          <ng-template #headerContent>
+            {{
+              t("DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.MATERIALS")
+            }}
+          </ng-template>
+          <ng-template #firstComponent>
+            <p-floatlabel class="w-full" variant="in">
+              <textarea
+                formControlName="materials"
+                [ngModel]="
+                  this.datePickerForm.controls.materials.value | sanitizeHTML
+                "
+                class="w-full"
+                pTextarea
+                [autoResize]="true"
+                noSuggest
+              ></textarea>
+              <label for="in_label">
+                {{
+                  t(
+                    "DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.MATERIALS"
+                  )
+                }}
+              </label>
+            </p-floatlabel>
+          </ng-template>
+          <ng-template #secondComponent>
+            <app-text-editor
+              formControlName="materials"
+              class="w-full"
+            ></app-text-editor>
+          </ng-template>
+        </app-swapper>
+      </div>
+      <div class="flex flex-col gap-6 md:flex-row">
+        @let isComplexWeeklyTutorials =
+          this.datePickerForm.get("weeklyTutorials")?.value || ""
+            | checkComplexHTML;
+        <app-swapper class="mt-6" [isVisible]="!isComplexWeeklyTutorials">
+          <ng-template #headerContent>
+            {{
+              t("DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.TUTORIALS")
+            }}
+          </ng-template>
+          <ng-template #firstComponent>
+            <p-floatlabel class="w-full" variant="in">
+              <textarea
+                formControlName="weeklyTutorials"
+                [ngModel]="
+                  this.datePickerForm.controls.weeklyTutorials.value
+                    | sanitizeHTML
+                "
+                class="w-full"
+                pTextarea
+                [autoResize]="true"
+                noSuggest
+              ></textarea>
+              <label for="in_label">
+                {{
+                  t(
+                    "DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.TUTORIALS"
+                  )
+                }}
+              </label>
+            </p-floatlabel>
+          </ng-template>
+          <ng-template #secondComponent>
+            <app-text-editor
+              formControlName="weeklyTutorials"
+              class="w-full"
+            ></app-text-editor>
+          </ng-template>
+        </app-swapper>
+        @let isComplexDoNotForget =
+          this.datePickerForm.get("doNotForget")?.value || ""
+            | checkComplexHTML;
+        <app-swapper class="mt-6" [isVisible]="!isComplexDoNotForget">
+          <ng-template #headerContent>
+            {{
+              t(
+                "DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.DO_NOT_FORGET"
+              )
+            }}
+          </ng-template>
+          <ng-template #firstComponent>
+            <p-floatlabel class="w-full" variant="in">
+              <textarea
+                formControlName="doNotForget"
+                [ngModel]="
+                  this.datePickerForm.controls.doNotForget.value | sanitizeHTML
+                "
+                class="w-full"
+                pTextarea
+                [autoResize]="true"
+                noSuggest
+              ></textarea>
+              <label for="in_label">
+                {{
+                  t(
+                    "DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.DO_NOT_FORGET"
+                  )
+                }}
+              </label>
+            </p-floatlabel>
+          </ng-template>
+          <ng-template #secondComponent>
+            <app-text-editor
+              formControlName="doNotForget"
+              class="w-full"
+            ></app-text-editor>
+          </ng-template>
+        </app-swapper>
+      </div>
+    </div>
+    <div class="flex w-full items-center justify-end-safe pr-4.5 pl-4.5">
+      <p-button
+        type="submit"
+        [disabled]="canSave() ? !canSave() : !this.datePickerForm.dirty"
+        [label]="
+          t('DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.ACTIONS.SAVE')
+        "
+        severity="success"
+        styleClass="w-32"
+      ></p-button>
+    </div>
+  </form>
+</ng-container>

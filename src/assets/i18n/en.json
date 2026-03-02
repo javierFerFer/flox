@@ -16,6 +16,9 @@
     "CLASSES": {
       "LABEL": "Classes"
     },
+    "CALENDAR": {
+      "LABEL": "Calendar"
+    },
     "SELECTED_CLASS": {
       "LABEL": "{{variable}}"
     },
@@ -214,6 +217,69 @@
           "ACTIONS": {
             "CLOSE": "Discard changes",
             "SAVE": "Save changes"
+          }
+        },
+        "NEW_CALENDAR_SCHEDULE": {
+          "TITLE": "Calendar config",
+          "TABLE_LABELS": {
+            "HOURS": "Hours",
+            "MONDAY": "Monday",
+            "TUESDAY": "Tuesday",
+            "WEDNESDAY": "Wednesday",
+            "THURSDAY": "Thursday",
+            "FRIDAY": "Friday"
+          },
+          "ACTIONS": {
+            "SAVE": "Save configuration"
+          },
+          "MESSAGES": {
+            "CONFIG_SCHEDULE_SUCCESS": {
+              "SUMMARY": "Success",
+              "DETAIL": "The configuration was saved successfully!"
+            },
+            "CONFIG_SCHEDULE_UNSUCCESS": {
+              "SUMMARY": "Error",
+              "DETAIL": "The configuration was not saved!"
+            }
+          }
+        }
+      }
+    },
+    "CALENDAR": {
+      "LABEL": "Calendar",
+      "DATE": "Date",
+      "COMPONENTS": {
+        "CALENDAR_TABLE": {
+          "HEADERS": {
+            "HOURS": "Hours",
+            "MONDAY": "Monday",
+            "TUESDAY": "Tuesday",
+            "WEDNESDAY": "Wednesday",
+            "THURSDAY": "Thursday",
+            "FRIDAY": "Friday"
+          }
+        },
+        "CALENDAR_FORM": {
+          "LABEL": "Daily information",
+          "FORM": {
+            "PROJECT": "Project",
+            "PROPOSALS": "Proposals",
+            "MATERIALS": "Materials",
+            "TUTORIALS": "Tutorials",
+            "DO_NOT_FORGET": "Do not forget",
+            "ACTIONS": {
+              "SAVE": "Save"
+            },
+            "MESSAGES": {
+              "CALENDAR_FORM_EDIT_SUCCESS": {
+                "SUMMARY": "Success",
+                "DETAIL": "The calendar was saved successfully!"
+              },
+              "CALENDAR_FORM_EDIT_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "The calendar was not saved!"
+              }
+            }
           }
         }
       }

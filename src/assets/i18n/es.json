@@ -16,6 +16,9 @@
     "CLASSES": {
       "LABEL": "Clases"
     },
+    "CALENDAR": {
+      "LABEL": "Calendario"
+    },
     "SELECTED_CLASS": {
       "LABEL": "{{variable}}"
     },
@@ -232,6 +235,69 @@
           "ACTIONS": {
             "CLOSE": "Descartar cambios",
             "SAVE": "Guardar cambios"
+          }
+        },
+        "NEW_CALENDAR_SCHEDULE": {
+          "TITLE": "Configurar calendario",
+          "TABLE_LABELS": {
+            "HOURS": "Horas",
+            "MONDAY": "Lunes",
+            "TUESDAY": "Martes",
+            "WEDNESDAY": "Miercoles",
+            "THURSDAY": "Jueves",
+            "FRIDAY": "Viernes"
+          },
+          "ACTIONS": {
+            "SAVE": "Guardar configuración"
+          },
+          "MESSAGES": {
+            "CONFIG_SCHEDULE_SUCCESS": {
+              "SUMMARY": "Éxito",
+              "DETAIL": "La configuración fue guardada correctamente!"
+            },
+            "CONFIG_SCHEDULE_UNSUCCESS": {
+              "SUMMARY": "Error",
+              "DETAIL": "La configuración no fue guardada!"
+            }
+          }
+        }
+      }
+    },
+    "CALENDAR": {
+      "LABEL": "Calendario",
+      "DATE": "Fecha",
+      "COMPONENTS": {
+        "CALENDAR_TABLE": {
+          "HEADERS": {
+            "HOURS": "Horas",
+            "MONDAY": "Lunes",
+            "TUESDAY": "Martes",
+            "WEDNESDAY": "Miercoles",
+            "THURSDAY": "Jueves",
+            "FRIDAY": "Viernes"
+          }
+        },
+        "CALENDAR_FORM": {
+          "LABEL": "Información del día",
+          "FORM": {
+            "PROJECT": "Proyecto",
+            "PROPOSALS": "Propuestas",
+            "MATERIALS": "Materiales",
+            "TUTORIALS": "Tutorias",
+            "DO_NOT_FORGET": "No olvidar",
+            "ACTIONS": {
+              "SAVE": "Guardar"
+            },
+            "MESSAGES": {
+              "CALENDAR_FORM_EDIT_SUCCESS": {
+                "SUMMARY": "Éxito",
+                "DETAIL": "El calendario fue guardado exitosamente!"
+              },
+              "CALENDAR_FORM_EDIT_UNSUCCESS": {
+                "SUMMARY": "Error",
+                "DETAIL": "El calendario no pudo ser guardado!"
+              }
+            }
           }
         }
       }

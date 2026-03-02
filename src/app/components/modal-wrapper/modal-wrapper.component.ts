@@ -1,18 +1,18 @@
+import { Location } from '@angular/common';
 import {
   Component,
   ComponentRef,
-  DestroyRef,
   inject,
   OnInit,
+  signal,
   viewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { DialogModule } from 'primeng/dialog';
-import { ButtonModule } from 'primeng/button';
-import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { TranslocoService } from '@jsverse/transloco';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { switchMap, take } from 'rxjs';
 import { CloseModal } from '../../pages/modals/close-modal-interface';
 
 type CustomComponentIntance = {
@@ -21,25 +21,24 @@ type CustomComponentIntance = {
 
 @Component({
   selector: 'app-modal-wrapper',
-  imports: [DialogModule, ButtonModule],
-  standalone: true,
   templateUrl: 'modal-wrapper.component.html',
+  standalone: true,
+  imports: [DialogModule, ButtonModule],
 })
 export class ModalWrapperComponent implements OnInit {
   visible = true;
-  autoMaximize = false;
+  autoMaximize = signal(false);
+  modalClosable = signal(true);
 
   componentSpot = viewChild.required('spot', { read: ViewContainerRef });
   modalTitle: string = '';
   private componentRef!: CustomComponentIntance;
   private readonly translocoService = inject(TranslocoService);
   private readonly location = inject(Location);
-  private readonly destroyRef = inject(DestroyRef);
 
   constructor(private activatedRoute: ActivatedRoute) {}
 
   async ngOnInit(): Promise<void> {
-    await this.renderComponent();
     const modalTitleKey = this.activatedRoute.snapshot.data[
       'modalTitleKey'
     ] as string;
@@ -48,16 +47,28 @@ export class ModalWrapperComponent implements OnInit {
       'autoMaximize'
     ] as string;
 
-    if (autoMaximize) {
-      this.autoMaximize = true;
+    const modalClosable = this.activatedRoute.snapshot.data[
+      'modalClosable'
+    ] as boolean;
+
+    if (autoMaximize !== undefined) {
+      this.autoMaximize.update(() => true);
+    }
+
+    if (modalClosable !== undefined) {
+      this.modalClosable.update(() => modalClosable);
     }
 
     this.translocoService
       .selectTranslate(modalTitleKey)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((value) => {
-        this.modalTitle = value;
-      });
+      .pipe(
+        take(1),
+        switchMap((value) => {
+          this.modalTitle = value;
+          return this.renderComponent();
+        }),
+      )
+      .subscribe();
   }
 
   private async renderComponent() {

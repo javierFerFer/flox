@@ -1,0 +1,40 @@
+<ng-container *transloco="let t">
+  <form [formGroup]="datePickerForm">
+    <p-card>
+      <div class="pr-4.5 pb-4.5 pl-4.5">
+        <div
+          class="flex w-full flex-col md:flex-row md:items-center md:justify-between"
+        >
+          <h1 class="mb-3 font-bold md:mb-0">
+            {{ t("DASHBOARD.CALENDAR.LABEL") }}
+          </h1>
+          <p-float-label variant="in">
+            <p-datepicker
+              size="large"
+              selectionMode="range"
+              inputId="selectedDate"
+              formControlName="selectedDate"
+            />
+            <label for="selectedDate">{{ t("DASHBOARD.CALENDAR.DATE") }}</label>
+          </p-float-label>
+        </div>
+        <div class="mt-6">
+          <p-divider></p-divider>
+        </div>
+        <div class="mt-4 pt-4.5">
+          <app-calendar-table
+            (tableInfoEmitter)="tableHasChanged($event)"
+          ></app-calendar-table>
+        </div>
+      </div>
+    </p-card>
+    <p-card>
+      <app-calendar-info-form
+        [canSave]="saveInfo()"
+        [tableInfo]="tableInfo()"
+        [selectedDate]="this.selectedDateValue()"
+      ></app-calendar-info-form>
+    </p-card>
+  </form>
+</ng-container>
+<router-outlet name="calendarUserConfig"></router-outlet>

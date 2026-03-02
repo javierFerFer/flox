@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { ClassStore } from '../../stores/class/class.store';
-import { ClassApiService } from './class-api.service';
-import { tap, finalize, switchMap } from 'rxjs';
+import { finalize, switchMap, tap } from 'rxjs';
 import { ClassModel } from '../../stores/class/class.model';
+import { ClassStore } from '../../stores/class/class.store';
 import { UnitsService } from '../unity/unity.service';
+import { ClassApiService } from './class-api.service';
 
 @Injectable({ providedIn: 'root' })
 export class ClassService {

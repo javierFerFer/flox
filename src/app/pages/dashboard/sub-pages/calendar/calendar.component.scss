@@ -1,0 +1,9 @@
+:host {
+  ::ng-deep {
+    p-card {
+      .p-card {
+        margin-bottom: calc(var(--spacing) * 6); // 1.5rem;
+      }
+    }
+  }
+}
