@@ -11,17 +11,17 @@ import { routes } from './app.routes';
 
 import { providePrimeNG } from 'primeng/config';
 
-import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { provideHttpClient } from '@angular/common/http';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideTransloco } from '@jsverse/transloco';
+import { ToastModule } from 'primeng/toast';
 import { MyPreset } from '../../app.theme';
+import { ToastMessagingModule } from './services/toast/toast-messaging.module';
 import { TranslocoHttpLoader } from './transloco-loader';
 import { PROJECT_VERSION } from './version.config';
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { provideAuth, getAuth } from '@angular/fire/auth';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { ToastModule } from 'primeng/toast';
-import { ToastMessagingModule } from './services/toast/toast-messaging.module';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyA53tCg81VnygQLo6exgQsldVO_SfIe4b4',
@@ -80,7 +80,7 @@ export const appConfig: ApplicationConfig = {
     }),
     {
       provide: PROJECT_VERSION,
-      useValue: { version: '1.1.0' },
+      useValue: { version: '1.2.0' },
     },
   ],
 };
