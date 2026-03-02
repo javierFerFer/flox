@@ -1,15 +1,17 @@
 <ng-container *transloco="let t">
   <form [formGroup]="datePickerForm" (ngSubmit)="saveInfo()">
     <div class="pr-4.5 pb-4.5 pl-4.5">
-      <h1 class="mt-3 mb-3 font-bold">Información del día</h1>
+      <h1 class="mt-3 mb-3 font-bold">
+        {{ t("DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.LABEL") }}
+      </h1>
       <p-divider></p-divider>
       <div class="flex flex-col gap-6 md:flex-row">
-        <app-swapper class="mt-6">
-          <ng-template #headerContent>{{
-            t(
-              "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ACTIVITIES"
-            )
-          }}</ng-template>
+        @let isComplexProject =
+          this.datePickerForm.get("project")?.value || "" | checkComplexHTML;
+        <app-swapper class="mt-6" [isVisible]="!isComplexProject">
+          <ng-template #headerContent>
+            {{ t("DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.PROJECT") }}
+          </ng-template>
           <ng-template #firstComponent>
             <p-floatlabel class="w-full" variant="in">
               <textarea
@@ -22,11 +24,11 @@
                 [autoResize]="true"
                 noSuggest
               ></textarea>
-              <label for="in_label">{{
-                t(
-                  "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ACTIVITIES"
-                )
-              }}</label>
+              <label for="in_label">
+                {{
+                  t("DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.PROJECT")
+                }}
+              </label>
             </p-floatlabel>
           </ng-template>
           <ng-template #secondComponent>
@@ -36,12 +38,14 @@
             ></app-text-editor>
           </ng-template>
         </app-swapper>
-        <app-swapper class="mt-6">
-          <ng-template #headerContent>{{
-            t(
-              "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ACTIVITIES"
-            )
-          }}</ng-template>
+        @let isComplexProposals =
+          this.datePickerForm.get("proposals")?.value || "" | checkComplexHTML;
+        <app-swapper class="mt-6" [isVisible]="!isComplexProposals">
+          <ng-template #headerContent>
+            {{
+              t("DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.PROPOSALS")
+            }}
+          </ng-template>
           <ng-template #firstComponent>
             <p-floatlabel class="w-full" variant="in">
               <textarea
@@ -54,11 +58,13 @@
                 [autoResize]="true"
                 noSuggest
               ></textarea>
-              <label for="in_label">{{
-                t(
-                  "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ACTIVITIES"
-                )
-              }}</label>
+              <label for="in_label">
+                {{
+                  t(
+                    "DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.PROPOSALS"
+                  )
+                }}
+              </label>
             </p-floatlabel>
           </ng-template>
           <ng-template #secondComponent>
@@ -70,12 +76,14 @@
         </app-swapper>
       </div>
       <div class="flex">
-        <app-swapper class="mt-6">
-          <ng-template #headerContent>{{
-            t(
-              "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ACTIVITIES"
-            )
-          }}</ng-template>
+        @let isComplexMaterials =
+          this.datePickerForm.get("materials")?.value || "" | checkComplexHTML;
+        <app-swapper class="mt-6" [isVisible]="!isComplexMaterials">
+          <ng-template #headerContent>
+            {{
+              t("DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.MATERIALS")
+            }}
+          </ng-template>
           <ng-template #firstComponent>
             <p-floatlabel class="w-full" variant="in">
               <textarea
@@ -88,11 +96,13 @@
                 [autoResize]="true"
                 noSuggest
               ></textarea>
-              <label for="in_label">{{
-                t(
-                  "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ACTIVITIES"
-                )
-              }}</label>
+              <label for="in_label">
+                {{
+                  t(
+                    "DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.MATERIALS"
+                  )
+                }}
+              </label>
             </p-floatlabel>
           </ng-template>
           <ng-template #secondComponent>
@@ -104,12 +114,15 @@
         </app-swapper>
       </div>
       <div class="flex flex-col gap-6 md:flex-row">
-        <app-swapper class="mt-6">
-          <ng-template #headerContent>{{
-            t(
-              "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ACTIVITIES"
-            )
-          }}</ng-template>
+        @let isComplexWeeklyTutorials =
+          this.datePickerForm.get("weeklyTutorials")?.value || ""
+            | checkComplexHTML;
+        <app-swapper class="mt-6" [isVisible]="!isComplexWeeklyTutorials">
+          <ng-template #headerContent>
+            {{
+              t("DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.TUTORIALS")
+            }}
+          </ng-template>
           <ng-template #firstComponent>
             <p-floatlabel class="w-full" variant="in">
               <textarea
@@ -123,11 +136,13 @@
                 [autoResize]="true"
                 noSuggest
               ></textarea>
-              <label for="in_label">{{
-                t(
-                  "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ACTIVITIES"
-                )
-              }}</label>
+              <label for="in_label">
+                {{
+                  t(
+                    "DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.TUTORIALS"
+                  )
+                }}
+              </label>
             </p-floatlabel>
           </ng-template>
           <ng-template #secondComponent>
@@ -137,12 +152,17 @@
             ></app-text-editor>
           </ng-template>
         </app-swapper>
-        <app-swapper class="mt-6">
-          <ng-template #headerContent>{{
-            t(
-              "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ACTIVITIES"
-            )
-          }}</ng-template>
+        @let isComplexDoNotForget =
+          this.datePickerForm.get("doNotForget")?.value || ""
+            | checkComplexHTML;
+        <app-swapper class="mt-6" [isVisible]="!isComplexDoNotForget">
+          <ng-template #headerContent>
+            {{
+              t(
+                "DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.DO_NOT_FORGET"
+              )
+            }}
+          </ng-template>
           <ng-template #firstComponent>
             <p-floatlabel class="w-full" variant="in">
               <textarea
@@ -155,11 +175,13 @@
                 [autoResize]="true"
                 noSuggest
               ></textarea>
-              <label for="in_label">{{
-                t(
-                  "DASHBOARD.RECORDS.MODALS.CREATE_NEW_SESSION.FORM.SESSION_ACTIVITIES"
-                )
-              }}</label>
+              <label for="in_label">
+                {{
+                  t(
+                    "DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.DO_NOT_FORGET"
+                  )
+                }}
+              </label>
             </p-floatlabel>
           </ng-template>
           <ng-template #secondComponent>
@@ -175,7 +197,9 @@
       <p-button
         type="submit"
         [disabled]="canSave() ? !canSave() : !this.datePickerForm.dirty"
-        [label]="'Save!'"
+        [label]="
+          t('DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.ACTIONS.SAVE')
+        "
         severity="success"
         styleClass="w-32"
       ></p-button>

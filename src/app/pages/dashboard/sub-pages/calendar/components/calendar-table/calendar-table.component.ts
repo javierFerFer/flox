@@ -32,7 +32,7 @@ export class CalendarTableComponent {
 
   readonly calendarInfo = computed(() => {
     const calendarUserInfo = this.calendarStore.calendarUserConfig()!;
-    const mapedResult = (
+    const mappedResult = (
       this.calendarStore.calendarInfo()?.calendarData.tableInfo ||
       calendarUserInfo ||
       []
@@ -92,8 +92,8 @@ export class CalendarTableComponent {
           },
         }) as CalendarInnerConfig,
     );
-    this.tableInfoEmitter.emit(mapedResult);
-    return mapedResult;
+    this.tableInfoEmitter.emit(mappedResult);
+    return mappedResult;
   });
 
   emitNewChanges() {

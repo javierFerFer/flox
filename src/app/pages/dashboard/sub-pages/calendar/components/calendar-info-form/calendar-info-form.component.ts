@@ -16,6 +16,7 @@ import { TextareaModule } from 'primeng/textarea';
 import { take } from 'rxjs';
 import { SwapperComponent } from '../../../../../../components/swapper-components/swapper.component';
 import { TextEditorComponent } from '../../../../../../components/text-editor/text-editor.component';
+import { CheckComplexHTMLPipe } from '../../../../../../pipes/check-complex-html.pipe';
 import { SanitizeHTMLPipe } from '../../../../../../pipes/sanitize-html.pipe';
 import { CalendarService } from '../../../../../../services/calendar/calendar.service';
 import { ToastService } from '../../../../../../services/toast/toast.service';
@@ -46,6 +47,7 @@ type ɵNullableFormControls<T> = {
     TranslocoDirective,
     ReactiveFormsModule,
     FormsModule,
+    CheckComplexHTMLPipe,
   ],
 })
 export class CalendarInfoFormComponent implements OnInit {
@@ -167,18 +169,18 @@ export class CalendarInfoFormComponent implements OnInit {
         .subscribe(() => {
           this.toastService.showSuccessMessage({
             summaryToTranslate:
-              'DASHBOARD.RECORDS.MODALS.EDIT_NEW_SESSION.FORM.MESSAGES.NEW_SESSION_EDIT_SUCCESS.SUMMARY',
+              'DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.MESSAGES.CALENDAR_FORM_EDIT_SUCCESS.SUMMARY',
             detailToTranslate:
-              'DASHBOARD.RECORDS.MODALS.EDIT_NEW_SESSION.FORM.MESSAGES.NEW_SESSION_EDIT_SUCCESS.DETAIL',
+              'DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.MESSAGES.CALENDAR_FORM_EDIT_SUCCESS.DETAIL',
           });
         });
     } catch (error) {
       this.calendarStore.setIsLoading(false);
       this.toastService.showErrorMessage({
         summaryToTranslate:
-          'DASHBOARD.RECORDS.MODALS.EDIT_NEW_SESSION.FORM.MESSAGES.NEW_SESSION_EDIT_UNSUCCESS.SUMMARY',
+          'DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.MESSAGES.CALENDAR_FORM_EDIT_UNSUCCESS.SUMMARY',
         detailToTranslate:
-          'DASHBOARD.RECORDS.MODALS.EDIT_NEW_SESSION.FORM.MESSAGES.NEW_SESSION_EDIT_UNSUCCESS.DETAIL',
+          'DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.MESSAGES.CALENDAR_FORM_EDIT_UNSUCCESS.DETAIL',
       });
     }
   }

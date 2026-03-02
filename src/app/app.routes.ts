@@ -206,7 +206,8 @@ export const routes: Routes = [
                 (m) => m.ModalWrapperComponent,
               ),
             data: {
-              modalTitleKey: 'DASHBOARD.RECORDS.MODALS.CREATE_NEW_CLASS.TITLE',
+              modalTitleKey:
+                'DASHBOARD.RECORDS.MODALS.NEW_CALENDAR_SCHEDULE.TITLE',
               modalClosable: false,
               modalComponentPromise: () =>
                 import(

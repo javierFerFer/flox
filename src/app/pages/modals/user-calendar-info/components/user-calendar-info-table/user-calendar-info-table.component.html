@@ -5,12 +5,48 @@
   >
     <ng-template #header>
       <tr>
-        <th>horario</th>
-        <th>lunes</th>
-        <th>martes</th>
-        <th>miercoles</th>
-        <th>jueves</th>
-        <th>viernes</th>
+        <th>
+          {{
+            t(
+              "DASHBOARD.RECORDS.MODALS.NEW_CALENDAR_SCHEDULE.TABLE_LABELS.HOURS"
+            )
+          }}
+        </th>
+        <th>
+          {{
+            t(
+              "DASHBOARD.RECORDS.MODALS.NEW_CALENDAR_SCHEDULE.TABLE_LABELS.MONDAY"
+            )
+          }}
+        </th>
+        <th>
+          {{
+            t(
+              "DASHBOARD.RECORDS.MODALS.NEW_CALENDAR_SCHEDULE.TABLE_LABELS.TUESDAY"
+            )
+          }}
+        </th>
+        <th>
+          {{
+            t(
+              "DASHBOARD.RECORDS.MODALS.NEW_CALENDAR_SCHEDULE.TABLE_LABELS.WEDNESDAY"
+            )
+          }}
+        </th>
+        <th>
+          {{
+            t(
+              "DASHBOARD.RECORDS.MODALS.NEW_CALENDAR_SCHEDULE.TABLE_LABELS.THURSDAY"
+            )
+          }}
+        </th>
+        <th>
+          {{
+            t(
+              "DASHBOARD.RECORDS.MODALS.NEW_CALENDAR_SCHEDULE.TABLE_LABELS.FRIDAY"
+            )
+          }}
+        </th>
       </tr>
     </ng-template>
     <ng-template #body let-hour let-editing="editing">
@@ -73,7 +109,7 @@
     <p-button
       [disabled]="this.calendarStore.isLoading()"
       (onClick)="saveUserCalendarInfo()"
-      [label]="t('Guardar configuracion')"
+      [label]="t('DASHBOARD.RECORDS.MODALS.NEW_CALENDAR_SCHEDULE.ACTIONS.SAVE')"
       severity="success"
     >
     </p-button>
