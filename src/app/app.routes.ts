@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { CanActivateCalendarUserInfoGuard } from './guards/can-activate-calendar-user-info.guard';
-import { CanDeactivateCalendarUserInfoGuard } from './guards/can-deactivate-calendar-user-info.guard';
 import { ExistClassGuard } from './guards/exist-class.guard';
 import { InitGuard } from './guards/init.guard';
 import { CalendarGlobalConfigResolver } from './resolvers/calendar-global-config.resolver';
@@ -200,7 +199,7 @@ export const routes: Routes = [
           {
             path: 'calendar-user-config',
             canActivate: [CanActivateCalendarUserInfoGuard],
-            canDeactivate: [CanDeactivateCalendarUserInfoGuard],
+            // canDeactivate: [CanDeactivateCalendarUserInfoGuard],
             loadComponent: () =>
               import('./components/modal-wrapper/modal-wrapper.component').then(
                 (m) => m.ModalWrapperComponent,

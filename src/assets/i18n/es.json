@@ -248,7 +248,8 @@
             "FRIDAY": "Viernes"
           },
           "ACTIONS": {
-            "SAVE": "Guardar configuración"
+            "SAVE": "Guardar configuración",
+            "EXIT": "Quizás mas tarde..."
           },
           "MESSAGES": {
             "CONFIG_SCHEDULE_SUCCESS": {

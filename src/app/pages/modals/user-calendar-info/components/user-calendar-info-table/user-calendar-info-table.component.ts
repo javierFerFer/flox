@@ -1,6 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, output } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  OnDestroy,
+  output,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -22,10 +30,12 @@ import { CalendarStore } from '../../../../../stores/calendar/calendar.store';
     ButtonModule,
   ],
 })
-export class UserCalendarInfoTableComponent {
+export class UserCalendarInfoTableComponent implements OnDestroy {
   protected readonly calendarStore = inject(CalendarStore);
   protected readonly calendarService = inject(CalendarService);
   private readonly calendarGlobalInfo = this.calendarStore.calendarGlobalInfo;
+  private readonly router = inject(Router);
+  private isGoingBack = signal(false);
 
   protected calendarGlobalInfoParsed = computed(() => {
     const calendarGlobalInfo = this.calendarGlobalInfo()?.calendarInfo!;
@@ -48,5 +58,20 @@ export class UserCalendarInfoTableComponent {
 
   saveUserCalendarInfo() {
     this.tableInfoEmitter.emit(this.calendarGlobalInfoParsed());
+  }
+
+  navigateBack() {
+    this.isGoingBack.update(() => true);
+    this.router.navigate(['app', 'dashboard']);
+  }
+
+  // instead of use canDeactivate guard, this is a solution due to a problem with canDeactivate running twice
+  ngOnDestroy(): void {
+    if (
+      this.calendarStore.calendarUserConfig() == undefined &&
+      !this.isGoingBack()
+    ) {
+      this.router.navigate(['app', 'dashboard']);
+    }
   }
 }
