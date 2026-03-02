@@ -230,7 +230,8 @@
             "FRIDAY": "Friday"
           },
           "ACTIONS": {
-            "SAVE": "Save configuration"
+            "SAVE": "Save configuration",
+            "EXIT": "Maybe later..."
           },
           "MESSAGES": {
             "CONFIG_SCHEDULE_SUCCESS": {
