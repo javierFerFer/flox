@@ -6,6 +6,8 @@ import { TranslocoDirective } from '@jsverse/transloco';
 import { ButtonModule } from 'primeng/button';
 import { ChipModule } from 'primeng/chip';
 import { TableModule } from 'primeng/table';
+import { TextareaModule } from 'primeng/textarea';
+import { NoSuggestDirective } from '../../../../../../directives/no-suggest.directive';
 import {
   CalendarInnerConfig,
   CalendarInnerElement,
@@ -24,6 +26,8 @@ import { CalendarStore } from '../../../../../../stores/calendar/calendar.store'
     FormsModule,
     ChipModule,
     CommonModule,
+    TextareaModule,
+    NoSuggestDirective,
   ],
 })
 export class CalendarTableComponent {
