@@ -34,7 +34,11 @@
         <td>
           {{ hour.value }}
         </td>
-        <td [pEditableColumn]="hour.monday.value" pEditableColumnField="value">
+        <td
+          class="align-top"
+          [pEditableColumn]="hour.monday.value"
+          pEditableColumnField="value"
+        >
           <p-cellEditor>
             <ng-template #input>
               <div class="flex flex-col gap-3">
@@ -43,12 +47,14 @@
                     {{ hour.monday.tag }}
                   </p-chip>
                 }
-                <input
-                  pInputText
-                  type="text"
+                <textarea
                   [(ngModel)]="hour.monday.value"
                   (ngModelChange)="emitNewChanges()"
-                />
+                  pTextarea
+                  [autoResize]="true"
+                  noSuggest
+                  (keydown.enter)="$event.stopPropagation()"
+                ></textarea>
               </div>
             </ng-template>
             <ng-template #output>
@@ -58,14 +64,18 @@
                     {{ hour.monday.tag }}
                   </p-chip>
                 }
-                <div class="pl-3">
+                <div class="mt-2 whitespace-pre-line">
                   {{ hour.monday.value }}
                 </div>
               </div>
             </ng-template>
           </p-cellEditor>
         </td>
-        <td [pEditableColumn]="hour.tuesday.value" pEditableColumnField="value">
+        <td
+          class="align-top"
+          [pEditableColumn]="hour.tuesday.value"
+          pEditableColumnField="value"
+        >
           <p-cellEditor>
             <ng-template #input>
               <div class="flex flex-col gap-3">
@@ -74,12 +84,14 @@
                     {{ hour.tuesday.tag }}
                   </p-chip>
                 }
-                <input
-                  pInputText
-                  type="text"
+                <textarea
                   [(ngModel)]="hour.tuesday.value"
                   (ngModelChange)="emitNewChanges()"
-                />
+                  pTextarea
+                  [autoResize]="true"
+                  noSuggest
+                  (keydown.enter)="$event.stopPropagation()"
+                ></textarea>
               </div>
             </ng-template>
             <ng-template #output>
@@ -89,7 +101,7 @@
                     {{ hour.tuesday.tag }}
                   </p-chip>
                 }
-                <div class="pl-3">
+                <div class="mt-2 whitespace-pre-line">
                   {{ hour.tuesday.value }}
                 </div>
               </div>
@@ -97,6 +109,7 @@
           </p-cellEditor>
         </td>
         <td
+          class="align-top"
           [pEditableColumn]="hour.wednesday.value"
           pEditableColumnField="value"
         >
@@ -108,12 +121,14 @@
                     {{ hour.wednesday.tag }}
                   </p-chip>
                 }
-                <input
-                  pInputText
-                  type="text"
+                <textarea
                   [(ngModel)]="hour.wednesday.value"
                   (ngModelChange)="emitNewChanges()"
-                />
+                  pTextarea
+                  [autoResize]="true"
+                  noSuggest
+                  (keydown.enter)="$event.stopPropagation()"
+                ></textarea>
               </div>
             </ng-template>
             <ng-template #output>
@@ -123,7 +138,7 @@
                     {{ hour.wednesday.tag }}
                   </p-chip>
                 }
-                <div class="pl-3">
+                <div class="mt-2 whitespace-pre-line">
                   {{ hour.wednesday.value }}
                 </div>
               </div>
@@ -131,6 +146,7 @@
           </p-cellEditor>
         </td>
         <td
+          class="align-top"
           [pEditableColumn]="hour.thursday.value"
           pEditableColumnField="value"
         >
@@ -142,12 +158,14 @@
                     {{ hour.thursday.tag }}
                   </p-chip>
                 }
-                <input
-                  pInputText
-                  type="text"
+                <textarea
                   [(ngModel)]="hour.thursday.value"
                   (ngModelChange)="emitNewChanges()"
-                />
+                  pTextarea
+                  [autoResize]="true"
+                  noSuggest
+                  (keydown.enter)="$event.stopPropagation()"
+                ></textarea>
               </div>
             </ng-template>
             <ng-template #output>
@@ -157,14 +175,18 @@
                     {{ hour.thursday.tag }}
                   </p-chip>
                 }
-                <div class="pl-3">
+                <div class="mt-2 whitespace-pre-line">
                   {{ hour.thursday.value }}
                 </div>
               </div>
             </ng-template>
           </p-cellEditor>
         </td>
-        <td [pEditableColumn]="hour.friday.value" pEditableColumnField="value">
+        <td
+          class="align-top"
+          [pEditableColumn]="hour.friday.value"
+          pEditableColumnField="value"
+        >
           <p-cellEditor>
             <ng-template #input>
               <div class="flex flex-col gap-3">
@@ -173,12 +195,14 @@
                     {{ hour.friday.tag }}
                   </p-chip>
                 }
-                <input
-                  pInputText
-                  type="text"
+                <textarea
                   [(ngModel)]="hour.friday.value"
                   (ngModelChange)="emitNewChanges()"
-                />
+                  pTextarea
+                  [autoResize]="true"
+                  noSuggest
+                  (keydown.enter)="$event.stopPropagation()"
+                ></textarea>
               </div>
             </ng-template>
             <ng-template #output>
@@ -188,7 +212,7 @@
                     {{ hour.friday.tag }}
                   </p-chip>
                 }
-                <div class="pl-3">
+                <div class="mt-2 whitespace-pre-line">
                   {{ hour.friday.value }}
                 </div>
               </div>
