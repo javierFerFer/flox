@@ -27,16 +27,9 @@ export type StickyPosition =
   imports: [NgClass, TranslocoDirective, ButtonModule],
 })
 export class StickyButtonComponent {
-  /** Position of the sticky button on screen. Defaults to bottom-right. */
   position = input<StickyPosition>('bottom-right');
-
-  /** Controls whether the default button is disabled. Defaults to false. */
   disabled = input<boolean>(false);
-
-  /** Emits an event when the default sticky button is clicked. */
   onClick = output<void>();
-
-  /** Detects if the consumer projected custom content via [stickyContent] */
   customContent = contentChild('stickyContent');
 
   hasCustomContent = computed(() => !!this.customContent());
