@@ -286,9 +286,6 @@
             "MATERIALS": "Materiales",
             "TUTORIALS": "Tutorias",
             "DO_NOT_FORGET": "No olvidar",
-            "ACTIONS": {
-              "SAVE": "Guardar"
-            },
             "MESSAGES": {
               "CALENDAR_FORM_EDIT_SUCCESS": {
                 "SUMMARY": "Éxito",
@@ -334,6 +331,11 @@
       "ACTIONS": {
         "RESET_COLOR_SCHEME": "Restablecer color por defecto"
       }
+    }
+  },
+  "SHARED": {
+    "STICKY_BUTTON": {
+      "SAVE": "Guardar"
     }
   },
   "LANGUAGES": {

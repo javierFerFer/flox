@@ -1,0 +1,15 @@
+<ng-container *transloco="let t">
+  <div class="sticky-button-wrapper" [ngClass]="positionClass()">
+    @if (hasCustomContent()) {
+      <ng-content></ng-content>
+    } @else {
+      <p-button
+        (click)="onClick.emit()"
+        [disabled]="disabled()"
+        [label]="t('SHARED.STICKY_BUTTON.SAVE')"
+        icon="pi pi-save"
+        iconPos="left"
+      />
+    }
+  </div>
+</ng-container>

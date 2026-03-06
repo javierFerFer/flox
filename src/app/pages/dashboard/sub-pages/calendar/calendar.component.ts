@@ -17,7 +17,13 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { DividerModule } from 'primeng/divider';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { map, take, tap } from 'rxjs';
-import { CalendarInnerConfig } from '../../../../stores/calendar/calendar.model';
+import { StickyButtonComponent } from '../../../../components/sticky-button/sticky-button.component';
+import { CalendarService } from '../../../../services/calendar/calendar.service';
+import { ToastService } from '../../../../services/toast/toast.service';
+import {
+  CalendarInnerConfig,
+  CalendarModel,
+} from '../../../../stores/calendar/calendar.model';
 import { CalendarStore } from '../../../../stores/calendar/calendar.store';
 import { CalendarInfoFormComponent } from './components/calendar-info-form/calendar-info-form.component';
 import { CalendarTableComponent } from './components/calendar-table/calendar-table.component';
@@ -36,6 +42,7 @@ import { CalendarTableComponent } from './components/calendar-table/calendar-tab
     CalendarTableComponent,
     CalendarInfoFormComponent,
     RouterOutlet,
+    StickyButtonComponent,
   ],
 })
 export class CalendarComponent implements OnInit {
@@ -44,8 +51,9 @@ export class CalendarComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly calendarStore = inject(CalendarStore);
+  private readonly calendarService = inject(CalendarService);
+  private readonly toastService = inject(ToastService);
   protected tableInfo: WritableSignal<CalendarInnerConfig[]> = signal([]);
-  protected saveInfo = signal(false);
 
   private selectedDate = signal(this.selectFirstDay(new Date()));
 
@@ -129,7 +137,6 @@ export class CalendarComponent implements OnInit {
 
   tableHasChanged(tableInfo: CalendarInnerConfig[]) {
     this.tableInfo.update(() => tableInfo);
-    this.saveInfo.update(() => true);
   }
 
   private checkInitialUserCalendarConfig() {
@@ -156,5 +163,46 @@ export class CalendarComponent implements OnInit {
     start.setHours(0, 0, 0, 0);
     start.setDate(start.getDate() - start.getDay());
     return start;
+  }
+
+  save() {
+    const { doNotForget, materials, project, proposals, weeklyTutorials } =
+      this.datePickerForm.getRawValue();
+    const calendarModel: CalendarModel = {
+      date: this.selectedDateValue(),
+      calendarData: {
+        doNotForget: doNotForget || '',
+        materials: materials || '',
+        project: project || '',
+        proposals: proposals || '',
+        weeklyTutorials: weeklyTutorials || '',
+        tableInfo: [
+          ...(this.tableInfo().length
+            ? this.tableInfo()
+            : this.calendarStore.mappedCalendarInfo()),
+        ],
+      },
+    };
+    try {
+      this.calendarService
+        .updateCalendarWeeklyInfo(calendarModel)
+        .pipe(take(1))
+        .subscribe(() => {
+          this.toastService.showSuccessMessage({
+            summaryToTranslate:
+              'DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.MESSAGES.CALENDAR_FORM_EDIT_SUCCESS.SUMMARY',
+            detailToTranslate:
+              'DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.MESSAGES.CALENDAR_FORM_EDIT_SUCCESS.DETAIL',
+          });
+        });
+    } catch (error) {
+      this.calendarStore.setIsLoading(false);
+      this.toastService.showErrorMessage({
+        summaryToTranslate:
+          'DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.MESSAGES.CALENDAR_FORM_EDIT_UNSUCCESS.SUMMARY',
+        detailToTranslate:
+          'DASHBOARD.CALENDAR.COMPONENTS.CALENDAR_FORM.FORM.MESSAGES.CALENDAR_FORM_EDIT_UNSUCCESS.DETAIL',
+      });
+    }
   }
 }

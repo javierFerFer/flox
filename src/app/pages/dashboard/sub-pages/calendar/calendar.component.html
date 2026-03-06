@@ -29,12 +29,9 @@
       </div>
     </p-card>
     <p-card>
-      <app-calendar-info-form
-        [canSave]="saveInfo()"
-        [tableInfo]="tableInfo()"
-        [selectedDate]="this.selectedDateValue()"
-      ></app-calendar-info-form>
+      <app-calendar-info-form></app-calendar-info-form>
     </p-card>
+    <app-sticky-button (onClick)="save()"></app-sticky-button>
   </form>
 </ng-container>
 <router-outlet name="calendarUserConfig"></router-outlet>
