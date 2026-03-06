@@ -31,7 +31,10 @@
     <p-card>
       <app-calendar-info-form></app-calendar-info-form>
     </p-card>
-    <app-sticky-button (onClick)="save()"></app-sticky-button>
+    <app-sticky-button
+      [disabled]="calendarStore.isLoading()"
+      (onClick)="save()"
+    ></app-sticky-button>
   </form>
 </ng-container>
 <router-outlet name="calendarUserConfig"></router-outlet>

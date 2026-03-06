@@ -50,10 +50,10 @@ export class CalendarComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
-  private readonly calendarStore = inject(CalendarStore);
   private readonly calendarService = inject(CalendarService);
   private readonly toastService = inject(ToastService);
   protected tableInfo: WritableSignal<CalendarInnerConfig[]> = signal([]);
+  protected readonly calendarStore = inject(CalendarStore);
 
   private selectedDate = signal(this.selectFirstDay(new Date()));
 
