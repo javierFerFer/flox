@@ -14,6 +14,7 @@
               selectionMode="range"
               inputId="selectedDate"
               formControlName="selectedDate"
+              [dateFormat]="calendarDateFormat()"
             />
             <label for="selectedDate">{{ t("DASHBOARD.CALENDAR.DATE") }}</label>
           </p-float-label>

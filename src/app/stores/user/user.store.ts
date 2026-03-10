@@ -1,4 +1,5 @@
 import { computed, effect, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { TranslocoService } from '@jsverse/transloco';
 import {
   patchState,
@@ -8,6 +9,8 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
+import { PrimeNG } from 'primeng/config';
+import { switchMap } from 'rxjs';
 import { DEFAULT_LANGUAGE } from '../../app.config';
 import {
   FirebaseUserConfig,
@@ -116,6 +119,7 @@ export const UserStore = signalStore(
     onInit: (store) => {
       const localStorageService = inject(LocalStorageService);
       const translocoService = inject(TranslocoService);
+      const primengConfig = inject(PrimeNG);
 
       const storedUser = localStorageService.getItem<UserModel>('user') || {};
       patchState(store, (state) => ({
@@ -156,6 +160,22 @@ export const UserStore = signalStore(
       effect(() => {
         const user = store.user();
         store._updateUserIntoLocalStorage(user);
+      });
+      const PRIME_NG_TRANSLATIONS_KEY = 'PRIME_NG_TRANSLATIONS';
+      const langChanges = toSignal(
+        translocoService.langChanges$.pipe(
+          switchMap(() => {
+            return translocoService.selectTranslateObject(
+              PRIME_NG_TRANSLATIONS_KEY,
+            );
+          }),
+        ),
+      );
+      effect(() => {
+        const currentTranslations = langChanges();
+        if (!!currentTranslations && Object.keys(currentTranslations).length) {
+          primengConfig.setTranslation(currentTranslations);
+        }
       });
     },
   }),
