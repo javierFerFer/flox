@@ -1,22 +1,21 @@
 import { Component, DestroyRef, effect, inject, OnInit } from '@angular/core';
 
-import { DEFAULT_THEME, UserStore } from '../../../../stores/user/user.store';
-import { MenubarModule } from 'primeng/menubar';
+import { CommonModule } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { TranslocoDirective } from '@jsverse/transloco';
 import { MenuItem } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
-import { CommonModule } from '@angular/common';
-import { translateObjectSignal, TranslocoDirective } from '@jsverse/transloco';
-import { Router, RouterModule } from '@angular/router';
-import { ToggleThemeComponent } from '../../../../components/toggle-theme/toggle-theme.component';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ConfigUserService } from '../../../../services/config-user/config-user.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { RoutingService } from '../../../../services/routing/routing.service';
-import { DEFAULT_COLOR } from '../../../../../../app.theme';
 import { ColorPickerModule } from 'primeng/colorpicker';
-import { palette, updatePrimaryPalette } from '@primeng/themes';
+import { MenubarModule } from 'primeng/menubar';
 import { switchMap, take } from 'rxjs';
+import { DEFAULT_COLOR } from '../../../../../../app.theme';
+import { ToggleThemeComponent } from '../../../../components/toggle-theme/toggle-theme.component';
+import { ConfigUserService } from '../../../../services/config-user/config-user.service';
+import { RoutingService } from '../../../../services/routing/routing.service';
+import { DEFAULT_THEME, UserStore } from '../../../../stores/user/user.store';
 
 @Component({
   selector: 'app-custom-menu-bar',
@@ -91,9 +90,11 @@ export class CustomMenuBarComponent implements OnInit {
   }
 
   openUserSettings() {
-    this.router.navigate([
-      'dashboard',
-      { outlets: { modal: ['user-config'] } },
-    ]);
+    this.router.navigate(
+      ['dashboard', { outlets: { modal: ['user-config'] } }],
+      {
+        queryParamsHandling: 'preserve',
+      },
+    );
   }
 }
