@@ -54,6 +54,7 @@ export class CalendarComponent implements OnInit {
   private readonly toastService = inject(ToastService);
   protected tableInfo: WritableSignal<CalendarInnerConfig[]> = signal([]);
   protected readonly calendarStore = inject(CalendarStore);
+  protected readonly calendarDateFormat = this.calendarStore.calendarDateFormat;
 
   private selectedDate = signal(this.selectFirstDay(new Date()));
 

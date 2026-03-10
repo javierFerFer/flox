@@ -1,12 +1,19 @@
-import { computed } from '@angular/core';
+import { computed, effect, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { TranslocoService } from '@jsverse/transloco';
 import {
   patchState,
   signalStore,
   withComputed,
+  withHooks,
   withMethods,
   withState,
 } from '@ngrx/signals';
+import { PrimeNG } from 'primeng/config';
+import { LanguagesEnum } from './../../app.config';
 import {
+  CalendarFormat,
+  CalendarFormatEnum,
   CalendarGlobalInfo,
   CalendarInnerConfig,
   CalendarInnerElement,
@@ -18,6 +25,7 @@ type CalendarState = {
   calendarInfo: CalendarModel | undefined;
   calendarGlobalInfo: CalendarGlobalInfo | undefined;
   calendarUserConfig: CalendarUserConfig[] | undefined;
+  calendarDateFormat: CalendarFormat;
   isLoading: boolean;
 };
 
@@ -25,6 +33,7 @@ const initialState: CalendarState = {
   calendarInfo: undefined,
   calendarGlobalInfo: undefined,
   calendarUserConfig: undefined,
+  calendarDateFormat: 'mm/dd/yy',
   isLoading: false,
 };
 
@@ -125,8 +134,34 @@ export const CalendarStore = signalStore(
         calendarInfo: calendarModel,
       }));
     },
+    updateCalendarFormat(calendarFormat: CalendarFormat): void {
+      patchState(store, (state) => ({
+        ...state,
+        calendarDateFormat: calendarFormat,
+      }));
+    },
     setIsLoading(isLoading: boolean): void {
       patchState(store, (state) => ({ ...state, isLoading }));
     },
   })),
+  withHooks({
+    onInit: (store) => {
+      const primeConfig = inject(PrimeNG);
+      const translocoService = inject(TranslocoService);
+      const translationObserver = toSignal(primeConfig.translationObserver);
+      effect(() => {
+        translationObserver();
+        const currentLanguage = translocoService.getActiveLang() as
+          | LanguagesEnum.en
+          | LanguagesEnum.es;
+
+        if (currentLanguage === LanguagesEnum.en) {
+          store.updateCalendarFormat(CalendarFormatEnum.en);
+        }
+        if (currentLanguage === LanguagesEnum.es) {
+          store.updateCalendarFormat(CalendarFormatEnum.es);
+        }
+      });
+    },
+  }),
 );

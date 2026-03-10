@@ -1,3 +1,9 @@
+export type CalendarFormat = 'mm/dd/yy' | 'dd/mm/yy';
+export enum CalendarFormatEnum {
+  en = 'mm/dd/yy',
+  es = 'dd/mm/yy',
+}
+
 export interface CalendarModel {
   date: string;
   calendarData: CalendarData;
