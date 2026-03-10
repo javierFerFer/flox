@@ -1,4 +1,5 @@
 import { computed, effect, inject } from '@angular/core';
+import { TranslocoService } from '@jsverse/transloco';
 import {
   patchState,
   signalStore,
@@ -7,14 +8,13 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
-import { LocalStorageService } from '../../services/local-storage/local-storage.service';
-import { UserModel } from './user.model';
+import { DEFAULT_LANGUAGE } from '../../app.config';
 import {
   FirebaseUserConfig,
   UserTheme,
 } from '../../resolvers/user-config-modal.resolver';
-import { DEFAULT_LANGUAGE } from '../../app.config';
-import { TranslocoService } from '@jsverse/transloco';
+import { LocalStorageService } from '../../services/local-storage/local-storage.service';
+import { UserModel } from './user.model';
 
 export const DEFAULT_THEME: UserTheme = 'light';
 export enum themesEnum {
@@ -48,9 +48,7 @@ export const UserStore = signalStore(
     themeAsBoolean: computed(() =>
       user().userConfig?.toggleTheme === DEFAULT_THEME ? true : false,
     ),
-    userColorScheme: computed(() =>
-      user().userConfig?.userColorScheme,
-    ),
+    userColorScheme: computed(() => user().userConfig?.userColorScheme),
   })),
   withMethods((store, localStorageService = inject(LocalStorageService)) => ({
     updateTheme(theme: UserTheme): void {
