@@ -1,5 +1,43 @@
-<p-menu
-  class="self-stretch"
-  [style]="{ 'border-radius': '0', border: '0', height: '100%' }"
-  [model]="model"
-/>
+<ng-container *transloco="let t">
+  <p-menu
+    class="relative self-stretch"
+    [style]="{ 'border-radius': '0', border: '0', height: '100%' }"
+    [model]="model"
+  >
+    <ng-template #item let-item>
+      @if (showStatus()) {
+        @if (!item?.configureAsStatusButton) {
+          <a
+            pRipple
+            [routerLink]="item.routerLink"
+            class="p-menu-item-link flex h-10 items-center"
+          >
+            <span [class]="item.icon"></span>
+            <span class="mr-4">{{ t(item.label) }}</span>
+          </a>
+        } @else {
+          <a class="relative flex cursor-pointer items-center">
+            <span
+              class="absolute top-[1rem] left-50"
+              [class]="item?.iconBack"
+            ></span>
+          </a>
+        }
+      } @else {
+        @if (!item?.configureAsStatusButton) {
+          <a
+            pRipple
+            class="p-menu-item-link flex items-center"
+            [routerLink]="item.routerLink"
+          >
+            <span [class]="item.icon"></span>
+          </a>
+        } @else {
+          <a class="p-menu-item-link flex items-center">
+            <span [class]="item?.icon"></span>
+          </a>
+        }
+      }
+    </ng-template>
+  </p-menu>
+</ng-container>

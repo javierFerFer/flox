@@ -39,6 +39,7 @@ const initialState: UserState = {
       toggleTheme: DEFAULT_THEME,
       lastVersionReadIt: undefined,
       suggestInputs: false,
+      lateralMenuStatus: false,
     },
   },
   isLoading: false,

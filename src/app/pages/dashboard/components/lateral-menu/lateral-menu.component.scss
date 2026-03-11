@@ -10,8 +10,8 @@
           li {
             .p-menu-item-content {
               a {
-                padding-right: 5px;
-
+                padding-right: 0.4rem;
+                color: var(--p-menu-item-icon-focus-color);
                 span {
                   font-size: 1.5rem;
                   padding-left: 5px;
@@ -24,13 +24,18 @@
             padding-top: 1.5rem;
           }
 
+          li:nth-last-child(-n + 2) {
+            margin-top: 1.4rem;
+            padding: 0;
+          }
+
           li:last-child {
             margin-top: auto;
             padding: 0;
 
             div {
               a {
-                span:first-child {
+                span {
                   color: var(--p-red-500) !important;
                 }
               }
