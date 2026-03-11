@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ConfigUserService } from '../services/config-user/config-user.service';
 import { LanguagesEnum } from '../app.config';
+import { ConfigUserService } from '../services/config-user/config-user.service';
 
 export type UserTheme = 'light' | 'dark';
 
@@ -13,6 +13,7 @@ export interface FirebaseUserConfig {
   lastVersionReadIt?: string;
   suggestInputs?: boolean;
   userColorScheme?: string;
+  lateralMenuStatus?: boolean;
 }
 
 @Injectable({ providedIn: 'root' })

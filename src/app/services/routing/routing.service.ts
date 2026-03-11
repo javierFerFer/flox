@@ -1,14 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { Auth, signOut } from '@angular/fire/auth';
+import { CustomMenuItem } from '../../pages/dashboard/components/custom-breadcrumb/custom-breadcrumb.component';
 import { ProjectVersionStore } from '../../stores/project-version/project-version.store';
-import { MenuItem } from 'primeng/api';
 
 @Injectable({ providedIn: 'root' })
 export class RoutingService {
   private readonly auth = inject(Auth);
   private readonly projectVersionStore = inject(ProjectVersionStore);
 
-  public getRoutingConfig(): MenuItem[] {
+  public getRoutingConfig(): CustomMenuItem[] {
     return [
       {
         label: 'NAVIGATION.CLASSES.LABEL',

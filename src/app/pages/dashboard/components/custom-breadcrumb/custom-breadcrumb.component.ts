@@ -3,25 +3,17 @@ import {
   Component,
   computed,
   inject,
-  signal,
-  untracked,
 } from '@angular/core';
-import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { MenuItem } from 'primeng/api';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  Router,
-  RouterModule,
-} from '@angular/router';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { filter, map } from 'rxjs';
 import { RoutingService } from '../../../../services/routing/routing.service';
-import { CommonModule } from '@angular/common';
-import { filter, map, startWith } from 'rxjs';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { ClassStore } from '../../../../stores/class/class.store';
 
-interface CustomMenuItem extends MenuItem {
+export interface CustomMenuItem extends MenuItem {
   property?: {
     value: string;
   };
