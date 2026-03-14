@@ -28,6 +28,7 @@ export class LateralMenuComponent {
       ? this.userStore.user().userConfig?.lateralMenuStatus!
       : true,
   );
+  protected readonly animationsEnabled = signal<boolean>(false);
 
   private readonly allElementsExceptLast = this.routingService
     .getRoutingConfig()
@@ -45,6 +46,7 @@ export class LateralMenuComponent {
       iconBack: 'pi pi-arrow-circle-left',
       configureAsStatusButton: true,
       command: () => {
+        this.animationsEnabled.set(true);
         this.showStatus.update((status) => !status);
         const userConfig = this.userStore.user().userConfig;
 
