@@ -1,42 +1,35 @@
 <ng-container *transloco="let t">
   <p-menu
+    [class.animations-enabled]="animationsEnabled()"
+    [class.show-animation]="showStatus()"
+    [class.hide-animation]="!showStatus()"
     class="relative self-stretch"
     [style]="{ 'border-radius': '0', border: '0', height: '100%' }"
     [model]="model"
   >
     <ng-template #item let-item>
-      @if (showStatus()) {
-        @if (!item?.configureAsStatusButton) {
-          <a
-            pRipple
-            [routerLink]="item.routerLink"
-            class="p-menu-item-link flex h-10 items-center"
-          >
-            <span [class]="item.icon"></span>
-            <span class="mr-4">{{ t(item.label) }}</span>
-          </a>
-        } @else {
-          <a class="relative flex cursor-pointer items-center">
-            <span
-              class="absolute top-[1rem] left-50"
-              [class]="item?.iconBack"
-            ></span>
-          </a>
-        }
+      @if (!item?.configureAsStatusButton) {
+        <a
+          pRipple
+          [routerLink]="item.routerLink"
+          class="p-menu-item-link flex items-center"
+        >
+          <span [class]="item.icon"></span>
+          <span class="ml-[0.18rem] text-nowrap">{{ t(item.label) }}</span>
+        </a>
       } @else {
-        @if (!item?.configureAsStatusButton) {
+        <div class="relative">
           <a
-            pRipple
-            class="p-menu-item-link flex items-center"
             [routerLink]="item.routerLink"
+            [class.animations-enabled]="animationsEnabled()"
+            [class.rotate-180-degree]="showStatus()"
+            [class.rotate-180-degree-back]="!showStatus()"
+            class="absolute right-[-0.8rem] flex items-center"
           >
             <span [class]="item.icon"></span>
+            <span>{{ t(item.label) }}</span>
           </a>
-        } @else {
-          <a class="p-menu-item-link flex items-center">
-            <span [class]="item?.icon"></span>
-          </a>
-        }
+        </div>
       }
     </ng-template>
   </p-menu>
