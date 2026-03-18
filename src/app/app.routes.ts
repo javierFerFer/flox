@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
+import { CanActivateCalendarUserInfoEditGuard } from './guards/can-activate-calendar-user-info-edit.guard';
 import { CanActivateCalendarUserInfoGuard } from './guards/can-activate-calendar-user-info.guard';
 import { ExistClassGuard } from './guards/exist-class.guard';
 import { InitGuard } from './guards/init.guard';
@@ -62,6 +63,7 @@ const MODAL_SHARED_ROUTES: Routes = [
               CalendarUserConfigResolver,
               CalendarResolver,
             ],
+            canActivate: [CanActivateCalendarUserInfoEditGuard],
             loadComponent: () =>
               import('./components/modal-wrapper/modal-wrapper.component').then(
                 (m) => m.ModalWrapperComponent,

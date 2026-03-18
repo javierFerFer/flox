@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { MenuModule } from 'primeng/menu';
+import { CalendarStore } from '../../../../../stores/calendar/calendar.store';
 import { CustomMenuItem } from '../../../../dashboard/components/custom-breadcrumb/custom-breadcrumb.component';
 
 @Component({
@@ -12,6 +13,7 @@ import { CustomMenuItem } from '../../../../dashboard/components/custom-breadcru
   styleUrl: './user-config-navbar.component.scss',
 })
 export class UserConfigNavbarComponent {
+  private readonly calendarStore = inject(CalendarStore);
   public model: CustomMenuItem[] = [
     {
       label: 'SHARED_MODALS.USER_CONFIG.SUB_HEADER',
@@ -19,13 +21,15 @@ export class UserConfigNavbarComponent {
       routerLink: [{ outlets: { 'user-config-outlet': ['preferences'] } }],
       queryParamsHandling: 'preserve',
     },
-    {
-      label: 'NAVIGATION.CALENDAR.LABEL',
-      icon: 'pi pi-calendar-clock',
-      routerLink: [
-        { outlets: { 'user-config-outlet': ['calendar-preferences'] } },
-      ],
-      queryParamsHandling: 'preserve',
-    },
+    this.calendarStore.mappedCalendarHeadersInfo().length
+      ? {
+          label: 'NAVIGATION.CALENDAR.LABEL',
+          icon: 'pi pi-calendar-clock',
+          routerLink: [
+            { outlets: { 'user-config-outlet': ['calendar-preferences'] } },
+          ],
+          queryParamsHandling: 'preserve',
+        }
+      : {},
   ];
 }
