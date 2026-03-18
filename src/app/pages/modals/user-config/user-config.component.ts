@@ -11,7 +11,7 @@ import { CloseModal } from '../close-modal-interface';
   host: {
     class: 'w-full block min-h-[596px]',
     style:
-      'border-top-left-radius: 30px; box-shadow: inset 0 3px 4px #0000001a; background-color: var(--p-background); padding: 2rem; padding-top: 3rem; padding-bottom: 5rem; height: 100%; border-bottom-right-radius: var(--p-dialog-border-radius);',
+      'border-top-left-radius: 30px; box-shadow: inset 0 3px 4px #0000001a; background-color: var(--p-background); padding: 2rem; padding-top: 3rem; padding-bottom: 3rem; height: 100%; border-bottom-right-radius: var(--p-dialog-border-radius);',
   },
 })
 export class UserConfigModalComponent implements CloseModal {
