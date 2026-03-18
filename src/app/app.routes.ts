@@ -25,6 +25,10 @@ const MODAL_SHARED_ROUTES: Routes = [
         import('../app/pages/modals/user-config/user-config.component').then(
           (m) => m.UserConfigModalComponent,
         ),
+      helperComponentPromise: () =>
+        import('../app/pages/modals/user-config/user-config.component').then(
+          (m) => m.UserConfigModalComponent,
+        ),
     },
     outlet: 'modal',
   },

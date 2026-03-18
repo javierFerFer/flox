@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { CommonModule, Location, NgClass } from '@angular/common';
 import {
   Component,
   ComponentRef,
@@ -23,7 +23,7 @@ type CustomComponentIntance = {
   selector: 'app-modal-wrapper',
   templateUrl: 'modal-wrapper.component.html',
   standalone: true,
-  imports: [DialogModule, ButtonModule],
+  imports: [DialogModule, ButtonModule, NgClass, CommonModule],
 })
 export class ModalWrapperComponent implements OnInit {
   visible = true;
@@ -31,8 +31,12 @@ export class ModalWrapperComponent implements OnInit {
   modalClosable = signal(true);
 
   componentSpot = viewChild.required('spot', { read: ViewContainerRef });
+  componentHelperSpot = viewChild.required('helperSpot', {
+    read: ViewContainerRef,
+  });
   modalTitle: string = '';
   private componentRef!: CustomComponentIntance;
+  protected helperComponentRef!: CustomComponentIntance;
   private readonly translocoService = inject(TranslocoService);
   private readonly location = inject(Location);
 
@@ -75,6 +79,16 @@ export class ModalWrapperComponent implements OnInit {
     const modalComponentPromise =
       this.activatedRoute.snapshot.data['modalComponentPromise'];
     const componentToRender = await modalComponentPromise();
+
+    const helperComponentPromise =
+      this.activatedRoute.snapshot.data['helperComponentPromise'];
+    if (!!helperComponentPromise) {
+      const helperComponentPromiseToRender = await helperComponentPromise();
+      this.helperComponentRef = this.componentHelperSpot().createComponent(
+        helperComponentPromiseToRender,
+      );
+    }
+
     this.componentRef = this.componentSpot().createComponent(componentToRender);
     this.componentRef.setInput('modalWrapperRef', this);
   }
