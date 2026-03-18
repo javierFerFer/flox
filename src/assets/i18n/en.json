@@ -290,7 +290,34 @@
       "SUB_TITLE": "Update your information",
       "CALENDAR_PREFERENCES": {
         "TITLE": "Configure calendar",
-        "SUB_TITLE": "Update your calendar preferences"
+        "SUB_TITLE": "Update your calendar preferences",
+        "MODIFY_TEXT": "Modify calendar preferences",
+        "ACTIONS": {
+          "MODIFY": "Modify"
+        },
+        "EDIT": {
+          "TABLE_LABELS": {
+            "HOURS": "Hours",
+            "MONDAY": "Monday",
+            "TUESDAY": "Tuesday",
+            "WEDNESDAY": "Wednesday",
+            "THURSDAY": "Thursday",
+            "FRIDAY": "Friday"
+          },
+          "ACTIONS": {
+            "SAVE": "Save configuration"
+          },
+          "MESSAGES": {
+            "CONFIG_SCHEDULE_SUCCESS": {
+              "SUMMARY": "Success",
+              "DETAIL": "The configuration was saved successfully!"
+            },
+            "CONFIG_SCHEDULE_UNSUCCESS": {
+              "SUMMARY": "Error",
+              "DETAIL": "The configuration was not saved!"
+            }
+          }
+        }
       },
       "FORM": {
         "APP_LANGUAGE": "Language to use",

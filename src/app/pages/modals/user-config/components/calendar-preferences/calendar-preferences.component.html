@@ -8,5 +8,18 @@
         {{ t("SHARED_MODALS.USER_CONFIG.CALENDAR_PREFERENCES.SUB_TITLE") }}
       </p>
     </div>
+    <div class="mt-4 flex items-center">
+      <span class="w-full">{{
+        t("SHARED_MODALS.USER_CONFIG.CALENDAR_PREFERENCES.MODIFY_TEXT")
+      }}</span>
+      <p-button
+        (onClick)="navigateToCalendarConfig()"
+        severity="primary"
+        [label]="
+          t('SHARED_MODALS.USER_CONFIG.CALENDAR_PREFERENCES.ACTIONS.MODIFY')
+        "
+      />
+    </div>
   </p-card>
 </ng-container>
+<router-outlet name="calendar-preferences-outlet"></router-outlet>

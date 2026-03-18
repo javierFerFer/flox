@@ -125,6 +125,7 @@ export class ModalWrapperComponent implements OnInit {
     if (outletName !== 'primary') {
       this.router.navigate([{ outlets: { [outletName]: null } }], {
         relativeTo: routeToClear.parent,
+        queryParamsHandling: 'preserve',
       });
     } else {
       this.location.back();

@@ -17,6 +17,7 @@ export class UserConfigNavbarComponent {
       label: 'SHARED_MODALS.USER_CONFIG.SUB_HEADER',
       icon: 'pi pi-user-edit',
       routerLink: [{ outlets: { 'user-config-outlet': ['preferences'] } }],
+      queryParamsHandling: 'preserve',
     },
     {
       label: 'NAVIGATION.CALENDAR.LABEL',
@@ -24,6 +25,7 @@ export class UserConfigNavbarComponent {
       routerLink: [
         { outlets: { 'user-config-outlet': ['calendar-preferences'] } },
       ],
+      queryParamsHandling: 'preserve',
     },
   ];
 }

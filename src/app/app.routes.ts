@@ -54,6 +54,29 @@ const MODAL_SHARED_ROUTES: Routes = [
           import(
             '../app/pages/modals/user-config/components/calendar-preferences/calendar-preferences.component'
           ).then((m) => m.CalendarPreferencesComponent),
+        children: [
+          {
+            path: 'calendar-user-config',
+            resolve: [
+              CalendarGlobalConfigResolver,
+              CalendarUserConfigResolver,
+              CalendarResolver,
+            ],
+            loadComponent: () =>
+              import('./components/modal-wrapper/modal-wrapper.component').then(
+                (m) => m.ModalWrapperComponent,
+              ),
+            data: {
+              modalTitleKey:
+                'DASHBOARD.RECORDS.MODALS.NEW_CALENDAR_SCHEDULE.TITLE',
+              modalComponentPromise: () =>
+                import(
+                  '../app/pages/modals/user-config/components/user-calendar-info-edit/user-calendar-info-edit.component'
+                ).then((m) => m.UserCalendarInfoEditComponent),
+            },
+            outlet: 'calendar-preferences-outlet',
+          },
+        ],
       },
     ],
     outlet: 'modal',
