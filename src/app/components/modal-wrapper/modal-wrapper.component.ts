@@ -8,7 +8,7 @@ import {
   viewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoService } from '@jsverse/transloco';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -28,7 +28,9 @@ type CustomComponentIntance = {
 export class ModalWrapperComponent implements OnInit {
   visible = true;
   autoMaximize = signal(false);
+  maximize = signal(true);
   modalClosable = signal(true);
+  contentStyleClass = signal('');
 
   componentSpot = viewChild.required('spot', { read: ViewContainerRef });
   componentHelperSpot = viewChild.required('helperSpot', {
@@ -38,6 +40,7 @@ export class ModalWrapperComponent implements OnInit {
   private componentRef!: CustomComponentIntance;
   protected helperComponentRef!: CustomComponentIntance;
   private readonly translocoService = inject(TranslocoService);
+  private readonly router = inject(Router);
   private readonly location = inject(Location);
 
   constructor(private activatedRoute: ActivatedRoute) {}
@@ -47,6 +50,8 @@ export class ModalWrapperComponent implements OnInit {
       'modalTitleKey'
     ] as string;
 
+    const maximize = this.activatedRoute.snapshot.data['maximize'] as boolean;
+
     const autoMaximize = this.activatedRoute.snapshot.data[
       'autoMaximize'
     ] as string;
@@ -55,12 +60,24 @@ export class ModalWrapperComponent implements OnInit {
       'modalClosable'
     ] as boolean;
 
+    const contentStyleClass = this.activatedRoute.snapshot.data[
+      'contentStyleClass'
+    ] as string;
+
     if (autoMaximize !== undefined) {
       this.autoMaximize.update(() => true);
     }
 
+    if (maximize !== undefined) {
+      this.maximize.update(() => maximize);
+    }
+
     if (modalClosable !== undefined) {
       this.modalClosable.update(() => modalClosable);
+    }
+
+    if (contentStyleClass !== undefined) {
+      this.contentStyleClass.update(() => contentStyleClass);
     }
 
     this.translocoService
@@ -97,6 +114,20 @@ export class ModalWrapperComponent implements OnInit {
     if (this.componentRef.instance?.onClose) {
       this.componentRef.instance?.onClose();
     }
-    this.location.back();
+
+    let routeToClear = this.activatedRoute;
+    while (routeToClear.snapshot.outlet === 'primary' && routeToClear.parent) {
+      routeToClear = routeToClear.parent;
+    }
+
+    const outletName = routeToClear.snapshot.outlet;
+
+    if (outletName !== 'primary') {
+      this.router.navigate([{ outlets: { [outletName]: null } }], {
+        relativeTo: routeToClear.parent,
+      });
+    } else {
+      this.location.back();
+    }
   }
 }

@@ -285,8 +285,13 @@
   },
   "SHARED_MODALS": {
     "USER_CONFIG": {
-      "TITLE": "Edit profile",
+      "TITLE": "Config",
+      "SUB_HEADER": "Edit profile",
       "SUB_TITLE": "Update your information",
+      "CALENDAR_PREFERENCES": {
+        "TITLE": "Configure calendar",
+        "SUB_TITLE": "Update your calendar preferences"
+      },
       "FORM": {
         "APP_LANGUAGE": "Language to use",
         "AUTO_SUGGEST_INPUTS": {

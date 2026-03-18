@@ -303,8 +303,13 @@
   },
   "SHARED_MODALS": {
     "USER_CONFIG": {
-      "TITLE": "Editar perfil",
+      "TITLE": "Configuración",
+      "SUB_HEADER": "Editar perfil",
       "SUB_TITLE": "Actualiza tu información",
+      "CALENDAR_PREFERENCES": {
+        "TITLE": "Configurar calendario",
+        "SUB_TITLE": "Actualiza tus preferencias de calendario"
+      },
       "FORM": {
         "APP_LANGUAGE": "Idioma de la interfaz",
         "AUTO_SUGGEST_INPUTS": {

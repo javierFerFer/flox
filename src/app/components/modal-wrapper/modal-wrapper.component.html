@@ -8,13 +8,14 @@
   [closable]="modalClosable()"
   (onHide)="close()"
   [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [contentStyleClass]="contentStyleClass()"
   [style]="{
     width: '50vw',
     transform: 'none',
   }"
   [draggable]="false"
   [resizable]="false"
-  [maximizable]="true"
+  [maximizable]="maximize()"
   (onShow)="autoMaximize() ? dialog.maximize() : null"
 >
   <div

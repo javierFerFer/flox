@@ -21,15 +21,41 @@ const MODAL_SHARED_ROUTES: Routes = [
     resolve: [UserConfigModalResolver],
     data: {
       modalTitleKey: 'SHARED_MODALS.USER_CONFIG.TITLE',
+      maximize: false,
       modalComponentPromise: () =>
         import('../app/pages/modals/user-config/user-config.component').then(
           (m) => m.UserConfigModalComponent,
         ),
       helperComponentPromise: () =>
-        import('../app/pages/modals/user-config/user-config.component').then(
-          (m) => m.UserConfigModalComponent,
-        ),
+        import(
+          '../app/pages/modals/user-config/components/user-config-navbar/user-config-navbar.component'
+        ).then((m) => m.UserConfigNavbarComponent),
+      contentStyleClass: '![padding:0]',
     },
+    children: [
+      {
+        path: '',
+        redirectTo: 'preferences',
+        pathMatch: 'full',
+        outlet: 'user-config-outlet',
+      },
+      {
+        path: 'preferences',
+        outlet: 'user-config-outlet',
+        loadComponent: () =>
+          import(
+            '../app/pages/modals/user-config/components/user-preferences/user-preferences.component'
+          ).then((m) => m.UserPreferencesComponent),
+      },
+      {
+        path: 'calendar-preferences',
+        outlet: 'user-config-outlet',
+        loadComponent: () =>
+          import(
+            '../app/pages/modals/user-config/components/calendar-preferences/calendar-preferences.component'
+          ).then((m) => m.CalendarPreferencesComponent),
+      },
+    ],
     outlet: 'modal',
   },
 ];

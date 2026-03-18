@@ -1,0 +1,17 @@
+<ng-container *transloco="let t">
+  <p-menu
+    [model]="model"
+    styleClass="w-full p-0"
+    [style]="{ border: 'none', 'border-radius': '0' }"
+  >
+    <ng-template #item let-item>
+      <a
+        pRipple
+        [routerLink]="item.routerLink"
+        class="p-menu-item-link flex cursor-pointer items-center justify-center p-3"
+      >
+        <span class="{{ item.icon }} text-xl"></span>
+      </a>
+    </ng-template>
+  </p-menu>
+</ng-container>

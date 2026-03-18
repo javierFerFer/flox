@@ -1,129 +1,22 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { RippleModule } from 'primeng/ripple';
-import { TranslocoDirective } from '@jsverse/transloco';
-import { CardModule } from 'primeng/card';
-import { delay, take } from 'rxjs';
-import { UserImageComponent } from './components/user-image/user-image.component';
-import { SelectModule } from 'primeng/select';
-import { ToastService } from '../../../services/toast/toast.service';
-import { TranslocoHelperService } from '../../../services/transoloco-helper/transloco-helper.service';
-import { ConfigUserService } from '../../../services/config-user/config-user.service';
-import { UserStore } from '../../../stores/user/user.store';
-import { CloseModal } from '../close-modal-interface';
+import { Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { ModalWrapperComponent } from '../../../components/modal-wrapper/modal-wrapper.component';
-import { DEFAULT_LANGUAGE } from '../../../app.config';
-import { DEFAULT_COLOR } from '../../../../../app.theme';
+import { CloseModal } from '../close-modal-interface';
 
 @Component({
   selector: 'app-user-config',
-  imports: [
-    ButtonModule,
-    RippleModule,
-    ReactiveFormsModule,
-    TranslocoDirective,
-    SelectModule,
-    CardModule,
-    UserImageComponent,
-  ],
+  imports: [RouterModule],
   standalone: true,
   templateUrl: 'user-config.component.html',
+  host: {
+    class: 'w-full block min-h-[596px]',
+    style:
+      'border-top-left-radius: 30px; box-shadow: inset 0 3px 4px #0000001a; background-color: var(--p-background); padding: 2rem; padding-top: 3rem; padding-bottom: 5rem; height: 100%; border-bottom-right-radius: var(--p-dialog-border-radius);',
+  },
 })
-export class UserConfigModalComponent implements OnInit, CloseModal {
+export class UserConfigModalComponent implements CloseModal {
   @Input('modalWrapperRef')
   ModalWrapperRef!: ModalWrapperComponent;
-
-  private readonly fb = inject(FormBuilder);
-  private readonly configUserService = inject(ConfigUserService);
-  private readonly toastService = inject(ToastService);
-  private readonly translocoHelperService = inject(TranslocoHelperService);
-
-  userStore = inject(UserStore);
-  protected readonly userColorScheme = this.userStore.userColorScheme;
-  protected readonly DEFAULT_COLOR = DEFAULT_COLOR;
-
-  userConfigForm = this.fb.group({
-    photo: [this.userStore.user().userConfig?.photo],
-    appLanguage: [
-      this.userStore.user().userConfig?.appLanguage,
-      Validators.required,
-    ],
-    autoComplete: [
-      this.userStore.user().userConfig?.suggestInputs || false,
-      Validators.required,
-    ],
-  });
-
-  languages = [] as {}[];
-  autoCompleteOptions = [
-    {
-      name: 'SHARED_MODALS.USER_CONFIG.FORM.AUTO_SUGGEST_INPUTS.OPTIONS.ON',
-      value: true,
-    },
-    {
-      name: 'SHARED_MODALS.USER_CONFIG.FORM.AUTO_SUGGEST_INPUTS.OPTIONS.OFF',
-      value: false,
-    },
-  ];
-
-  ngOnInit(): void {
-    this.languages = this.translocoHelperService
-      .getTranslocoAvailableLangs()
-      .map((language) => {
-        return {
-          name: language.keyToTranslate,
-          code: language.key,
-        };
-      });
-  }
-
-  resetDefaultColorScheme() {
-    this.configUserService
-      .updateUserConfig({
-        ...this.userStore.user().userConfig,
-        userColorScheme: DEFAULT_COLOR,
-      })
-      .pipe(take(1))
-      .subscribe();
-  }
-
-  updateUserConfig() {
-    const { appLanguage, photo, autoComplete } =
-      this.userConfigForm.getRawValue();
-    try {
-      this.configUserService
-        .updateUserConfig({
-          appLanguage: appLanguage || DEFAULT_LANGUAGE,
-          photo: (photo as any) || '',
-          toggleTheme: this.userStore.user().userConfig?.toggleTheme,
-          suggestInputs: autoComplete || false,
-          userColorScheme: this.userStore.userColorScheme(),
-        })
-        .pipe(take(1), delay(100))
-        .subscribe(() => {
-          this.toastService.showSuccessMessage({
-            summaryToTranslate:
-              'SHARED_MODALS.USER_CONFIG.FORM.MESSAGES.USER_EDIT_SUCCESS.SUMMARY',
-            detailToTranslate:
-              'SHARED_MODALS.USER_CONFIG.FORM.MESSAGES.USER_EDIT_SUCCESS.DETAIL',
-          });
-        });
-    } catch (error) {
-      this.userStore.setIsLoading(false);
-      this.toastService.showErrorMessage({
-        summaryToTranslate:
-          'SHARED_MODALS.USER_CONFIG.FORM.MESSAGES.USER_EDIT_SUCCESS.SUMMARY',
-        detailToTranslate:
-          'SHARED_MODALS.USER_CONFIG.FORM.MESSAGES.USER_EDIT_SUCCESS.DETAIL',
-      });
-    }
-  }
 
   public close() {
     this.ModalWrapperRef.close();
