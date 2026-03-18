@@ -100,6 +100,20 @@ export const CalendarStore = signalStore(
           }) as CalendarInnerConfig,
       );
     }),
+    mappedCalendarHeadersInfo: computed(() => {
+      const userInfo = calendarUserConfig()!;
+      return (userInfo || []).map(
+        (c) =>
+          ({
+            value: c.value,
+            monday: c.monday,
+            tuesday: c.tuesday,
+            wednesday: c.wednesday,
+            thursday: c.thursday,
+            friday: c.friday,
+          }) as CalendarUserConfig,
+      );
+    }),
   })),
   withMethods((store) => ({
     updateCalendar(calendarInfo: CalendarModel): void {

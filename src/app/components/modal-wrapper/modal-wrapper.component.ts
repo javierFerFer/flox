@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { CommonModule, Location, NgClass } from '@angular/common';
 import {
   Component,
   ComponentRef,
@@ -8,7 +8,7 @@ import {
   viewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslocoService } from '@jsverse/transloco';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -23,17 +23,24 @@ type CustomComponentIntance = {
   selector: 'app-modal-wrapper',
   templateUrl: 'modal-wrapper.component.html',
   standalone: true,
-  imports: [DialogModule, ButtonModule],
+  imports: [DialogModule, ButtonModule, NgClass, CommonModule],
 })
 export class ModalWrapperComponent implements OnInit {
   visible = true;
   autoMaximize = signal(false);
+  maximize = signal(true);
   modalClosable = signal(true);
+  contentStyleClass = signal('');
 
   componentSpot = viewChild.required('spot', { read: ViewContainerRef });
+  componentHelperSpot = viewChild.required('helperSpot', {
+    read: ViewContainerRef,
+  });
   modalTitle: string = '';
   private componentRef!: CustomComponentIntance;
+  protected helperComponentRef!: CustomComponentIntance;
   private readonly translocoService = inject(TranslocoService);
+  private readonly router = inject(Router);
   private readonly location = inject(Location);
 
   constructor(private activatedRoute: ActivatedRoute) {}
@@ -43,6 +50,8 @@ export class ModalWrapperComponent implements OnInit {
       'modalTitleKey'
     ] as string;
 
+    const maximize = this.activatedRoute.snapshot.data['maximize'] as boolean;
+
     const autoMaximize = this.activatedRoute.snapshot.data[
       'autoMaximize'
     ] as string;
@@ -51,12 +60,24 @@ export class ModalWrapperComponent implements OnInit {
       'modalClosable'
     ] as boolean;
 
+    const contentStyleClass = this.activatedRoute.snapshot.data[
+      'contentStyleClass'
+    ] as string;
+
     if (autoMaximize !== undefined) {
       this.autoMaximize.update(() => true);
     }
 
+    if (maximize !== undefined) {
+      this.maximize.update(() => maximize);
+    }
+
     if (modalClosable !== undefined) {
       this.modalClosable.update(() => modalClosable);
+    }
+
+    if (contentStyleClass !== undefined) {
+      this.contentStyleClass.update(() => contentStyleClass);
     }
 
     this.translocoService
@@ -75,6 +96,16 @@ export class ModalWrapperComponent implements OnInit {
     const modalComponentPromise =
       this.activatedRoute.snapshot.data['modalComponentPromise'];
     const componentToRender = await modalComponentPromise();
+
+    const helperComponentPromise =
+      this.activatedRoute.snapshot.data['helperComponentPromise'];
+    if (!!helperComponentPromise) {
+      const helperComponentPromiseToRender = await helperComponentPromise();
+      this.helperComponentRef = this.componentHelperSpot().createComponent(
+        helperComponentPromiseToRender,
+      );
+    }
+
     this.componentRef = this.componentSpot().createComponent(componentToRender);
     this.componentRef.setInput('modalWrapperRef', this);
   }
@@ -83,6 +114,21 @@ export class ModalWrapperComponent implements OnInit {
     if (this.componentRef.instance?.onClose) {
       this.componentRef.instance?.onClose();
     }
-    this.location.back();
+
+    let routeToClear = this.activatedRoute;
+    while (routeToClear.snapshot.outlet === 'primary' && routeToClear.parent) {
+      routeToClear = routeToClear.parent;
+    }
+
+    const outletName = routeToClear.snapshot.outlet;
+
+    if (outletName !== 'primary') {
+      this.router.navigate([{ outlets: { [outletName]: null } }], {
+        relativeTo: routeToClear.parent,
+        queryParamsHandling: 'preserve',
+      });
+    } else {
+      this.location.back();
+    }
   }
 }

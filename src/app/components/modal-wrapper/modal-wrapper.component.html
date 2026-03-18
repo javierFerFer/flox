@@ -8,11 +8,22 @@
   [closable]="modalClosable()"
   (onHide)="close()"
   [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
-  [style]="{ width: '50vw', transform: 'none' }"
+  [contentStyleClass]="contentStyleClass()"
+  [style]="{
+    width: '50vw',
+    transform: 'none',
+  }"
   [draggable]="false"
   [resizable]="false"
-  [maximizable]="true"
+  [maximizable]="maximize()"
   (onShow)="autoMaximize() ? dialog.maximize() : null"
 >
-  <ng-container #spot></ng-container>
+  <div
+    [ngClass]="{
+      'flex flex-row': !!helperComponentRef,
+    }"
+  >
+    <ng-container #helperSpot></ng-container>
+    <ng-container #spot></ng-container>
+  </div>
 </p-dialog>

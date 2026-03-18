@@ -303,8 +303,40 @@
   },
   "SHARED_MODALS": {
     "USER_CONFIG": {
-      "TITLE": "Editar perfil",
+      "TITLE": "Configuración",
+      "SUB_HEADER": "Editar perfil",
       "SUB_TITLE": "Actualiza tu información",
+      "CALENDAR_PREFERENCES": {
+        "TITLE": "Configurar calendario",
+        "SUB_TITLE": "Actualiza tus preferencias de calendario",
+        "MODIFY_TEXT": "Modificar preferencias de calendario",
+        "ACTIONS": {
+          "MODIFY": "Modificar"
+        },
+        "EDIT": {
+          "TABLE_LABELS": {
+            "HOURS": "Horas",
+            "MONDAY": "Lunes",
+            "TUESDAY": "Martes",
+            "WEDNESDAY": "Miercoles",
+            "THURSDAY": "Jueves",
+            "FRIDAY": "Viernes"
+          },
+          "ACTIONS": {
+            "SAVE": "Guardar configuración"
+          },
+          "MESSAGES": {
+            "CONFIG_SCHEDULE_SUCCESS": {
+              "SUMMARY": "Éxito",
+              "DETAIL": "La configuración fue guardada correctamente!"
+            },
+            "CONFIG_SCHEDULE_UNSUCCESS": {
+              "SUMMARY": "Error",
+              "DETAIL": "La configuración no fue guardada!"
+            }
+          }
+        }
+      },
       "FORM": {
         "APP_LANGUAGE": "Idioma de la interfaz",
         "AUTO_SUGGEST_INPUTS": {

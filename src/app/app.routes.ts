@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
+import { CanActivateCalendarUserInfoEditGuard } from './guards/can-activate-calendar-user-info-edit.guard';
 import { CanActivateCalendarUserInfoGuard } from './guards/can-activate-calendar-user-info.guard';
 import { ExistClassGuard } from './guards/exist-class.guard';
 import { InitGuard } from './guards/init.guard';
@@ -21,11 +22,65 @@ const MODAL_SHARED_ROUTES: Routes = [
     resolve: [UserConfigModalResolver],
     data: {
       modalTitleKey: 'SHARED_MODALS.USER_CONFIG.TITLE',
+      maximize: false,
       modalComponentPromise: () =>
         import('../app/pages/modals/user-config/user-config.component').then(
           (m) => m.UserConfigModalComponent,
         ),
+      helperComponentPromise: () =>
+        import(
+          '../app/pages/modals/user-config/components/user-config-navbar/user-config-navbar.component'
+        ).then((m) => m.UserConfigNavbarComponent),
+      contentStyleClass: '![padding:0]',
     },
+    children: [
+      {
+        path: '',
+        redirectTo: 'preferences',
+        pathMatch: 'full',
+        outlet: 'user-config-outlet',
+      },
+      {
+        path: 'preferences',
+        outlet: 'user-config-outlet',
+        loadComponent: () =>
+          import(
+            '../app/pages/modals/user-config/components/user-preferences/user-preferences.component'
+          ).then((m) => m.UserPreferencesComponent),
+      },
+      {
+        path: 'calendar-preferences',
+        outlet: 'user-config-outlet',
+        loadComponent: () =>
+          import(
+            '../app/pages/modals/user-config/components/calendar-preferences/calendar-preferences.component'
+          ).then((m) => m.CalendarPreferencesComponent),
+        children: [
+          {
+            path: 'calendar-user-config',
+            resolve: [
+              CalendarGlobalConfigResolver,
+              CalendarUserConfigResolver,
+              CalendarResolver,
+            ],
+            canActivate: [CanActivateCalendarUserInfoEditGuard],
+            loadComponent: () =>
+              import('./components/modal-wrapper/modal-wrapper.component').then(
+                (m) => m.ModalWrapperComponent,
+              ),
+            data: {
+              modalTitleKey:
+                'DASHBOARD.RECORDS.MODALS.NEW_CALENDAR_SCHEDULE.TITLE',
+              modalComponentPromise: () =>
+                import(
+                  '../app/pages/modals/user-config/components/user-calendar-info-edit/user-calendar-info-edit.component'
+                ).then((m) => m.UserCalendarInfoEditComponent),
+            },
+            outlet: 'calendar-preferences-outlet',
+          },
+        ],
+      },
+    ],
     outlet: 'modal',
   },
 ];
