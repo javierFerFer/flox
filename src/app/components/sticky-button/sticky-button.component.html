@@ -6,6 +6,7 @@
       <p-button
         (click)="onClick.emit()"
         [disabled]="disabled()"
+        [loading]="loading()"
         [label]="t('SHARED.STICKY_BUTTON.SAVE')"
         icon="pi pi-save"
         iconPos="left"

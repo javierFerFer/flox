@@ -108,6 +108,7 @@
   <div class="mt-8 flex items-center justify-end-safe gap-2">
     <p-button
       [disabled]="this.calendarStore.isLoading()"
+      [loading]="this.calendarStore.isLoading()"
       (onClick)="saveUserCalendarInfo()"
       [label]="
         t('SHARED_MODALS.USER_CONFIG.CALENDAR_PREFERENCES.EDIT.ACTIONS.SAVE')

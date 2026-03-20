@@ -17,7 +17,9 @@ export class CalendarService {
     const calendarGlobalInfo =
       this.calendarStore.calendarGlobalInfo()?.calendarInfo;
     return calendarGlobalInfo
-      ? of(calendarGlobalInfo)
+      ? of(calendarGlobalInfo).pipe(
+          tap(() => this.calendarStore.setIsLoading(false)),
+        )
       : this.calendarApiService.getCalendarGlobalConfig().pipe(
           tap((result) => {
             if (result) {
@@ -34,7 +36,9 @@ export class CalendarService {
     this.calendarStore.setIsLoading(true);
     const calendarUserConfig = this.calendarStore.calendarUserConfig();
     return !!calendarUserConfig
-      ? of(calendarUserConfig)
+      ? of(calendarUserConfig).pipe(
+          tap(() => this.calendarStore.setIsLoading(false)),
+        )
       : this.calendarApiService.getCalendarUserConfig().pipe(
           tap((result) => {
             if (result) {
