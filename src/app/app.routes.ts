@@ -19,7 +19,7 @@ const MODAL_SHARED_ROUTES: Routes = [
       import('./components/modal-wrapper/modal-wrapper.component').then(
         (m) => m.ModalWrapperComponent,
       ),
-    resolve: [UserConfigModalResolver],
+    resolve: [UserConfigModalResolver, CalendarUserConfigResolver],
     data: {
       modalTitleKey: 'SHARED_MODALS.USER_CONFIG.TITLE',
       maximize: false,
@@ -58,11 +58,6 @@ const MODAL_SHARED_ROUTES: Routes = [
         children: [
           {
             path: 'calendar-user-config',
-            resolve: [
-              CalendarGlobalConfigResolver,
-              CalendarUserConfigResolver,
-              CalendarResolver,
-            ],
             canActivate: [CanActivateCalendarUserInfoEditGuard],
             loadComponent: () =>
               import('./components/modal-wrapper/modal-wrapper.component').then(

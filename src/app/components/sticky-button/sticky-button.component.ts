@@ -29,6 +29,7 @@ export type StickyPosition =
 export class StickyButtonComponent {
   position = input<StickyPosition>('bottom-right');
   disabled = input<boolean>(false);
+  loading = input<boolean>(false);
   onClick = output<void>();
   customContent = contentChild('stickyContent');
 
