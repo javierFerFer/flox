@@ -72,7 +72,6 @@ export const appConfig: ApplicationConfig = {
       config: {
         availableLangs: Array.from(AVAILABLE_LANGUAGES.keys()),
         defaultLang: DEFAULT_LANGUAGE,
-        // Remove this option if your application doesn't support changing language in runtime.
         reRenderOnLangChange: true,
         prodMode: !isDevMode(),
       },
@@ -80,7 +79,7 @@ export const appConfig: ApplicationConfig = {
     }),
     {
       provide: PROJECT_VERSION,
-      useValue: { version: '1.6.1' },
+      useValue: { version: '1.6.2' },
     },
   ],
 };

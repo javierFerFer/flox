@@ -111,8 +111,8 @@ export class ModalWrapperComponent implements OnInit {
   }
 
   public close() {
-    if (this.componentRef.instance?.onClose) {
-      this.componentRef.instance?.onClose();
+    if (this.componentRef.instance?.onCloseBeforeNavigate) {
+      this.componentRef.instance?.onCloseBeforeNavigate();
     }
 
     let routeToClear = this.activatedRoute;
@@ -129,6 +129,10 @@ export class ModalWrapperComponent implements OnInit {
       });
     } else {
       this.location.back();
+    }
+
+    if (this.componentRef.instance?.onCloseAfterNavigate) {
+      this.componentRef.instance?.onCloseAfterNavigate();
     }
   }
 }
