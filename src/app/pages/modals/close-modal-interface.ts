@@ -3,5 +3,6 @@ import { ModalWrapperComponent } from '../../components/modal-wrapper/modal-wrap
 export interface CloseModal {
   ModalWrapperRef: ModalWrapperComponent;
   close: () => void;
-  onClose?: () => void;
+  onCloseBeforeNavigate?: () => void;
+  onCloseAfterNavigate?: () => void;
 }

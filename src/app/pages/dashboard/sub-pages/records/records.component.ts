@@ -1,10 +1,10 @@
-import { Component, computed, inject, effect, ViewChild } from '@angular/core';
-import { TabList, TabsModule } from 'primeng/tabs';
-import { CardModule } from 'primeng/card';
 import { CommonModule } from '@angular/common';
+import { Component, computed, effect, inject, ViewChild } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { ClassStore } from '../../../../stores/class/class.store';
 import { TranslocoDirective } from '@jsverse/transloco';
+import { CardModule } from 'primeng/card';
+import { TabList, TabsModule } from 'primeng/tabs';
+import { ClassStore } from '../../../../stores/class/class.store';
 
 interface TabsElements {
   value: string | number;
